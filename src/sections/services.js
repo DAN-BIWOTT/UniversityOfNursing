@@ -5,20 +5,10 @@ import Service from 'components/cards/service';
 
 const services = [
   {
-    title: 'Blog Hosting',
-    price: 900,
+    title: 'Pre-assignment guidance'
   },
   {
-    title: 'School Project Web Hosting',
-    price: 500,
-  },
-  {
-    title: 'Small Business Web Hosting',
-    price: 1400,
-  },
-  {
-    title: 'Start-Up Company Web Hosting',
-    price: 2000,
+    title: 'Post-assignment guidance'
   }
 ];
 
@@ -28,7 +18,7 @@ const Services = () => {
       <Container>
         <SectionHeading
           slogan="Ideal solutions for you"
-          title="Didn’t find what you were looking for?"
+          title="This may be what you are looking for..."
         />
         <Box sx={styles.grid}>
           {services.map((service, i) => (
@@ -53,12 +43,6 @@ const styles = {
     justifyContent: 'center',
     gridTemplateColumns: [
       'repeat(2, 1fr)',
-      null,
-      null,
-      'repeat(3, 1fr)',
-      null,
-      'repeat(4, 1fr)',
-      'repeat(4, 300px)',
-    ],
+      ],
   },
 };

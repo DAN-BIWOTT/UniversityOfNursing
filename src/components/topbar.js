@@ -4,34 +4,12 @@ import { Link } from 'components/link';
 import RightArrow from 'components/icons/right-arrow';
 import GiftBox from 'components/icons/gift-box';
 
-const data = [
-  {
-    tld: '.com',
-    price: 15,
-  },
-  {
-    tld: '.net',
-    price: 14,
-  },
-  {
-    tld: '.org',
-    price: 19,
-  },
-];
-
 const TopBar = () => {
   return (
     <Box as="section" sx={styles.topbar}>
       <Box sx={styles.content}>
         <Text as="span" className="caption">
-          <GiftBox /> Get discount hosting plans for
-        </Text>
-        <Text as="span" className="tlds">
-          {data.map((item, i) => (
-            <strong key={i}>
-              {item.tld} ${item.price}
-            </strong>
-          ))}
+          <GiftBox /> Get discount plans for more than 3 orders
         </Text>
         <Link path="#">
           See Pricing <RightArrow />

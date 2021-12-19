@@ -10,6 +10,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import { rgba } from 'polished';
 import Image from 'components/image';
 import Styled from 'styled-components';
+import styled from 'styled-components';
 
 
 const Banner = () => {
@@ -32,13 +33,15 @@ const Banner = () => {
       <Container>
         <Box sx={styles.grid}>
           <Box as="form" sx={styles.domainCard}>
-            <Heading>Grow your business with a website</Heading>
+            <Heading>Get Professional Nursing Writers For Your Projects</Heading>
+            <H3>Why Choose Us?</H3>
             <List>
               <ul>
-                <li>~ Cheap Hosting</li>
-                <li>~ Cheap Domain Names</li>
-                <li>~ Top Class Services On A Budget</li>
-                <li>~ Work With Certified Professionals And Meet Your Business Needs</li>
+                <li>• Prices: cheap and based on complexity of assistance needed.</li>
+                <li>• Diversification of skills: services for all nursing cadres (BSN, MSN/APRN, and DNP) and disciplines (research, education, and practice, etc.)</li>
+                <li>• Freebies: Title page, revisions, plagiarism reports, bibliography, and formatting.</li>
+                <li>• Client-focused care</li>
+                <li>• Punctuality</li>
               </ul>
             </List>
             <Text as="p" sx={styles.note}>
@@ -107,9 +110,12 @@ const styles = {
 };
 
 const List = Styled.div`
-
+  
   li{
     font-size: 1rem clamp(25px);
     list-style-type:none;
   }
+`
+const H3 = styled.h3`
+margin-top: -35px ;
 `

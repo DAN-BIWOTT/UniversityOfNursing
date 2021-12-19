@@ -8,16 +8,8 @@ export default [
     label: 'Services',
   },
   {
-    path: 'features',
-    label: 'Features',
-  },
-  {
     path: 'pricing',
-    label: 'Pricing',
-  },
-  {
-    path: 'testimonials',
-    label: 'Testimonials',
+    label: 'Paper Bank',
   },
   {
     path: 'blog',

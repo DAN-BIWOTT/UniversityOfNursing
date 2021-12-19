@@ -9,7 +9,7 @@ const data = [
     title: 'Organized project content',
     contents: (
       <div>
-        Tell us what kind of application suits you best, tell us what you need and we shall build it.
+        Tell us what sort of assignment you'd like done, we'll get an expert to work on it.
       </div>
     ),
   },

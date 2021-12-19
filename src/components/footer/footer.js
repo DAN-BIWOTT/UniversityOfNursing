@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, Box, Text, Container } from 'theme-ui';
 import { rgba } from 'polished';
-import Logo from 'components/icons/logo';
+import Logo from 'components/icons/bottomLogo';
 import { Link } from 'components/link';
 import CallToAction from 'sections/call-to-action';
 import Widget from './widget';
@@ -25,7 +25,7 @@ export default function Footer() {
                 <Link path="#!">Privacy</Link>
               </Box>
               <Text as="p" sx={styles.copyright}>
-                Copyright by {new Date().getFullYear()} Jodawaki, Ent.
+                Copyright by {new Date().getFullYear()} University Of Nursing, Ent.
               </Text>
             </Box>
             {menuItems.map(({ id, title, items }) => (
@@ -70,6 +70,7 @@ const styles = {
     gridColumn: ['1/3', null, '1/2', '1/5', 'unset'],
   },
   logo: {
+    marginTop: '-70px',
     display: ['flex'],
     justifyContent: ['center', null, null, 'unset'],
     gridColumn: '1/2',

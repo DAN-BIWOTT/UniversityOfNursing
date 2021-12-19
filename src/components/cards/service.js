@@ -5,7 +5,6 @@ const Service = ({ service }) => {
   return (
     <Box sx={styles.service}>
       <Text as="p">{service.title}</Text>
-      <Text as="span">Ksh.{service.price}/mo</Text>
     </Box>
   );
 };
@@ -27,10 +26,10 @@ const styles = {
       borderColor: 'transparent',
     },
     p: {
-      fontWeight: 500,
-      fontSize: [1, null, null, '17px'],
+      fontWeight: 600,
+      fontSize: [2, null, null, '17px'],
       lineHeight: 1.77,
-      color: 'heading',
+      color: '#968F89',
     },
     span: {
       color: 'primary',

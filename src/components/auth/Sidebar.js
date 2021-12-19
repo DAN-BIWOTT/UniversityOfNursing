@@ -9,9 +9,6 @@ const Sidebar = () => {
     <Container>
       <LogoWrapper>
         <img src={logo} alt="" />
-        <h3>
-          Eli <span>Codes</span>
-        </h3>
       </LogoWrapper>
       <Form>
         <h3>Sign Up</h3>
@@ -21,6 +18,7 @@ const Sidebar = () => {
         <Input type="password" placeholder="Confrim Password" />
         <button as={Link} to="/admin">Sign Up</button>
       </Form>
+      <a href="/admin/">By Pass Auth</a>
       <div>
         <Terms>
           By signing up, I agree to the Privacy Policy <br /> and Terms of
