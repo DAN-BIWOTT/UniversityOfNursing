@@ -10,7 +10,6 @@ import { useStaticQuery, graphql } from 'gatsby';
 import { rgba } from 'polished';
 import Image from 'components/image';
 import Styled from 'styled-components';
-import styled from 'styled-components';
 
 
 const Banner = () => {
@@ -116,6 +115,6 @@ const List = Styled.div`
     list-style-type:none;
   }
 `
-const H3 = styled.h3`
+const H3 = Styled.h3`
 margin-top: -35px ;
 `
