@@ -37,11 +37,11 @@ const Banner = () => {
             <H3>Why Choose Us?</H3>
             <List>
               <ul>
-                <li>• Prices: cheap and based on complexity of assistance needed.</li>
-                <li>• Diversification of skills: services for all nursing cadres (BSN, MSN/APRN, and DNP) and disciplines (research, education, and practice, etc.)</li>
-                <li>• Freebies: Title page, revisions, plagiarism reports, bibliography, and formatting.</li>
-                <li>• Client-focused care</li>
-                <li>• Punctuality</li>
+                <li>Prices: cheap and based on complexity of assistance needed.</li>
+                <li>Diversification of skills: services for all nursing cadres (BSN, MSN/APRN, and DNP) and disciplines (research, education, and practice, etc.)</li>
+                <li>Freebies: Title page, revisions, plagiarism reports, bibliography, and formatting.</li>
+                <li>Client-focused care</li>
+                <li>Punctuality</li>
               </ul>
             </List>
             <Text as="p" sx={styles.note}>
