@@ -9,7 +9,7 @@ const Admin = () => {
   const { theme } = useThemeContext()
   return (
     <ThemeContextProvider>
-      <ThemeProvider theme={lightTheme}>
+      <ThemeProvider theme={theme === 'light' ? lightTheme: darkTheme}>
         <GlobalStyles />
         <Dashboard />
       </ThemeProvider>
