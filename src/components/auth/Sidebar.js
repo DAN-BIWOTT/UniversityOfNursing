@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import logo from "../../assets/images/logo.png";
 import Input from "./Input";
+import { Button } from 'theme-ui';
 
 const Sidebar = () => {
   return (
@@ -18,7 +19,12 @@ const Sidebar = () => {
         <Input type="password" placeholder="Confrim Password" />
         <button as={Link} to="/admin">Sign Up</button>
       </Form>
-      <a href="/admin/">By Pass Auth</a>
+      <Button
+                as={Link}
+                to="/admin"
+              >
+                By-pass Auth
+              </Button>
       <div>
         <Terms>
           By signing up, I agree to the Privacy Policy <br /> and Terms of
