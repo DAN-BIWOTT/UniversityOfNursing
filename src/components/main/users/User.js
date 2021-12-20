@@ -9,14 +9,22 @@ const User = ({data}) => {
            <Property>
                 <PropertyImg src="https://images.pexels.com/photos/3866555/pexels-photo-3866555.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
                 <PropertyText>
-                    <PropertyStreet>address</PropertyStreet>
+                    <PropertyStreet>46199</PropertyStreet>
                     <Subtitle>{firstName} {lastName}</Subtitle>
                 </PropertyText>
             </Property>
-            <MoveInDate>moveInDate</MoveInDate>
-            <Rent>$ bill</Rent>
+            <MoveInDate>Nursing</MoveInDate>
+            <Rent>Discussion quest...</Rent>
             <UserWrapper>
-                <Text>$ amount</Text>
+                <Text>500 words</Text>
+                <Subtitle>Bill type</Subtitle>
+            </UserWrapper>
+            <UserWrapper>
+                <Text>3,500/=</Text>
+                <Subtitle>Bill type</Subtitle>
+            </UserWrapper>
+            <UserWrapper>
+                <Text>4 days</Text>
                 <Subtitle>Bill type</Subtitle>
             </UserWrapper>
             {/* <Status>

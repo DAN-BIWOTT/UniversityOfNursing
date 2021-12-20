@@ -33,7 +33,7 @@ const Users = ({title,count}) => {
             {combinedData.map(user=>{
               return(<User data={user} key={user.id} />);
             })}
-            <AllUsersBtn title={title} />
+            {/* <AllUsersBtn title={title} /> */}
         </div>
     )
 }

@@ -10,8 +10,7 @@ const Main = () => {
         <Container>
             <Nav/>
             <NewUserBtn />
-            <Users title="Active URLs Summary" count={2}  />
-            <Users title="Inactive URLs Summary" count={3}  />
+            <Users title="New Orders" count={2}  />
         </Container>
     )
 }

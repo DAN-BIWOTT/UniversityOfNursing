@@ -9,7 +9,7 @@ const Sidebar = () => {
         <Container>
             <Profile />
             <Menu />
-            <ToggleSwitch />
+            {/* <ToggleSwitch /> */}
         </Container>
     )
 }
@@ -26,4 +26,5 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: scroll;
 `

@@ -4,11 +4,12 @@ import styled from 'styled-components'
 const SortingBar = () => {
     return (
         <Container>
-            <Property>Property</Property>
-            <MoveInDate>Move In Date</MoveInDate>
-            <Rent>Rent</Rent>
-            <Bill>Bill</Bill>
-            <Status>Status</Status>
+            <Property>Order Id</Property>
+            <Subject>Subject</Subject>
+            <Topic>Topic</Topic>
+            <Pages>Pages/words</Pages>
+            <Budget>Budget</Budget>
+            <Duration>Duration</Duration>
         </Container>
     )
 }
@@ -34,18 +35,21 @@ const Property = styled(Text)`
     width: 30%;
 `
 
-const MoveInDate = styled(Text)`
+const Subject = styled(Text)`
     width: 15%;
 `
 
-const Rent = styled(Text)`
+const Topic = styled(Text)`
     width: 10%;
 `
 
-const Bill = styled(Text)`
+const Pages = styled(Text)`
     width: 15%;
 `
 
-const Status = styled(Text)`
+const Budget = styled(Text)`
+     width: 15%;
+`
+const Duration = styled(Text)`
     
 `
