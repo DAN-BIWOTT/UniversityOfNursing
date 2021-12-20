@@ -6,10 +6,14 @@ const Menu = () => {
     return (
         <Container>
             <MenuItem title="Home" icon="home" />
-            <MenuItem title="Users" icon="account" active/>
-            <MenuItem title="Sites" icon="sitemap" />
-            <MenuItem title="Payments" icon="bank" />
-            <MenuItem title="Settings" icon="cog" />
+            <MenuItem title="All orders" icon="account" active/>
+            <MenuItem title="Complete Orders" icon="sitemap" />
+            <MenuItem title="Paid Orders" icon="bank" />
+            <MenuItem title="Disputed Orders" icon="cog" />
+            <MenuItem title="Orders in Revision" icon="cog" />
+            <MenuItem title="All Users" icon="cog" />
+            <MenuItem title="Paper Bank" icon="cog" />
+            <MenuItem title="Blog" icon="cog" />
         </Container>
     )
 }
