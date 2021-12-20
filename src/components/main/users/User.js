@@ -9,7 +9,7 @@ const User = ({data}) => {
            <Property>
                 <PropertyImg src="https://images.pexels.com/photos/3866555/pexels-photo-3866555.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
                 <PropertyText>
-                    <PropertyStreet>46199</PropertyStreet>
+                    <PropertyStreet><OrderLink href='adminPages/OrderDetail/1'>46199</OrderLink></PropertyStreet>
                     <Subtitle>{firstName} {lastName}</Subtitle>
                 </PropertyText>
             </Property>
@@ -111,4 +111,20 @@ const StatusIndicator = styled.div`
     margin-left: 1rem;
     position: absolute;
     right: 7rem;
+`
+const OrderLink = styled.a`
+  width: 10rem;
+  font-size: 1rem;
+  font-weight: 700;
+  background-color: transparent;
+  color: #6B6B6B;
+  border-radius: 5rem;
+  padding: 0.7rem;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  transition: all ease-in-out 300ms;
+  &:hover {
+    box-shadow: 0px 0px 7px rgba(128, 74, 216, 0.6);
+  }
 `

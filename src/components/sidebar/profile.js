@@ -6,7 +6,7 @@ const Profile = () => {
     return (
         <Container>
             <ProfileImg src={Image} />
-            <ProfileName>Sabina Dev</ProfileName>
+            <ProfileName>Admin Dev</ProfileName>
         </Container>
     )
 }
