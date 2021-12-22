@@ -22,8 +22,8 @@ export default function Support() {
       <Container>
         <SectionHeading
           sx={styles.heading}
-          title="Meet our support team who always work hardly behind the scenes"
-          description="Focus only on the meaning, we take care of the design. As soon as the meeting end you can export in one click into your preferred."
+          title="Our support team works tirelessly to make sure all our needs are catered for."
+          description="Let us be your partner as you partake your nursing career."
         />
 
         <Box as="figure" sx={styles.thumbWrapper}>

@@ -1,12 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
+import DetailMain from '../../components/adminPages/DetailMain'
 import Nav from '../../components/main/Nav'
+import Sidebar from '../../components/sidebar/sidebar'
 
-const OrderDetail = ({id}) => {
-
+const OrderDetail = ({itemId}) => {
+    console.log(itemId);
     return (
         <Container>
+            <Sidebar/>
             <Nav/>
+            <DetailMain itemId={itemId}/>
         </Container>
     )
 }

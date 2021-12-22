@@ -9,7 +9,7 @@ const User = ({data}) => {
            <Property>
                 <PropertyImg src="https://images.pexels.com/photos/3866555/pexels-photo-3866555.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
                 <PropertyText>
-                    <PropertyStreet><OrderLink href='adminPages/OrderDetail/1'>46199</OrderLink></PropertyStreet>
+                    <PropertyStreet><OrderLink href='/adminPages/OrderDetail/1'>46199</OrderLink></PropertyStreet>
                     <Subtitle>{firstName} {lastName}</Subtitle>
                 </PropertyText>
             </Property>

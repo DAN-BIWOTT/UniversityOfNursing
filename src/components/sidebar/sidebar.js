@@ -9,7 +9,6 @@ const Sidebar = () => {
         <Container>
             <Profile />
             <Menu />
-            {/* <ToggleSwitch /> */}
         </Container>
     )
 }
@@ -17,7 +16,7 @@ const Sidebar = () => {
 export default Sidebar
 
 const Container = styled.div`
-    background-color: ${({theme})=>theme.secondary};
+    background-color: #F8F8F8;
     position: fixed;
     left: 0;
     top: 0;

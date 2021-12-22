@@ -11,23 +11,23 @@ import thumb3 from 'assets/images/blog/3.png';
 const data = [
   {
     id: 1,
-    title: 'Learn from how to host your site',
+    title: 'Test-taking strategies for nursing scholars',
     thumbnail: thumb1,
-    excerpt: `Brian Halligan knows that you need more than a great product to have a great brand with new features.`,
+    excerpt: `Do exams make you anxious? Let\'s have a glance at some methodologies that will help you gain better scores on nursing papers.`,
     slug: `#Learn more`,
   },
   {
-    id: 2,
-    title: 'Customize your domain hosting',
+    id: 2,  
+    title: 'How to pursue a top-notch nursing career',
     thumbnail: thumb2,
-    excerpt: `Brian Halligan knows that you need more than a great product to have a great brand with new features.`,
+    excerpt: `Wondering how to kick start your nursing career? Let\'s explore some of the high ranked career choices in nursing that will render you competitive.`,
     slug: `#Learn more`,
   },
   {
     id: 3,
-    title: 'Learn how to upload on cloud host',
+    title: 'Nurse practitioner vs Physician assistants',
     thumbnail: thumb3,
-    excerpt: `Brian Halligan knows that you need more than a great product to have a great brand with new features.`,
+    excerpt: `Wondering difference between Nurse practitioners and Physician assistants? Let\'s look at the two genres distinctively.`,
     slug: `#Learn more`,
   },
 ];

@@ -42,9 +42,9 @@ const PremiumFeature = () => {
         <Box sx={styles.accordionGroup}>
           <SectionHeading
             sx={styles.heading}
-            slogan="Website and MobileApp Builders"
+            slogan="Professional nursing essay help"
             title="Meet our premium services that will make you wow"
-            description="A single developer dedicated to Building for you incredible applications and grow your business with Gusto’s all-in-one platform with amazing contents."
+            description="A competent team crafting your custom made nursing papers. Providing top-notch help on your way to academic excellence!"
           />
           <Accordion items={data} />
         </Box>

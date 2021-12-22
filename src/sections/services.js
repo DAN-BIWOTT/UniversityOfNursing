@@ -17,8 +17,8 @@ const Services = () => {
     <Box as="section" id="services" sx={styles.section}>
       <Container>
         <SectionHeading
-          slogan="Ideal solutions for you"
-          title="This may be what you are looking for..."
+          slogan="Developing Future Nurses"
+          title="Nursing insights, essay help and support tools to help future nurses gain confidence and experience nursing thrive."
         />
         <Box sx={styles.grid}>
           {services.map((service, i) => (
