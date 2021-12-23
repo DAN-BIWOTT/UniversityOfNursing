@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import DetailMain from '../../components/adminPages/DetailMain'
 import Nav from '../../components/main/Nav'
 import Sidebar from '../../components/sidebar/sidebar'
 
 const OrderDetail = ({location}) => {
+    const [ItemOrderId, setItemOrderId] = useState(initialState)
+    setItemOrderId(location.state.orderId)
     return (
         <Container>
             <Sidebar/>
             <Nav/>
             {/* <DetailMain orderId={location.state.orderId}/> */}
-            <DetailMain orderId={1}/>
+            <DetailMain orderId={ItemOrderId}/>
         </Container>
     )
 }
