@@ -9,7 +9,8 @@ const OrderDetail = ({location}) => {
         <Container>
             <Sidebar/>
             <Nav/>
-            <DetailMain orderId={location.state.orderId}/>
+            {/* <DetailMain orderId={location.state.orderId}/> */}
+            <DetailMain orderId={1}/>
         </Container>
     )
 }
