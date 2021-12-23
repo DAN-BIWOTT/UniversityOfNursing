@@ -1,20 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
-import DetailMain from '../../components/adminPages/DetailMain'
 import Nav from '../../components/main/Nav'
 import Sidebar from '../../components/sidebar/sidebar'
 
-const OrderDetail = ({location}) => {
+const AllOrders = () => {
     return (
         <Container>
-            <Sidebar/>
-            <Nav/>
-            <DetailMain orderId={location.state.orderId}/>
-        </Container>
+        <Sidebar/>
+        <Nav/>
+    </Container>
     )
 }
 
-export default OrderDetail
+export default AllOrders
 
 const Container = styled.div`
     width: auto;

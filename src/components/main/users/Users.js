@@ -5,7 +5,8 @@ import SortingBar from './SortingBar'
 import User from './User.js'
 import AllUsersBtn from './AllUsersBtn'
 
-const Users = ({title,count}) => {
+const 
+Users = ({title,count}) => {
     const allUsers = useStaticQuery(graphql`
     query MyQuery {
       allMongodbJodawakiJodawakiUsers {
@@ -19,6 +20,7 @@ const Users = ({title,count}) => {
       }
     }
   `);
+  
   var data = []
   data.push(allUsers.allMongodbJodawakiJodawakiUsers.edges)
   var combinedData = []

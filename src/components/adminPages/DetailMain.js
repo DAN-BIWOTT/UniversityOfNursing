@@ -1,11 +1,16 @@
 import React from 'react'
+import styled from 'styled-components';
 
-const DetailMain = ({itemId}) => {
+const DetailMain = ({orderId}) => {
     return (
         <div>
-           <h1>Item Id: {itemId}</h1> 
+           <H1>Item Id: {orderId}</H1> 
         </div>
     )
 }
 
-export default DetailMain
+export default DetailMain;
+
+const H1 = styled.h1`
+color: black;
+`

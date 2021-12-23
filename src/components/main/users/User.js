@@ -1,3 +1,4 @@
+import { Link } from 'gatsby';
 import React from 'react'
 import styled from 'styled-components'
 
@@ -9,7 +10,7 @@ const User = ({data}) => {
            <Property>
                 <PropertyImg src="https://images.pexels.com/photos/3866555/pexels-photo-3866555.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
                 <PropertyText>
-                    <PropertyStreet><OrderLink href='/adminPages/OrderDetail/1'>46199</OrderLink></PropertyStreet>
+                    <PropertyStreet><OrderLink to={`/adminPages/OrderDetail`} state={{ orderId: firstName }} >46199</OrderLink></PropertyStreet>
                     <Subtitle>{firstName} {lastName}</Subtitle>
                 </PropertyText>
             </Property>
@@ -112,7 +113,7 @@ const StatusIndicator = styled.div`
     position: absolute;
     right: 7rem;
 `
-const OrderLink = styled.a`
+const OrderLink = styled(Link)`
   width: 10rem;
   font-size: 1rem;
   font-weight: 700;
