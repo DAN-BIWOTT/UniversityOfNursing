@@ -5,7 +5,7 @@ import Nav from '../../components/main/Nav'
 import Sidebar from '../../components/sidebar/sidebar'
 
 const OrderDetail = ({location}) => {
-    const [itemOrderId, setItemOrderId] = useState((typeof location.state.orderId === "undefined")? "":location.state.orderId)
+    const [itemOrderId, setItemOrderId] = useState((location.state === undefined)? "":location.state.orderId)
     return (
         <Container>
             <Sidebar/>
