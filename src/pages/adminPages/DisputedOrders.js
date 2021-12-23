@@ -2,12 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 import Nav from '../../components/main/Nav'
 import Sidebar from '../../components/sidebar/sidebar'
+import DisputedOrdersList from '../../components/main/users/Users'
 
 const DisputedOrders = () => {
     return (
         <Container>
             <Sidebar/>
             <Nav/>
+            <DisputedOrdersList title="Disputed Orders" count={2}/>
         </Container>
     )
 }

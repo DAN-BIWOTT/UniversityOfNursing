@@ -2,12 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 import Nav from '../../components/main/Nav'
 import Sidebar from '../../components/sidebar/sidebar'
+import AllOrdersList from '../../components/main/users/Users'
 
 const AllOrders = () => {
     return (
         <Container>
         <Sidebar/>
         <Nav/>
+        <AllOrdersList title="All Orders" count={2}  />
     </Container>
     )
 }
