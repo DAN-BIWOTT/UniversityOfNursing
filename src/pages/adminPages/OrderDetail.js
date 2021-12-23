@@ -1,12 +1,11 @@
-import React, { useState, initialState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import DetailMain from '../../components/adminPages/DetailMain'
 import Nav from '../../components/main/Nav'
 import Sidebar from '../../components/sidebar/sidebar'
 
 const OrderDetail = ({location}) => {
-    const [itemOrderId, setItemOrderId] = useState(location.state.orderId)
-    
+    const [itemOrderId, setItemOrderId] = useState((location.state.orderId === undefined)? "":location.state.orderId)
     return (
         <Container>
             <Sidebar/>
