@@ -26,7 +26,7 @@ const Menu = ({permission}) => {
                     <MenuLink to="/client"><MenuItem title="Home" icon="home" /></MenuLink>
                     <MenuLink to="/clientPages/AllSubmissions"><MenuItem title="All Submissions" icon="account" active/></MenuLink>
                     <MenuLink to="/clientPages/CompleteSubmissions"><MenuItem title="Complete Submissions" icon="sitemap" /></MenuLink>
-                    <MenuLink to="/clientPages/PendigSubmissions"><MenuItem title="Paid Submissions" icon="bank" /></MenuLink>
+                    <MenuLink to="/clientPages/PaidSubmissions"><MenuItem title="Paid Submissions" icon="bank" /></MenuLink>
                     <MenuLink to="/clientPages/CompleteTransactions"><MenuItem title="Complete Transactions" icon="cog" /></MenuLink>
                     <MenuLink to="/clientPages/PendingTransactions"><MenuItem title="Pending Transactions" icon="cog" /></MenuLink>
                 </Container>

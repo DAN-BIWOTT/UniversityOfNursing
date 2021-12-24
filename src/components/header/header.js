@@ -71,7 +71,7 @@ export default function Header() {
               </Button>
               <Button
                 as={Link}
-                to="/admin"
+                to="/login"
                 variant="text"
                 sx={{
                   ...styles.joinCommunity,
