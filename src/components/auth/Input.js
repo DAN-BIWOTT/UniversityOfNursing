@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Input = ({ type, placeholder }) => {
+const Input = ({ type, placeholder,handleChange,value }) => {
   return (
     <Container>
       <StyledInput
@@ -9,6 +9,8 @@ const Input = ({ type, placeholder }) => {
         type={type ? type : "text"}
         required
         autocomplete="off"
+        onChange={handleChange}
+        value={value}
       />
       <Status />
     </Container>

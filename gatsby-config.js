@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   siteMetadata: {
     title: `Uon Gatsby Default Starter`,
@@ -76,29 +80,7 @@ module.exports = {
         sitemap: "https://www.example.com/sitemap.xml",
         policy: [{ userAgent: "*", allow: "/" }],
       },
-    },
-    {
-      resolve: "gatsby-source-mongodb",
-      options: {
-        // Name of the database and collection where are books reside
-        dbName: "jodawaki",
-        collection: ["jodawakiUsers"],
-        server: {
-          address: "jodawakihosting-shard-00-01.lcw4x.mongodb.net",
-          port: 27017,
-        },
-        auth: {
-          user: "Lloyd",
-          password: "Alchemy_254",
-        },
-        extraParams: {
-          replicaSet: "jodawakihosting-shard-0",
-          ssl: true,
-          authSource: "admin",
-          retryWrites: true,
-        },
-      },
-    },
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

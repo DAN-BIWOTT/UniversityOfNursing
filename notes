@@ -1,0 +1,4 @@
+start local postgres = pg_ctl.exe restart -D  "C:\Program Files\PostgreSQL\14\data"
+Login as admin to postgres local = psql -U postgres -h localhost
+push .sql files to heroku = heroku pg:psql --app university-of-nurses < uon.sql
+Delete node modules faster = npx npkill

@@ -4,11 +4,11 @@ import NewUserBtn from "../sidebar/menu/NewUserBtn";
 import Nav from "./Nav";
 import Users from "../main/users/Users";
 
-const Main = () => {
+const ClientMain = () => {
     
   useEffect(() => {
-    AllNewOrders();
-  });
+    //   AllNewOrders();
+});
 
   const newOrdersQuery = `query AllNewOrders {
     order(order_by: {client_id: asc, id: desc}) {
@@ -39,13 +39,13 @@ const Main = () => {
   return (
     <Container>
       <Nav />
-      <NewUserBtn />
-      <Users title="New Orders" count={2} />
+      <h1>Client Main</h1>
+      {/* <Users title="New Orders" count={2} /> */}
     </Container>
   );
 };
 
-export default Main;
+export default ClientMain;
 
 const Container = styled.div`
   width: auto;

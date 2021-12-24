@@ -4,11 +4,11 @@ import Menu from './menu/menu'
 import Profile from './profile'
 import ToggleSwitch from './ToggleSwitch'
 
-const Sidebar = () => {
+const Sidebar = ({permission}) => {
     return (
         <Container>
-            <Profile />
-            <Menu />
+            <Profile permission={permission} />
+            <Menu permission={permission}/>
         </Container>
     )
 }

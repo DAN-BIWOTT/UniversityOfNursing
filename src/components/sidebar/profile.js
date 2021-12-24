@@ -2,11 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import Image from '../../assets/images/profile.jpg'
 
-const Profile = () => {
+const Profile = ({permission}) => {
+    
     return (
         <Container>
             <ProfileImg src={Image} />
-            <ProfileName>Admin Dev</ProfileName>
+            <ProfileName>{permission} Dev</ProfileName>
         </Container>
     )
 }
