@@ -5,7 +5,7 @@ import ChatBody from "./chatPartials/ChatBody";
 const ChatBox = () => {
   return (
     <Container>
-      <TopChatBar>Admin Side</TopChatBar>
+      <TopChatBar><h1>Chat Box</h1></TopChatBar>
       <ChatBody />
     </Container>
   );
@@ -25,9 +25,15 @@ const Container = styled.div`
 const TopChatBar = styled.div`
   width: 100%;
   height: 10vh;
+  display: flex;
   background-color: green;
   border-radius: 5px 5px 0px 0px;
-  align-items: center;
-  color: white;
-  font-size: clamp(1rem,1vw, 1rem);
+  justify-content: center;
+  h1{
+    padding-top: 1rem;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(1rem,1vw, 1rem);
+    font-weight: 300;
+  }
 `;

@@ -33,7 +33,7 @@ const ContainerFail = styled.div`
   padding: 5px 5px 5px 5px;
   font-weight: bold;
   color: white;
-  background: red;
+  background: #ee6911;
   border-radius: 5vw;
 `;
 const ContainerWait = styled.div`

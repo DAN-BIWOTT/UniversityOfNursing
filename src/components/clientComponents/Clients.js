@@ -1,24 +1,24 @@
 import styled from "@emotion/styled";
 import React from "react";
+import Client from "./Client";
 import SortingBar from "./SortingBar";
-import User from "./User.js";
 
-const Users = ({ data,title, count }) => {
+const Clients = ({ data,title, count }) => {
     
   return (
     <div>
       <Title>
         {title} <UserCount> {count}</UserCount>
       </Title>
-      <SortingBar />
+      <SortingBar /><hr/>
       {data.map((user) => {
-        return <User data={user} key={user.id} />;
+        return <Client data={user} key={user.id} />;
       })}
     </div>
   );
 };
 
-export default Users;
+export default Clients;
 
 const Title = styled.h1`
   font-weight: 500;

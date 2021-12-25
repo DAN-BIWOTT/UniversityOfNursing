@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import styled from "styled-components";
 import NewUserBtn from "../sidebar/menu/NewUserBtn";
 import Nav from "./Nav";
@@ -8,23 +8,26 @@ const Main = () => {
     
   useEffect(() => {
     AllNewOrders();
-  });
-
+  },[]);
+  const [data, setData] = useState([])
   const newOrdersQuery = `query AllNewOrders {
-    order(order_by: {client_id: asc, id: desc}) {
+    order(order_by: {created_at: desc}, where: {progress_status: {_eq: 0}}) {
       id
       subject
       pages
       budget
       due_time
+      price
+      topic
+      created_at
     }
   }`;
 
   const AllNewOrders = async () => {
-    const response = await fetch("https://elegant-phoenix-17.hasura.app/v1/graphql", {
+    const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
       headers: {
-        "x-hasura-admin-secret": "KqWmApoDDGIvFcJkhmxAJZGWxeERYz4g7VyRnKckrbFgdcWJ5ixe9os1559IjSTr",
+        "x-hasura-admin-secret": `${process.env.GATSBY_HASURA_ADMIN_SECRET}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -33,13 +36,14 @@ const Main = () => {
     });
 
     const finalResp = await response.json();
+    setData(finalResp.data.order)
   };
 
   return (
     <Container>
       <Nav />
       <NewUserBtn />
-      <Users title="New Orders" count={2} />
+      <Users data={data} title="New Orders" count={data.length} />
     </Container>
   );
 };
