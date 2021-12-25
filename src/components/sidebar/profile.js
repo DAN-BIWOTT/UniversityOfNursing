@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import Image from '../../assets/images/profile.jpg'
+import { getUser } from '../../services/auth'
 
-const Profile = ({permission}) => {
-    
+const Profile = () => {
     return (
         <Container>
             <ProfileImg src={Image} />
-            <ProfileName>{permission} Dev</ProfileName>
+            <ProfileName>{getUser().username} Dev</ProfileName>
         </Container>
     )
 }

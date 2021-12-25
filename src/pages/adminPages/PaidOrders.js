@@ -7,7 +7,7 @@ import PaidOrdersList from '../../components/main/users/Users'
 const PaidOrders = () => {
     return (
         <Container>
-        <Sidebar/>
+        <Sidebar permission="admin"/>
         <Nav/>
         <PaidOrdersList title="Paid Orders" count={2}/>
     </Container>

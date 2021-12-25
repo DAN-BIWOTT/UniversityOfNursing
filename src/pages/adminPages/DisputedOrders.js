@@ -7,7 +7,7 @@ import DisputedOrdersList from '../../components/main/users/Users'
 const DisputedOrders = () => {
     return (
         <Container>
-            <Sidebar/>
+            <Sidebar permission="admin"/>
             <Nav/>
             <DisputedOrdersList title="Disputed Orders" count={2}/>
         </Container>

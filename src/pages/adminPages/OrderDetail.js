@@ -8,7 +8,7 @@ const OrderDetail = ({location}) => {
     const [itemOrderId, setItemOrderId] = useState((location.state === undefined)? "":location.state.orderId)
     return (
         <Container>
-            <Sidebar/>
+            <Sidebar permission="admin"/>
             <Nav/>
             <DetailMain orderId={itemOrderId}/>
         </Container>

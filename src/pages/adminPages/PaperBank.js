@@ -6,7 +6,7 @@ import Sidebar from '../../components/sidebar/sidebar'
 const PaperBank = () => {
     return (
         <Container>
-            <Sidebar/>
+            <Sidebar permission="admin"/>
             <Nav/>
         </Container>
     )

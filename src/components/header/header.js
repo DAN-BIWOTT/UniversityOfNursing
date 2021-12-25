@@ -1,13 +1,13 @@
 /** @jsx jsx */
-import { jsx, Box, Flex, Container, Button } from 'theme-ui';
-import { Fragment, useState } from 'react';
-import Sticky from 'react-stickynode';
-import Logo from 'components/logo';
-import TopBar from 'components/topbar';
-import LockIcon from 'components/icons/lock';
-import HamburgerMenu from 'components/hamburger';
-import Navbar from './navbar';
-import { Link } from 'gatsby';
+import { jsx, Box, Flex, Container, Button } from "theme-ui";
+import { Fragment, useState } from "react";
+import Sticky from "react-stickynode";
+import Logo from "components/logo";
+import TopBar from "components/topbar";
+import LockIcon from "components/icons/lock";
+import HamburgerMenu from "components/hamburger";
+import Navbar from "./navbar";
+import { Link } from "gatsby";
 
 export default function Header() {
   const [state, setState] = useState({
@@ -47,7 +47,7 @@ export default function Header() {
         <Box
           as="header"
           sx={styles.header}
-          className={state.isSticky ? 'is-sticky' : ''}
+          className={state.isSticky ? "is-sticky" : ""}
         >
           <Container sx={styles.container}>
             <Logo sx={styles.logo} isSticky={state.isSticky} />
@@ -58,15 +58,15 @@ export default function Header() {
             />
             <Flex sx={styles.buttonGroup}>
               <Button
-              as={Link}
-              to="/login"
+                as={Link}
+                to="/login"
                 variant="text"
                 sx={{
                   ...styles.login,
-                  color: state.isSticky ? 'text' : 'white',
+                  color: state.isSticky ? "text" : "white",
                 }}
               >
-                <LockIcon fill={state.isSticky ? '#343D48' : 'white'} />
+                <LockIcon fill={state.isSticky ? "#343D48" : "white"} />
                 Login
               </Button>
               <Button
@@ -75,8 +75,8 @@ export default function Header() {
                 variant="text"
                 sx={{
                   ...styles.joinCommunity,
-                  backgroundColor: state.isSticky ? 'primary' : 'white',
-                  color: state.isSticky ? 'white' : 'primary',
+                  backgroundColor: state.isSticky ? "primary" : "white",
+                  color: state.isSticky ? "white" : "primary",
                 }}
               >
                 Get Started
@@ -98,39 +98,39 @@ export default function Header() {
 
 const styles = {
   header: {
-    position: 'fixed',
+    position: "fixed",
     left: 0,
     right: 0,
     py: 4,
-    transition: 'all 0.3s ease-in-out 0s',
-    '&.is-sticky': {
-      backgroundColor: 'white',
-      boxShadow: '0 6px 13px rgba(38,78,118,0.1)',
-      paddingTop: '15px',
-      paddingBottom: '15px',
+    transition: "all 0.3s ease-in-out 0s",
+    "&.is-sticky": {
+      backgroundColor: "white",
+      boxShadow: "0 6px 13px rgba(38,78,118,0.1)",
+      paddingTop: "15px",
+      paddingBottom: "15px",
     },
-    '&.is-mobile-menu': {
-      backgroundColor: 'white',
+    "&.is-mobile-menu": {
+      backgroundColor: "white",
     },
   },
   container: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   logo: {
     mr: [null, null, null, null, 6, null, 12],
   },
   buttonGroup: {
-    alignItems: 'center',
-    marginLeft: 'auto',
+    alignItems: "center",
+    marginLeft: "auto",
     button: {
       fontWeight: 500,
     },
   },
   login: {
-    display: ['none', null, null, null, 'flex'],
-    color: 'white',
+    display: ["none", null, null, null, "flex"],
+    color: "white",
     p: 0,
     mr: [null, null, null, null, 5],
     svg: {
@@ -138,12 +138,12 @@ const styles = {
     },
   },
   joinCommunity: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     minHeight: [30, null, null, 40],
-    p: ['0 12px', null, null, '0 14px'],
-    fontSize: ['10px', null, null, 1],
+    p: ["0 12px", null, null, "0 14px"],
+    fontSize: ["10px", null, null, 1],
   },
   hamburger: {
-    display: [null, null, null, null, null, 'none'],
+    display: [null, null, null, null, null, "none"],
   },
 };

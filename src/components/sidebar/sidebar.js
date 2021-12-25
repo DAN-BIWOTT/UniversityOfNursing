@@ -7,7 +7,7 @@ import ToggleSwitch from './ToggleSwitch'
 const Sidebar = ({permission}) => {
     return (
         <Container>
-            <Profile permission={permission} />
+            <Profile />
             <Menu permission={permission}/>
         </Container>
     )

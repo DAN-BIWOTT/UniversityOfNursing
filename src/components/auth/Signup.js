@@ -22,8 +22,12 @@ const Signup = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault(event);
-    setWaitingButton(true)
-    if(pass!==confirmPass){setWaitingButton(false);toast("Password and Confirm Password do not match");return false;}
+    setWaitingButton(true);
+    if (pass !== confirmPass) {
+      setWaitingButton(false);
+      toast("Password and Confirm Password do not match");
+      return false;
+    }
     if (email !== "" && pass !== "" && full_name !== "" && confirmPass !== "") {
       const response = await fetch(
         "https://elegant-phoenix-17.hasura.app/v1/graphql",
@@ -43,14 +47,17 @@ const Signup = () => {
         }
       );
       const finalRes = await response.json();
-      console.log("🚀 ~ file: Signup.js ~ line 46 ~ submitHandler ~ finalRes", finalRes)
-      
-      if(finalRes.errors !== undefined){
+
+      if (finalRes.errors !== undefined) {
         setWaitingButton(false);
-        toast("Error. User already exists.")
-      }else{setWaitingButton(false);toast("User Creation Success! You may log in.");window.location.reload();}
+        toast("Error. User already exists.");
+      } else {
+        setWaitingButton(false);
+        toast("User Creation Success! You may log in.");
+        window.location.replace("/login");
+      }
     } else {
-        setWaitingButton(false);
+      setWaitingButton(false);
       toast("Please fill all inputs in the Form.");
     }
   };

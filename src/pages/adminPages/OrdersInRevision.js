@@ -7,7 +7,7 @@ import OrdersInRevisionList from '../../components/main/users/Users'
 const OrdersInRevision = () => {
     return (
         <Container>
-            <Sidebar/>
+            <Sidebar permission="admin"/>
             <Nav/>
             <OrdersInRevisionList title="Orders In Revision" count={2}/>
         </Container>

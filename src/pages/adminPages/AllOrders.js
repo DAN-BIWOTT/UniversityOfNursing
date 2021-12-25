@@ -7,7 +7,7 @@ import AllOrdersList from '../../components/main/users/Users'
 const AllOrders = () => {
     return (
         <Container>
-        <Sidebar/>
+        <Sidebar permission="admin"/>
         <Nav/>
         <AllOrdersList title="All Orders" count={2}  />
     </Container>

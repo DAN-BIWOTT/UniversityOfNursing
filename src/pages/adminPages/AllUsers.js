@@ -7,7 +7,7 @@ import AllUsersList from '../../components/main/users/Users'
 const AllUsers = () => {
     return (
         <Container>
-        <Sidebar/>
+        <Sidebar permission="admin"/>
         <Nav/>
         <AllUsersList title="All Users" count={2} />
     </Container>

@@ -33,7 +33,6 @@ const Main = () => {
     });
 
     const finalResp = await response.json();
-    console.log("🚀 ~ file: main.js ~ line 31 ~ Main ~ finalResp", finalResp);
   };
 
   return (
