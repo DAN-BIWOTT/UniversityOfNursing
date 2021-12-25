@@ -4,8 +4,7 @@ import SortingBar from "./SortingBar";
 import User from "./User.js";
 
 const Users = ({ title, count }) => {
-  title = "title";
-  count = 5;
+  
   const combinedData = [
       {
         id: 1,
