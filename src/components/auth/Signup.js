@@ -54,7 +54,6 @@ const Signup = () => {
       } else {
         setWaitingButton(false);
         toast("User Creation Success! You may log in.");
-        window.location.reload();
       }
     } else {
       setWaitingButton(false);
