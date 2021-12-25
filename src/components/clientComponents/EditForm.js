@@ -1,30 +1,98 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import toast, { Toaster } from "react-hot-toast";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
 
-const EditForm = ({ id }) => {
+const EditForm = ({ data }) => {
+  const { email, full_name, id, created_at } = data;
+  const [fullName, setFullName] = useState(full_name);
+  const [fullEmail, setFullEmail] = useState(email);
+  const [waitingButton, setWaitingButton] = useState(false);
+
+  const EditQuery = `mutation EditClientInfo($id: Int!,$fullName: String,$fullEmail: String) {
+    update_client_by_pk(pk_columns: {id: $id}, _set: {email: $fullEmail, full_name: $fullName}) {
+      email
+      full_name
+    }
+  }`;
+
+  const makeEdit = async () => {
+    const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
+      method: "POST",
+      headers: {
+        "x-hasura-admin-secret": `${process.env.GATSBY_HASURA_ADMIN_SECRET}`,
+        "Content-Type": "Application/Json",
+      },
+      body: JSON.stringify({
+        query: EditQuery,
+        variables: { id, fullName, fullEmail },
+      }),
+    });
+    const finalRes = await response.json();
+    setWaitingButton(false);
+    toast("User Editted successfully",{
+      style:{
+        background: "#32CD32"
+      }
+    });
+    console.log(
+      "🚀 ~ file: EditForm.js ~ line 24 ~ makeEdit ~ finalRes",
+      finalRes
+    );
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    setWaitingButton(true);
+    if (fullName === "" || fullEmail === "") {
+      setWaitingButton(false);
+      toast("Cant have Empty name or email");
+      return false;
+    }
+    makeEdit();
+  };
   return (
     <Container>
       <ModalTitle> Edit User Name </ModalTitle>
-      <Form>
+      <Form onSubmit={submitHandler}>
         <ModalBody>
           <InputWrapper>
             <Label>Input Name</Label>
-            <Input placeholder="Input Name" />
+            <Input
+              onChange={(event) => {
+                setFullName(event.target.value);
+              }}
+              value={fullName}
+            />
           </InputWrapper>
           <InputWrapper>
             <Label>Input Email</Label>
-            <Input placeholder="Input Email" />
+            <Input
+              onChange={(event) => {
+                setFullEmail(event.target.value);
+              }}
+              value={fullEmail}
+            />
           </InputWrapper>
         </ModalBody>
         <ModalFooter></ModalFooter>
         <hr />
-        <Button>Sumit</Button>
+        {waitingButton ? (
+          <Loader type="Bars" color="#00BFFF" height={40} width={40} style={{marginLeft:'40%'}} />
+        ) : (
+          <Button type="submit">Submit</Button>
+        )}
+       
       </Form>
     </Container>
   );
 };
 
 export default EditForm;
+const LoaderContainer = styled.div`
+  margin-left: 40%;
+`
 const ModalBody = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -54,7 +122,8 @@ const Input = styled.input`
   border-radius: 8px;
   padding: 0 1rem;
   transition: all 0.2s ease-in;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   &:hover {
     transform: translateY(-3px);
   }
@@ -75,7 +144,7 @@ const ModalTitle = styled.div`
   padding: 5px;
 `;
 
-const Form = styled.div``;
+const Form = styled.form``;
 
 const ModalFooter = styled.div``;
 

@@ -28,7 +28,7 @@ const Client = ({ data }) => {
       }),
     });
     const finalResponse = await response.json();
-    finalResponse.data.delete_client.affected_rows === 1
+    finalResponse.data !== undefined
       ? toast("User Deleted Successfully!")
       : toast("User Doesn't Exist!");
 
@@ -40,12 +40,12 @@ const Client = ({ data }) => {
 
   const deleteUser = (event) => {
     event.preventDefault();
-    deleteUserFunc(id);
-  };
-
-  const editUser = (event) => {
-    event.preventDefault();
-    console.log("🚀 ~ file: Client.js ~ line 24 ~ editUser ~ id", id);
+    let confirmAction = window.confirm("Are you sure you want to delete user?");
+    if (confirmAction) {
+      deleteUserFunc(id);
+    } else {
+      toast("Action Cancelled");
+    }
   };
 
   return (
@@ -61,8 +61,8 @@ const Client = ({ data }) => {
         <Text>{date}</Text>
       </UserWrapper>
       <UserWrapper>
-          {/* /////////// */}
-       <Popup id={id} />
+        {/* /////////// */}
+        <Popup data={data} />
         {/* /////////////// */}
         <Button onClick={deleteUser}>Delete</Button>
       </UserWrapper>
@@ -115,8 +115,9 @@ const Button = styled.button`
   background-color: #ff4646; /* red */
   border: none;
   color: white;
-  padding: .5rem;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  padding: 0.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   text-align: center;
   text-decoration: none;
   display: inline-block;

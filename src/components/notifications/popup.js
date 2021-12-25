@@ -3,7 +3,7 @@ import Popup from "reactjs-popup";
 import EditForm from "../clientComponents/EditForm";
 import "./popup.css";
 
-export default ({id}) => (
+export default ({data}) => (
   <Popup
     trigger={<button className="button"> Edit </button>}
     modal
@@ -14,7 +14,7 @@ export default ({id}) => (
         <button className="close" onClick={close}>
           &times;
         </button>
-      <EditForm id={id} />
+      <EditForm data={data} />
       </div>
     )}
   </Popup>
