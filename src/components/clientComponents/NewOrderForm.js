@@ -273,8 +273,8 @@ const Container = styled.div`
   cursor: pointer;
   background-color: ${({ theme }) => theme.primary};
   transition: all ease-in-out 300ms;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   &:hover {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     background-color: ${({ theme }) => theme.secondary};
   }
 `;
