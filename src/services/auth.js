@@ -22,7 +22,7 @@ export const isLoggedIn = () => {
   const user = getUser();
   return !!user.username;
 };
-export const logout = (callback) => {
+export const logout = () => {
   setUser({});
-  callback();
+  window.location.replace("/login");
 };

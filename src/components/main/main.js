@@ -1,6 +1,5 @@
 import React, { useState,useEffect } from "react";
 import styled from "styled-components";
-import NewUserBtn from "../sidebar/menu/NewUserBtn";
 import Nav from "./Nav";
 import Users from "../main/users/Users";
 
@@ -42,7 +41,6 @@ const Main = () => {
   return (
     <Container>
       <Nav />
-      <NewUserBtn />
       <Users data={data} title="New Orders" count={data.length} />
     </Container>
   );

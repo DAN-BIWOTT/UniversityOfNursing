@@ -11,7 +11,7 @@ const TopBar = () => {
         <Text as="span" className="caption">
           <GiftBox /> Get discount plans for more than 3 orders
         </Text>
-        <Link path="#">
+        <Link sx={styles.link} path="#">
           See Pricing <RightArrow />
         </Link>
       </Box>
@@ -27,6 +27,9 @@ const styles = {
     px: [6, null, null, null, 0],
     py: ['12px'],
   },
+  link:{
+    fontFamily:"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen",
+  },
   content: {
     display: ['flex'],
     alignItems: ['center'],
@@ -37,6 +40,7 @@ const styles = {
     maxWidth: 780,
     m: '0 auto',
     textAlign: 'center',
+    fontFamily:"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen",
     span: {
       '+ span': {
         ml: [4],

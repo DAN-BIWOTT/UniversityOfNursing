@@ -2,8 +2,8 @@ import { Link } from "gatsby";
 import React from "react";
 import styled from "styled-components";
 
-const User = ({ data }) => {
-  console.log("🚀 ~ file: User.js ~ line 6 ~ User ~ data", data);
+const SingleOrder = ({ data }) => {
+  console.log("🚀 ~ file: SingleOrder.js ~ line 6 ~ SingleOrder ~ data", data);
 
   const { budget, due_time, id, pages, subject, price, topic, created_at } =
     data;
@@ -11,13 +11,14 @@ const User = ({ data }) => {
     created_at
   ).getMonth()}/${new Date(created_at).getFullYear()}`;
 
+  
   return (
     <Container>
       <Property>
         <PropertyImg src="https://images.pexels.com/photos/3866555/pexels-photo-3866555.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
         <PropertyText>
           <PropertyStreet>
-            <OrderLink to={`/adminPages/OrderDetail`} state={{ orderId: id }}>
+            <OrderLink to={`/clientPages/ClientOrderDetail`} state={{ orderId: id }}>
               {id}
             </OrderLink>
           </PropertyStreet>
@@ -53,7 +54,7 @@ const User = ({ data }) => {
   );
 };
 
-export default User;
+export default SingleOrder;
 
 const Container = styled.div`
   display: flex;

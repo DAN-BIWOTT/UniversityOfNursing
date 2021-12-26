@@ -29,12 +29,14 @@ const styles = {
     textAlign: 'center',
     maxWidth: 660,
     margin: '0 auto 50px',
+    fontFamily:"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen",
   },
   slogan: {
     color: 'primary',
     fontWeight: 500,
     fontSize: 2,
     lineHeight: 2.5,
+    fontFamily:"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen",
   },
   title: {
     color: 'heading',
@@ -42,6 +44,7 @@ const styles = {
     fontSize: [4, null, null, 6],
     lineHeight: [1.33, 1.33, 1.5],
     letterSpacing: [null, null, null, 'heading'],
+    fontFamily:"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen",
     img: {
       ml: ['15px'],
       position: 'relative',
@@ -53,6 +56,7 @@ const styles = {
     color: 'heading',
     fontSize: ['14px', null, '16px'],
     lineHeight: [1.86, null, 2.2],
+    fontFamily:"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen",
     mt: [5],
     maxWidth: 610,
     m: ['10px auto 0'],

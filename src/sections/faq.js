@@ -42,7 +42,7 @@ const Faq = () => {
         <SectionHeading
           sx={styles.heading}
           slogan="Get yours question answer"
-          title="Frequantly asked question"
+          title="Frequently asked question"
         />
         <Masonry options={masonryOptions} sx={styles.grid}>
           {data.map((item) => {
@@ -64,4 +64,10 @@ const styles = {
   grid: {
     mx: [null, null, null, -6, -8, 'unset'],
   },
+  heading: {
+    fontFamily:"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen",
+  },
+  title: {
+    fontFamily:"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen",
+  }
 };

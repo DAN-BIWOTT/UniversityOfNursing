@@ -103,6 +103,7 @@ const styles = {
     right: 0,
     py: 4,
     transition: "all 0.3s ease-in-out 0s",
+    fontFamily:"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen",
     "&.is-sticky": {
       backgroundColor: "white",
       boxShadow: "0 6px 13px rgba(38,78,118,0.1)",
@@ -133,6 +134,7 @@ const styles = {
     color: "white",
     p: 0,
     mr: [null, null, null, null, 5],
+    fontFamily:"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen",
     svg: {
       mr: 2,
     },
@@ -142,6 +144,7 @@ const styles = {
     minHeight: [30, null, null, 40],
     p: ["0 12px", null, null, "0 14px"],
     fontSize: ["10px", null, null, 1],
+    fontFamily:"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen"
   },
   hamburger: {
     display: [null, null, null, null, null, "none"],
