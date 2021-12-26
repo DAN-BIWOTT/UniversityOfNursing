@@ -1,3 +1,5 @@
+import { navigate } from "gatsby";
+
 export const isBrowser = () => typeof window !== "undefined";
 export const getUser = () =>
   isBrowser() && window.localStorage.getItem("uonClient")
@@ -14,8 +16,8 @@ export const handleLogin = (id, username, email, isAdmin) => {
     username: username,
     email: email,
   });
-  if (isAdmin === 1) window.location.replace("/admin");
-  else window.location.replace("/client");
+  if (isAdmin === 1) navigate("/admin");
+  else navigate("/client");
   return true;
 };
 export const isLoggedIn = () => {
@@ -24,5 +26,5 @@ export const isLoggedIn = () => {
 };
 export const logout = () => {
   setUser({});
-  window.location.replace("/login");
+  navigate("/login");
 };
