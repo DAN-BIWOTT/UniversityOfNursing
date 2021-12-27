@@ -2,13 +2,13 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore/lite';
 
 const config = {
-  apiKey: process.env.GATSBY_apiKey,
-  authDomain: process.env.GATSBY_authDomain,
-  projectId: process.env.GATSBY_projectId,
-  storageBucket: process.env.GATSBY_storageBucket,
-  messagingSenderId: process.env.GATSBY_messagingSenderId,
-  appId: process.env.GATSBY_appId,
-  measurementId: process.env.GATSBY_measurementId,
+  apiKey: `${process.env.GATSBY_APIKEY}`,
+  authDomain: `${process.env.GATSBY_AUTHDOMAIN}`,
+  projectId: `${process.env.GATSBY_PROJECTID}`,
+  storageBucket: `${process.env.GATSBY_STORAGEBUCKET}`,
+  messagingSenderId: `${process.env.GATSBY_MESSAGINGSENDERID}`,
+  appId: `${process.env.GATSBY_APPID}`,
+  measurementId: `${process.env.GATSBY_MEASUREMENTID}`,
 };
 
   
