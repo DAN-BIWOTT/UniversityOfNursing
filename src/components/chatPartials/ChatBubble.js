@@ -1,13 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 
-const ChatBubble = ({ data,direction }) => {
+const ChatBubble = ({ data, direction }) => {
+  console.log(data);
+  const date = `${new Date(data.created_at).toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  })} | ${new Date(data.created_at).getDate()}/${new Date(
+    data.created_at
+  ).getMonth()}/${new Date(data.created_at).getFullYear()}`;
+
   switch (direction) {
     case true:
       return (
         <ContainerRight>
           <ChatContentRight>
             {data.msg}
+            <TimeStampRight>{date}</TimeStampRight>
           </ChatContentRight>
         </ContainerRight>
       );
@@ -15,8 +25,8 @@ const ChatBubble = ({ data,direction }) => {
     default:
       return (
         <ContainerLeft>
-          <ChatContentLeft>
-            {data.msg}
+          <ChatContentLeft>{data.msg}
+          <TimeStampLeft>{date}</TimeStampLeft>
           </ChatContentLeft>
         </ContainerLeft>
       );
@@ -24,7 +34,22 @@ const ChatBubble = ({ data,direction }) => {
 };
 
 export default ChatBubble;
-
+const TimeStampLeft = styled.p`
+padding-top: 1rem;
+  float: right;
+  font-size: 0.8rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: white;
+`;
+const TimeStampRight = styled.p`
+padding-top: 1rem;
+  float: left;
+  font-size: 0.8rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: grey;
+`;
 const ContainerRight = styled.div`
   width: 100%;
   height: auto;
@@ -42,8 +67,9 @@ const ChatContentRight = styled.div`
   margin-top: 1rem;
   margin-bottom: 1rem;
   border-radius: 10px 0 0 10px;
-  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color:#000000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: #000000;
 `;
 const ContainerLeft = styled.div`
   width: 100%;
@@ -62,6 +88,7 @@ const ChatContentLeft = styled.div`
   margin-top: 1rem;
   margin-bottom: 1rem;
   border-radius: 0 10px 10px 0;
-  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color:#f2f2f2;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: #f2f2f2;
 `;

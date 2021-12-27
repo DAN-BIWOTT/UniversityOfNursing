@@ -1,8 +1,8 @@
 import { db } from "./firebase";
-import { collection, getDocs,setDoc,doc, collectionGroup, query, where } from "firebase/firestore/lite";
+import { collection, getDocs,setDoc,doc, collectionGroup, query, where, orderBy, limit } from "firebase/firestore/lite";
 
 const getChats = async (order_id) => {
-  const allChats = collection(db, "chats");
+  const allChats = collection(db, "chats")
   const someChats = query(allChats,where("order_id","==",order_id))
   const chatSnapshot = await getDocs(someChats);
   const chatList = chatSnapshot.docs.map((doc) => doc.data());

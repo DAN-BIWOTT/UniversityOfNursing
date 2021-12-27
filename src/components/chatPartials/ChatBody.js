@@ -69,13 +69,13 @@ const ChatBody = ({ orderId,sender }) => {
     <Container>
       <Body id="bottom-chat">
         {chats.map((msg) => {
-          {
+          
             return msg.sender === "admin" ? (
               <ChatBubble data={msg} direction={true} key={msg.created_at} />
             ) : (
               <ChatBubble data={msg} direction={false} key={msg.created_at} />
             );
-          }
+          
         })}
       </Body>
       <form onSubmit={handleSubmit}>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 

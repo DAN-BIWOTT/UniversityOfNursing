@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import Menu from './menu/menu'
 import Profile from './profile'
-import ToggleSwitch from './ToggleSwitch'
 
 const Sidebar = ({permission}) => {
     return (
