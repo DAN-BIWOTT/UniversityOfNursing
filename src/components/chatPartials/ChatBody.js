@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ChatBubble from "./ChatBubble";
 import { RiSendPlaneFill } from "react-icons/ri";
-import { getChats, sendChats } from "../../../utils/chats";
+import { getChats, sendChats } from "../../utils/chats";
 import toast, { Toaster } from "react-hot-toast";
 import { animateScroll } from "react-scroll";
 import Loader from "react-loader-spinner";

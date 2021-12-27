@@ -12,7 +12,7 @@ const getChats = async (order_id) => {
 
 const sendChats = async (msgObj) => {
   try {
-    await setDoc(doc(db, "chats",`Order time: ${msgObj.created_at}`), {
+    await setDoc(doc(db, "chats",`Convo Time: ${msgObj.created_at}`), {
     order_id: msgObj.order_id,
     msg: msgObj.msg,
     sender: msgObj.sender,

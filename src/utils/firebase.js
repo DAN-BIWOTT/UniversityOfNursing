@@ -11,7 +11,6 @@ const config = {
   measurementId: `${process.env.GATSBY_MEASUREMENTID}`,
 };
 
-  
   const App = initializeApp(config)
   const db = getFirestore(App);
 export { db };
