@@ -5,7 +5,7 @@ import Nav from '../../components/main/Nav'
 import Sidebar from '../../components/sidebar/sidebar'
 
 const ClientOrderDetail = ({location}) => {
-    const [id, setId] = useState((location.state === undefined)? "":location.state.orderId)
+    const [id, setId] = useState( location.state === null?"":location.state.orderId);
     
     const ClientOrderDetailQuery = `query MyQuery($id: Int!) {
         order_by_pk(id: $id) {
@@ -31,7 +31,11 @@ const ClientOrderDetail = ({location}) => {
 
     const [data, setData] = useState({});
     useEffect(() => {
-        getClientOrderDetails()
+        if(id===""){
+            window.location.replace("/client")
+        }else{
+            getClientOrderDetails()
+        }
     }, [])
 
     const getClientOrderDetails = async() =>{
