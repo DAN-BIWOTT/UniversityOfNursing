@@ -33,7 +33,7 @@ const AdminOrderDetail = ({ location }) => {
   const [data, setData] = useState({});
   useEffect(() => {
     if(id===""){
-        window.location.replace("/admin")
+        window.location.href = "/admin"
     }else{
         getOrderDetails();
     }

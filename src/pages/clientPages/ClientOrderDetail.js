@@ -32,7 +32,7 @@ const ClientOrderDetail = ({location}) => {
     const [data, setData] = useState({});
     useEffect(() => {
         if(id===""){
-            window.location.replace("/client")
+            window.location.href = "/admin"
         }else{
             getClientOrderDetails()
         }
