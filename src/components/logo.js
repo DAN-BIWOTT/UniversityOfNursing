@@ -7,7 +7,7 @@ export default function Logo({ isSticky, footer, ...props }) {
   return (
     <Link path="/" sx={styles.logo} {...props}>
       <LogoSvg white={!isSticky} />
-    </Link>
+    </Link> 
   );
 }
 const styles = {
