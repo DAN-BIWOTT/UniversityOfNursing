@@ -3,7 +3,6 @@ import React from "react";
 import styled from "styled-components";
 
 const User = ({ data }) => {
-  console.log("🚀 ~ file: User.js ~ line 6 ~ User ~ data", data);
 
   const { budget, due_time, id, pages, subject, price, topic, created_at } =
     data;
@@ -17,7 +16,7 @@ const User = ({ data }) => {
         <PropertyImg src="https://images.pexels.com/photos/3866555/pexels-photo-3866555.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
         <PropertyText>
           <PropertyStreet>
-            <OrderLink to={`/adminPages/OrderDetail`} state={{ orderId: id }}>
+            <OrderLink to={`/adminPages/AdminOrderDetail`} state={{ orderId: id }}>
               {id}
             </OrderLink>
           </PropertyStreet>

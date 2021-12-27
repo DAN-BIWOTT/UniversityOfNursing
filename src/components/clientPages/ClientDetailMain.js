@@ -3,8 +3,7 @@ import styled from "styled-components";
 import ColorStatus from "../icons/ColorStatus";
 import ChatBox from "../ChatBox";
 
-const DetailMain = ({ data, orderId }) => {
-  console.log("🚀 ~ file: DetailMain.js ~ line 7 ~ DetailMain ~ data", data);
+const ClientDetailMain = ({ data, orderId }) => {
 
   var progressStatus, colorProgressTitle, paymentStatus, colorPaymentTitle;
 
@@ -35,11 +34,42 @@ const DetailMain = ({ data, orderId }) => {
       colorPaymentTitle = "Paid";
       break;
   }
+  const Ul = styled.ul`
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  `
+  
+  const Li = styled.li`
+  border-right: 1px solid #bbb;
+    float: left;
+    `
+
+  const Link = styled.a`
+  display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    cursor: pointer;
+    :hover {
+    background-color: #111;
+  }
+  `
+  
   return (
     <div>
       <H1>Order Id: {orderId}</H1>
       <OrderGrid>
         <OrderContainer>
+          <Ul>
+            <Li><Link to="/">Pay</Link></Li>
+            <Li><Link to="/">Dispute</Link></Li>
+            <Li><Link to="/">Revision</Link></Li>
+            <Li style={{float:"right"}}><Link to="/">About</Link></Li>
+          </Ul>
           <OrderTitle>{data.subject}</OrderTitle>
           <StatusContainer>
             <ColorStatus status={progressStatus} title={colorProgressTitle} />
@@ -105,12 +135,12 @@ const DetailMain = ({ data, orderId }) => {
           </table>
         </OrderSummary>
       </OrderGrid>
-      <ChatBox />
+      <ChatBox sender="client" orderData={orderId} />
     </div>
   );
 };
 
-export default DetailMain;
+export default ClientDetailMain;
 
 const H1 = styled.h1`
   color: black;

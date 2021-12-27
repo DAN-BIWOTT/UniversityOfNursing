@@ -1,10 +1,10 @@
 import React, { useState,useEffect } from 'react'
 import styled from 'styled-components'
-import DetailMain from '../../components/adminPages/DetailMain'
+import AdminDetailMain from '../../components/adminPages/AdminDetailMain'
 import Nav from '../../components/main/Nav'
 import Sidebar from '../../components/sidebar/sidebar'
 
-const OrderDetail = ({location}) => {
+const AdminOrderDetail = ({location}) => {
     const [id, setId] = useState((location.state === undefined)? "":location.state.orderId)
     
     const OrderDetailQuery = `query MyQuery($id: Int!) {
@@ -57,12 +57,12 @@ const OrderDetail = ({location}) => {
         <Container>
             <Sidebar permission="admin"/>
             <Nav/>
-            <DetailMain data={data} orderId={id}/>
+            <AdminDetailMain data={data} orderId={id}/>
         </Container>
     )
 }
 
-export default OrderDetail
+export default AdminOrderDetail
 
 const Container = styled.div`
     width: auto;

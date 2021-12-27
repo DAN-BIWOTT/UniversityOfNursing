@@ -1,20 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-const ChatBubble = ({ direction }) => {
-  console.log(
-    "🚀 ~ file: ChatBubble.js ~ line 5 ~ ChatBubble ~ direction",
-    direction
-  );
+const ChatBubble = ({ data,direction }) => {
   switch (direction) {
     case true:
       return (
         <ContainerRight>
           <ChatContentRight>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
+            {data.msg}
           </ChatContentRight>
         </ContainerRight>
       );
@@ -23,10 +16,7 @@ const ChatBubble = ({ direction }) => {
       return (
         <ContainerLeft>
           <ChatContentLeft>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
+            {data.msg}
           </ChatContentLeft>
         </ContainerLeft>
       );

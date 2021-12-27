@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react'
 import styled from 'styled-components'
-import DetailMain from '../../components/clientPages/DetailMain'
+import ClientDetailMain from '../../components/clientPages/ClientDetailMain'
 import Nav from '../../components/main/Nav'
 import Sidebar from '../../components/sidebar/sidebar'
 
@@ -57,7 +57,7 @@ const ClientOrderDetail = ({location}) => {
         <Container>
             <Sidebar />
             <Nav/>
-            <DetailMain data={data} orderId={id}/>
+            <ClientDetailMain data={data} orderId={id}/>
         </Container>
     )
 }

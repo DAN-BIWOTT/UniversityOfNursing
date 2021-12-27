@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import ChatBody from "./chatPartials/ChatBody";
 
-const ChatBox = () => {
+const ChatBox = ({orderData,sender}) => {
   return (
     <Container>
-      <TopChatBar><h1>Chat Box</h1></TopChatBar>
-      <ChatBody />
+      <TopChatBar><h1>Chat Box for Order: {orderData}</h1></TopChatBar>
+      <ChatBody sender={sender} orderId={orderData} />
     </Container>
   );
 };
