@@ -6,7 +6,6 @@ import Nav from "../../components/main/Nav";
 import Sidebar from "../../components/sidebar/sidebar";
 
 const AdminOrderDetail = ({ location }) => {
-     console.log(location.state);
    const [id, setId] = useState( location.state === null?"":location.state.orderId);
 
   const OrderDetailQuery = `query MyQuery($id: Int!) {
