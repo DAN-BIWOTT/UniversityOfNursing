@@ -5,7 +5,7 @@ import Nav from '../../components/main/Nav'
 import Sidebar from '../../components/sidebar/sidebar'
 
 const ClientOrderDetail = ({location}) => {
-    const [id, setId] = useState( location.state === null || location.state.orderId === undefined?"":location.state.orderId);
+    const [id, setId] = useState( location.state === null || location.state === undefined?"":location.state.orderId);
     
     const ClientOrderDetailQuery = `query MyQuery($id: Int!) {
         order_by_pk(id: $id) {
