@@ -39,7 +39,7 @@ const Button = styled.button`
   border: none;
 `
 const CollapseChat = styled.div`
-  transition: width 2s, height 4s;
+  /* transition: width 2s, height 4s; */
 `;
 
 const styleIcon = {
