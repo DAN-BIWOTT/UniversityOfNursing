@@ -13,6 +13,7 @@ export default Service;
 
 const styles = {
   service: {
+    backgroundColor:"#fff",
     border: (theme) => `1px solid ${theme.colors.borderColor}`,
     borderRadius: 5,
     display: 'flex',
@@ -21,6 +22,7 @@ const styles = {
     minHeight: [107, null, null, 130],
     textAlign: 'center',
     transition: 'all 0.3s ease-in-out 0s',
+    boxShadow: '0 4px 8px 0 rgba(23, 64, 225, 0.2)',
     ':hover': {
       boxShadow: '0px 11px 30px rgba(51, 83, 145, 0.07)',
       borderColor: 'transparent',
