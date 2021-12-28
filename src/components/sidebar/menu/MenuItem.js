@@ -34,6 +34,7 @@ const IconCustom = styled(Icon)`
   font: 1rem;
   margin-right: 1rem;
   align-self: center;
+  color: #fff;
 `;
 
 const Title = styled.h1`
@@ -41,4 +42,6 @@ const Title = styled.h1`
   font-size: 0.9rem;
   margin-right: 1rem;
   font-weight: 300;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 `;

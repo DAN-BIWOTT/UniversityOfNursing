@@ -15,7 +15,7 @@ const Sidebar = ({permission}) => {
 export default Sidebar
 
 const Container = styled.div`
-    background-color: #F8F8F8;
+    background-color: #36006c;
     position: fixed;
     left: 0;
     top: 0;

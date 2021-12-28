@@ -113,7 +113,7 @@ const handleFileSubmit = (event)=>{
   return (
     <Container>
       {/* <form onSubmit={handleFileSubmit}>
-        <input type="file" multiple onChange={(event)=>setSelectedFile(event.target.inputMode)} value={selectedFile} />
+        <input type="file" multiple onChange={(event)=>setSelectedFile(event.target.files[0])} value={selectedFile} />
         <button>submit</button>
       </form> */}
       <Title>Add Order</Title>
@@ -293,9 +293,10 @@ const Container = styled.div`
   padding: 1rem 0;
   border-bottom: 1px solid rgba(190, 190, 190, 0.22);
   cursor: pointer;
-  background-color: ${({ theme }) => theme.primary};
+  background-color: #fff;
   transition: all ease-in-out 300ms;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
   &:hover {
     background-color: ${({ theme }) => theme.secondary};
   }

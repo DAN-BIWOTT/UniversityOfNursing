@@ -26,5 +26,5 @@ export const isLoggedIn = () => {
 };
 export const logout = () => {
   setUser({});
-  navigate("/login");
+  navigate("/");
 };

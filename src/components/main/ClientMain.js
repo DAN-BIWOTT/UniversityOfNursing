@@ -96,4 +96,6 @@ const Container = styled.div`
   margin-left: 16rem;
   position: relative;
   padding: 0 4rem 4rem;
+  background: #f4eaff;
+  height: 100vh;
 `;

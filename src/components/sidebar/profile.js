@@ -26,6 +26,8 @@ const ProfileImg = styled.img`
 const ProfileName = styled.h1`
     font-size: 1rem;
     font-weight: 300;
-    color: ${({theme})=>theme.textColor};
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
 `
 

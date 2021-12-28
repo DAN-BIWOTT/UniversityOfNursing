@@ -42,6 +42,7 @@ const NewOrder = () => {
 export default NewOrder;
 
 const Container = styled.div`
+background: #f4eaff;
   width: auto;
   margin-left: 16rem;
   position: relative;

@@ -49,6 +49,9 @@ const CompleteOrder = () => {
 export default CompleteOrder
 
 const Container = styled.div`
+background-color: #f4eaff;
+min-height: 100vh;
+height: fit-content;
     width: auto;
     margin-left: 16rem;
     position: relative;

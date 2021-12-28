@@ -11,7 +11,6 @@ import PremiumFeature from 'sections/premium-feature';
 import Blog from 'sections/blog';
 import Faq from 'sections/faq';
 import Support from 'sections/support';
-import tawkTo from "tawkto-react";
 
 export default function IndexPage() {
 

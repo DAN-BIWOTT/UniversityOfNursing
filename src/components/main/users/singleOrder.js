@@ -62,7 +62,6 @@ const Container = styled.div`
   padding: 1rem 0;
   border-bottom: 1px solid rgba(190, 190, 190, 0.22);
   cursor: pointer;
-  background-color: ${({ theme }) => theme.primary};
   transition: all ease-in-out 300ms;
   &:hover {
     /* box-shadow: 0px 10px 8px -8px rgba(138, 153, 192, 0.6); */
@@ -136,7 +135,8 @@ const OrderLink = styled(Link)`
   justify-content: center;
   cursor: pointer;
   transition: all ease-in-out 300ms;
+  box-shadow: 0px 0px 7px rgba(128, 74, 216, 0.6);
   &:hover {
-    box-shadow: 0px 0px 7px rgba(128, 74, 216, 0.6);
+    box-shadow: 0px 0px 10px rgba(128, 74, 216, 0.6);
   }
 `;
