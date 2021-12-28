@@ -9,7 +9,7 @@ import Loader from "react-loader-spinner";
 import { uploadFile } from "../../utils/fileHandling";
 
 const NewOrderForm = () => {
-  const [budgetRange, setBudgetRange] = useState({ min: 200, max: 5000 });
+  const [budgetRange, setBudgetRange] = useState({ min: 10, max: 50 });
   let budgetRangeString;
   const [price, setPrice] = useState("");
   const [paperFormat, setPaperFormat] = useState("");
@@ -123,9 +123,9 @@ const handleFileSubmit = (event)=>{
             <Label>Budget: </Label>
             <div style={{ width: "80%", marginLeft: "1rem" }}>
               <InputRange
-                maxValue={30000}
-                minValue={200}
-                formatLabel={(value) => `${value} Ksh`}
+                maxValue={400}
+                minValue={10}
+                formatLabel={(value) => `${value} $`}
                 value={budgetRange}
                 onChange={(value) => setBudgetRange(value)}
                 onChangeComplete={(value) => console.log(value)}
@@ -135,7 +135,7 @@ const handleFileSubmit = (event)=>{
           <ColumnGrid>
             <Label>*Price: </Label>
             <Input
-              placeholder="EXAMPLE: 2500"
+              placeholder="EXAMPLE: 25"
               type="number"
               onChange={(event) => {
                 setPrice(event.target.value);
@@ -337,17 +337,23 @@ const Input = styled.input`
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 400;
   padding: 1rem;
+  border: none;
+  border-bottom: 1px solid black;
+  box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
+  padding:1rem;
+  border-radius: 5px;
   :focus {
     outline: none;
     border: none;
     border-bottom: #1740e1;
     box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
   }
+ 
 `;
 
 const InputSelect = styled.select`
   width: 70%;
-  height: 7vh;
+  height: 8vh;
   margin-left: 10px;
   font-size: clamp(1rem, 1vw, 1rem);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -355,6 +361,10 @@ const InputSelect = styled.select`
   font-weight: 400;
   padding: 0px 0px 0px 1rem;
   border-radius: 5px;
+  border: none;
+  border-bottom: 1px solid black;
+  box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
+  padding:1rem;
   :focus {
     outline: none;
     border: none;
@@ -372,6 +382,10 @@ const TextAreaInput = styled.textarea`
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 400;
   padding: 1rem;
+  border-radius: 5px;
+  border: none;
+  border-bottom: 1px solid black;
+  box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
   :focus {
     outline: none;
     border: none;
@@ -386,6 +400,7 @@ const Button = styled.button`
   height: 7vh;
   background-color: #8e6fe1;
   border: none;
+  border-bottom:1px solid black ;
   border-radius: 5px;
   cursor: pointer;
   color: #fff;

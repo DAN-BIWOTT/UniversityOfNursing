@@ -33,7 +33,7 @@ const ContainerFail = styled.div`
   padding: 5px 5px 5px 5px;
   font-weight: bold;
   color: white;
-  background: #ee6911;
+  background: #3c3b62bf;
   border-radius: 5vw;
 `;
 const ContainerWait = styled.div`
@@ -44,6 +44,6 @@ const ContainerWait = styled.div`
   padding: 5px 5px 5px 5px;
   font-weight: bold;
   color: white;
-  background: orange;
+  background: #3c3b62bf;
   border-radius: 5vw;
 `;
