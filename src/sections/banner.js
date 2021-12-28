@@ -4,13 +4,12 @@ import {
   Box,
   Text,
   Heading,
-  Container,
 } from 'theme-ui';
 import { useStaticQuery, graphql } from 'gatsby';
 import { rgba } from 'polished';
 import Image from 'components/image';
 import Styled from 'styled-components';
-
+import Video from "../assets/videos/travel.mp4"
 
 const Banner = () => {
  
@@ -29,6 +28,9 @@ const Banner = () => {
 
   return (
     <Box as="section" id="home" sx={styles.section}>
+      <HeroBg>
+        <VideoBg src={Video} type="video/mp4" autoPlay loop muted playsInline />
+      </HeroBg>
       <Container>
         <Box sx={styles.grid}>
           <Box as="form" sx={styles.domainCard}>
@@ -61,14 +63,36 @@ const Banner = () => {
 };
 
 export default Banner;
-
+const Container = Styled.div`
+  display: flex;
+  height: 101vh;
+  padding: 0 1rem;
+  position: relative;
+  margin-top:-8vh;
+  :before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.2) 0%,
+        rgba(0, 0, 0, 0.6) 100%
+      ),
+      linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
+  }
+`
 const styles = {
-  section: {
-    backgroundColor: 'primary',
-    pt: [17, null, null, 20, null],
-    pb: [6, null, null, 12, 16],
-  },
+section:{
+  marginBottom:"10vh",
+},
   grid: {
+    marginTop:"23vh",
+    marginLeft:"6vw",
+    zIndex:"3",
     gap: ['30px 60px', null, null, null, '30px 40px', '30px 60px'],
     display: 'grid',
     minHeight: [null, null, null, null, null, '66vh', '81vh'],
@@ -117,4 +141,23 @@ const List = Styled.div`
 `
 const H3 = Styled.h3`
 margin-top: -35px ;
+`
+
+const HeroBg = Styled.div`
+position: absolute;
+top: 0;
+bottom: 0;
+right: 0;
+left: 0;
+width: 100%;
+height: 100%;
+overflow: hidden;
+`
+
+const VideoBg = Styled.video`
+width: 100%;
+height: 100%;
+-o-object-fit: cover;
+object-fit: cover;
+z-index:-1;
 `
