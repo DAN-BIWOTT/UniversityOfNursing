@@ -134,13 +134,25 @@ const ClientDetailMain = ({ data, orderId }) => {
             </tbody>
           </table>
         </OrderSummary>
-      </OrderGrid>
       <ChatBox sender="client" orderData={orderId} />
+      <FileHold >
+          <H1>Project Files</H1>
+      </FileHold>
+      </OrderGrid>
     </div>
   );
 };
 
 export default ClientDetailMain;
+const FileHold = styled.div`
+  width: auto;
+  margin-top: 3vh;
+  background: #fff;
+  border-radius: 10px;
+  display: block;
+  padding-left: 2rem;
+  box-shadow: 0 6px 12px 0 rgba(23, 64, 225, 0.2);
+`
 
 const H1 = styled.h1`
   color: black;

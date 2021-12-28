@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { LineSpacing, NatureDropDown, PaperFormat, Subjects } from "./newOrderForm.data";
+import {
+  LineSpacing,
+  NatureDropDown,
+  PaperFormat,
+  Subjects,
+} from "./newOrderForm.data";
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 import { getUser } from "../../services/auth";
 import toast from "react-hot-toast";
 import Loader from "react-loader-spinner";
-import { uploadFile } from "../../utils/fileHandling";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { storage } from "../../utils/firebase";
 
 const NewOrderForm = () => {
   const [budgetRange, setBudgetRange] = useState({ min: 10, max: 50 });
@@ -28,13 +34,29 @@ const NewOrderForm = () => {
       id
     }
   }`;
-  const emptyFields =()=>{
-    if(price === "" || paperFormat === "" || nature === "" || pages === "" || deadline === "" || subject === "" || topic === "" || description === "" ) return true;
+  const emptyFields = () => {
+    if (
+      price === "" ||
+      paperFormat === "" ||
+      nature === "" ||
+      pages === "" ||
+      deadline === "" ||
+      subject === "" ||
+      topic === "" ||
+      description === ""
+    )
+      return true;
     return false;
-  }
+  };
 
   const submitOrder = async () => {
-    if(emptyFields()){toast("Fields with stars cant be left empty!",{style:{background:"#DC143C"}});setWaitingButton(false); return false;}
+    if (emptyFields()) {
+      toast("Fields with stars cant be left empty!", {
+        style: { background: "#DC143C" },
+      });
+      setWaitingButton(false);
+      return false;
+    }
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
       headers: {
@@ -89,33 +111,53 @@ const NewOrderForm = () => {
       return false;
     }
   };
-  const handleSubmit = (event) => {
+  const [selectedFile, setSelectedFile] = useState("");
+  // uploadFile(selectedFile);
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setWaitingButton(true);
-    console.log("Submitted form");
-    budgetToString()
-      ? submitOrder()
-      : toast("Input Budget Range", {
+    if(selectedFile !== ""){
+      console.log("We have files to upload")
+      const httpsReference = "files/".concat(selectedFile.name);
+      const fileRef = ref(storage,httpsReference)
+      try {
+          uploadBytes(fileRef, selectedFile).then((url) => {
+            console.log(url)
+              getDownloadURL(fileRef).then(downloadUrl =>{
+                console.log(downloadUrl);
+                setFiles(downloadUrl)
+                console.log(files)
+                budgetToString()
+                ? submitOrder()
+                : toast("Please Input Budget Range", {
+                    style: {
+                      background: "#DC143C",
+                    },
+                  });
+              });
+          });
+      } catch (error) {
+        toast("File Upload Failed.", {
           style: {
             background: "#DC143C",
           },
         });
+          return false;
+      }
+    }else{
+      console.log("no files to upload")
+      budgetToString()
+      ? submitOrder()
+      : toast("Please Input Budget Range", {
+          style: {
+            background: "#DC143C",
+          },
+        });
+    }
   };
-
-  const [selectedFile, setSelectedFile] = useState("")
-const handleFileSubmit = (event)=>{
-  event.preventDefault();
-  console.log(selectedFile.split("/").pop())
-  // uploadFile(selectedFile)
-}
-
 
   return (
     <Container>
-      {/* <form onSubmit={handleFileSubmit}>
-        <input type="file" multiple onChange={(event)=>setSelectedFile(event.target.files[0])} value={selectedFile} />
-        <button>submit</button>
-      </form> */}
       <Title>Add Order</Title>
       <form onSubmit={handleSubmit}>
         <RowGrid>
@@ -209,10 +251,7 @@ const handleFileSubmit = (event)=>{
             >
               {LineSpacing.map((data) => {
                 return (
-                  <option
-                    value={data.lineSpace}
-                    key={data.lineSpace_id}
-                  >
+                  <option value={data.lineSpace} key={data.lineSpace_id}>
                     {data.lineSpace}
                   </option>
                 );
@@ -265,8 +304,12 @@ const handleFileSubmit = (event)=>{
           />
         </ColumnGrid>
         <ColumnGrid>
+        <p>Upload a single compressed file (.rar,.zip etc) upto 80mb</p>
           <Label>Upload File: </Label>
-          <Input type="file" />
+          <Input
+            type="file"
+            onChange={(event) => setSelectedFile(event.target.files[0])}
+          />
         </ColumnGrid>
         <ColumnGrid>
           {waitingButton ? (
@@ -341,7 +384,7 @@ const Input = styled.input`
   border: none;
   border-bottom: 1px solid black;
   box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
-  padding:1rem;
+  padding: 1rem;
   border-radius: 5px;
   :focus {
     outline: none;
@@ -349,7 +392,6 @@ const Input = styled.input`
     border-bottom: #1740e1;
     box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
   }
- 
 `;
 
 const InputSelect = styled.select`
@@ -365,7 +407,7 @@ const InputSelect = styled.select`
   border: none;
   border-bottom: 1px solid black;
   box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
-  padding:1rem;
+  padding: 1rem;
   :focus {
     outline: none;
     border: none;
@@ -401,7 +443,7 @@ const Button = styled.button`
   height: 7vh;
   background-color: #8e6fe1;
   border: none;
-  border-bottom:1px solid black ;
+  border-bottom: 1px solid black;
   border-radius: 5px;
   cursor: pointer;
   color: #fff;

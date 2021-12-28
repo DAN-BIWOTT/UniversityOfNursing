@@ -1,16 +1,20 @@
-import { getBlob, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "./firebase";
 
 
 // 'file' comes from the Blob or File API
-const httpsReference = 'https://firebasestorage.googleapis.com/b/bucket/o/';
 const uploadFile = (file) =>{
-    const fileRef = ref(storage,`${httpsReference}/${file.name}`)
-    uploadBytes(fileRef, file).then((url) => {
-        console.log('Uploaded a blob or file!');
-        console.log(url);
-    return url;
-    });
+    const httpsReference = "files/".concat(file.name);
+    const fileRef = ref(storage,httpsReference)
+    try {
+        uploadBytes(fileRef, file).then((url) => {
+            getDownloadURL(fileRef).then(downloadUrl =>{
+                return downloadUrl;
+            });
+        });
+    } catch (error) {
+        return false;
+    }
 }
 
 export {uploadFile};

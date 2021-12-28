@@ -1,17 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import ChatBody from "./chatPartials/ChatBody";
+import { BiChat } from "react-icons/Bi";
 
-const ChatBox = ({orderData,sender}) => {
+const ChatBox = ({ orderData, sender }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <Container>
-      <TopChatBar><h1>Chat Box for Order: {orderData}</h1></TopChatBar>
-      <ChatBody sender={sender} orderId={orderData} />
+      <TopChatBar>
+        <h1>Chat Box for Order: {orderData}</h1>
+        <Button onClick={(event)=>toggle()}>
+          <BiChat style={styleIcon} />
+        </Button>
+      </TopChatBar>
+      {!isOpen ? (
+        <></>
+      ) : (
+        <CollapseChat>
+          <ChatBody sender={sender} orderId={orderData} />
+        </CollapseChat>
+      )}
     </Container>
   );
 };
 
 export default ChatBox;
+const Button = styled.button`
+  width: 3rem;
+  height: 3rem;
+  background:transparent;
+  position: absolute;
+  font-size: 1.5em;
+  margin-left: 40vw;
+  margin-top: 1rem;
+  border: none;
+`
+const CollapseChat = styled.div`
+  transition: width 2s, height 4s;
+`;
+
+const styleIcon = {
+  color: "#fff",
+  fontSize: "1.5em",
+  cursor: "pointer",
+};
 
 const Container = styled.div`
   margin-top: 3vh;
@@ -29,11 +64,11 @@ const TopChatBar = styled.div`
   background-color: #8e6fe1;
   border-radius: 5px 5px 0px 0px;
   justify-content: center;
-  h1{
+  h1 {
     padding-top: 1rem;
     color: #ffffff;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: clamp(1rem,1vw, 1rem);
+    font-size: clamp(1rem, 1vw, 1rem);
     font-weight: 300;
   }
 `;
