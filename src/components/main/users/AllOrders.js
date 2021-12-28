@@ -6,7 +6,7 @@ import ClientSortingBar from "./ClientSortingBar";
 const AllOrders = ({ data,title, count }) => {
     
   return (
-    <div>
+    <Container>
       <Title>
         {title} <UserCount> {count}</UserCount>
       </Title>
@@ -14,11 +14,17 @@ const AllOrders = ({ data,title, count }) => {
       {data.map((user) => {
         return <SingleOrder data={user} key={user.id} />;
       })}
-    </div>
+    </Container>
   );
 };
 
 export default AllOrders;
+
+const Container = styled.div`
+box-shadow: 2px 14px 9px 2px rgba(0, 0, 0, 0.25);
+  padding:1rem;
+  border-radius: 5px;
+`
 
 const Title = styled.h1`
   font-weight: 500;

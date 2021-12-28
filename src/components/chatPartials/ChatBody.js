@@ -173,7 +173,7 @@ const Button = styled.button`
   height: 10vh;
   border-radius: 5px;
   margin-bottom: 20px;
-  background: #0000ff;
+  background: #9483c5;
   border: none;
   color: #ffffff;
   font-size: clamp(1rem, 1vw, 1rem);

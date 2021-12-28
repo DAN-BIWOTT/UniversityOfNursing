@@ -26,7 +26,7 @@ const TopChatBar = styled.div`
   width: 100%;
   height: 10vh;
   display: flex;
-  background-color: green;
+  background-color: #8e6fe1;
   border-radius: 5px 5px 0px 0px;
   justify-content: center;
   h1{

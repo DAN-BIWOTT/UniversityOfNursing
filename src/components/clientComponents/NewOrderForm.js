@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { NatureDropDown, PaperFormat, Subjects } from "./newOrderForm.data";
+import { LineSpacing, NatureDropDown, PaperFormat, Subjects } from "./newOrderForm.data";
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 import { getUser } from "../../services/auth";
 import toast from "react-hot-toast";
 import Loader from "react-loader-spinner";
+import { uploadFile } from "../../utils/fileHandling";
 
 const NewOrderForm = () => {
   const [budgetRange, setBudgetRange] = useState({ min: 200, max: 5000 });
@@ -100,8 +101,21 @@ const NewOrderForm = () => {
           },
         });
   };
+
+  const [selectedFile, setSelectedFile] = useState("")
+const handleFileSubmit = (event)=>{
+  event.preventDefault();
+  console.log(selectedFile.split("/").pop())
+  // uploadFile(selectedFile)
+}
+
+
   return (
     <Container>
+      {/* <form onSubmit={handleFileSubmit}>
+        <input type="file" multiple onChange={(event)=>setSelectedFile(event.target.inputMode)} value={selectedFile} />
+        <button>submit</button>
+      </form> */}
       <Title>Add Order</Title>
       <form onSubmit={handleSubmit}>
         <RowGrid>
@@ -189,13 +203,21 @@ const NewOrderForm = () => {
 
           <ColumnGrid>
             <Label>Spacing: </Label>
-            <Input
-              placeholder="EXAMPLE: 1.5"
-              onChange={(event) => {
-                setSpacing(event.target.value);
-              }}
+            <InputSelect
+              onChange={(event) => setSpacing(event.target.value)}
               value={spacing}
-            />
+            >
+              {LineSpacing.map((data) => {
+                return (
+                  <option
+                    value={data.lineSpace}
+                    key={data.lineSpace_id}
+                  >
+                    {data.lineSpace}
+                  </option>
+                );
+              })}
+            </InputSelect>
           </ColumnGrid>
           <ColumnGrid>
             <Label>*Subject: </Label>
@@ -362,7 +384,7 @@ const Button = styled.button`
   margin-top: 2rem;
   width: 90%;
   height: 7vh;
-  background-color: #3900e6;
+  background-color: #8e6fe1;
   border: none;
   border-radius: 5px;
   cursor: pointer;

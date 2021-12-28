@@ -6,7 +6,7 @@ import User from "./User.js";
 const Users = ({ data,title, count }) => {
     
   return (
-    <div>
+    <Container>
       <Title>
         {title} <UserCount> {count}</UserCount>
       </Title>
@@ -14,12 +14,16 @@ const Users = ({ data,title, count }) => {
       {data.map((user) => {
         return <User data={user} key={user.id} />;
       })}
-    </div>
+    </Container>
   );
 };
 
 export default Users;
-
+const Container = styled.div`
+  box-shadow: 2px 14px 9px 2px rgba(0, 0, 0, 0.25);
+  padding:1rem;
+  border-radius: 5px;
+`
 const Title = styled.h1`
   font-weight: 500;
   color: ${({ theme }) => theme.textColor};

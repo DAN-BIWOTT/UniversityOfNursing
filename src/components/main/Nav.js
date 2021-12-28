@@ -20,7 +20,7 @@ const Nav = () => {
   };
   return (
     <Container>
-      <MessageIcon icon={`mdi-light:email`} inline={false}></MessageIcon>
+      <MessageIcon icon={`mdi-light:bell`} inline={false}></MessageIcon>
       <DropDown>
         <ImageButton onClick={toggleDrop}>
           <ProfileImg src={Image} />
@@ -55,6 +55,7 @@ const Container = styled.div`
   justify-content: flex-end;
   align-items: center;
   margin-bottom: 3rem;
+  
 `;
 const ProfileImg = styled.img`
   border-radius: 50%;

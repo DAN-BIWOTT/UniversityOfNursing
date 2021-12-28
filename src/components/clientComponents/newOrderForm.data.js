@@ -367,6 +367,28 @@ export const PaperFormat = [
     }
 ]
 
+export const LineSpacing = [
+    {
+        lineSpace:"",
+        lineSpace_id:""
+    },
+    {
+        lineSpace:"None",
+        lineSpace_id:"None"
+    },
+    {
+        lineSpace:"Single",
+        lineSpace_id:"Single"
+    },
+    {
+        lineSpace:"Double",
+        lineSpace_id:"Double"
+    },
+    {
+        lineSpace:"1.5",
+        lineSpace_id:"1.5"
+    }
+]
 
 
 
