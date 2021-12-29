@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import ColorStatus from "../icons/ColorStatus";
 import ChatBox from "../ChatBox";
+import fileFolder from "../../assets/images/fileFolder.png";
 
 const ClientDetailMain = ({ data, orderId }) => {
-
   var progressStatus, colorProgressTitle, paymentStatus, colorPaymentTitle;
 
   const date = `${new Date(data.created_at).getDate()}/${new Date(
@@ -40,35 +40,43 @@ const ClientDetailMain = ({ data, orderId }) => {
     padding: 0;
     overflow: hidden;
     background-color: #333;
-  `
-  
+  `;
+
   const Li = styled.li`
-  border-right: 1px solid #bbb;
+    border-right: 1px solid #bbb;
     float: left;
-    `
+  `;
 
   const Link = styled.a`
-  display: block;
+    display: block;
     color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     cursor: pointer;
     :hover {
-    background-color: #111;
-  }
-  `
-  
+      background-color: #111;
+    }
+  `;
+
   return (
     <div>
       <H1>Order Id: {orderId}</H1>
       <OrderGrid>
         <OrderContainer>
           <Ul>
-            <Li><Link to="/">Pay</Link></Li>
-            <Li><Link to="/">Dispute</Link></Li>
-            <Li><Link to="/">Revision</Link></Li>
-            <Li style={{float:"right"}}><Link to="/">About</Link></Li>
+            <Li>
+              <Link to="/">Pay</Link>
+            </Li>
+            <Li>
+              <Link to="/">Dispute</Link>
+            </Li>
+            <Li>
+              <Link to="/">Revision</Link>
+            </Li>
+            <Li style={{ float: "right" }}>
+              <Link to="/">About</Link>
+            </Li>
           </Ul>
           <OrderTitle>{data.subject}</OrderTitle>
           <StatusContainer>
@@ -134,29 +142,105 @@ const ClientDetailMain = ({ data, orderId }) => {
             </tbody>
           </table>
         </OrderSummary>
-      <ChatBox sender="client" orderData={orderId} />
-      <FileHold >
+        <ChatBox sender="client" orderData={orderId} />
+        <FileHold>
           <H1>Project Files</H1>
-      </FileHold>
+          <FileRow>
+            <FolderImage
+              src={fileFolder}
+              alt="Folder representing downloadable files."
+            />
+            <FileTitle>File 1</FileTitle>
+          </FileRow>
+          <Form>
+            <Label>Upload size no more than 80mb</Label>
+            <Input type="file" />
+            <Button disabled>Upload</Button>
+          </Form>
+        </FileHold>
       </OrderGrid>
     </div>
   );
 };
 
 export default ClientDetailMain;
+const Button = styled.button`
+font-weight: 400;
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+font-size: clamp(1rem,1vw,1rem);
+margin-top: 1rem;
+margin-bottom: 1rem;
+width: 100%;
+background-color: #8e6fe1;
+border-radius: 10px;
+border: none;
+color: #fff;
+height: 6vh;
+cursor: pointer;
+`
+
+const Input = styled.input`
+width: 100%;
+  height: 7vh;
+  margin-left: 0px;
+  font-size: clamp(1rem, 1vw, 1rem);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 400;
+  padding: 1rem;
+  border: none;
+  border-bottom: 1px solid black;
+  box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
+  padding: 1rem;
+  border-radius: 5px;
+  :focus {
+    outline: none;
+    border: none;
+    border-bottom: #1740e1;
+    box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
+  }
+`
+
+const Form = styled.form`
+bottom: 0px;
+margin-top: 1rem;
+`
+const Label = styled.label`
+padding-left: 2rem;
+font-size: medium;
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+`
+const FolderImage = styled.img`
+  min-height: 5vh;
+  min-width: 5vh;
+  max-width: 10vw;
+  max-height: 10vh;
+  align-content: flex-start;
+  padding-left: 2rem;
+`;
+const FileTitle = styled.h1`
+padding-left: 3rem;
+  float: right;
+  font-size: clamp(1rem, 2vw, 1rem);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+`;
 const FileHold = styled.div`
+  display: block;
   width: auto;
+  height: fit-content;
   margin-top: 3vh;
   background: #fff;
   border-radius: 10px;
-  display: block;
-  padding-left: 2rem;
   box-shadow: 0 6px 12px 0 rgba(23, 64, 225, 0.2);
+`;
+const FileRow = styled.div`
+display: flex;
 `
-
 const H1 = styled.h1`
   color: black;
   font-family: Arial, Helvetica, sans-serif;
+  padding-left: 2rem;
 `;
 
 const OrderGrid = styled.div`

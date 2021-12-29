@@ -2,32 +2,40 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import ChatBody from "./chatPartials/ChatBody";
 import { BiChat } from "react-icons/Bi";
+import { CSSTransition } from 'react-transition-group';
+import "./chatPartials/chatBox.css";
 
 const ChatBox = ({ orderData, sender }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
+    console.log(isOpen)
     setIsOpen(!isOpen);
   };
   return (
     <Container>
       <TopChatBar>
-        <h1>Chat Box for Order: {orderData}</h1>
+        <h1>Order: {orderData} | Press button 👉 to Start Chat</h1>
         <Button onClick={(event)=>toggle()}>
           <BiChat style={styleIcon} />
         </Button>
       </TopChatBar>
-      {!isOpen ? (
-        <></>
-      ) : (
-        <CollapseChat>
+
+      <CSSTransition
+        in={isOpen}
+        timeout={400}
+        classNames="chat"
+        unmountOnExit
+      >
           <ChatBody sender={sender} orderId={orderData} />
-        </CollapseChat>
-      )}
+      </CSSTransition>
+
+    
     </Container>
   );
 };
 
 export default ChatBox;
+
 const Button = styled.button`
   width: 3rem;
   height: 3rem;
@@ -35,12 +43,12 @@ const Button = styled.button`
   position: absolute;
   font-size: 1.5em;
   margin-left: 40vw;
-  margin-top: 1rem;
+  margin-top: 0.7rem;
   border: none;
+  box-shadow: 2px 14px 9px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  background-color: #8000ff;
 `
-const CollapseChat = styled.div`
-  /* transition: width 2s, height 4s; */
-`;
 
 const styleIcon = {
   color: "#fff",
@@ -53,7 +61,7 @@ const Container = styled.div`
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   height: auto;
-  background: white;
+  background: #fcf9ff;
   display: block;
 `;
 

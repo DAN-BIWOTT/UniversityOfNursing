@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import ColorStatus from "../icons/ColorStatus";
 import ChatBox from "../ChatBox";
+import fileFolder from "../../assets/images/fileFolder.png";
 
 const AdminDetailMain = ({ data, orderId }) => {
   var progressStatus, colorProgressTitle, paymentStatus, colorPaymentTitle;
@@ -103,28 +104,105 @@ const AdminDetailMain = ({ data, orderId }) => {
           </table>
         </OrderSummary>
       <ChatBox sender="admin" orderData={orderId} />
-      <FileHold >
+      <FileHold>
           <H1>Project Files</H1>
-      </FileHold>
+          <FileRow>
+            <FolderImage
+              src={fileFolder}
+              alt="Folder representing downloadable files."
+            />
+            <FileTitle>File 1</FileTitle>
+          </FileRow>
+          <Form>
+            <Label>Upload size no more than 80mb</Label>
+            <Input type="file" />
+            <Button disabled>Upload</Button>
+          </Form>
+        </FileHold>
       </OrderGrid>
     </div>
   );
 };
 
 export default AdminDetailMain;
+const Button = styled.button`
+font-weight: 400;
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+font-size: clamp(1rem,1vw,1rem);
+margin-top: 1rem;
+margin-bottom: 1rem;
+width: 100%;
+background-color: #8e6fe1;
+border-radius: 10px;
+border: none;
+color: #fff;
+height: 6vh;
+cursor: pointer;
+`
+
+const Input = styled.input`
+width: 100%;
+  height: 7vh;
+  margin-left: 0px;
+  font-size: clamp(1rem, 1vw, 1rem);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 400;
+  padding: 1rem;
+  border: none;
+  border-bottom: 1px solid black;
+  box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
+  padding: 1rem;
+  border-radius: 5px;
+  :focus {
+    outline: none;
+    border: none;
+    border-bottom: #1740e1;
+    box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
+  }
+`
+
+const Form = styled.form`
+bottom: 0px;
+margin-top: 1rem;
+`
+const Label = styled.label`
+padding-left: 2rem;
+font-size: medium;
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+`
+const FolderImage = styled.img`
+  min-height: 5vh;
+  min-width: 5vh;
+  max-width: 10vw;
+  max-height: 10vh;
+  align-content: flex-start;
+  padding-left: 2rem;
+`;
+const FileTitle = styled.h1`
+padding-left: 3rem;
+  float: right;
+  font-size: clamp(1rem, 2vw, 1rem);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+`;
 const FileHold = styled.div`
+  display: block;
   width: auto;
+  height: fit-content;
   margin-top: 3vh;
   background: #fff;
   border-radius: 10px;
-  display: block;
-  padding-left: 2rem;
   box-shadow: 0 6px 12px 0 rgba(23, 64, 225, 0.2);
+`;
+const FileRow = styled.div`
+display: flex;
 `
 
 const H1 = styled.h1`
   color: black;
   font-family: Arial, Helvetica, sans-serif;
+  padding-left: 2rem;
 `;
 
 const OrderGrid = styled.div`
