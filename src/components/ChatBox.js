@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import ChatBody from "./chatPartials/ChatBody";
-import { BiChat } from "react-icons/Bi/index";
+import { BiChat } from "react-icons/bi";
 import { CSSTransition } from 'react-transition-group';
 import "./chatPartials/chatBox.css";
 
