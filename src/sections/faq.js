@@ -46,7 +46,7 @@ const Faq = () => {
         />
         <Masonry options={masonryOptions} sx={styles.grid}>
           {data.map((item) => {
-            return <FaqItem key={item.id} faq={item} className="faq-item" />;
+            return <FaqItem key={item.id} faq={item} className="faq-item" />
           })}
         </Masonry>
       </Container>

@@ -23,6 +23,8 @@ export default TopBar;
 
 const styles = {
   topbar: {
+    position:'relative',
+    zIndex:3,
     backgroundColor: '#080111',
     px: [6, null, null, null, 0],
     py: ['12px'],

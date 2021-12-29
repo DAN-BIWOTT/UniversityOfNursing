@@ -17,7 +17,7 @@ const data = [
     title: 'Collaborative environment',
     contents: (
       <div>
-        Work closely with a developer and someone tasked with understanding your project.
+        Work closely with a writers and professionals tasked with understanding your project.
       </div>
     ),
   },

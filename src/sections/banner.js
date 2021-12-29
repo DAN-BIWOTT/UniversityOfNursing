@@ -49,13 +49,6 @@ const Banner = () => {
               Expose yourself to the world.
             </Text>
           </Box>
-          <Box as="figure" sx={styles.illustration}>
-            <Image
-              src={data.serverRack.childImageSharp.fluid}
-              loading="lazy"
-              alt="sever-rack"
-            />
-          </Box>
         </Box>
       </Container>
     </Box>
