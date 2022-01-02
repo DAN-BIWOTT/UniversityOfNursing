@@ -14,3 +14,8 @@ CODES
 Revision
 101 = start Revision
 404 = finish Revision
+
+Acceptance
+0 = denied
+1 = accepted
+3 = neutral

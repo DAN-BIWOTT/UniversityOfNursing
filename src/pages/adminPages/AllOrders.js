@@ -3,20 +3,10 @@ import styled from 'styled-components'
 import Nav from '../../components/main/Nav'
 import Sidebar from '../../components/sidebar/sidebar'
 import AllOrdersList from '../../components/main/users/Users'
+import { AllOrders_Query } from '../../graphQl/uonQueries'
 
 const AllOrders = () => {
-    const AllOrdersQuery = `query AllOrders {
-        order(order_by: {created_at: desc}) {
-          id
-          subject
-          pages
-          budget
-          due_time
-          price
-          topic
-          created_at
-        }
-      }`
+    const AllOrdersQuery = AllOrders_Query;
     useEffect(() => {
         getAllOrders()
     }, []);
@@ -34,7 +24,6 @@ const AllOrders = () => {
         }
         );
         const finalResp = await response.json();
-        console.log("🚀 ~ file: AllOrders.js ~ line 25 ~ getAllOrders ~ finalResp", finalResp);
         setData(finalResp.data.order)
     }
     return (

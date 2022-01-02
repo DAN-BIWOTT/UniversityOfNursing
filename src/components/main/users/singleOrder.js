@@ -1,26 +1,30 @@
 import { Link } from "gatsby";
-import React from "react";
+import React,{useState} from "react";
 import styled from "styled-components";
+import ClientOrderDetail from "../../../pages/clientPages/ClientOrderDetail";
 
 const SingleOrder = ({ data }) => {
-  console.log("🚀 ~ file: SingleOrder.js ~ line 6 ~ SingleOrder ~ data", data);
-
   const { budget, due_time, id, pages, subject, price, topic, created_at } =
     data;
   const date = `${new Date(created_at).getDate()}/${new Date(
     created_at
   ).getMonth()}/${new Date(created_at).getFullYear()}`;
 
-  
+  const [orderIdSet, setOrderId] = useState(false)
+  const showDetail = (event) =>{
+    event.preventDefault();
+    setOrderId(true);
+  }
+ if(!orderIdSet){
   return (
     <Container>
       <Property>
         <PropertyImg src="https://images.pexels.com/photos/3866555/pexels-photo-3866555.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
         <PropertyText>
           <PropertyStreet>
-            <OrderLink to={`/clientPages/ClientOrderDetail`} state={{ orderId: id }}>
+            <OrderButton onClick={event=>showDetail(event)}>
               {id}
-            </OrderLink>
+            </OrderButton>
           </PropertyStreet>
           <Subtitle>{/* {firstName} {lastName} */}</Subtitle>
         </PropertyText>
@@ -51,7 +55,9 @@ const SingleOrder = ({ data }) => {
                 })()}
             </Status> */}
     </Container>
-  );
+  )}else{
+  return(<ClientOrderDetail orderId={id}/>);
+  }
 };
 
 export default SingleOrder;
@@ -123,7 +129,7 @@ const StatusIndicator = styled.div`
   position: absolute;
   right: 7rem;
 `;
-const OrderLink = styled(Link)`
+const OrderButton = styled.button`
   width: 10rem;
   font-size: 1rem;
   font-weight: 700;

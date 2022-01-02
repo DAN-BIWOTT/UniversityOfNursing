@@ -1,6 +1,8 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore/lite';
 import { getStorage } from "firebase/storage";
+import { getDatabase } from "firebase/database";
+
 const config = {
   apiKey: `${process.env.GATSBY_APIKEY}`,
   authDomain: `${process.env.GATSBY_AUTHDOMAIN}`,
@@ -14,4 +16,6 @@ const config = {
   const App = initializeApp(config)
   const db = getFirestore(App);
   const storage = getStorage(App);
-export { db,storage };
+  const database = getDatabase(App);
+
+export { db,storage,database };

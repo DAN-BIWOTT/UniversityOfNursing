@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ColorStatus from "../icons/ColorStatus";
 import ChatBox from "../ChatBox";
 import fileFolder from "../../assets/images/fileFolder.png";
+import BackButton from "../BackButton";
 
 const AdminDetailMain = ({ data, orderId }) => {
   var progressStatus, colorProgressTitle, paymentStatus, colorPaymentTitle;
@@ -36,6 +37,7 @@ const AdminDetailMain = ({ data, orderId }) => {
   }
   return (
     <div>
+      <BackButton />
       <H1>Order Id: {orderId}</H1>
       <OrderGrid>
         <OrderContainer>
@@ -106,13 +108,16 @@ const AdminDetailMain = ({ data, orderId }) => {
       <ChatBox sender="admin" orderData={orderId} />
       <FileHold>
           <H1>Project Files</H1>
+            {(data.files!=="")?
           <FileRow>
             <FolderImage
               src={fileFolder}
               alt="Folder representing downloadable files."
             />
-            <FileTitle>File 1</FileTitle>
+            <FileTitle href={data.files}>Data File</FileTitle>
           </FileRow>
+            :<></>
+            }
           <Form>
             <Label>Upload size no more than 80mb</Label>
             <Input type="file" />
@@ -179,7 +184,9 @@ const FolderImage = styled.img`
   align-content: flex-start;
   padding-left: 2rem;
 `;
-const FileTitle = styled.h1`
+const FileTitle = styled.a`
+font-weight: 700;
+padding-top: 2rem;
 padding-left: 3rem;
   float: right;
   font-size: clamp(1rem, 2vw, 1rem);

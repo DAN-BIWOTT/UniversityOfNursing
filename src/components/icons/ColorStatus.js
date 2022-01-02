@@ -2,13 +2,15 @@ import React from "react";
 import styled from "styled-components";
 
 const ColorStatus = ({ status, title }) => {
+  console.log(title)
+  console.log(status)
   switch (status) {
     case "red":
       return <ContainerFail>{title}</ContainerFail>;
     case "green":
       return <ContainerSuccess>{title}</ContainerSuccess>;
     default:
-      return <ContainerWait>{title}</ContainerWait>;
+      return <ContainerNeutral>{title}</ContainerNeutral>;
   }
 };
 
@@ -16,34 +18,35 @@ export default ColorStatus;
 
 const ContainerSuccess = styled.div`
   height: auto;
-  width: 10vw;
+  width: fit-content;
   float: right;
-  margin: 10px 10vw 0 1rem;
+  margin-left: 10px;
   padding: 5px 5px 5px 5px;
   font-weight: bold;
   color: white;
-  background: green;
+  background: #00b000;
+  border-radius: 5vw;
+`;
+const ContainerNeutral = styled.div`
+  height: auto;
+  width: fit-content;
+  float: right;
+  margin-left: 10px;
+  padding: 5px 5px 5px 5px;
+  font-weight: bold;
+  color: white;
+  background: #3c3b62bf;
   border-radius: 5vw;
 `;
 const ContainerFail = styled.div`
   height: auto;
-  width: 10vw;
+  width: fit-content;
   float: right;
-  margin: 10px 10vw 0 1rem;
+  margin-left: 10px;
   padding: 5px 5px 5px 5px;
   font-weight: bold;
   color: white;
-  background: #3c3b62bf;
+  background: #ca0000;
   border-radius: 5vw;
 `;
-const ContainerWait = styled.div`
-  height: auto;
-  width: 10vw;
-  float: right;
-  margin: 10px 10vw 0 1rem;
-  padding: 5px 5px 5px 5px;
-  font-weight: bold;
-  color: white;
-  background: #3c3b62bf;
-  border-radius: 5vw;
-`;
+

@@ -1,34 +1,13 @@
-import { navigate } from "gatsby";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import AdminDetailMain from "../../components/adminPages/AdminDetailMain";
-import Nav from "../../components/main/Nav";
 import Sidebar from "../../components/sidebar/sidebar";
+import { AdminOrderDetail_Query } from "../../graphQl/uonQueries";
 
-const AdminOrderDetail = ({ location }) => {
-   const [id, setId] = useState( location.state === null || location.state === undefined?"":location.state.orderId);
+const AdminOrderDetail = ({ orderId }) => {
+   const [id, setId] = useState( orderId);
 
-  const OrderDetailQuery = `query MyQuery($id: Int!) {
-        order_by_pk(id: $id) {
-          budget
-          client_id
-          created_at
-          dispute_status
-          doc_description
-          doc_format
-          due_time
-          id
-          nature
-          pages
-          payment_status
-          price
-          progress_status
-          revision_status
-          spacing
-          subject
-          topic
-        }
-      }`;
+  const OrderDetailQuery = AdminOrderDetail_Query;
 
   const [data, setData] = useState({});
   useEffect(() => {
@@ -60,7 +39,6 @@ const AdminOrderDetail = ({ location }) => {
   return (
     <Container>
       <Sidebar permission="admin" />
-      <Nav />
       <AdminDetailMain data={data} orderId={id} />
     </Container>
   );
@@ -70,7 +48,12 @@ export default AdminOrderDetail;
 
 const Container = styled.div`
   width: auto;
-  margin-left: 16rem;
-  position: relative;
+  left:16rem;
+  top:0px;
+  position: fixed;
   padding: 0 4rem 4rem;
+  background: #f4eaff;
+  height: 100vh;
+  z-index:10;
+  overflow-y: auto;
 `;

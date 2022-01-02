@@ -1,6 +1,7 @@
 import { Link } from "gatsby";
-import React from "react";
+import React,{useState} from "react";
 import styled from "styled-components";
+import AdminOrderDetail from "../../../pages/adminPages/AdminOrderDetail";
 
 const User = ({ data }) => {
 
@@ -10,15 +11,21 @@ const User = ({ data }) => {
     created_at
   ).getMonth()}/${new Date(created_at).getFullYear()}`;
 
-  return (
+  const [orderIdSet, setOrderId] = useState(false)
+  const showDetail = (event) =>{
+    event.preventDefault();
+    setOrderId(true);
+  }
+ if(!orderIdSet){
+   return(
     <Container>
       <Property>
         <PropertyImg src="https://images.pexels.com/photos/3866555/pexels-photo-3866555.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
         <PropertyText>
           <PropertyStreet>
-            <OrderLink to={`/adminPages/AdminOrderDetail`} state={{ orderId: id }}>
+          <OrderButton onClick={event=>showDetail(event)}>
               {id}
-            </OrderLink>
+            </OrderButton>
           </PropertyStreet>
           <Subtitle>{/* {firstName} {lastName} */}</Subtitle>
         </PropertyText>
@@ -49,7 +56,10 @@ const User = ({ data }) => {
                 })()}
             </Status> */}
     </Container>
-  );
+  );}else{
+    return(
+    <AdminOrderDetail orderId={id}/>)
+  }
 };
 
 export default User;
@@ -122,7 +132,7 @@ const StatusIndicator = styled.div`
   position: absolute;
   right: 7rem;
 `;
-const OrderLink = styled(Link)`
+const OrderButton = styled.button`
   width: 10rem;
   font-size: 1rem;
   font-weight: 700;

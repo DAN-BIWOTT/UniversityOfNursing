@@ -1,25 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import ColorStatus from "../icons/ColorStatus";
 import ChatBox from "../ChatBox";
 import fileFolder from "../../assets/images/fileFolder.png";
+import BackButton from "../BackButton";
+import { dispute_query } from "../../graphQl/uonQueries";
 
 const ClientDetailMain = ({ data, orderId }) => {
-  var progressStatus, colorProgressTitle, paymentStatus, colorPaymentTitle;
+  var progressStatus,
+    colorProgressTitle,
+    paymentStatus,
+    colorPaymentTitle,
+    acceptanceStatus,
+    colorAcceptanceTitle;
 
   const date = `${new Date(data.created_at).getDate()}/${new Date(
     data.created_at
   ).getMonth()}/${new Date(data.created_at).getFullYear()}`;
+
+  console.log(data.payment_status);
 
   switch (data.progress_status) {
     case 0:
       progressStatus = "red";
       colorProgressTitle = "Incomplete";
       break;
-
-    default:
+    case 1:
       progressStatus = "green";
       colorProgressTitle = "Complete";
+      break;
+
+    default:
+      progressStatus = "neutral";
+      colorProgressTitle = "Incomplete";
       break;
   }
 
@@ -28,39 +41,62 @@ const ClientDetailMain = ({ data, orderId }) => {
       paymentStatus = "red";
       colorPaymentTitle = "Not Paid";
       break;
-
-    default:
+    case 1:
       paymentStatus = "green";
       colorPaymentTitle = "Paid";
       break;
+
+    default:
+      paymentStatus = "neutral";
+      colorPaymentTitle = "Not Paid";
+      break;
   }
-  const Ul = styled.ul`
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-  `;
 
-  const Li = styled.li`
-    border-right: 1px solid #bbb;
-    float: left;
-  `;
+  switch (data.acceptance_status) {
+    case 0:
+      acceptanceStatus = "red";
+      colorAcceptanceTitle = "Declined";
+      break;
+    case 1:
+      acceptanceStatus = "green";
+      colorAcceptanceTitle = "Accepted";
+      break;
 
-  const Link = styled.a`
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    cursor: pointer;
-    :hover {
-      background-color: #111;
-    }
-  `;
+    default:
+      acceptanceStatus = "neutral";
+      colorAcceptanceTitle = "Waiting Acceptance";
+      break;
+  }
 
+  const [disputeValue, setDisputeValue] = useState(0);
+  const disputeQuery = dispute_query;
+  const changeDisputeStatus = async () => {
+    const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
+      method: "POST",
+      headers: {
+        "x-hasura-admin-secret": `${process.env.GATSBY_HASURA_ADMIN_SECRET}`,
+        "Content-Type": "Application/Json",
+      },
+      body: JSON.stringify({
+        query: disputeQuery,
+        variables: {
+          orderId,
+          disputeValue,
+        },
+      }),
+    });
+    const finalResp = await response.json();
+    console.log(finalResp);
+  };
+
+  const disputeButton = (event) => {
+    event.preventDefault();
+    setDisputeValue(1);
+    changeDisputeStatus();
+  };
   return (
     <div>
+      <BackButton />
       <H1>Order Id: {orderId}</H1>
       <OrderGrid>
         <OrderContainer>
@@ -69,7 +105,9 @@ const ClientDetailMain = ({ data, orderId }) => {
               <Link to="/">Pay</Link>
             </Li>
             <Li>
-              <Link to="/">Dispute</Link>
+              <NavButton onClick={(event) => disputeButton(event)}>
+                Dispute
+              </NavButton>
             </Li>
             <Li>
               <Link to="/">Revision</Link>
@@ -79,10 +117,20 @@ const ClientDetailMain = ({ data, orderId }) => {
             </Li>
           </Ul>
           <OrderTitle>{data.subject}</OrderTitle>
-          <StatusContainer>
-            <ColorStatus status={progressStatus} title={colorProgressTitle} />
-            <ColorStatus status={paymentStatus} title={colorPaymentTitle} />
-          </StatusContainer>
+          <StatusContainerUl>
+            <StatusContainerLi>
+              <ColorStatus
+                status={acceptanceStatus}
+                title={colorAcceptanceTitle}
+              />
+            </StatusContainerLi>
+            <StatusContainerLi>
+              <ColorStatus status={paymentStatus} title={colorPaymentTitle} />
+            </StatusContainerLi>
+            <StatusContainerLi>
+              <ColorStatus status={progressStatus} title={colorProgressTitle} />
+            </StatusContainerLi>
+          </StatusContainerUl>
           <OrderSubtitle>{data.topic}</OrderSubtitle>
           <OrderDescription>{data.doc_description}</OrderDescription>
         </OrderContainer>
@@ -164,23 +212,62 @@ const ClientDetailMain = ({ data, orderId }) => {
 };
 
 export default ClientDetailMain;
+const Ul = styled.ul`
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+`;
+
+const Li = styled.li`
+  border-right: 1px solid #bbb;
+  float: left;
+`;
+
+const Link = styled.a`
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  cursor: pointer;
+  :hover {
+    background-color: #111;
+  }
+`;
+
 const Button = styled.button`
-font-weight: 400;
-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-font-size: clamp(1rem,1vw,1rem);
-margin-top: 1rem;
-margin-bottom: 1rem;
-width: 100%;
-background-color: #8e6fe1;
-border-radius: 10px;
-border: none;
-color: #fff;
-height: 6vh;
-cursor: pointer;
-`
+  font-weight: 400;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: clamp(1rem, 1vw, 1rem);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  background-color: #8e6fe1;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  height: 6vh;
+  cursor: pointer;
+`;
+
+const NavButton = styled.button`
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  align-content: center;
+  margin-top: 1rem;
+  font-size: clamp(1rem, 1vw, 1rem);
+  font-weight: bold;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+`;
 
 const Input = styled.input`
-width: 100%;
+  width: 100%;
   height: 7vh;
   margin-left: 0px;
   font-size: clamp(1rem, 1vw, 1rem);
@@ -199,17 +286,18 @@ width: 100%;
     border-bottom: #1740e1;
     box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
   }
-`
+`;
 
 const Form = styled.form`
-bottom: 0px;
-margin-top: 1rem;
-`
+  bottom: 0px;
+  margin-top: 1rem;
+`;
 const Label = styled.label`
-padding-left: 2rem;
-font-size: medium;
-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-`
+  padding-left: 2rem;
+  font-size: medium;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+`;
 const FolderImage = styled.img`
   min-height: 5vh;
   min-width: 5vh;
@@ -219,7 +307,7 @@ const FolderImage = styled.img`
   padding-left: 2rem;
 `;
 const FileTitle = styled.h1`
-padding-left: 3rem;
+  padding-left: 3rem;
   float: right;
   font-size: clamp(1rem, 2vw, 1rem);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -235,8 +323,8 @@ const FileHold = styled.div`
   box-shadow: 0 6px 12px 0 rgba(23, 64, 225, 0.2);
 `;
 const FileRow = styled.div`
-display: flex;
-`
+  display: flex;
+`;
 const H1 = styled.h1`
   color: black;
   font-family: Arial, Helvetica, sans-serif;
@@ -292,7 +380,14 @@ const OrderTitle = styled.h2`
   margin-left: 3vw;
 `;
 
-const StatusContainer = styled.div`
+const StatusContainerUl = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+`;
+
+const StatusContainerLi = styled.li`
   display: inline-block;
 `;
 

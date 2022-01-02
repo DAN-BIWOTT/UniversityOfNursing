@@ -1,38 +1,19 @@
 import React, { useState,useEffect } from 'react'
 import styled from 'styled-components'
 import ClientDetailMain from '../../components/clientPages/ClientDetailMain'
-import Nav from '../../components/main/Nav'
 import Sidebar from '../../components/sidebar/sidebar'
+import { ClientOrderDetail_Query } from '../../graphQl/uonQueries'
 
-const ClientOrderDetail = ({location}) => {
-    const [id, setId] = useState( location.state === null || location.state === undefined?"":location.state.orderId);
+const ClientOrderDetail = ({orderId}) => {
+    console.log(orderId);
+    const [id, setId] = useState(orderId);
     
-    const ClientOrderDetailQuery = `query MyQuery($id: Int!) {
-        order_by_pk(id: $id) {
-          budget
-          client_id
-          created_at
-          dispute_status
-          doc_description
-          doc_format
-          due_time
-          id
-          nature
-          pages
-          payment_status
-          price
-          progress_status
-          revision_status
-          spacing
-          subject
-          topic
-        }
-      }`
+    const ClientOrderDetailQuery = ClientOrderDetail_Query;
 
     const [data, setData] = useState({});
     useEffect(() => {
         if(id===""){
-            window.location.href = "/admin"
+            window.location.href = "/client"
         }else{
             getClientOrderDetails()
         }
@@ -60,7 +41,6 @@ const ClientOrderDetail = ({location}) => {
     return (
         <Container>
             <Sidebar />
-            <Nav/>
             <ClientDetailMain data={data} orderId={id}/>
         </Container>
     )
@@ -69,8 +49,13 @@ const ClientOrderDetail = ({location}) => {
 export default ClientOrderDetail
 
 const Container = styled.div`
-    width: auto;
-    margin-left: 16rem;
-    position: relative;
-    padding: 0 4rem 4rem;
+  width: auto;
+  left:16rem;
+  top:0px;
+  position: fixed;
+  padding: 0 4rem 4rem;
+  background: #f4eaff;
+  height: 100vh;
+  z-index:10;
+  overflow-y: auto;
 `
