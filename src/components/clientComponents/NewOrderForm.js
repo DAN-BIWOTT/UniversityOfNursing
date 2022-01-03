@@ -13,6 +13,8 @@ import toast from "react-hot-toast";
 import Loader from "react-loader-spinner";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../../utils/firebase";
+import { NewOrderForm_query } from "../../graphQl/uonQueries";
+import { navigate } from "gatsby";
 
 const NewOrderForm = () => {
   const [budgetRange, setBudgetRange] = useState({ min: 10, max: 50 });
@@ -29,11 +31,7 @@ const NewOrderForm = () => {
   const [files, setFiles] = useState("");
   const [waitingButton, setWaitingButton] = useState(false);
   const client_id = getUser().id;
-  const orderFormQuery = `mutation addOrder($client_id: Int!, $budgetRangeString: String, $price: Int!, $paperFormat: String, $nature: String, $pages: String, $deadline: String, $spacing: String, $subject: String, $topic: String, $description: String, $files: String) {
-    insert_order_one(object: {budget: $budgetRangeString, client_id: $client_id, doc_description: $description, doc_format: $paperFormat, due_time: $deadline, files: $files, nature: $nature, pages: $pages, price: $price, spacing: $spacing, subject: $subject, topic: $topic}) {
-      id
-    }
-  }`;
+  const orderFormQuery = NewOrderForm_query;
   const emptyFields = () => {
     if (
       price === "" ||
@@ -92,6 +90,9 @@ const NewOrderForm = () => {
         style: { background: "#00FF00" },
       });
       setWaitingButton(false);
+      setTimeout(()=>{
+        navigate(-1);
+    }, 2000);
     } catch (e) {
       console.log("🚀 ~ file: NewOrderForm.js ~ line 59 ~ submitOrder ~ e", e);
       toast("Problem Creating Order.", { style: { background: "#DC143C" } });

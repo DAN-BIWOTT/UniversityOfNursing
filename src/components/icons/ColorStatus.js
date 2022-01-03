@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const ColorStatus = ({ status, title }) => {
-  console.log(title)
-  console.log(status)
   switch (status) {
     case "red":
       return <ContainerFail>{title}</ContainerFail>;

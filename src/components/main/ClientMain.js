@@ -41,10 +41,7 @@ const ClientMain = () => {
     });
     try {
       const finalResp = await response.json();
-      console.log(
-        "🚀 ~ file: ClientMain.js ~ line 42 ~ AllNewOrders ~ finalResp",
-        finalResp
-      );
+
       setData(finalResp.data.order);
     } catch (e) {
       console.log("🚀 ~ file: ClientMain.js ~ line 47 ~ AllNewOrders ~ e", e);

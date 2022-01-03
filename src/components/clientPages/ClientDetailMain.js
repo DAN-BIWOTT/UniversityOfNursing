@@ -5,6 +5,8 @@ import ChatBox from "../ChatBox";
 import fileFolder from "../../assets/images/fileFolder.png";
 import BackButton from "../BackButton";
 import { dispute_query } from "../../graphQl/uonQueries";
+import toast from "react-hot-toast";
+import { BsQuestionLg } from "react-icons/bs";
 
 const ClientDetailMain = ({ data, orderId }) => {
   var progressStatus,
@@ -13,12 +15,10 @@ const ClientDetailMain = ({ data, orderId }) => {
     colorPaymentTitle,
     acceptanceStatus,
     colorAcceptanceTitle;
-
+  console.log(data);
   const date = `${new Date(data.created_at).getDate()}/${new Date(
     data.created_at
   ).getMonth()}/${new Date(data.created_at).getFullYear()}`;
-
-  console.log(data.payment_status);
 
   switch (data.progress_status) {
     case 0:
@@ -86,7 +86,9 @@ const ClientDetailMain = ({ data, orderId }) => {
       }),
     });
     const finalResp = await response.json();
-    console.log(finalResp);
+    if (finalResp.data.update_order_by_pk.dispute_status === 1) {
+      toast("dispute filed", { style: { background: "#a92d2d" } });
+    }
   };
 
   const disputeButton = (event) => {
@@ -94,9 +96,21 @@ const ClientDetailMain = ({ data, orderId }) => {
     setDisputeValue(1);
     changeDisputeStatus();
   };
+
   return (
     <div>
       <BackButton />
+                <ToolTip>
+      <FaqButton>
+                  <BsQuestionLg color="black" size="clamp(1rem,1vw,1rem)" />
+                  <ToolTipText className="tooltiptext">
+                    HELP<br/>
+                    Wait For The admin to accept the assignment.<br/>
+                    To start chats about the assignment with the admin, press the 
+                    start chat button below.
+                  </ToolTipText>
+              </FaqButton>
+                </ToolTip>
       <H1>Order Id: {orderId}</H1>
       <OrderGrid>
         <OrderContainer>
@@ -113,7 +127,7 @@ const ClientDetailMain = ({ data, orderId }) => {
               <Link to="/">Revision</Link>
             </Li>
             <Li style={{ float: "right" }}>
-              <Link to="/">About</Link>
+             
             </Li>
           </Ul>
           <OrderTitle>{data.subject}</OrderTitle>
@@ -149,11 +163,12 @@ const ClientDetailMain = ({ data, orderId }) => {
               </tr>
               <tr>
                 <td>Dispute:</td>
-                <td>
-                  {data.dispute_status === 0 || data.dispute_status === null
-                    ? "No Dispute"
-                    : "Under Dispute"}
-                </td>
+
+                {data.dispute_status === 0 || data.dispute_status === null ? (
+                  <td> No Dispute</td>
+                ) : (
+                  <td style={{ color: "#b90000" }}>Under Dispute</td>
+                )}
               </tr>
               <tr>
                 <td>Date Received:</td>
@@ -193,12 +208,21 @@ const ClientDetailMain = ({ data, orderId }) => {
         <ChatBox sender="client" orderData={orderId} />
         <FileHold>
           <H1>Project Files</H1>
+          <h2 style={{ paddingLeft: "1rem" }}>From Client</h2>
           <FileRow>
             <FolderImage
               src={fileFolder}
               alt="Folder representing downloadable files."
             />
-            <FileTitle>File 1</FileTitle>
+            <FileTitle href={data.files}>Download files</FileTitle>
+          </FileRow>
+          <h2 style={{ paddingLeft: "1rem" }}>From Admin</h2>
+          <FileRow>
+            <FolderImage
+              src={fileFolder}
+              alt="Folder representing downloadable files."
+            />
+            <FileTitle href={data.files}>Download files</FileTitle>
           </FileRow>
           <Form>
             <Label>Upload size no more than 80mb</Label>
@@ -212,6 +236,39 @@ const ClientDetailMain = ({ data, orderId }) => {
 };
 
 export default ClientDetailMain;
+const FaqButton = styled.button`
+ margin-left: 100%;
+  float: left;
+  align-content: center;
+  border: none;
+ `
+const ToolTip = styled.div`
+    position: relative;
+    display: inline-block;
+    :hover .tooltiptext {
+      visibility: visible;
+      
+    }
+  `;
+  const ToolTipText = styled.span`
+    visibility: hidden;
+    width: 30vw;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    /* text */
+    font-size: medium;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    top: -5px;
+    left: 220%;
+    z-index: 2;
+  `;
+  
 const Ul = styled.ul`
   list-style-type: none;
   margin: 0;
@@ -306,7 +363,7 @@ const FolderImage = styled.img`
   align-content: flex-start;
   padding-left: 2rem;
 `;
-const FileTitle = styled.h1`
+const FileTitle = styled.a`
   padding-left: 3rem;
   float: right;
   font-size: clamp(1rem, 2vw, 1rem);

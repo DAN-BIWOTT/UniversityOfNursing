@@ -19,3 +19,7 @@ Acceptance
 0 = denied
 1 = accepted
 3 = neutral
+
+Dispute
+0 = no Dispute
+1 = Dispute

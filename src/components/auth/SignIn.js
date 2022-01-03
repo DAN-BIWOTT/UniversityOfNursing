@@ -52,11 +52,11 @@ const SignIn = () => {
         );
       } else {
         setWaitingButton(false);
-        toast("Failed Login. Check Your Password or Email");
+        toast("Failed Login. Check Your Password or Email",{ style: { background: "#a92d2d" } });
       }
     } else {
       setWaitingButton(false);
-      toast("Please fill all inputs on the form");
+      toast("Please fill all inputs on the form",{ style: { background: "#a92d2d" } });
     }
   };
 

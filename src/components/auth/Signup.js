@@ -25,7 +25,7 @@ const Signup = () => {
     setWaitingButton(true);
     if (pass !== confirmPass) {
       setWaitingButton(false);
-      toast("Password and Confirm Password do not match");
+      toast("Password and Confirm Password do not match",{ style: { background: "#a92d2d" } });
       return false;
     }
     if (email !== "" && pass !== "" && full_name !== "" && confirmPass !== "") {
@@ -58,7 +58,7 @@ const Signup = () => {
       }
     } else {
       setWaitingButton(false);
-      toast("Please fill all inputs in the Form.");
+      toast("Please fill all inputs in the Form.",{ style: { background: "#a92d2d" } });
     }
   };
 
