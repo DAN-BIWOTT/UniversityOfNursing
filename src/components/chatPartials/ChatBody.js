@@ -6,8 +6,10 @@ import { getChats, sendChats } from "../../utils/chats";
 import toast, { Toaster } from "react-hot-toast";
 import { animateScroll } from "react-scroll";
 import Loader from "react-loader-spinner";
+import { database } from "../../utils/firebase.js";
+import { onValue, ref } from "firebase/database";
 
-const ChatBody = ({ orderId,sender }) => {
+const ChatBody = ({ orderId, sender }) => {
   const msgObj = {
     order_id: "",
     msg: "",
@@ -23,7 +25,19 @@ const ChatBody = ({ orderId,sender }) => {
     scrollToBottom();
   });
 
-  const [chats, setChats] = useState([]);
+
+  const [tempChats, setTempChats] = useState([{
+    created_at:{
+      created_at: 0,
+    },
+    sender:{
+      sender: 0,
+    },
+    msg:{
+      msg : 0
+    }
+  }]);
+
   const [waitingButton, setWaitingButton] = useState(false);
   const scrollToBottom = () => {
     animateScroll.scrollToBottom({
@@ -32,8 +46,16 @@ const ChatBody = ({ orderId,sender }) => {
   };
 
   const getMessages = async () => {
-    const resp = await getChats(orderId);
-    setChats(resp);
+    const chatRef = ref(database, 'Chats/' + msgObj.order_id + '/');
+    onValue(chatRef, (snapshot) => {
+      const data = snapshot.val();
+      const chatList = []
+      for(let contentId in data[orderId]){
+        chatList.push(data[orderId][contentId])
+      }
+      setTempChats(chatList)
+      tempChats.map(chatItem=>{console.log(chatItem.sender.sender);console.log(chatItem.msg.msg)})
+    });
   };
 
   const [text, setText] = useState("");
@@ -42,6 +64,7 @@ const ChatBody = ({ orderId,sender }) => {
     msgObj.msg = text;
     msgObj.created_at = Date.now();
     const resp = await sendChats(msgObj);
+
     if (resp) {
       setWaitingButton(false);
       toast("Message Sent Successfully.", { style: { background: "#00FF00" } });
@@ -67,15 +90,15 @@ const ChatBody = ({ orderId,sender }) => {
   };
   return (
     <Container>
+
       <Body id="bottom-chat">
-        {chats.map((msg) => {
-          
-            return msg.sender === "admin" ? (
-              <ChatBubble data={msg} direction={true} key={msg.created_at} />
-            ) : (
-              <ChatBubble data={msg} direction={false} key={msg.created_at} />
-            );
-          
+        {tempChats.map((chatItem) => {
+          if(chatItem.created_at.created_at !== 0){
+          return chatItem.sender.sender === "admin" ? (
+            <ChatBubble data={chatItem} direction={true} key={chatItem.created_at.created_at} />
+          ) : (
+            <ChatBubble data={chatItem} direction={false} key={chatItem.created_at.created_at} />
+          );}
         })}
       </Body>
       <form onSubmit={handleSubmit}>
@@ -161,7 +184,6 @@ const Input = styled.textarea`
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   :hover {
     background-color: rgba(255, 255, 255, 0.45);
-    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
   }
   :active {
     border-color: transparent;

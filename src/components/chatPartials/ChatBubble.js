@@ -2,21 +2,20 @@ import React from "react";
 import styled from "styled-components";
 
 const ChatBubble = ({ data, direction }) => {
-  console.log(data);
-  const date = `${new Date(data.created_at).toLocaleTimeString("en-US", {
+  const date = `${new Date(data.created_at.created_at).toLocaleTimeString("en-US", {
     hour: "numeric",
     minute: "numeric",
     hour12: true,
-  })} | ${new Date(data.created_at).getDate()}/${new Date(
-    data.created_at
-  ).getMonth()}/${new Date(data.created_at).getFullYear()}`;
+  })} | ${new Date(data.created_at.created_at).getDate()}/${new Date(
+    data.created_at.created_at
+  ).getMonth()}/${new Date(data.created_at.created_at).getFullYear()}`;
 
   switch (direction) {
     case true:
       return (
         <ContainerRight>
           <ChatContentRight>
-            {data.msg}
+            {data.msg.msg}
             <TimeStampRight>{date}</TimeStampRight>
           </ChatContentRight>
         </ContainerRight>
@@ -25,7 +24,7 @@ const ChatBubble = ({ data, direction }) => {
     default:
       return (
         <ContainerLeft>
-          <ChatContentLeft>{data.msg}
+          <ChatContentLeft>{data.msg.msg}
           <TimeStampLeft>{date}</TimeStampLeft>
           </ChatContentLeft>
         </ContainerLeft>
