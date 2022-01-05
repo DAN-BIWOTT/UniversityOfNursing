@@ -41,7 +41,7 @@ const Faq = () => {
       <Container>
         <SectionHeading
           sx={styles.heading}
-          slogan="Get yours question answer"
+          slogan="Get your questions answered"
           title="Frequently asked question"
         />
         <Masonry options={masonryOptions} sx={styles.grid}>

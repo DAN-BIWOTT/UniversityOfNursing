@@ -17,10 +17,10 @@ export default {
     // highlight	a background color for highlighting text
     modes: {
       dark: {
-        text: '#fff',
-        background: '#000',
-        primary: '#0cf',
-        secondary: '#09c',
+        text: '#000',
+        background: '#fcf9ff',
+        primary: '#5B2B9D',
+        secondary: '#FFC059',
         muted: '#111',
       },
     },
