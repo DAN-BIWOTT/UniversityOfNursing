@@ -70,3 +70,18 @@ export const AllOrders_Query = `query AllOrders {
       files
     }
   }`
+
+  export const UserSpecific_query = `
+  query UserSpecificOrders($id: Int!) {
+    order(order_by: {created_at: desc}, where: {client_id: {_eq: $id}}) {
+      id
+      subject
+      pages
+      budget
+      due_time
+      price
+      topic
+      created_at
+    }
+  }
+`

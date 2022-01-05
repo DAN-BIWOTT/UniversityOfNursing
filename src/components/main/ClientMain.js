@@ -5,29 +5,28 @@ import Nav from "./Nav";
 import { getUser } from "../../services/auth";
 import toast, { Toaster } from "react-hot-toast";
 import AllOrders from "./users/AllOrders";
+import { UserSpecific_query } from "../../graphQl/uonQueries";
+import Spinner from "../Spinner";
 
 const ClientMain = () => {
   const id = getUser().id;
   useEffect(() => {
     AllNewOrders();
   }, []);
-  const [data, setData] = useState([]);
-  const newOrdersQuery = `
-    query UserSpecificOrders($id: Int!) {
-      order(order_by: {created_at: desc}, where: {client_id: {_eq: $id}}) {
-        id
-        subject
-        pages
-        budget
-        due_time
-        price
-        topic
-        created_at
-      }
-    }
-  `;
 
+  useEffect(() => {
+    loadingFunc();
+  });
+  const [pageLoader, setPageLoader] = useState(false);
+  const [loadingScreen,setLoadingScreen] = useState(<Spinner/>)
+  const loadingFunc = ()=>{
+    pageLoader?setLoadingScreen(<Spinner/>):setLoadingScreen(<></>)
+  }
+  
+  const [data, setData] = useState([]);
+  const newOrdersQuery = UserSpecific_query;
   const AllNewOrders = async () => {
+    setPageLoader(true);
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
       headers: {
@@ -41,8 +40,8 @@ const ClientMain = () => {
     });
     try {
       const finalResp = await response.json();
-
       setData(finalResp.data.order);
+      setPageLoader(false);
     } catch (e) {
       console.log("🚀 ~ file: ClientMain.js ~ line 47 ~ AllNewOrders ~ e", e);
       toast("Problem Retrieving Data", {
@@ -55,6 +54,7 @@ const ClientMain = () => {
 
   return (
     <Container>
+      {loadingScreen}
       <Nav />
       <NewUserBtn />
       <AllOrders data={data} title="My Active Orders" count={data.length} />
