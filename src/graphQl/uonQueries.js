@@ -82,6 +82,34 @@ export const AllOrders_Query = `query AllOrders {
       price
       topic
       created_at
+      acceptance_status
     }
   }
 `
+
+export const ClientAllSubmissions_query = `query MyOrders($id: Int!) {
+  order(where: {client_id: {_eq: $id}}, order_by: {created_at: desc}) {
+    id
+    subject
+    pages
+    budget
+    due_time
+    price
+    topic
+    created_at
+  }
+}`;
+
+export const AdminAllNewOrders_query = `query AllNewOrders {
+  order(order_by: {created_at: desc}, where: {progress_status: {_eq: 0}}) {
+    id
+    subject
+    pages
+    budget
+    due_time
+    price
+    topic
+    created_at
+    acceptance_status
+  }
+}`;

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import AdminDetailMain from "../../components/adminPages/AdminDetailMain";
 import Sidebar from "../../components/sidebar/sidebar";
+import Spinner from "../../components/Spinner";
 import { AdminOrderDetail_Query } from "../../graphQl/uonQueries";
 
 const AdminOrderDetail = ({ orderId }) => {
@@ -18,7 +19,17 @@ const AdminOrderDetail = ({ orderId }) => {
     }
   }, []);
 
+  useEffect(() => {
+    loadingFunc();
+  });
+  const [pageLoader, setPageLoader] = useState(false);
+  const [loadingScreen,setLoadingScreen] = useState(<Spinner/>)
+  const loadingFunc = ()=>{
+    pageLoader?setLoadingScreen(<Spinner/>):setLoadingScreen(<></>)
+  }
+
   const getOrderDetails = async () => {
+    setPageLoader(true)
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
       headers: {
@@ -34,10 +45,12 @@ const AdminOrderDetail = ({ orderId }) => {
     });
     const finalRes = await response.json();
     setData(finalRes.data.order_by_pk);
+    setPageLoader(false);
   };
 
   return (
     <Container>
+      {loadingScreen}
       <Sidebar permission="admin" />
       <AdminDetailMain data={data} orderId={id} />
     </Container>

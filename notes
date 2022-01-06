@@ -23,3 +23,8 @@ Acceptance
 Dispute
 0 = no Dispute
 1 = Dispute
+
+order status
+101 = rejected
+202 = in progress
+303 = accepted

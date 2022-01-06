@@ -5,7 +5,7 @@ import AdminOrderDetail from "../../../pages/adminPages/AdminOrderDetail";
 
 const User = ({ data }) => {
 
-  const { budget, due_time, id, pages, subject, price, topic, created_at } =
+  const { budget, due_time, id, pages, price, topic, created_at,acceptance_status } =
     data;
   const date = `${new Date(created_at).getDate()}/${new Date(
     created_at
@@ -16,6 +16,7 @@ const User = ({ data }) => {
     event.preventDefault();
     setOrderId(true);
   }
+
  if(!orderIdSet){
    return(
     <Container>
@@ -30,31 +31,31 @@ const User = ({ data }) => {
           <Subtitle>{/* {firstName} {lastName} */}</Subtitle>
         </PropertyText>
       </Property>
-      <Subject>{subject}</Subject>
       <Topic>{topic.substring(0, 20)}</Topic>
       <UserWrapper>
-        <Text>{pages}</Text>
+        <Text style={{paddingLeft:"1rem"}}>{pages}</Text>
         <Subtitle>Pages or word</Subtitle>
       </UserWrapper>
       <UserWrapper>
         <Text>{price}/=</Text>
-        <Subtitle>Budget {budget}</Subtitle>
+        <Subtitle>Amount Paid {budget}</Subtitle>
       </UserWrapper>
       <UserWrapper>
         <Text>{due_time}</Text>
         <Subtitle>From: {date}</Subtitle>
       </UserWrapper>
-      {/* <Status>
-                <Text>Time left</Text>
+      <UserWrapper>
+      <Status>
                 {(() => {
-                    switch (level) {
-                        case 101: return <StatusIndicator color="#F17E7E" />;
-                        case 202: return <StatusIndicator color="#FFD056" />;
-                        case 303: return <StatusIndicator color="#75C282" />;
-                        default: return <StatusIndicator color="#AAA5A5" />;
+                    switch (acceptance_status) {
+                        case 101: return <><Text>Rejected</Text> <StatusIndicator color="#F17E7E"/></>;
+                        case 202: return <><Text>Inprogress</Text> <StatusIndicator color="#FFD056"/></>;
+                        case 303: return <><Text>Accepted</Text> <StatusIndicator color="#75C282"/></>;
+                        default: return <><Text>Unconfirmed</Text><StatusIndicator color="#AAA5A5"/></>;
                     }
                 })()}
-            </Status> */}
+            </Status>
+            </UserWrapper>
     </Container>
   );}else{
     return(

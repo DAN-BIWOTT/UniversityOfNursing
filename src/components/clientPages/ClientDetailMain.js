@@ -100,17 +100,19 @@ const ClientDetailMain = ({ data, orderId }) => {
   return (
     <div>
       <BackButton />
-                <ToolTip>
-      <FaqButton>
-                  <BsQuestionLg color="black" size="clamp(1rem,1vw,1rem)" />
-                  <ToolTipText className="tooltiptext">
-                    HELP<br/>
-                    Wait For The admin to accept the assignment.<br/>
-                    To start chats about the assignment with the admin, press the 
-                    start chat button below.
-                  </ToolTipText>
-              </FaqButton>
-                </ToolTip>
+      <ToolTip>
+        <FaqButton>
+          <BsQuestionLg color="black" size="clamp(1rem,1vw,1rem)" />
+          <ToolTipText className="tooltiptext">
+            HELP
+            <br />
+            Wait For The admin to accept the assignment.
+            <br />
+            To start chats about the assignment with the admin, press the start
+            chat button below.
+          </ToolTipText>
+        </FaqButton>
+      </ToolTip>
       <H1>Order Id: {orderId}</H1>
       <OrderGrid>
         <OrderContainer>
@@ -126,9 +128,7 @@ const ClientDetailMain = ({ data, orderId }) => {
             <Li>
               <Link to="/">Revision</Link>
             </Li>
-            <Li style={{ float: "right" }}>
-             
-            </Li>
+            <Li style={{ float: "right" }}></Li>
           </Ul>
           <OrderTitle>{data.subject}</OrderTitle>
           <StatusContainerUl>
@@ -237,38 +237,38 @@ const ClientDetailMain = ({ data, orderId }) => {
 
 export default ClientDetailMain;
 const FaqButton = styled.button`
- margin-left: 100%;
+  margin-left: 100%;
   float: left;
   align-content: center;
   border: none;
- `
+`;
 const ToolTip = styled.div`
-    position: relative;
-    display: inline-block;
-    :hover .tooltiptext {
-      visibility: visible;
-      
-    }
-  `;
-  const ToolTipText = styled.span`
-    visibility: hidden;
-    width: 30vw;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 6px;
-    /* text */
-    font-size: medium;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: 600;
-    /* Position the tooltip text - see examples below! */
-    position: absolute;
-    top: -5px;
-    left: 220%;
-    z-index: 2;
-  `;
-  
+  position: relative;
+  display: inline-block;
+  :hover .tooltiptext {
+    visibility: visible;
+  }
+`;
+const ToolTipText = styled.span`
+  visibility: hidden;
+  width: 30vw;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  /* text */
+  font-size: medium;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 600;
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  top: -5px;
+  left: 220%;
+  z-index: 2;
+`;
+
 const Ul = styled.ul`
   list-style-type: none;
   margin: 0;

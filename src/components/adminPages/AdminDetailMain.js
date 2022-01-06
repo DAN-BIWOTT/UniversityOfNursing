@@ -4,6 +4,7 @@ import ColorStatus from "../icons/ColorStatus";
 import ChatBox from "../ChatBox";
 import fileFolder from "../../assets/images/fileFolder.png";
 import BackButton from "../BackButton";
+import { BsQuestionLg } from "react-icons/bs";
 
 const AdminDetailMain = ({ data, orderId }) => {
   var progressStatus, colorProgressTitle, paymentStatus, colorPaymentTitle;
@@ -35,12 +36,53 @@ const AdminDetailMain = ({ data, orderId }) => {
       colorPaymentTitle = "Paid";
       break;
   }
+  const orderStatus = (status) =>{
+    alert(status);
+  }
+  const progress_status = (status) =>{
+    alert(status);
+  }
   return (
     <div>
       <BackButton />
+      <ToolTip>
+        <FaqButton>
+          <BsQuestionLg color="black" size="clamp(1rem,1vw,1rem)" />
+          <ToolTipText className="tooltiptext">
+            HELP
+            <br />
+            Wait For The admin to accept the assignment.
+            <br />
+            To start chats about the assignment with the admin, press the start
+            chat button below.
+          </ToolTipText>
+        </FaqButton>
+      </ToolTip>
       <H1>Order Id: {orderId}</H1>
       <OrderGrid>
         <OrderContainer>
+        <Ul>
+            <Li>
+            <NavButton onClick={() => orderStatus(101)}>
+                Reject Order
+              </NavButton>
+            </Li>
+            <Li>
+              <NavButton onClick={() => orderStatus(303)}>
+                Approve Order
+              </NavButton>
+            </Li>
+            <Li>
+            <NavButton onClick={() => orderStatus(202)}>
+                Order Inprogress
+              </NavButton>
+            </Li>
+            <Li style={{ float: "right" }}>
+            <NavButton onClick={() => progress_status(505)}>
+                Order Complete
+              </NavButton>
+            </Li>
+          </Ul>
           <OrderTitle>{data.subject}</OrderTitle>
           <StatusContainer>
             <ColorStatus status={progressStatus} title={colorProgressTitle} />
@@ -130,6 +172,75 @@ const AdminDetailMain = ({ data, orderId }) => {
 };
 
 export default AdminDetailMain;
+const FaqButton = styled.button`
+  margin-left: 100%;
+  float: left;
+  align-content: center;
+  border: none;
+`;
+const ToolTip = styled.div`
+  position: relative;
+  display: inline-block;
+  :hover .tooltiptext {
+    visibility: visible;
+  }
+`;
+const ToolTipText = styled.span`
+  visibility: hidden;
+  width: 30vw;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  /* text */
+  font-size: medium;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 600;
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  top: -5px;
+  left: 220%;
+  z-index: 2;
+`;
+
+const Ul = styled.ul`
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #e7e7e7;
+  background-color: #8e6fe1;
+`;
+
+const Li = styled.li`
+  border-right: 1px solid #bbb;
+  float: left;
+`;
+const NavButton = styled.button`
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  align-content: center;
+  margin-top: 1rem;
+  font-size: clamp(1rem, 1vw, 1rem);
+  font-weight: bold;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+`;
+const Link = styled.a`
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  cursor: pointer;
+  :hover {
+    background-color: #111;
+  }
+`;
 const Button = styled.button`
 font-weight: 400;
 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;

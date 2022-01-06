@@ -5,11 +5,11 @@ const ClientSortingBar = () => {
     return (
         <Container>
             <Property>Order Id</Property>
-            <Subject>Subject</Subject>
             <Topic>Topic</Topic>
             <Pages>Pages/words</Pages>
-            <Budget>Budget</Budget>
+            <Budget>Paid Amount</Budget>
             <Duration>Duration</Duration>
+            <Subject>Order Status</Subject>
         </Container>
     )
 }
@@ -51,5 +51,5 @@ const Budget = styled(Text)`
      width: 15%;
 `
 const Duration = styled(Text)`
-    
+    width: 15%;
 `
