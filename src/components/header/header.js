@@ -1,13 +1,14 @@
 /** @jsx jsx */
 import { jsx, Box, Flex, Container, Button } from "theme-ui";
-import { Fragment, useState } from "react";
+import React,{ Fragment, useState,useEffect } from "react";
 import Sticky from "react-stickynode";
 import Logo from "components/logo";
 import TopBar from "components/topbar";
 import LockIcon from "components/icons/lock";
 import HamburgerMenu from "components/hamburger";
 import Navbar from "./navbar";
-import { Link } from "gatsby";
+import Spinner from '../Spinner';
+import { navigate } from "gatsby";
 
 export default function Header() {
   const [state, setState] = useState({
@@ -33,9 +34,22 @@ export default function Header() {
       isMobileMenu: false,
     });
   };
-
+  useEffect(() => {
+    loadingFunc();
+  });
+  const [pageLoader, setPageLoader] = useState(false);
+  const [loadingScreen,setLoadingScreen] = useState(<Spinner/>)
+  const loadingFunc = ()=>{
+    pageLoader?setLoadingScreen(<Spinner/>):setLoadingScreen(<></>)
+  }
+const login=(event)=>{
+event.preventDefault();
+setPageLoader(true);
+navigate('/login');
+}
   return (
     <Fragment>
+      {loadingScreen}
       <TopBar />
       <Sticky
         enabled={true}
@@ -58,8 +72,7 @@ export default function Header() {
             />
             <Flex sx={styles.buttonGroup}>
               <Button
-                as={Link}
-                to="/login"
+                onClick={(event)=>{login(event)}}
                 variant="text"
                 sx={{
                   ...styles.login,
@@ -70,8 +83,7 @@ export default function Header() {
                 Login
               </Button>
               <Button
-                as={Link}
-                to="/login"
+                onClick={(event)=>{login(event)}}
                 variant="text"
                 sx={{
                   ...styles.joinCommunity,

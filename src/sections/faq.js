@@ -59,7 +59,7 @@ export default Faq;
 const styles = {
   section: {
     pt: [8, null, null, null, 10, 14],
-    pb: [null, null, null, null, null, null, 10, 6],
+    pb: [null, null, null, null, null, null, 10, 6]
   },
   grid: {
     mx: [null, null, null, -6, -8, 'unset'],
