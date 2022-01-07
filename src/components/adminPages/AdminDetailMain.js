@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ColorStatus from "../icons/ColorStatus";
 import ChatBox from "../ChatBox";
@@ -6,7 +6,10 @@ import fileFolder from "../../assets/images/fileFolder.png";
 import BackButton from "../BackButton";
 import { BsQuestionLg } from "react-icons/bs";
 import toast, { Toaster } from "react-hot-toast";
-import { AdminStatusChange_query } from "../../graphQl/uonQueries";
+import {
+  AdminStatusChange_query,
+  CompleteOrderButton_query,
+} from "../../graphQl/uonQueries";
 import Spinner from "../Spinner";
 
 const AdminDetailMain = ({ data, orderId }) => {
@@ -41,10 +44,10 @@ const AdminDetailMain = ({ data, orderId }) => {
   }
 
   const [pageLoader, setPageLoader] = useState(false);
-  const [loadingScreen,setLoadingScreen] = useState(<Spinner/>)
+  const [loadingScreen, setLoadingScreen] = useState(<Spinner />);
   useEffect(() => {
-    pageLoader?setLoadingScreen(<Spinner/>):setLoadingScreen(<></>)
-  },[pageLoader]);
+    pageLoader ? setLoadingScreen(<Spinner />) : setLoadingScreen(<></>);
+  }, [pageLoader]);
 
   let statusChangeQuery = AdminStatusChange_query;
   const callToDb = async (status) => {
@@ -64,7 +67,9 @@ const AdminDetailMain = ({ data, orderId }) => {
     });
     const finalRes = await response.json();
     setPageLoader(false);
-    if (typeof finalRes.data.update_order_by_pk.acceptance_status !== "undefined") {
+    if (
+      typeof finalRes.data.update_order_by_pk.acceptance_status !== "undefined"
+    ) {
       let returnStatus = finalRes.data.update_order_by_pk.acceptance_status;
       switch (returnStatus) {
         case 101:
@@ -110,7 +115,12 @@ const AdminDetailMain = ({ data, orderId }) => {
 
   const progress_status = (event) => {
     event.preventDefault();
-    console.log(event.target.value);
+    setPageLoader(true);
+    statusChangeQuery = CompleteOrderButton_query;
+    callToDb(404);
+    toast("Order Marked as complete.", {
+      style: { backgroundColor: "#22c382" },
+    });
   };
   return (
     <div>
@@ -122,9 +132,9 @@ const AdminDetailMain = ({ data, orderId }) => {
           <ToolTipText className="tooltiptext">
             HELP
             <br />
-            Wait For The admin to accept the assignment.
+            Approve an Order before marking it Complete
             <br />
-            To start chats about the assignment with the admin, press the start
+            To start chats about the assignment with the client, press the start
             chat button below.
           </ToolTipText>
         </FaqButton>
@@ -151,7 +161,7 @@ const AdminDetailMain = ({ data, orderId }) => {
             <Li style={{ float: "right" }}>
               <NavButton
                 onClick={(event) => progress_status(event)}
-                value={505}
+                value={404}
               >
                 Order Complete
               </NavButton>

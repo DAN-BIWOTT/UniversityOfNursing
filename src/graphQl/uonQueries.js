@@ -155,3 +155,9 @@ export const IncompleteOrders_query = `query InCompleteOrders {
     acceptance_status
   }
 }`;
+
+export const CompleteOrderButton_query = `mutation CompleteOrder($orderId: Int!,$status: Int!) {
+  update_order_by_pk(pk_columns: {id: $orderId}, _set: {progress_status: $status}) {
+    progress_status
+  }
+}`
