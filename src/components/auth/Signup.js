@@ -4,15 +4,10 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
+import { AddUser_query } from "../../graphQl/uonQueries";
 
 const Signup = () => {
-  const mutation = `mutation AddUser ($email: String, $pass: String,$full_name: String){
-    insert_client_one(object: {email: $email, full_name: $full_name, pass: $pass}) {
-        email
-        full_name
-        pass
-    }
-  }`;
+  const mutation = AddUser_query;
 
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");

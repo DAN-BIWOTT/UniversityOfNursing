@@ -19,14 +19,13 @@ const AdminOrderDetail = ({ orderId }) => {
     }
   }, []);
 
-  useEffect(() => {
-    loadingFunc();
-  });
-  const [pageLoader, setPageLoader] = useState(false);
+  const [pageLoader, setPageLoader] = useState(true);
   const [loadingScreen,setLoadingScreen] = useState(<Spinner/>)
-  const loadingFunc = ()=>{
-    pageLoader?setLoadingScreen(<Spinner/>):setLoadingScreen(<></>)
-  }
+  useEffect(() => {
+    if(pageLoader)setLoadingScreen(<Spinner/>)
+    else setLoadingScreen(<></>)
+  },[pageLoader]);
+  
 
   const getOrderDetails = async () => {
     setPageLoader(true)

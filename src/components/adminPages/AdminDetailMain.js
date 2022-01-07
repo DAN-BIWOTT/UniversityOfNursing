@@ -36,12 +36,13 @@ const AdminDetailMain = ({ data, orderId }) => {
       colorPaymentTitle = "Paid";
       break;
   }
-  const orderStatus = (status) =>{
-    alert(status);
-  }
-  const progress_status = (status) =>{
-    alert(status);
-  }
+  const orderStatus = (event) => {
+    event.preventDefault();
+    console.log(event.target.value);
+  };
+  const progress_status = (event) => {
+    console.log(event.target.value);
+  };
   return (
     <div>
       <BackButton />
@@ -61,24 +62,27 @@ const AdminDetailMain = ({ data, orderId }) => {
       <H1>Order Id: {orderId}</H1>
       <OrderGrid>
         <OrderContainer>
-        <Ul>
+          <Ul>
             <Li>
-            <NavButton onClick={() => orderStatus(101)}>
+              <NavButton onClick={(event) => orderStatus(event)} value={101}>
                 Reject Order
               </NavButton>
             </Li>
             <Li>
-              <NavButton onClick={() => orderStatus(303)}>
+              <NavButton onClick={(event) => orderStatus(event)} value={303}>
                 Approve Order
               </NavButton>
             </Li>
             <Li>
-            <NavButton onClick={() => orderStatus(202)}>
+              <NavButton onClick={(event) => orderStatus(event)} value={202}>
                 Order Inprogress
               </NavButton>
             </Li>
             <Li style={{ float: "right" }}>
-            <NavButton onClick={() => progress_status(505)}>
+              <NavButton
+                onClick={(event) => progress_status(event)}
+                value={505}
+              >
                 Order Complete
               </NavButton>
             </Li>
@@ -147,19 +151,20 @@ const AdminDetailMain = ({ data, orderId }) => {
             </tbody>
           </table>
         </OrderSummary>
-      <ChatBox sender="admin" orderData={orderId} />
-      <FileHold>
+        <ChatBox sender="admin" orderData={orderId} />
+        <FileHold>
           <H1>Project Files</H1>
-            {(data.files!=="")?
-          <FileRow>
-            <FolderImage
-              src={fileFolder}
-              alt="Folder representing downloadable files."
-            />
-            <FileTitle href={data.files}>Data File</FileTitle>
-          </FileRow>
-            :<></>
-            }
+          {data.files !== "" ? (
+            <FileRow>
+              <FolderImage
+                src={fileFolder}
+                alt="Folder representing downloadable files."
+              />
+              <FileTitle href={data.files}>Data File</FileTitle>
+            </FileRow>
+          ) : (
+            <></>
+          )}
           <Form>
             <Label>Upload size no more than 80mb</Label>
             <Input type="file" />
@@ -242,22 +247,23 @@ const Link = styled.a`
   }
 `;
 const Button = styled.button`
-font-weight: 400;
-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-font-size: clamp(1rem,1vw,1rem);
-margin-top: 1rem;
-margin-bottom: 1rem;
-width: 100%;
-background-color: #8e6fe1;
-border-radius: 10px;
-border: none;
-color: #fff;
-height: 6vh;
-cursor: pointer;
-`
+  font-weight: 400;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: clamp(1rem, 1vw, 1rem);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  background-color: #8e6fe1;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  height: 6vh;
+  cursor: pointer;
+`;
 
 const Input = styled.input`
-width: 100%;
+  width: 100%;
   height: 7vh;
   margin-left: 0px;
   font-size: clamp(1rem, 1vw, 1rem);
@@ -276,17 +282,18 @@ width: 100%;
     border-bottom: #1740e1;
     box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
   }
-`
+`;
 
 const Form = styled.form`
-bottom: 0px;
-margin-top: 1rem;
-`
+  bottom: 0px;
+  margin-top: 1rem;
+`;
 const Label = styled.label`
-padding-left: 2rem;
-font-size: medium;
-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-`
+  padding-left: 2rem;
+  font-size: medium;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+`;
 const FolderImage = styled.img`
   min-height: 5vh;
   min-width: 5vh;
@@ -296,9 +303,9 @@ const FolderImage = styled.img`
   padding-left: 2rem;
 `;
 const FileTitle = styled.a`
-font-weight: 700;
-padding-top: 2rem;
-padding-left: 3rem;
+  font-weight: 700;
+  padding-top: 2rem;
+  padding-left: 3rem;
   float: right;
   font-size: clamp(1rem, 2vw, 1rem);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -314,8 +321,8 @@ const FileHold = styled.div`
   box-shadow: 0 6px 12px 0 rgba(23, 64, 225, 0.2);
 `;
 const FileRow = styled.div`
-display: flex;
-`
+  display: flex;
+`;
 
 const H1 = styled.h1`
   color: black;

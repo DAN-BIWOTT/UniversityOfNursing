@@ -10,20 +10,19 @@ const Main = () => {
   useEffect(() => {
     AllNewOrders();
   },[]);
+
+  const [pageLoader, setPageLoader] = useState(true);
+  const [loadingScreen,setLoadingScreen] = useState(<Spinner/>);
+
   useEffect(() => {
-    loadingFunc();
-  });
-  const [pageLoader, setPageLoader] = useState(false);
-  const [loadingScreen,setLoadingScreen] = useState(<Spinner/>)
-  const loadingFunc = ()=>{
     pageLoader?setLoadingScreen(<Spinner/>):setLoadingScreen(<></>)
-  }
+  },[pageLoader]);
 
   const [data, setData] = useState([])
   const newOrdersQuery = AdminAllNewOrders_query;
 
   const AllNewOrders = async () => {
-    setPageLoader(true);
+    setPageLoader(true)
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
       headers: {

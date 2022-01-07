@@ -14,14 +14,11 @@ const ClientMain = () => {
     AllNewOrders();
   }, []);
 
-  useEffect(() => {
-    loadingFunc();
-  });
-  const [pageLoader, setPageLoader] = useState(false);
+  const [pageLoader, setPageLoader] = useState(true);
   const [loadingScreen,setLoadingScreen] = useState(<Spinner/>)
-  const loadingFunc = ()=>{
+  useEffect(() => {
     pageLoader?setLoadingScreen(<Spinner/>):setLoadingScreen(<></>)
-  }
+  },[pageLoader]);
   
   const [data, setData] = useState([]);
   const newOrdersQuery = UserSpecific_query;

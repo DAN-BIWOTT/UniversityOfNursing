@@ -113,3 +113,11 @@ export const AdminAllNewOrders_query = `query AllNewOrders {
     acceptance_status
   }
 }`;
+
+export const AddUser_query = `mutation AddUser ($email: String, $pass: String,$full_name: String){
+  insert_client_one(object: {email: $email, full_name: $full_name, pass: $pass}) {
+      email
+      full_name
+      pass
+  }
+}`

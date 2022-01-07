@@ -34,14 +34,12 @@ export default function Header() {
       isMobileMenu: false,
     });
   };
+  const [pageLoader, setPageLoader] = useState(true);
+  const [loadingScreen,setLoadingScreen] = useState(<Spinner/>);
   useEffect(() => {
-    loadingFunc();
-  });
-  const [pageLoader, setPageLoader] = useState(false);
-  const [loadingScreen,setLoadingScreen] = useState(<Spinner/>)
-  const loadingFunc = ()=>{
     pageLoader?setLoadingScreen(<Spinner/>):setLoadingScreen(<></>)
-  }
+  },[pageLoader]);
+
 const login=(event)=>{
 event.preventDefault();
 setPageLoader(true);
