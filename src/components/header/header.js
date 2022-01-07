@@ -34,7 +34,7 @@ export default function Header() {
       isMobileMenu: false,
     });
   };
-  const [pageLoader, setPageLoader] = useState(true);
+  const [pageLoader, setPageLoader] = useState(false);
   const [loadingScreen,setLoadingScreen] = useState(<Spinner/>);
   useEffect(() => {
     pageLoader?setLoadingScreen(<Spinner/>):setLoadingScreen(<></>)
