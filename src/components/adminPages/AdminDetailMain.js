@@ -1,10 +1,13 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import styled from "styled-components";
 import ColorStatus from "../icons/ColorStatus";
 import ChatBox from "../ChatBox";
 import fileFolder from "../../assets/images/fileFolder.png";
 import BackButton from "../BackButton";
 import { BsQuestionLg } from "react-icons/bs";
+import toast, { Toaster } from "react-hot-toast";
+import { AdminStatusChange_query } from "../../graphQl/uonQueries";
+import Spinner from "../Spinner";
 
 const AdminDetailMain = ({ data, orderId }) => {
   var progressStatus, colorProgressTitle, paymentStatus, colorPaymentTitle;
@@ -36,15 +39,82 @@ const AdminDetailMain = ({ data, orderId }) => {
       colorPaymentTitle = "Paid";
       break;
   }
+
+  const [pageLoader, setPageLoader] = useState(false);
+  const [loadingScreen,setLoadingScreen] = useState(<Spinner/>)
+  useEffect(() => {
+    pageLoader?setLoadingScreen(<Spinner/>):setLoadingScreen(<></>)
+  },[pageLoader]);
+
+  let statusChangeQuery = AdminStatusChange_query;
+  const callToDb = async (status) => {
+    const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
+      method: "POST",
+      headers: {
+        "x-hasura-admin-secret": `${process.env.GATSBY_HASURA_ADMIN_SECRET}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: statusChangeQuery,
+        variables: {
+          orderId,
+          status,
+        },
+      }),
+    });
+    const finalRes = await response.json();
+    setPageLoader(false);
+    if (typeof finalRes.data.update_order_by_pk.acceptance_status !== "undefined") {
+      let returnStatus = finalRes.data.update_order_by_pk.acceptance_status;
+      switch (returnStatus) {
+        case 101:
+          toast("Order Rejected.", { style: { backgroundColor: "#ff1216" } });
+          break;
+        case 202:
+          toast("Order in progress");
+          break;
+        case 303:
+          toast("Order Approved.", { style: { backgroundColor: "#22c382" } });
+          break;
+
+        default:
+          toast("Selection Still neutral.", {
+            style: { backgroundColor: "#ff1216" },
+          });
+          break;
+      }
+    }
+  };
+
   const orderStatus = (event) => {
     event.preventDefault();
-    console.log(event.target.value);
+    setPageLoader(true);
+    switch (event.target.value) {
+      case "101":
+        callToDb(101);
+        break;
+      case "202":
+        callToDb(202);
+        break;
+      case "303":
+        callToDb(303);
+        break;
+
+      default:
+        toast("Selection out of bound.", {
+          style: { backgroundColor: "#ff1216" },
+        });
+        break;
+    }
   };
+
   const progress_status = (event) => {
+    event.preventDefault();
     console.log(event.target.value);
   };
   return (
     <div>
+      {loadingScreen}
       <BackButton />
       <ToolTip>
         <FaqButton>
@@ -172,6 +242,30 @@ const AdminDetailMain = ({ data, orderId }) => {
           </Form>
         </FileHold>
       </OrderGrid>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          // Define default options
+          className: "",
+          duration: 5000,
+          style: {
+            background: "#363636",
+            color: "#fff",
+          },
+          // Default options for specific types
+          success: {
+            duration: 3000,
+            theme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
+      />
     </div>
   );
 };

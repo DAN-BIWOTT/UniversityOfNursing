@@ -120,4 +120,10 @@ export const AddUser_query = `mutation AddUser ($email: String, $pass: String,$f
       full_name
       pass
   }
-}`
+}`;
+
+export const AdminStatusChange_query = `mutation upDateAcceptanceStatus($orderId: Int!,$status: Int!) {
+  update_order_by_pk(pk_columns: {id: $orderId}, _set: {acceptance_status: $status}) {
+    acceptance_status
+  }
+}`;
