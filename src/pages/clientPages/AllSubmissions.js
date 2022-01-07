@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Nav from "../../components/main/Nav";
 import Sidebar from "../../components/sidebar/sidebar";
-import AllSubmissionsList from "../../components/main/users/Users";
+import AllSubmissionsList from "../../components/main/users/AllOrders";
 import { getUser } from "../../services/auth";
 import { ClientAllSubmissions_query } from "../../graphQl/uonQueries";
+import Spinner from "../../components/Spinner";
 
 const AllSubmissions = () => {
   const AllSubmissionsQuery = ClientAllSubmissions_query;
@@ -12,8 +13,15 @@ const AllSubmissions = () => {
     getAllSubmissions();
   }, []);
   const [data, setData] = useState([]);
+  const [pageLoader, setPageLoader] = useState(true);
+    const [loadingScreen,setLoadingScreen] = useState(<Spinner/>)
+    useEffect(() => {
+        pageLoader?setLoadingScreen(<Spinner/>):setLoadingScreen(<></>)
+      },[pageLoader]);
+
   const id = getUser().id;
   const getAllSubmissions = async () => {
+    setPageLoader(true);
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
       headers: {
@@ -29,9 +37,11 @@ const AllSubmissions = () => {
     });
     const finalResp = await response.json();
     setData(finalResp.data.order);
+    setPageLoader(false);
   };
   return (
     <Container>
+      {loadingScreen}
       <Sidebar />
       <Nav />
       <AllSubmissionsList

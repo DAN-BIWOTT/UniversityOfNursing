@@ -18,6 +18,7 @@ export const AdminOrderDetail_Query = `query MyQuery($id: Int!) {
       subject
       topic
       files
+      acceptance_status
     }
   }`
 
@@ -31,6 +32,7 @@ export const AllOrders_Query = `query AllOrders {
       price
       topic
       created_at
+      acceptance_status
     }
   }`;
 
@@ -97,6 +99,7 @@ export const ClientAllSubmissions_query = `query MyOrders($id: Int!) {
     price
     topic
     created_at
+    acceptance_status
   }
 }`;
 
@@ -160,4 +163,107 @@ export const CompleteOrderButton_query = `mutation CompleteOrder($orderId: Int!,
   update_order_by_pk(pk_columns: {id: $orderId}, _set: {progress_status: $status}) {
     progress_status
   }
-}`
+}`;
+
+export const ClientCompleteSubmissions_query = `query MyOrders($id: Int!) {
+  order(where: {client_id: {_eq: $id}, progress_status: {_eq: 404}}, order_by: {created_at: desc}) {
+    id
+    subject
+    pages
+    budget
+    due_time
+    price
+    topic
+    created_at
+    acceptance_status
+  }
+}`;
+
+export const ClientCompleteTransactions_query = `query MyOrders($id: Int!) {
+  order(where: {client_id: {_eq: $id}, payment_status: {_eq: 404}}, order_by: {created_at: desc}) {
+    id
+    subject
+    pages
+    budget
+    due_time
+    price
+    topic
+    created_at
+    acceptance_status
+  }
+}`;
+
+export const ClientPaidSubmissions_query = `query MyOrders($id: Int!) {
+  order(where: {client_id: {_eq: $id}, payment_status: {_eq: 404}}, order_by: {created_at: desc}) {
+    id
+    subject
+    pages
+    budget
+    due_time
+    price
+    topic
+    created_at
+    acceptance_status
+  }
+}`;
+
+export const ClientPendingTransactions_query = `query MyOrders($id: Int!) {
+  order(where: {client_id: {_eq: $id}, payment_status: {_neq: 404}}, order_by: {created_at: desc}) {
+    id
+    subject
+    pages
+    budget
+    due_time
+    price
+    topic
+    created_at
+    acceptance_status
+  }
+}`;
+
+export const AdminOrdersInRevision_query = `query OrdersInRevision {
+  order(order_by: {created_at: desc}, where: {revision_status: {_eq: 101}}) {
+      id
+      subject
+      pages
+      budget
+      due_time
+      price
+      topic
+      created_at
+      acceptance_status
+    }
+}`;
+
+export const AdminPaidOrders_query = `query PaidOrders {
+  order(order_by: {created_at: desc}, where: {payment_status: {_eq: 404}}) {
+      id
+      subject
+      pages
+      budget
+      due_time
+      price
+      topic
+      created_at
+      acceptance_status
+    }
+}`;
+
+export const SignInFindUser_query = `query findUserQuery($email: String,$pass: String) {
+  client(where: {email: {_regex: $email}, pass: {_regex: $pass}}) {
+    id
+    email
+    full_name
+    isAdmin
+  }
+}`;
+
+export const AdminAllUsers_query = `query AllNewOrders {
+  client(order_by: {created_at: asc}) {
+      email
+      full_name
+      id
+      created_at
+      acceptance_status
+    }
+}`;

@@ -1,27 +1,28 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import styled from "styled-components";
-import { useState } from "react";
 import { handleLogin } from "../../services/auth";
 import toast, { Toaster } from "react-hot-toast";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
+import { SignInFindUser_query } from "../../graphQl/uonQueries";
+import Spinner from "../Spinner";
 
 const SignIn = () => {
-  const findUserQuery = `query findUserQuery($email: String,$pass: String) {
-    client(where: {email: {_regex: $email}, pass: {_regex: $pass}}) {
-      id
-      email
-      full_name
-      isAdmin
-    }
-  }`;
+  const findUserQuery = SignInFindUser_query;
 
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [waitingButton, setWaitingButton] = useState(false);
 
+  const [pageLoader, setPageLoader] = useState(false);
+    const [loadingScreen,setLoadingScreen] = useState(<Spinner/>)
+    useEffect(() => {
+        pageLoader?setLoadingScreen(<Spinner/>):setLoadingScreen(<></>)
+      },[pageLoader]);
+
   const submitHandler = async (event) => {
     event.preventDefault(event);
+    setPageLoader(true)
     setWaitingButton("wait");
     if (email !== "") {
       const response = await fetch(
@@ -42,6 +43,7 @@ const SignIn = () => {
       );
 
       const finalRes = await response.json();
+      setLoadingScreen(false);
       if (finalRes.data.client.length !== 0) {
         setWaitingButton(false);
         handleLogin(
@@ -62,6 +64,7 @@ const SignIn = () => {
 
   return (
     <Form onSubmit={submitHandler}>
+      {loadingScreen}
       <h3>Sign In</h3>
       <ButtonContainer>
         <Input

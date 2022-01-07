@@ -82,10 +82,7 @@ const NewOrderForm = () => {
 
     try {
       const finalRes = await response.json();
-      console.log(
-        "🚀 ~ file: NewOrderForm.js ~ line 48 ~ submitOrder ~ finalRes",
-        finalRes
-      );
+   
       toast("Your Order Has Been Placed.", {
         style: { background: "#00FF00" },
       });
@@ -94,7 +91,6 @@ const NewOrderForm = () => {
         navigate(-1);
     }, 2000);
     } catch (e) {
-      console.log("🚀 ~ file: NewOrderForm.js ~ line 59 ~ submitOrder ~ e", e);
       toast("Problem Creating Order.", { style: { background: "#DC143C" } });
       setWaitingButton(false);
     }
@@ -118,16 +114,12 @@ const NewOrderForm = () => {
     event.preventDefault();
     setWaitingButton(true);
     if(selectedFile !== ""){
-      console.log("We have files to upload")
       const httpsReference = "files/".concat(selectedFile.name);
       const fileRef = ref(storage,httpsReference)
       try {
           uploadBytes(fileRef, selectedFile).then((url) => {
-            console.log(url)
               getDownloadURL(fileRef).then(downloadUrl =>{
-                console.log(downloadUrl);
                 setFiles(downloadUrl)
-                console.log(files)
                 budgetToString()
                 ? submitOrder()
                 : toast("Please Input Budget Range", {
@@ -146,7 +138,6 @@ const NewOrderForm = () => {
           return false;
       }
     }else{
-      console.log("no files to upload")
       budgetToString()
       ? submitOrder()
       : toast("Please Input Budget Range", {

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Clients from "../../components/clientComponents/Clients";
 import Nav from "../../components/main/Nav";
 import Sidebar from "../../components/sidebar/sidebar";
+import { AdminAllUsers_query } from "../../graphQl/uonQueries";
 
 const AllUsers = () => {
     
@@ -10,14 +11,7 @@ const AllUsers = () => {
     AllNewOrders();
   },[]);
   const [data, setData] = useState([])
-  const newOrdersQuery = `query AllNewOrders {
-    client(order_by: {created_at: asc}) {
-        email
-        full_name
-        id
-        created_at
-      }
-  }`;
+  const newOrdersQuery = AdminAllUsers_query;
 
   const AllNewOrders = async () => {
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {

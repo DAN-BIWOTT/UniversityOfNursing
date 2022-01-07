@@ -3,24 +3,22 @@ import styled from 'styled-components'
 import Nav from '../../components/main/Nav'
 import Sidebar from '../../components/sidebar/sidebar'
 import OrdersInRevisionList from '../../components/main/users/Users'
+import { AdminOrdersInRevision_query } from '../../graphQl/uonQueries'
+import Spinner from '../../components/Spinner'
 
 const OrdersInRevision = () => {
-    const OrdersInRevisionQuery = `query OrdersInRevision {
-        order(order_by: {created_at: desc}, where: {revision_status: {_eq: 101}}) {
-            id
-            subject
-            pages
-            budget
-            due_time
-            price
-            topic
-            created_at
-          }
-      }`
+    const OrdersInRevisionQuery = AdminOrdersInRevision_query;
     useEffect(() => {
         getOrdersInRevision()
     }, []);
     const [data, setData] = useState([])
+
+    const [pageLoader, setPageLoader] = useState(true);
+    const [loadingScreen,setLoadingScreen] = useState(<Spinner/>)
+    useEffect(() => {
+        pageLoader?setLoadingScreen(<Spinner/>):setLoadingScreen(<></>)
+      },[pageLoader]);
+
     const getOrdersInRevision = async()=>{
         const response = await fetch(`${process.env.GATSBY_HASURA_URI}`,{
             method:"POST",
@@ -34,11 +32,12 @@ const OrdersInRevision = () => {
         }
         );
         const finalResp = await response.json();
-        console.log("🚀 ~ file: OrdersInRevision.js ~ line 25 ~ getOrdersInRevision ~ finalResp", finalResp);
         setData(finalResp.data.order)
+        setPageLoader(false);
     }
     return (
         <Container>
+            {loadingScreen}
         <Sidebar permission="admin"/>
         <Nav/>
         <OrdersInRevisionList data={data} title="Orders In Revision" count={data.length}  />

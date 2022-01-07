@@ -8,7 +8,6 @@ import "./chatPartials/chatBox.css";
 const ChatBox = ({ orderData, sender }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
-    console.log(isOpen)
     setIsOpen(!isOpen);
   };
   return (

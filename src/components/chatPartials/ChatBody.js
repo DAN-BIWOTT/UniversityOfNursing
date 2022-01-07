@@ -54,7 +54,6 @@ const ChatBody = ({ orderId, sender }) => {
         chatList.push(data[orderId][contentId])
       }
       setTempChats(chatList)
-      tempChats.map(chatItem=>{console.log(chatItem.sender.sender);console.log(chatItem.msg.msg)})
     });
   };
 

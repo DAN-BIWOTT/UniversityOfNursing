@@ -34,7 +34,6 @@ const DisputedOrder = () => {
         }
         );
         const finalResp = await response.json();
-        console.log("🚀 ~ file: DisputedOrders.js ~ line 25 ~ getDisputedOrders ~ finalResp", finalResp);
         setData(finalResp.data.order)
     }
     return (

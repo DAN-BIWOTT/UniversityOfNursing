@@ -2,25 +2,23 @@ import React,{useEffect,useState} from 'react'
 import styled from 'styled-components'
 import Nav from '../../components/main/Nav'
 import Sidebar from '../../components/sidebar/sidebar'
-import PaidSubmissionsList from '../../components/main/users/Users'
+import PaidSubmissionsList from '../../components/main/users/AllOrders'
 import { getUser } from '../../services/auth'
+import Spinner from '../../components/Spinner'
+import { ClientPaidSubmissions_query } from '../../graphQl/uonQueries'
 
 const PaidSubmissions = () => {
-    const PaidSubmissionsQuery = `query MyOrders($id: Int!) {
-        order(where: {client_id: {_eq: $id}, payment_status: {_eq: 404}}, order_by: {created_at: desc}) {
-          id
-          subject
-          pages
-          budget
-          due_time
-          price
-          topic
-          created_at
-        }
-      }`
+    const PaidSubmissionsQuery = ClientPaidSubmissions_query;
     useEffect(() => {
         getPaidSubmissions()
     }, []);
+
+    const [pageLoader, setPageLoader] = useState(true);
+    const [loadingScreen,setLoadingScreen] = useState(<Spinner/>)
+    useEffect(() => {
+        pageLoader?setLoadingScreen(<Spinner/>):setLoadingScreen(<></>)
+      },[pageLoader]);
+
     const id = getUser().id
     const [data, setData] = useState([])
     const getPaidSubmissions = async()=>{
@@ -39,11 +37,12 @@ const PaidSubmissions = () => {
         }
         );
         const finalResp = await response.json();
-        console.log("🚀 ~ file: PaidSubmissions.js ~ line 25 ~ getPaidSubmissions ~ finalResp", finalResp);
         setData(finalResp.data.order)
+        setPageLoader(false);
     }
     return (
         <Container>
+            {loadingScreen}
         <Sidebar/>
         <Nav/>
         <PaidSubmissionsList data={data} title="Paid Submissions" count={data.length}  />

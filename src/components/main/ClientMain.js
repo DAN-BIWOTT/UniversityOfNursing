@@ -40,7 +40,6 @@ const ClientMain = () => {
       setData(finalResp.data.order);
       setPageLoader(false);
     } catch (e) {
-      console.log("🚀 ~ file: ClientMain.js ~ line 47 ~ AllNewOrders ~ e", e);
       toast("Problem Retrieving Data", {
         style: {
           background: "#DC143C",

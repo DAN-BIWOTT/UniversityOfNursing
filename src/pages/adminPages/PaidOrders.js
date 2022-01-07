@@ -3,20 +3,10 @@ import styled from 'styled-components'
 import Nav from '../../components/main/Nav'
 import Sidebar from '../../components/sidebar/sidebar'
 import PaidOrdersList from '../../components/main/users/Users'
+import { AdminPaidOrders_query } from '../../graphQl/uonQueries'
 
 const PaidOrders = () => {
-    const PaidOrdersQuery = `query PaidOrders {
-        order(order_by: {created_at: desc}, where: {payment_status: {_eq: 404}}) {
-            id
-            subject
-            pages
-            budget
-            due_time
-            price
-            topic
-            created_at
-          }
-      }`
+    const PaidOrdersQuery = AdminPaidOrders_query;
     useEffect(() => {
         getPaidOrders()
     }, []);

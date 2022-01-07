@@ -6,7 +6,6 @@ import Spinner from '../../components/Spinner'
 import { ClientOrderDetail_Query } from '../../graphQl/uonQueries'
 
 const ClientOrderDetail = ({orderId}) => {
-    console.log(orderId);
     const [id, setId] = useState(orderId);
     
     const ClientOrderDetailQuery = ClientOrderDetail_Query;

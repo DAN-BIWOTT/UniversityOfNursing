@@ -2,26 +2,25 @@ import React,{useEffect,useState} from 'react'
 import styled from 'styled-components'
 import Nav from '../../components/main/Nav'
 import Sidebar from '../../components/sidebar/sidebar'
-import PendingTransactionsList from '../../components/main/users/Users'
+import PendingTransactionsList from '../../components/main/users/AllOrders'
 import { getUser } from '../../services/auth'
+import Spinner from '../../components/Spinner'
+import { ClientPendingTransactions_query } from '../../graphQl/uonQueries'
 
 const PendingTransactions = () => {
-    const PendingTransactionsQuery = `query MyOrders($id: Int!) {
-        order(where: {client_id: {_eq: $id}, payment_status: {_neq: 404}}, order_by: {created_at: desc}) {
-          id
-          subject
-          pages
-          budget
-          due_time
-          price
-          topic
-          created_at
-        }
-      }`
+    const PendingTransactionsQuery = ClientPendingTransactions_query;
+
     useEffect(() => {
         getPendingTransactions()
     }, []);
     const id = getUser().id
+
+    const [pageLoader, setPageLoader] = useState(true);
+    const [loadingScreen,setLoadingScreen] = useState(<Spinner/>)
+    useEffect(() => {
+        pageLoader?setLoadingScreen(<Spinner/>):setLoadingScreen(<></>)
+      },[pageLoader]);
+
     const [data, setData] = useState([])
     const getPendingTransactions = async()=>{
         const response = await fetch(`${process.env.GATSBY_HASURA_URI}`,{
@@ -39,11 +38,12 @@ const PendingTransactions = () => {
         }
         );
         const finalResp = await response.json();
-        console.log("🚀 ~ file: PendingTransactions.js ~ line 25 ~ getPendingTransactions ~ finalResp", finalResp);
         setData(finalResp.data.order)
+        setPageLoader(false)
     }
     return (
         <Container>
+            {loadingScreen}
         <Sidebar/>
         <Nav/>
         <PendingTransactionsList data={data} title="Pending Transactions" count={data.length}  />

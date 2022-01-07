@@ -32,10 +32,7 @@ const Client = ({ data }) => {
       ? toast("User Deleted Successfully!")
       : toast("User Doesn't Exist!");
 
-    console.log(
-      "🚀 ~ file: Client.js ~ line 29 ~ deleteUserFunc ~ finalResponse",
-      finalResponse
-    );
+  
   };
 
   const deleteUser = (event) => {
