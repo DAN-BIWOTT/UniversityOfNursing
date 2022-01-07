@@ -37,7 +37,7 @@ const User = ({ data }) => {
         <Subtitle>Pages or word</Subtitle>
       </UserWrapper>
       <UserWrapper>
-        <Text>{price}/=</Text>
+        <Text>$ {price}</Text>
         <Subtitle>Amount Paid {budget}</Subtitle>
       </UserWrapper>
       <UserWrapper>

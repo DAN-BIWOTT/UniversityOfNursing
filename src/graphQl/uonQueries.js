@@ -127,3 +127,31 @@ export const AdminStatusChange_query = `mutation upDateAcceptanceStatus($orderId
     acceptance_status
   }
 }`;
+
+export const CompleteOrders_query = `query InCompleteOrders {
+  order(order_by: {created_at: desc}, where: {progress_status: {_eq: 404}, acceptance_status: {_eq: 303}}) {
+    id
+    subject
+    pages
+    budget
+    due_time
+    price
+    topic
+    created_at
+    acceptance_status
+  }
+}`;
+
+export const IncompleteOrders_query = `query InCompleteOrders {
+  order(order_by: {created_at: desc}, where: {progress_status: {_eq: 0}, acceptance_status: {_eq: 303}}) {
+    id
+    subject
+    pages
+    budget
+    due_time
+    price
+    topic
+    created_at
+    acceptance_status
+  }
+}`;

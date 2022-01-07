@@ -2,25 +2,22 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Nav from "../../components/main/Nav";
 import Sidebar from "../../components/sidebar/sidebar";
-import CompleteOrdersList from "../../components/main/users/Users";
-import { CompleteOrders_query } from "../../graphQl/uonQueries";
+import InCompleteOrdersList from "../../components/main/users/Users";
 import Spinner from "../../components/Spinner";
+import { IncompleteOrders_query } from "../../graphQl/uonQueries";
 
-const CompleteOrder = () => {
-  const CompleteOrdersQuery = CompleteOrders_query;
-
+const InCompleteOrder = () => {
+  const InCompleteOrdersQuery = IncompleteOrders_query;
   useEffect(() => {
-    getCompleteOrders();
+    getInCompleteOrders();
   }, []);
   const [data, setData] = useState([]);
-
   const [pageLoader, setPageLoader] = useState(true);
   const [loadingScreen, setLoadingScreen] = useState(<Spinner />);
   useEffect(() => {
     pageLoader ? setLoadingScreen(<Spinner />) : setLoadingScreen(<></>);
   }, [pageLoader]);
-
-  const getCompleteOrders = async () => {
+  const getInCompleteOrders = async () => {
     setPageLoader(true);
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
@@ -29,7 +26,7 @@ const CompleteOrder = () => {
         "Content-Type": "Application/Json",
       },
       body: JSON.stringify({
-        query: CompleteOrdersQuery,
+        query: InCompleteOrdersQuery,
       }),
     });
     const finalResp = await response.json();
@@ -41,16 +38,16 @@ const CompleteOrder = () => {
       {loadingScreen}
       <Sidebar permission="admin" />
       <Nav />
-      <CompleteOrdersList
+      <InCompleteOrdersList
         data={data}
-        title="Complete Orders"
+        title="Incomplete Orders"
         count={data.length}
       />
     </Container>
   );
 };
 
-export default CompleteOrder;
+export default InCompleteOrder;
 
 const Container = styled.div`
   background-color: #f4eaff;
