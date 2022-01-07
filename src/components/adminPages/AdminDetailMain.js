@@ -11,6 +11,10 @@ import {
   CompleteOrderButton_query,
 } from "../../graphQl/uonQueries";
 import Spinner from "../Spinner";
+import AdminUploadForm from "./AdminUploadForm";
+import Loader from "react-loader-spinner";
+import { storage } from "../../utils/firebase";
+import { deleteObject, ref } from "firebase/storage";
 
 const AdminDetailMain = ({ data, orderId }) => {
   var progressStatus, colorProgressTitle, paymentStatus, colorPaymentTitle;
@@ -121,6 +125,64 @@ const AdminDetailMain = ({ data, orderId }) => {
     toast("Order Marked as complete.", {
       style: { backgroundColor: "#22c382" },
     });
+  };
+  const [waitingButton,setWaitingButton] = useState(false)
+  const deleteFromFireBase=async()=>{
+    const fileRef = ref(storage, "files/".concat(data.admin_file_name));
+// Delete the file
+deleteObject(fileRef).then(() => {
+  toast("File Deleted From storage Successfully!", {
+    style: {
+      background: "#3b8334",
+    },
+  });
+}).catch((error) => {
+  // Uh-oh, an error occurred!
+  console.log(error);
+  toast("File Not Deleted From storage!", {
+    style: {
+      background: "#914747",
+    },
+  });
+});
+    return true;
+  } 
+  const deleteFromHasura =async()=>{
+    let AdminDeleteFileQuery = `mutation adminFile_query($orderId:Int!,$files:String) {
+      update_order_by_pk(pk_columns: {id: $orderId}, _set: {admin_files: $files}) {
+        admin_files
+      }
+    }`
+    let files = null
+    const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
+      method: "POST",
+      headers: {
+        "x-hasura-admin-secret": `${process.env.GATSBY_HASURA_ADMIN_SECRET}`,
+        "Content-Type": "Application/Json",
+      },
+      body: JSON.stringify({
+        query: AdminDeleteFileQuery,
+        variables: {
+          orderId,
+          files,
+        },
+      }),
+    });
+    const finalRes = await response.json();
+    console.log(finalRes);
+    setWaitingButton(false);
+    toast("File Deleted From database Successfully!", {
+        style: {
+          background: "#3b8334",
+        },
+      });
+    return true;
+  }
+  const deleteFile = (event) => {
+    event.preventDefault();
+    if (deleteFromFireBase() && deleteFromHasura())
+      toast("File deleted successfully!");
+    else toast("System failed to delete file!");
   };
   return (
     <div>
@@ -234,6 +296,7 @@ const AdminDetailMain = ({ data, orderId }) => {
         <ChatBox sender="admin" orderData={orderId} />
         <FileHold>
           <H1>Project Files</H1>
+          <h2 style={{ paddingLeft: "1rem" }}>From Client</h2>
           {data.files !== "" ? (
             <FileRow>
               <FolderImage
@@ -243,13 +306,43 @@ const AdminDetailMain = ({ data, orderId }) => {
               <FileTitle href={data.files}>Data File</FileTitle>
             </FileRow>
           ) : (
+            <p style={{ paddingLeft: "1rem" }}>No File Uploaded</p>
+          )}
+          <h2 style={{ paddingLeft: "1rem" }}>From Admin</h2>
+          {data.admin_files !== null ? (
+            <FileRow>
+              <FolderImage
+                src={fileFolder}
+                alt="Folder representing downloadable files."
+              />
+              <FileTitle href={data.admin_files}>Download files</FileTitle>
+              <br />
+              {waitingButton ? (
+            <Loader
+              type="Bars"
+              color="#00BFFF"
+              height={40}
+              width={40}
+              style={{ marginLeft: "40%" }}
+            />
+          ) : (
+              <Button
+                onClick={(event) => {
+                  deleteFile(event);
+                }}
+              >
+                delete
+              </Button>
+          )}
+            </FileRow>
+          ) : (
+            <p style={{ paddingLeft: "1rem" }}>No File Uploaded</p>
+          )}
+          {data.admin_files === null ? (
+            <AdminUploadForm orderId={orderId} />
+          ) : (
             <></>
           )}
-          <Form>
-            <Label>Upload size no more than 80mb</Label>
-            <Input type="file" />
-            <Button disabled>Upload</Button>
-          </Form>
         </FileHold>
       </OrderGrid>
       <Toaster
@@ -339,17 +432,6 @@ const NavButton = styled.button`
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 `;
-const Link = styled.a`
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  cursor: pointer;
-  :hover {
-    background-color: #111;
-  }
-`;
 const Button = styled.button`
   font-weight: 400;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -357,47 +439,16 @@ const Button = styled.button`
   font-size: clamp(1rem, 1vw, 1rem);
   margin-top: 1rem;
   margin-bottom: 1rem;
-  width: 100%;
+  width: fit-content;
   background-color: #8e6fe1;
   border-radius: 10px;
   border: none;
   color: #fff;
   height: 6vh;
   cursor: pointer;
+  margin-left: 1rem;
 `;
 
-const Input = styled.input`
-  width: 100%;
-  height: 7vh;
-  margin-left: 0px;
-  font-size: clamp(1rem, 1vw, 1rem);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-weight: 400;
-  padding: 1rem;
-  border: none;
-  border-bottom: 1px solid black;
-  box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
-  padding: 1rem;
-  border-radius: 5px;
-  :focus {
-    outline: none;
-    border: none;
-    border-bottom: #1740e1;
-    box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
-  }
-`;
-
-const Form = styled.form`
-  bottom: 0px;
-  margin-top: 1rem;
-`;
-const Label = styled.label`
-  padding-left: 2rem;
-  font-size: medium;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-`;
 const FolderImage = styled.img`
   min-height: 5vh;
   min-width: 5vh;
@@ -426,6 +477,7 @@ const FileHold = styled.div`
 `;
 const FileRow = styled.div`
   display: flex;
+  padding-bottom: 2rem;
 `;
 
 const H1 = styled.h1`

@@ -28,10 +28,12 @@ const NewOrderForm = () => {
   const [subject, setSubject] = useState("");
   const [topic, setTopic] = useState("");
   const [description, setDescription] = useState("");
-  const [files, setFiles] = useState("");
+  let files = "";
   const [waitingButton, setWaitingButton] = useState(false);
   const client_id = getUser().id;
   const orderFormQuery = NewOrderForm_query;
+  const [selectedFile, setSelectedFile] = useState("");
+  
   const emptyFields = () => {
     if (
       price === "" ||
@@ -55,6 +57,7 @@ const NewOrderForm = () => {
       setWaitingButton(false);
       return false;
     }
+    let fileName = selectedFile.name
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
       headers: {
@@ -76,6 +79,7 @@ const NewOrderForm = () => {
           topic,
           description,
           files,
+          fileName
         },
       }),
     });
@@ -108,7 +112,7 @@ const NewOrderForm = () => {
       return false;
     }
   };
-  const [selectedFile, setSelectedFile] = useState("");
+  
   // uploadFile(selectedFile);
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -119,8 +123,8 @@ const NewOrderForm = () => {
       try {
           uploadBytes(fileRef, selectedFile).then((url) => {
               getDownloadURL(fileRef).then(downloadUrl =>{
-                setFiles(downloadUrl)
-                budgetToString()
+                files = downloadUrl
+                budgetToString() && files !== ""
                 ? submitOrder()
                 : toast("Please Input Budget Range", {
                     style: {
@@ -169,7 +173,7 @@ const NewOrderForm = () => {
           <ColumnGrid>
             <Label>*Price: </Label>
             <Input
-              placeholder="EXAMPLE: 25"
+              placeholder="EXAMPLE: $25"
               type="number"
               onChange={(event) => {
                 setPrice(event.target.value);
