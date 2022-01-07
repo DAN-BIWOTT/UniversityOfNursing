@@ -5,6 +5,7 @@
   "version": "0.0.1",
   "author": "Sean & Sabina",
   "dependencies": {
+    "@paypal/paypal-js": "^4.2.2",
     "apollo-link-http": "^1.5.17",
     "dotenv": "^10.0.0",
     "firebase": "^9.6.1",

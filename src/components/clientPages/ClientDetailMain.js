@@ -7,6 +7,7 @@ import BackButton from "../BackButton";
 import { dispute_query } from "../../graphQl/uonQueries";
 import toast from "react-hot-toast";
 import { BsQuestionLg } from "react-icons/bs";
+import TransactionModal from "../transaction/TransactionModal";
 
 const ClientDetailMain = ({ data, orderId }) => {
   var progressStatus,
@@ -15,7 +16,6 @@ const ClientDetailMain = ({ data, orderId }) => {
     colorPaymentTitle,
     acceptanceStatus,
     colorAcceptanceTitle;
-  console.log(data);
   const date = `${new Date(data.created_at).getDate()}/${new Date(
     data.created_at
   ).getMonth()}/${new Date(data.created_at).getFullYear()}`;
@@ -96,6 +96,8 @@ const ClientDetailMain = ({ data, orderId }) => {
     setDisputeValue(1);
     changeDisputeStatus();
   };
+  // payment processing
+  console.log(data);
 
   return (
     <div>
@@ -118,7 +120,9 @@ const ClientDetailMain = ({ data, orderId }) => {
         <OrderContainer>
           <Ul>
             <Li>
-              <Link to="/">Pay</Link>
+            <Link>
+              <TransactionModal data={data}/>
+            </Link>
             </Li>
             <Li>
               <NavButton onClick={(event) => disputeButton(event)}>
