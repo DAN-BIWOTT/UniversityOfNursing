@@ -59,7 +59,13 @@ export default Faq;
 const styles = {
   section: {
     pt: [8, null, null, null, 10, 14],
-    pb: [null, null, null, null, null, null, 10, 6]
+    pb: [null, null, null, null, null, null, 10, 6],
+    backgroundColor: '#f1e7fe',
+    clipPath: 'ellipse(141% 100% at 90.04% 100%)',
+    '@media only screen and (max-width: 768px)': {
+      backgroundColor: '#f1e7fe',
+      clipPath: 'ellipse(239% 100% at 90.04% 100%)',
+    }
   },
   grid: {
     mx: [null, null, null, -6, -8, 'unset'],

@@ -83,6 +83,12 @@ const styles = {
   section: {
     pt: [12, null, null, 12, 15],
     pb: [6, null, null, 16, 10, 14],
+    backgroundColor: '#d5b8ff',
+    clipPath: 'ellipse(135% 100% at 19.4% 100%)',
+    '@media only screen and (max-width: 768px)': {
+      backgroundColor: '#d5b8ff',
+      clipPath: 'ellipse(211% 100% at 53.05% 0%)',
+    }
   },
   heading: {
     mb: [8, null, null, null, 10],

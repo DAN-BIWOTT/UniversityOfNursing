@@ -60,8 +60,14 @@ const styles = {
     pt: 0,
     pb: [12, null, null, null, null, 14, 18],
     // marginBottom: [null, null, null, null, null, null, '-85px'],
+    backgroundColor: '#fef8f3',
+    clipPath: 'ellipse(90% 100% at 69.6% 0%)',
     position: 'relative',
     zIndex: 0,
+    '@media only screen and (max-width: 768px)': {
+      backgroundColor: '#641BC9',
+      clipPath: 'ellipse(111% 100% at 53.05% 0%)',
+    }
   },
   container: {
     display: ['flex'],
@@ -111,6 +117,14 @@ const styles = {
       letterSpacing: 'heading',
       maxWidth: [250, null, null, 'none'],
       margin: ['0 auto', null, null, 'unset'],
+      '@media only screen and (max-width: 768px)': {
+        color: '#fefdff',
+      }
     },
+    p:{
+      '@media only screen and (max-width: 768px)': {
+        color: '#fefdff',
+      }
+    }
   },
 };
