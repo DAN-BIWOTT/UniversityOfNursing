@@ -15,6 +15,8 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../../utils/firebase";
 import { NewOrderForm_query } from "../../graphQl/uonQueries";
 import { navigate } from "gatsby";
+import { sendGeneralNotification, sendNotification } from "../../utils/chats";
+import { Timestamp } from "firebase/firestore/lite";
 
 const NewOrderForm = () => {
   const [budgetRange, setBudgetRange] = useState({ min: 10, max: 50 });
@@ -33,7 +35,7 @@ const NewOrderForm = () => {
   const client_id = getUser().id;
   const orderFormQuery = NewOrderForm_query;
   const [selectedFile, setSelectedFile] = useState("");
-  
+
   const emptyFields = () => {
     if (
       price === "" ||
@@ -49,6 +51,12 @@ const NewOrderForm = () => {
     return false;
   };
 
+  let notification = {
+    created_at: 0,
+    sender: "",
+    msg: "",
+  };
+
   const submitOrder = async () => {
     if (emptyFields()) {
       toast("Fields with stars cant be left empty!", {
@@ -57,7 +65,7 @@ const NewOrderForm = () => {
       setWaitingButton(false);
       return false;
     }
-    let fileName = selectedFile.name
+    let fileName = selectedFile.name;
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
       headers: {
@@ -79,21 +87,28 @@ const NewOrderForm = () => {
           topic,
           description,
           files,
-          fileName
+          fileName,
         },
       }),
     });
 
     try {
       const finalRes = await response.json();
-   
+      console.log(finalRes);
+      notification.created_at = Date.now();
+      notification.sender = "client";
+      notification.order_id = finalRes.data.insert_order_one.id;
+      notification.msg = "New order received: ".concat(finalRes.data.insert_order_one.id);
+      console.log(notification)
+      sendGeneralNotification(notification);
       toast("Your Order Has Been Placed.", {
         style: { background: "#00FF00" },
       });
       setWaitingButton(false);
-      setTimeout(()=>{
+      setTimeout(() => {
         navigate(-1);
-    }, 2000);
+      }, 2000);
+      setWaitingButton(false);
     } catch (e) {
       toast("Problem Creating Order.", { style: { background: "#DC143C" } });
       setWaitingButton(false);
@@ -112,43 +127,43 @@ const NewOrderForm = () => {
       return false;
     }
   };
-  
+
   // uploadFile(selectedFile);
   const handleSubmit = async (event) => {
     event.preventDefault();
     setWaitingButton(true);
-    if(selectedFile !== ""){
+    if (selectedFile !== "") {
       const httpsReference = "files/".concat(selectedFile.name);
-      const fileRef = ref(storage,httpsReference)
+      const fileRef = ref(storage, httpsReference);
       try {
-          uploadBytes(fileRef, selectedFile).then((url) => {
-              getDownloadURL(fileRef).then(downloadUrl =>{
-                files = downloadUrl
-                budgetToString() && files !== ""
-                ? submitOrder()
-                : toast("Please Input Budget Range", {
-                    style: {
-                      background: "#DC143C",
-                    },
-                  });
-              });
+        uploadBytes(fileRef, selectedFile).then((url) => {
+          getDownloadURL(fileRef).then((downloadUrl) => {
+            files = downloadUrl;
+            budgetToString() && files !== ""
+              ? submitOrder()
+              : toast("Please Input Budget Range", {
+                  style: {
+                    background: "#DC143C",
+                  },
+                });
           });
+        });
       } catch (error) {
         toast("File Upload Failed.", {
           style: {
             background: "#DC143C",
           },
         });
-          return false;
+        return false;
       }
-    }else{
+    } else {
       budgetToString()
-      ? submitOrder()
-      : toast("Please Input Budget Range", {
-          style: {
-            background: "#DC143C",
-          },
-        });
+        ? submitOrder()
+        : toast("Please Input Budget Range", {
+            style: {
+              background: "#DC143C",
+            },
+          });
     }
   };
 
@@ -300,7 +315,7 @@ const NewOrderForm = () => {
           />
         </ColumnGrid>
         <ColumnGrid>
-        <p>Upload a single compressed file (.rar,.zip etc) upto 80mb</p>
+          <p>Upload a single compressed file (.rar,.zip etc) upto 80mb</p>
           <Label>Upload File: </Label>
           <Input
             type="file"

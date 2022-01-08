@@ -55,5 +55,34 @@ const sendChats = async (msgObj) => {
   });
   return true;
 }
+const sendGeneralNotification = async (msgObj) => {
+  await push(ref(database, 'GeneralNotifications/'), {
+    created_at:{
+      created_at: msgObj.created_at,
+    },
+    sender:{
+      sender: msgObj.sender,
+    },
+    msg:{
+      msg : msgObj.msg
+    }
+  });
+  return true;
+}
 
-export { getChats, sendChats };
+const sendNotification = async (msgObj) => {
+  await push(ref(database, 'Notifications/' + msgObj.order_id + '/'), {
+    created_at:{
+      created_at: msgObj.created_at,
+    },
+    sender:{
+      sender: msgObj.sender,
+    },
+    msg:{
+      msg : msgObj.msg
+    }
+  });
+  return true;
+}
+
+export { getChats, sendChats, sendGeneralNotification,sendNotification };

@@ -26,7 +26,8 @@ const Menu = ({permission}) => {
                 <Container>
                     <MenuLink to="/client"><MenuItem title="Home" icon="home" /></MenuLink>
                     <MenuLink to="/clientPages/AllSubmissions"><MenuItem title="All Submissions" icon="account" active/></MenuLink>
-                    <MenuLink to="/clientPages/CompleteSubmissions"><MenuItem title="Complete Submissions" icon="sitemap" /></MenuLink>
+                    <MenuLink to="/clientPages/CompleteSubmissions"><MenuItem title="Completed Orders" icon="sitemap" /></MenuLink>
+                    <MenuLink to="/clientPages/IncompleteSubmissions"><MenuItem title="Orders in progress" icon="sitemap" /></MenuLink>
                     <MenuLink to="/clientPages/PaidSubmissions"><MenuItem title="Paid Submissions" icon="bank" /></MenuLink>
                     <MenuLink to="/clientPages/CompleteTransactions"><MenuItem title="Complete Transactions" icon="cog" /></MenuLink>
                     <MenuLink to="/clientPages/PendingTransactions"><MenuItem title="Pending Transactions" icon="cog" /></MenuLink>
@@ -41,6 +42,30 @@ export default Menu
 const Container = styled.div`
     margin-top: 2rem;
     width: 100%;
+
+    overflow-y: scroll;
+overflow-x: hidden;
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 6px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: grey; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000; 
+}
 `
 const MenuLink = styled(Link)`
 text-decoration: none;

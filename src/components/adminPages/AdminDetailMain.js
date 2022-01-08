@@ -126,34 +126,36 @@ const AdminDetailMain = ({ data, orderId }) => {
       style: { backgroundColor: "#22c382" },
     });
   };
-  const [waitingButton,setWaitingButton] = useState(false)
-  const deleteFromFireBase=async()=>{
+  const [waitingButton, setWaitingButton] = useState(false);
+  const deleteFromFireBase = async () => {
     const fileRef = ref(storage, "files/".concat(data.admin_file_name));
-// Delete the file
-deleteObject(fileRef).then(() => {
-  toast("File Deleted From storage Successfully!", {
-    style: {
-      background: "#3b8334",
-    },
-  });
-}).catch((error) => {
-  // Uh-oh, an error occurred!
-  console.log(error);
-  toast("File Not Deleted From storage!", {
-    style: {
-      background: "#914747",
-    },
-  });
-});
+    // Delete the file
+    deleteObject(fileRef)
+      .then(() => {
+        toast("File Deleted From storage Successfully!", {
+          style: {
+            background: "#3b8334",
+          },
+        });
+      })
+      .catch((error) => {
+        // Uh-oh, an error occurred!
+        console.log(error);
+        toast("File Not Deleted From storage!", {
+          style: {
+            background: "#914747",
+          },
+        });
+      });
     return true;
-  } 
-  const deleteFromHasura =async()=>{
+  };
+  const deleteFromHasura = async () => {
     let AdminDeleteFileQuery = `mutation adminFile_query($orderId:Int!,$files:String) {
       update_order_by_pk(pk_columns: {id: $orderId}, _set: {admin_files: $files}) {
         admin_files
       }
-    }`
-    let files = null
+    }`;
+    let files = null;
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
       headers: {
@@ -172,12 +174,12 @@ deleteObject(fileRef).then(() => {
     console.log(finalRes);
     setWaitingButton(false);
     toast("File Deleted From database Successfully!", {
-        style: {
-          background: "#3b8334",
-        },
-      });
+      style: {
+        background: "#3b8334",
+      },
+    });
     return true;
-  }
+  };
   const deleteFile = (event) => {
     event.preventDefault();
     if (deleteFromFireBase() && deleteFromHasura())
@@ -318,27 +320,27 @@ deleteObject(fileRef).then(() => {
               <FileTitle href={data.admin_files}>Download files</FileTitle>
               <br />
               {waitingButton ? (
-            <Loader
-              type="Bars"
-              color="#00BFFF"
-              height={40}
-              width={40}
-              style={{ marginLeft: "40%" }}
-            />
-          ) : (
-              <Button
-                onClick={(event) => {
-                  deleteFile(event);
-                }}
-              >
-                delete
-              </Button>
-          )}
+                <Loader
+                  type="Bars"
+                  color="#00BFFF"
+                  height={40}
+                  width={40}
+                  style={{ marginLeft: "40%" }}
+                />
+              ) : (
+                <Button
+                  onClick={(event) => {
+                    deleteFile(event);
+                  }}
+                >
+                  delete
+                </Button>
+              )}
             </FileRow>
           ) : (
             <p style={{ paddingLeft: "1rem" }}>No File Uploaded</p>
           )}
-          {data.admin_files === null ? (
+          {data.admin_files === null || data.admin_files === "" ? (
             <AdminUploadForm orderId={orderId} />
           ) : (
             <></>

@@ -24,7 +24,7 @@ const Nav = () => {
   return (
     <Container>
       <DropDown>
-        <Count>12</Count>
+        <span>12</span>
         <MessageIcon
           icon={`mdi-light:bell`}
           inline={false}
@@ -314,18 +314,15 @@ const ListItem = styled("li")`
 `;
 
 const DropDown = styled.div`
- 
-`;
-
-const Count = styled.div`
-background-color: grey;
+  span {
+    background-color: grey;
     color: white;
-    position: block;
-    display: inline-block;
+    position: flex;
+    z-index: 1;
     top: 0px;
     left: 0px;
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    padding-left: 0.2em;
-`
+  }
+`;

@@ -318,7 +318,11 @@ const ClientDetailMain = ({ data, orderId }) => {
           ) : (
             <p style={{ paddingLeft: "1rem" }}>No File Uploaded</p>
           )}
-          {data.files === null ? <ClientUploadForm /> : <></>}
+          {data.files === "" || data.files === "" ? (
+            <ClientUploadForm />
+          ) : (
+            <></>
+          )}
         </FileHold>
       </OrderGrid>
     </div>
@@ -413,7 +417,6 @@ const NavButton = styled.button`
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 `;
-
 
 const FolderImage = styled.img`
   min-height: 5vh;
