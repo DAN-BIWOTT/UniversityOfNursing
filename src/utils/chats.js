@@ -19,7 +19,7 @@ const getChats = async (order_id) => {
 };
 
 const readNotifications = async (msgObj) => {
-  const chatRef = ref(database, "Notifications/" + msgObj.order_id + "/");
+  const chatRef = ref(database, "Notifications/" + msgObj.clientId + "/");
   onValue(chatRef, (snapshot) => {
     const data = snapshot.val();
     return data;
@@ -81,16 +81,11 @@ const sendGeneralNotification = async (msgObj) => {
 };
 
 const sendNotification = async (msgObj) => {
-  await push(ref(database, "Notifications/" + msgObj.order_id + "/"), {
-    created_at: {
-      created_at: msgObj.created_at,
-    },
-    sender: {
-      sender: msgObj.sender,
-    },
-    msg: {
-      msg: msgObj.msg,
-    },
+  await push(ref(database, "Notifications/" + msgObj.clientId + "/"), {
+    created_at: msgObj.created_at,
+    sender: msgObj.sender,
+    msg: msgObj.msg,
+    orderId: msgObj.orderId
   });
   return true;
 };

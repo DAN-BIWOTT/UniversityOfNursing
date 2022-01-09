@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Image from "../../assets/images/profile.jpg";
 import { Icon } from "@iconify/react";
-import { logout } from "../../services/auth";
+import { getUser, logout } from "../../services/auth";
 import {
   endAt,
   endBefore,
@@ -28,9 +28,9 @@ const Nav = () => {
       msg: "",
     },
   ]);
+  let clientId = getUser().id;
   const getNotifications = async () => {
-    let now = Date.now();
-    const chatRef = ref(database, "GeneralNotifications/");
+    const chatRef = ref(database, "Notifications/" + clientId + "/");
     onValue(chatRef, (snapshot) => {
       const data = snapshot.val();
       let notificationArray = [];
@@ -38,6 +38,7 @@ const Nav = () => {
         notificationArray.push(data[notificationList]);
       }
       setNotifications(notificationArray);
+      console.log(notifications)
     });
   };
 
@@ -60,7 +61,7 @@ const Nav = () => {
   };
 
   const deleteFromDatabase = async()=>{
-    const chatRef = ref(database, "GeneralNotifications/");
+    const chatRef = ref(database, "Notifications/" + clientId + "/");
     remove(chatRef);
   }
   const eraseNotifications = (event) =>{
@@ -89,9 +90,6 @@ const Nav = () => {
             <MarkButton onClick={event=>eraseNotifications(event)}>Mark All As Read</MarkButton>
               <ListItem>
                 {notifications.map((data) => {
-                  {
-                    console.log(data);
-                  }
                   return (
                     <NotificationCard key={data.created_at}>
                       <NotificationRow>

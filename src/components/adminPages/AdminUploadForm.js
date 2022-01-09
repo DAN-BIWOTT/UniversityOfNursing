@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import Loader from "react-loader-spinner";
 import styled from "styled-components";
+import { sendNotification } from "../../utils/chats";
 import { storage } from "../../utils/firebase";
 
 const AdminUploadForm = ({ orderId }) => {
@@ -12,8 +13,17 @@ const AdminUploadForm = ({ orderId }) => {
   const adminFileQuery = `mutation adminFile_query($orderId: Int!, $fileName: String, $files: String) {
     update_order_by_pk(pk_columns: {id: $orderId}, _set: {admin_files: $files, admin_file_name: $fileName}) {
       admin_files
+      client_id
     }
   }`;
+  
+  let notification = {
+    clientId:0,
+    orderId: 0,
+    created_at: 0,
+    sender: "",
+    msg: "",
+  };
   const saveFiles = async() => {
       console.log("This is at save files",files);
       let fileName = selectedFile.name;
@@ -35,6 +45,12 @@ const AdminUploadForm = ({ orderId }) => {
     const finalRes = await response.json();
     console.log(finalRes);
     setWaitingButton(false);
+    notification.clientId = finalRes.data.update_order_by_pk.client_id;
+          notification.orderId = orderId;
+          notification.created_at = Date.now();
+          notification.sender = `From Admin`;
+          notification.msg = `Order: ${orderId} : Admin has uploaded a file.`;
+          sendNotification(notification);
     toast("File Upload Successful!", {
         style: {
           background: "#3b8334",

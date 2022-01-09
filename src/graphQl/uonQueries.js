@@ -175,6 +175,8 @@ export const IncompleteOrders_query = `query InCompleteOrders {
 export const CompleteOrderButton_query = `mutation CompleteOrder($orderId: Int!,$status: Int!) {
   update_order_by_pk(pk_columns: {id: $orderId}, _set: {progress_status: $status}) {
     progress_status
+    client_id
+    id
   }
 }`;
 
@@ -285,12 +287,11 @@ export const SignInFindUser_query = `query findUserQuery($email: String,$pass: S
   }
 }`;
 
-export const AdminAllUsers_query = `query AllNewOrders {
+export const AdminAllUsers_query = `query AllClients {
   client(order_by: {created_at: asc}) {
       email
       full_name
       id
       created_at
-      acceptance_status
     }
 }`;

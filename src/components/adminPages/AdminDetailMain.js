@@ -15,6 +15,7 @@ import AdminUploadForm from "./AdminUploadForm";
 import Loader from "react-loader-spinner";
 import { storage } from "../../utils/firebase";
 import { deleteObject, ref } from "firebase/storage";
+import { sendNotification } from "../../utils/chats";
 
 const AdminDetailMain = ({ data, orderId }) => {
   var progressStatus, colorProgressTitle, paymentStatus, colorPaymentTitle;
@@ -54,6 +55,14 @@ const AdminDetailMain = ({ data, orderId }) => {
   }, [pageLoader]);
 
   let statusChangeQuery = AdminStatusChange_query;
+  let clientId = data.client_id;
+  let notification = {
+    clientId: 0,
+    orderId: 0,
+    created_at: 0,
+    sender: "",
+    msg: "",
+  };
   const callToDb = async (status) => {
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
@@ -78,11 +87,29 @@ const AdminDetailMain = ({ data, orderId }) => {
       switch (returnStatus) {
         case 101:
           toast("Order Rejected.", { style: { backgroundColor: "#ff1216" } });
+          notification.clientId = clientId;
+          notification.orderId = orderId;
+          notification.created_at = Date.now();
+          notification.sender = `From Admin`;
+          notification.msg = `Order: ${orderId} Rejected by Admin`;
+          sendNotification(notification);
           break;
         case 202:
+          notification.clientId = clientId;
+          notification.orderId = orderId;
+          notification.created_at = Date.now();
+          notification.sender = `From Admin`;
+          notification.msg = `Order: ${orderId} Is in progress`;
+          sendNotification(notification);
           toast("Order in progress");
           break;
         case 303:
+          notification.clientId = clientId;
+          notification.orderId = orderId;
+          notification.created_at = Date.now();
+          notification.sender = `From Admin`;
+          notification.msg = `Order: ${orderId} Accepted by Admin`;
+          sendNotification(notification);
           toast("Order Approved.", { style: { backgroundColor: "#22c382" } });
           break;
 
@@ -122,6 +149,12 @@ const AdminDetailMain = ({ data, orderId }) => {
     setPageLoader(true);
     statusChangeQuery = CompleteOrderButton_query;
     callToDb(404);
+    notification.clientId = clientId;
+    notification.orderId = orderId;
+    notification.created_at = Date.now();
+    notification.sender = `From Admin`;
+    notification.msg = `Order: ${orderId} has been completed`;
+    sendNotification(notification);
     toast("Order Marked as complete.", {
       style: { backgroundColor: "#22c382" },
     });
