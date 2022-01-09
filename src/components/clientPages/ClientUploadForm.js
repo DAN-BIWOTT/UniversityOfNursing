@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import Loader from "react-loader-spinner";
 import styled from "styled-components";
+import { sendGeneralNotification } from "../../utils/chats";
 import { storage } from "../../utils/firebase";
 
 const ClientUploadForm = ({ orderId }) => {
@@ -35,6 +36,12 @@ const ClientUploadForm = ({ orderId }) => {
     const finalRes = await response.json();
     console.log(finalRes);
     setWaitingButton(false);
+    let notification = {
+      created_at: Date.now(),
+      sender: "Order: ".concat(orderId),
+      msg: "New File Uploaded",
+    };
+    sendGeneralNotification(notification);
     toast("File Upload Successful!", {
         style: {
           background: "#3b8334",

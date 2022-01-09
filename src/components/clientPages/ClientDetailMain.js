@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import styled from "styled-components";
 import ColorStatus from "../icons/ColorStatus";
 import ChatBox from "../ChatBox";
 import fileFolder from "../../assets/images/fileFolder.png";
 import BackButton from "../BackButton";
-import { dispute_query } from "../../graphQl/uonQueries";
+import { dispute_query, revision_query } from "../../graphQl/uonQueries";
 import toast from "react-hot-toast";
 import { BsQuestionLg } from "react-icons/bs";
 import TransactionModal from "../transaction/TransactionModal";
@@ -12,6 +12,8 @@ import ClientUploadForm from "./ClientUploadForm";
 import { deleteObject, ref } from "firebase/storage";
 import { storage } from "../../utils/firebase";
 import Loader from "react-loader-spinner";
+import { sendGeneralNotification } from "../../utils/chats";
+import Spinner from "../Spinner";
 
 const ClientDetailMain = ({ data, orderId }) => {
   var progressStatus,
@@ -20,10 +22,13 @@ const ClientDetailMain = ({ data, orderId }) => {
     colorPaymentTitle,
     acceptanceStatus,
     colorAcceptanceTitle;
-  const date = `${new Date(data.created_at).getDate()}/${new Date(
-    data.created_at
+  const date = `${new Date(data.created_at).getDate()}/${new Date(data.created_at
   ).getMonth()}/${new Date(data.created_at).getFullYear()}`;
-
+  const [pageLoader, setPageLoader] = useState(false);
+  const [loadingScreen, setLoadingScreen] = useState(<Spinner />);
+  useEffect(() => {
+    pageLoader ? setLoadingScreen(<Spinner />) : setLoadingScreen(<></>);
+  }, [pageLoader]);
   switch (data.progress_status) {
     case 0:
       progressStatus = "red";
@@ -72,9 +77,12 @@ const ClientDetailMain = ({ data, orderId }) => {
       break;
   }
 
-  const [disputeValue, setDisputeValue] = useState(0);
+  
+  const [revisionValue, setRevisionValue] = useState(0);
   const disputeQuery = dispute_query;
+  const revisionQuery = revision_query;
   const changeDisputeStatus = async () => {
+    setPageLoader(true)
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
       headers: {
@@ -90,18 +98,61 @@ const ClientDetailMain = ({ data, orderId }) => {
       }),
     });
     const finalResp = await response.json();
+    console.log(finalResp);
     if (finalResp.data.update_order_by_pk.dispute_status === 1) {
+      let notification = {
+        created_at: Date.now(),
+        sender: "Order: ".concat(orderId),
+        msg: "Dispute filed",
+      };
+      sendGeneralNotification(notification);
+      setPageLoader(false);
       toast("dispute filed", { style: { background: "#a92d2d" } });
+    }else{
+      setPageLoader(false);
+      toast("dispute unfiled", { style: { background: "#a92d2d" } });
     }
   };
-
+  const changeRevisionStatus = async () => {
+    setPageLoader(true)
+    const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
+      method: "POST",
+      headers: {
+        "x-hasura-admin-secret": `${process.env.GATSBY_HASURA_ADMIN_SECRET}`,
+        "Content-Type": "Application/Json",
+      },
+      body: JSON.stringify({
+        query: revisionQuery,
+        variables: {
+          orderId,
+          revisionValue,
+        },
+      }),
+    });
+    const finalResp = await response.json();
+    if (finalResp.data.update_order_by_pk.revision_status === 1) {
+      let notification = {
+        created_at: Date.now(),
+        sender: "Order: ".concat(orderId),
+        msg: "Request for Revision",
+      };
+      sendGeneralNotification(notification);
+      setPageLoader(false)
+      toast("Request for filed", { style: { background: "#a92d2d" } });
+    }
+  };
+  const [disputeValue, setDisputeValue] = useState(0);
   const disputeButton = (event) => {
     event.preventDefault();
     setDisputeValue(1);
-    changeDisputeStatus();
+    if(disputeValue === 1)changeDisputeStatus();
+  };
+  const revisionButton = (event) => {
+    event.preventDefault();
+    setRevisionValue(1);
+    if(revisionValue === 1)changeRevisionStatus();
   };
   // payment processing
-  console.log(data);
   const [waitingButton, setWaitingButton] = useState(false);
   const deleteFromFireBase = async () => {
     const fileRef = ref(storage, "files/".concat(data.client_file_name));
@@ -164,6 +215,7 @@ const ClientDetailMain = ({ data, orderId }) => {
   };
   return (
     <div>
+      {loadingScreen}
       <BackButton />
       <ToolTip>
         <FaqButton>
@@ -193,7 +245,9 @@ const ClientDetailMain = ({ data, orderId }) => {
               </NavButton>
             </Li>
             <Li>
-              <Link to="/">Revision</Link>
+            <NavButton onClick={(event) => revisionButton(event)}>
+                Revision
+              </NavButton>
             </Li>
             <Li style={{ float: "right" }}></Li>
           </Ul>

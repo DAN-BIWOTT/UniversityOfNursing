@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ChatBubble from "./ChatBubble";
 import { RiSendPlaneFill } from "react-icons/ri";
-import { getChats, sendChats } from "../../utils/chats";
+import { getChats, sendChats, sendGeneralNotification } from "../../utils/chats";
 import toast, { Toaster } from "react-hot-toast";
 import { animateScroll } from "react-scroll";
 import Loader from "react-loader-spinner";
@@ -65,6 +65,12 @@ const ChatBody = ({ orderId, sender }) => {
     const resp = await sendChats(msgObj);
 
     if (resp) {
+      let notification = {
+        created_at: Date.now(),
+        sender: "Order: ".concat(orderId),
+        msg: "New Chat Message",
+      };
+      sendGeneralNotification(notification);
       setWaitingButton(false);
       toast("Message Sent Successfully.", { style: { background: "#00FF00" } });
       setText("");
