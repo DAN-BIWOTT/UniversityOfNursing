@@ -1,18 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Image from "../../assets/images/profile.jpg";
 import { Icon } from "@iconify/react";
 import { logout } from "../../services/auth";
-
-const ImageButton = styled.button`
-  background-color: transparent;
-  border: none;
-  &:hover {
-    box-shadow: 0px, 4px, 4px, 0px rgba(0, 0, 0, 0.2);
-  }
-`;
+import {
+  endAt,
+  endBefore,
+  onValue,
+  orderByChild,
+  query,
+  ref,
+  remove,
+  startAfter,
+  startAt,
+} from "firebase/database";
+import { database } from "../../utils/firebase";
+import toast, { Toaster } from "react-hot-toast";
 
 const Nav = () => {
+  useEffect(() => {
+    getNotifications();
+  }, []);
+  const [notifications, setNotifications] = useState([
+    {
+      created_at: 0,
+      sender: "",
+      msg: "",
+    },
+  ]);
+  const getNotifications = async () => {
+    let now = Date.now();
+    const chatRef = ref(database, "GeneralNotifications/");
+    onValue(chatRef, (snapshot) => {
+      const data = snapshot.val();
+      let notificationArray = [];
+      for (let notificationList in data) {
+        notificationArray.push(data[notificationList]);
+      }
+      setNotifications(notificationArray);
+    });
+  };
+
   const [isActive, setIsActive] = useState(false);
   const [notificationIsActive, setNotificationIsActive] = useState(false);
   const toggleDrop = () => {
@@ -21,10 +49,35 @@ const Nav = () => {
   const toggleNotifications = () => {
     setNotificationIsActive(!notificationIsActive);
   };
+  const getDate = (created_at) => {
+    return `${new Date(created_at).toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    })} | ${new Date(created_at).getDate()}/${
+      new Date(created_at).getMonth() + 1
+    }/${new Date(created_at).getFullYear()}`;
+  };
+
+  const deleteFromDatabase = async()=>{
+    const chatRef = ref(database, "GeneralNotifications/");
+    remove(chatRef);
+  }
+  const eraseNotifications = (event) =>{
+    event.preventDefault();
+    let confirmAction = window.confirm("This will delete all notifications");
+    if (confirmAction) {
+      deleteFromDatabase();
+    } else {
+      toast("Action Cancelled");
+    }
+  }
+
   return (
     <Container>
+      <Toaster />
       <DropDown>
-        <span>12</span>
+        <Count>{notifications.length}</Count>
         <MessageIcon
           icon={`mdi-light:bell`}
           inline={false}
@@ -33,71 +86,29 @@ const Nav = () => {
         {notificationIsActive ? (
           <NotificationDropDownContainer>
             <NotificationDropDownList>
+            <MarkButton onClick={event=>eraseNotifications(event)}>Mark All As Read</MarkButton>
               <ListItem>
-                <NotificationCard>
-                  <NotificationRow>
-                    <NotificationTitle>
-                      <p>Order ID: 34</p>
-                    </NotificationTitle>
-                    <NotificationTime>
-                      <p>12:23 Pm | 12/Dec/2021</p>
-                    </NotificationTime>
-                  </NotificationRow>
-                  <hr />
-                  <NotificationBody>
-                    <p>
-                      Notification Body. Notification Body. Notification Body.
-                    </p>
-                  </NotificationBody>
-                </NotificationCard>
-                <NotificationCard>
-                  <NotificationRow>
-                    <NotificationTitle>
-                      <p>Order ID: 34</p>
-                    </NotificationTitle>
-                    <NotificationTime>
-                      <p>12:23 Pm | 12/Dec/2021</p>
-                    </NotificationTime>
-                  </NotificationRow>
-                  <hr />
-                  <NotificationBody>
-                    <p>
-                      Notification Body. Notification Body. Notification Body.
-                    </p>
-                  </NotificationBody>
-                </NotificationCard>
-                <NotificationCard>
-                  <NotificationRow>
-                    <NotificationTitle>
-                      <p>Order ID: 34</p>
-                    </NotificationTitle>
-                    <NotificationTime>
-                      <p>12:23 Pm | 12/Dec/2021</p>
-                    </NotificationTime>
-                  </NotificationRow>
-                  <hr />
-                  <NotificationBody>
-                    <p>
-                      Notification Body. Notification Body. Notification Body.
-                    </p>
-                  </NotificationBody>
-                </NotificationCard>
-                <NotificationCard>
-                  <NotificationRow>
-                    <NotificationTitle>
-                      <p>Order ID: 34</p>
-                    </NotificationTitle>
-                    <NotificationTime>
-                      <p>12:23 Pm | 12/Dec/2021</p>
-                    </NotificationTime>
-                  </NotificationRow>
-                  <hr />
-                  <NotificationBody>
-                    <p>
-                      Notification Body. Notification Body. Notification Body.
-                    </p>
-                  </NotificationBody>
-                </NotificationCard>
+                {notifications.map((data) => {
+                  {
+                    console.log(data);
+                  }
+                  return (
+                    <NotificationCard key={data.created_at}>
+                      <NotificationRow>
+                        <NotificationTitle>
+                          <p>{data.sender}</p>
+                        </NotificationTitle>
+                        <NotificationTime>
+                          <p>{getDate(data.created_at)}</p>
+                        </NotificationTime>
+                      </NotificationRow>
+                      <hr />
+                      <NotificationBody>
+                        <p>{data.msg}</p>
+                      </NotificationBody>
+                    </NotificationCard>
+                  );
+                })}
               </ListItem>
             </NotificationDropDownList>
           </NotificationDropDownContainer>
@@ -133,6 +144,16 @@ const Nav = () => {
 
 export default Nav;
 
+const MarkButton = styled.button`
+height:5vh;
+border:none;
+background-color: #2061ca;
+color:white;
+border-radius:5px;
+width: 100%;
+cursor: pointer;
+`
+
 const NotificationCard = styled.div`
   box-shadow: -2px -4px 6px 0px rgba(103, 46, 191, 0.75);
   -webkit-box-shadow: -2px -4px 6px 0px rgba(103, 46, 191, 0.75);
@@ -154,7 +175,16 @@ const NotificationCard = styled.div`
   }
 `;
 
+const ImageButton = styled.button`
+  background-color: transparent;
+  border: none;
+  &:hover {
+    box-shadow: 0px, 4px, 4px, 0px rgba(0, 0, 0, 0.2);
+  }
+`;
+
 const NotificationRow = styled.div`
+  margin-top: 0.5rem;
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -162,6 +192,7 @@ const NotificationRow = styled.div`
 `;
 
 const NotificationTitle = styled.div`
+  margin-bottom: -10%;
   p {
     padding-left: 0.5rem;
     font-size: clamp(1rem, 1rem, 1rem);
@@ -173,6 +204,7 @@ const NotificationTitle = styled.div`
 `;
 
 const NotificationTime = styled.div`
+  margin-bottom: -10%;
   p {
     font-size: clamp(0.8rem, 0.8rem, 0.8rem);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -183,7 +215,10 @@ const NotificationTime = styled.div`
 `;
 
 const NotificationBody = styled.div`
+  margin-top: -5%;
+  text-align: center;
   p {
+    display: inline-block;
     padding-left: 0.5rem;
     font-size: clamp(0.8rem, 0.8rem, 0.8rem);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -313,16 +348,17 @@ const ListItem = styled("li")`
   cursor: pointer;
 `;
 
-const DropDown = styled.div`
-  span {
-    background-color: grey;
-    color: white;
-    position: flex;
-    z-index: 1;
-    top: 0px;
-    left: 0px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-  }
+const DropDown = styled.div``;
+
+const Count = styled.div`
+  background-color: grey;
+  color: white;
+  position: block;
+  display: inline-block;
+  top: 0px;
+  left: 0px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  padding-left: 0.2em;
 `;

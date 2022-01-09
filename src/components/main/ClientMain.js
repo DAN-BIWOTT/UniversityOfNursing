@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import NewUserBtn from "../sidebar/menu/NewUserBtn";
-import Nav from "./Nav";
+import ClientNav from "./ClientNav";
 import { getUser } from "../../services/auth";
 import toast, { Toaster } from "react-hot-toast";
 import AllOrders from "./users/AllOrders";
@@ -51,7 +51,7 @@ const ClientMain = () => {
   return (
     <Container>
       {loadingScreen}
-      <Nav />
+      <ClientNav />
       <NewUserBtn />
       <AllOrders data={data} title="My Active Orders" count={data.length} />
       <Toaster

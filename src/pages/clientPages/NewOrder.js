@@ -2,14 +2,14 @@ import React from "react";
 import { Toaster } from "react-hot-toast";
 import styled from "styled-components";
 import NewOrderForm from "../../components/clientComponents/NewOrderForm";
-import Nav from "../../components/main/Nav";
+import ClientNav from "../../components/main/ClientNav";
 import Sidebar from "../../components/sidebar/sidebar";
 
 const NewOrder = () => {
   return (
     <Container>
       <Sidebar />
-      <Nav />
+      <ClientNav />
       <NewOrderForm />
       <Toaster
         position="top-center"

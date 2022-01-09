@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import styled from 'styled-components'
-import Nav from '../../components/main/Nav'
+import ClientNav from '../../components/main/ClientNav'
 import Sidebar from '../../components/sidebar/sidebar'
 import CompleteSubmissionsList from '../../components/main/users/AllOrders'
 import { getUser } from '../../services/auth'
@@ -43,7 +43,7 @@ const IncompleteSubmissions = () => {
         <Container>
             {loadingScreen}
         <Sidebar/>
-        <Nav/>
+        <ClientNav/>
         <CompleteSubmissionsList data={data} title="Orders In Progress" count={data.length}  />
     </Container>
     )

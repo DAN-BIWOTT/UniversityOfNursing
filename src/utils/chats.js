@@ -8,10 +8,26 @@ import {
   where,
 } from "firebase/firestore/lite";
 // import { ref } from "firebase/storage";
-import { onValue, getDatabase, ref, set,push } from "firebase/database";
+import { onValue, getDatabase, ref, set, push } from "firebase/database";
 
 const getChats = async (order_id) => {
   const chatRef = ref(database, "orderId/" + order_id);
+  onValue(chatRef, (snapshot) => {
+    const data = snapshot.val();
+    return data;
+  });
+};
+
+const readNotifications = async (msgObj) => {
+  const chatRef = ref(database, "Notifications/" + msgObj.order_id + "/");
+  onValue(chatRef, (snapshot) => {
+    const data = snapshot.val();
+    return data;
+  });
+};
+
+const readGeneralNotifications = async () => {
+  const chatRef = ref(database, "GeneralNotifications/");
   onValue(chatRef, (snapshot) => {
     const data = snapshot.val();
     return data;
@@ -42,47 +58,48 @@ const getChats = async (order_id) => {
 // };
 
 const sendChats = async (msgObj) => {
-  await push(ref(database, 'Chats/' + msgObj.order_id + '/'), {
-    created_at:{
+  await push(ref(database, "Chats/" + msgObj.order_id + "/"), {
+    created_at: {
       created_at: msgObj.created_at,
     },
-    sender:{
+    sender: {
       sender: msgObj.sender,
     },
-    msg:{
-      msg : msgObj.msg
-    }
+    msg: {
+      msg: msgObj.msg,
+    },
   });
   return true;
-}
+};
 const sendGeneralNotification = async (msgObj) => {
-  await push(ref(database, 'GeneralNotifications/'), {
-    created_at:{
-      created_at: msgObj.created_at,
-    },
-    sender:{
-      sender: msgObj.sender,
-    },
-    msg:{
-      msg : msgObj.msg
-    }
+  await push(ref(database, "GeneralNotifications/"), {
+    created_at: msgObj.created_at,
+    sender: msgObj.sender,
+    msg: msgObj.msg,
   });
   return true;
-}
+};
 
 const sendNotification = async (msgObj) => {
-  await push(ref(database, 'Notifications/' + msgObj.order_id + '/'), {
-    created_at:{
+  await push(ref(database, "Notifications/" + msgObj.order_id + "/"), {
+    created_at: {
       created_at: msgObj.created_at,
     },
-    sender:{
+    sender: {
       sender: msgObj.sender,
     },
-    msg:{
-      msg : msgObj.msg
-    }
+    msg: {
+      msg: msgObj.msg,
+    },
   });
   return true;
-}
+};
 
-export { getChats, sendChats, sendGeneralNotification,sendNotification };
+export {
+  getChats,
+  sendChats,
+  sendGeneralNotification,
+  sendNotification,
+  readGeneralNotifications,
+  readNotifications,
+};

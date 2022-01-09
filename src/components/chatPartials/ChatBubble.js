@@ -8,7 +8,7 @@ const ChatBubble = ({ data, direction }) => {
     hour12: true,
   })} | ${new Date(data.created_at.created_at).getDate()}/${new Date(
     data.created_at.created_at
-  ).getMonth()}/${new Date(data.created_at.created_at).getFullYear()}`;
+  ).getMonth()+1}/${new Date(data.created_at.created_at).getFullYear()}`;
 
   switch (direction) {
     case true:

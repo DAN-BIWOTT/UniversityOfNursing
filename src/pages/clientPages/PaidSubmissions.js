@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import styled from 'styled-components'
-import Nav from '../../components/main/Nav'
+import ClientNav from '../../components/main/ClientNav'
 import Sidebar from '../../components/sidebar/sidebar'
 import PaidSubmissionsList from '../../components/main/users/AllOrders'
 import { getUser } from '../../services/auth'
@@ -44,7 +44,7 @@ const PaidSubmissions = () => {
         <Container>
             {loadingScreen}
         <Sidebar/>
-        <Nav/>
+        <ClientNav/>
         <PaidSubmissionsList data={data} title="Paid Submissions" count={data.length}  />
     </Container>
     )

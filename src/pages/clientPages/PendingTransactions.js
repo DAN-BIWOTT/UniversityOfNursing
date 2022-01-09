@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import styled from 'styled-components'
-import Nav from '../../components/main/Nav'
+import ClientNav from '../../components/main/ClientNav'
 import Sidebar from '../../components/sidebar/sidebar'
 import PendingTransactionsList from '../../components/main/users/AllOrders'
 import { getUser } from '../../services/auth'
@@ -45,7 +45,7 @@ const PendingTransactions = () => {
         <Container>
             {loadingScreen}
         <Sidebar/>
-        <Nav/>
+        <ClientNav/>
         <PendingTransactionsList data={data} title="Pending Transactions" count={data.length}  />
     </Container>
     )
