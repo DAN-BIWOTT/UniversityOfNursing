@@ -1,4 +1,4 @@
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
 import MenuItem from './MenuItem'
@@ -17,7 +17,6 @@ const Menu = ({permission}) => {
                     <MenuLink to="/adminPages/OrdersInRevision"><MenuItem title="Orders in Revision" icon="cog" /></MenuLink>
                     <MenuLink to="/adminPages/AllUsers"><MenuItem title="All Users" icon="cog" /></MenuLink>
                     <MenuLink to="/adminPages/PaperBank"><MenuItem title="Paper Bank" icon="cog" /></MenuLink>
-                    <MenuLink to="#"><MenuItem title="Blog" icon="cog" /></MenuLink>
                 </Container>
             )
     

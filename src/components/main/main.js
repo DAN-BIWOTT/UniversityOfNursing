@@ -4,6 +4,8 @@ import Nav from "./Nav";
 import Users from "../main/users/Users";
 import { AdminAllNewOrders_query } from "../../graphQl/uonQueries";
 import Spinner from "../Spinner";
+import { navigate } from "gatsby";
+import { Button } from "theme-ui";
 
 const Main = () => {
     
@@ -39,10 +41,32 @@ const Main = () => {
     setPageLoader(false)
   };
 
+  const blog = (event) =>{
+    event.preventDefault();
+    const confirmationAction = window.confirm("Login Credentials as chief editor\r\n"+
+    "email: universityofnursingke@gmail.com \r\n"+
+    "Password: Alchemy_254");
+    if(confirmationAction){
+      navigate("https://www.blogger.com/blog/posts/5324359413116762170")
+    }
+  }
+
+  const generalChats = (event) =>{
+    event.preventDefault();
+    const confirmationAction = window.confirm("Login Credentials as Admin\r\n"+
+    "email: universityofnursingke@gmail.com \r\n"+
+    "Password: Alchemy_254");
+    if(confirmationAction){
+      navigate("https://dashboard.tawk.to/#/chat")
+    }
+  }
+
   return (
     <Container>
       {loadingScreen}
       <Nav />
+      <Button style={{marginBottom:"6vh"}} onClick={(event)=>{blog(event)}}>Blog</Button>
+      <Button style={{marginBottom:"6vh",marginLeft:"2rem",backgroundColor:"blueviolet"}} onClick={(event)=>{generalChats(event)}}>General Chats</Button>
       <Users data={data} title="New Orders" count={data.length} />
     </Container>
   );
