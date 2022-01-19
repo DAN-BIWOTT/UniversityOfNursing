@@ -16,7 +16,7 @@ const BlogPost = ({ post }) => {
         <Text as="p" sx={styles.excerpt}>
           {post?.excerpt}
         </Text>
-        <LearnMore path={post?.slug} label="Learn more" sx={styles.learnMore} />
+        <LearnMore path="https://uonke.blogspot.com/" label="Learn more" sx={styles.learnMore} />
       </Box>
     </Box>
   );

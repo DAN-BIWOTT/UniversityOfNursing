@@ -28,6 +28,9 @@ const Menu = ({permission}) => {
                     <MenuLink to="/clientPages/AllSubmissions"><MenuItem title="All Submissions" icon="account" active/></MenuLink>
                     <MenuLink to="/clientPages/CompleteSubmissions"><MenuItem title="Completed Orders" icon="sitemap" /></MenuLink>
                     <MenuLink to="/clientPages/IncompleteSubmissions"><MenuItem title="Orders in progress" icon="sitemap" /></MenuLink>
+                    <MenuLink to="/clientPages/RevisionSubmissions"><MenuItem title="Orders in revision" icon="sitemap" /></MenuLink>
+                    <MenuLink to="/clientPages/DisputedSubmissions"><MenuItem title="Orders in dispute" icon="sitemap" /></MenuLink>
+                    <MenuLink to="/clientPages/RejectedSubmissions"><MenuItem title="Rejected Orders" icon="sitemap" /></MenuLink>
                     <MenuLink to="/clientPages/PaidSubmissions"><MenuItem title="Paid Submissions" icon="bank" /></MenuLink>
                     <MenuLink to="/clientPages/CompleteTransactions"><MenuItem title="Complete Transactions" icon="cog" /></MenuLink>
                     <MenuLink to="/clientPages/PendingTransactions"><MenuItem title="Pending Transactions" icon="cog" /></MenuLink>

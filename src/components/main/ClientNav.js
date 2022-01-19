@@ -4,18 +4,13 @@ import Image from "../../assets/images/profile.jpg";
 import { Icon } from "@iconify/react";
 import { getUser, logout } from "../../services/auth";
 import {
-  endAt,
-  endBefore,
   onValue,
-  orderByChild,
-  query,
   ref,
-  remove,
-  startAfter,
-  startAt,
+  remove
 } from "firebase/database";
 import { database } from "../../utils/firebase";
 import toast, { Toaster } from "react-hot-toast";
+import AccountBalance from "./AccountBalance";
 
 const Nav = () => {
   useEffect(() => {
@@ -77,6 +72,7 @@ const Nav = () => {
   return (
     <Container>
       <Toaster />
+      <AccountBalance />
       <DropDown>
         <Count>{notifications.length}</Count>
         <MessageIcon
@@ -87,24 +83,25 @@ const Nav = () => {
         {notificationIsActive ? (
           <NotificationDropDownContainer>
             <NotificationDropDownList>
+                <span style={{justifyContent:"center"}}>Notifications</span>
             <MarkButton onClick={event=>eraseNotifications(event)}>Mark All As Read</MarkButton>
               <ListItem>
                 {notifications.map((data) => {
-                  return (
+                  return (<>
                     <NotificationCard key={data.created_at}>
                       <NotificationRow>
                         <NotificationTitle>
                           <p>{data.sender}</p>
                         </NotificationTitle>
+                        <NotificationBody>
+                        <p>{data.msg}</p>
+                      </NotificationBody>
                         <NotificationTime>
                           <p>{getDate(data.created_at)}</p>
                         </NotificationTime>
                       </NotificationRow>
-                      <hr />
-                      <NotificationBody>
-                        <p>{data.msg}</p>
-                      </NotificationBody>
                     </NotificationCard>
+                      <hr /></>
                   );
                 })}
               </ListItem>
@@ -185,8 +182,8 @@ const NotificationRow = styled.div`
   margin-top: 0.5rem;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 0fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
 `;
 
 const NotificationTitle = styled.div`
@@ -202,7 +199,8 @@ const NotificationTitle = styled.div`
 `;
 
 const NotificationTime = styled.div`
-  margin-bottom: -10%;
+margin-top: -1.8rem;
+padding-left: 4rem;
   p {
     font-size: clamp(0.8rem, 0.8rem, 0.8rem);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -240,7 +238,7 @@ const NotificationDropDownContainer = styled.div`
   overflow-x: hidden;
   /* width */
   ::-webkit-scrollbar {
-    width: 20px;
+    width: 5px;
   }
 
   /* Track */
@@ -262,10 +260,10 @@ const NotificationDropDownContainer = styled.div`
 `;
 
 const NotificationDropDownList = styled.ul`
-  width: 20vw;
+  width: 100%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 0;
-  margin: 0;
+  margin-top: -1rem;
   background: #ffffff;
   border: 1px solid #e5e5e5;
   box-sizing: border-box;

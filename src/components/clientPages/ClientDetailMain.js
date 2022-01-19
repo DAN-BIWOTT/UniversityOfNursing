@@ -138,7 +138,7 @@ const ClientDetailMain = ({ data, orderId }) => {
       };
       sendGeneralNotification(notification);
       setPageLoader(false)
-      toast("Request for filed", { style: { background: "#a92d2d" } });
+      toast("Request for Revision filed", { style: { background: "#a92d2d" } });
     }
   };
   const [disputeValue, setDisputeValue] = useState(0);

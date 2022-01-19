@@ -8,7 +8,7 @@ export default [
     label: 'Services',
   },
   {
-    path: 'pricing',
+    path: 'PaperBank',
     label: 'Paper Bank',
   },
   {

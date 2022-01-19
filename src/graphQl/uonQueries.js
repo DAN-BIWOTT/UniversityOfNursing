@@ -295,3 +295,45 @@ export const AdminAllUsers_query = `query AllClients {
       created_at
     }
 }`;
+
+export const ClientRevisionSubmissions_query = `query MyOrders($id: Int!) {
+  order(where: {client_id: {_eq: $id}, revision_status: {_eq: 1}}, order_by: {created_at: desc}) {
+    id
+    subject
+    pages
+    budget
+    due_time
+    price
+    topic
+    created_at
+    acceptance_status
+  }
+}`
+
+export const ClientRejectedSubmissions_query = `query MyOrders($id: Int!) {
+  order(where: {client_id: {_eq: $id}, acceptance_status: {_eq: 101}}, order_by: {created_at: desc}) {
+    id
+    subject
+    pages
+    budget
+    due_time
+    price
+    topic
+    created_at
+    acceptance_status
+  }
+}`;
+
+export const ClientDisputedSubmissions_query = `query MyOrders($id: Int!) {
+  order(where: {client_id: {_eq: $id}, dispute_status: {_eq: 1}}, order_by: {created_at: desc}) {
+    id
+    subject
+    pages
+    budget
+    due_time
+    price
+    topic
+    created_at
+    acceptance_status
+  }
+}`;

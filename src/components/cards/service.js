@@ -24,7 +24,6 @@ const styles = {
     transition: 'all 0.3s ease-in-out 0s',
     boxShadow: '0 4px 8px 0 rgba(23, 64, 225, 0.2)',
     ':hover': {
-      boxShadow: '0px 11px 30px rgba(51, 83, 145, 0.07)',
       borderColor: 'transparent',
     },
     p: {
