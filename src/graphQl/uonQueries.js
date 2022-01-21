@@ -352,3 +352,45 @@ export const MarkOrderAsPaid_query = `mutation MarkOrderAsPaid($orderId: Int!) {
     payment_status
   }
 }`;
+
+export const AcceptedOrders_query = `query AcceptedOrders {
+  order(order_by: {created_at: desc}, where: {acceptance_status: {_eq: 303}}) {
+    id
+    subject
+    pages
+    budget
+    due_time
+    price
+    topic
+    created_at
+    acceptance_status
+  }
+}`
+
+export const RejectedOrders_query = `query RejectedOrders {
+  order(order_by: {created_at: desc}, where: {acceptance_status: {_eq: 101}}) {
+    id
+    subject
+    pages
+    budget
+    due_time
+    price
+    topic
+    created_at
+    acceptance_status
+  }
+}`
+
+export const UnconfirmedOrders_query = `query UnconfirmedOrders {
+  order(order_by: {created_at: desc}, where: {_not: {acceptance_status: {_eq: 303}}, _or: {_not: {acceptance_status: {_eq: 101}}}}) {
+    id
+    subject
+    pages
+    budget
+    due_time
+    price
+    topic
+    created_at
+    acceptance_status
+  }
+}`

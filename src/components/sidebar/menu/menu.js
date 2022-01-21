@@ -10,6 +10,9 @@ const Menu = ({permission}) => {
                 <Container>
                     <MenuLink to="/admin"><MenuItem title="Home" icon="home" /></MenuLink>
                     <MenuLink to="/adminPages/AllOrders"><MenuItem title="All orders" icon="account" active/></MenuLink>
+                    <MenuLink to="/adminPages/AcceptedOrder"><MenuItem title="Accepted orders" icon="account" active/></MenuLink>
+                    <MenuLink to="/adminPages/RejectedOrders"><MenuItem title="Rejected orders" icon="account" active/></MenuLink>
+                    <MenuLink to="/adminPages/UnconfirmedOrders"><MenuItem title="Unconfirmed orders" icon="account" active/></MenuLink>
                     <MenuLink to="/adminPages/IncompleteOrders"><MenuItem title="Incomplete Orders" icon="sitemap" /></MenuLink>
                     <MenuLink to="/adminPages/CompleteOrders"><MenuItem title="Complete Orders" icon="sitemap" /></MenuLink>
                     <MenuLink to="/adminPages/PaidOrders"><MenuItem title="Paid Orders" icon="bank" /></MenuLink>
