@@ -12,7 +12,7 @@ const PendingTransactions = () => {
 
     useEffect(() => {
         getPendingTransactions()
-    }, []);
+    }, []);// eslint-disable-line react-hooks/exhaustive-deps
     const id = getUser().id
 
     const [pageLoader, setPageLoader] = useState(true);

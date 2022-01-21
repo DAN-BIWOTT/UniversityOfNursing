@@ -1,14 +1,6 @@
-import { database, db } from "./firebase";
-import {
-  collection,
-  getDocs,
-  setDoc,
-  doc,
-  query,
-  where,
-} from "firebase/firestore/lite";
-// import { ref } from "firebase/storage";
-import { onValue, getDatabase, ref, set, push } from "firebase/database";
+import { database } from "./firebase";
+
+import { onValue, ref, push } from "firebase/database";
 
 const getChats = async (order_id) => {
   const chatRef = ref(database, "orderId/" + order_id);

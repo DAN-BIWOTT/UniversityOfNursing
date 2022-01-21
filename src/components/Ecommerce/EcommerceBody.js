@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import cardBg from "../../assets/images/card.jpg";
 import AddToCart from "./AddToCart";
+import SingleProductBody from "./SingleProductBody";
 
 const EcommerceBody = () => {
   const product = [
@@ -55,12 +55,7 @@ const EcommerceBody = () => {
         {product.map((data) => {
           return (
             <PaperCard key={data.id}>
-              <PaperBody>
-                <PaperTitle>{data.title}</PaperTitle>
-                <PaperDescription>
-                  {data.description}
-                </PaperDescription>
-              </PaperBody>
+              <SingleProductBody data={data} />
               <PaperFooter>
                 <PaperPrice>${data.price}</PaperPrice>
                 <AddToCart data={data} />
@@ -93,15 +88,7 @@ const PaperCard = styled.div`
   border-radius: 5px;
   position: relative;
 `;
-const PaperBody = styled.div`
-  width: 100%;
-  height: 90%;
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url(${cardBg});
-  background-position: center;
-  background-size: 100%;
-  border-radius: 5px;
-`;
+
 
 const PaperFooter = styled.div`
   position: absolute;
@@ -112,18 +99,7 @@ const PaperFooter = styled.div`
   border-radius: 0px 0px 5px 5px;
 `;
 
-const PaperTitle = styled.h1`
-  color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serify;
-  padding-left: 2rem;
-`;
-const PaperDescription = styled.p`
-  color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  padding-left: 2rem;
-`;
+
 const PaperPrice = styled.span`
   color: #000;
   padding-left: 2rem;

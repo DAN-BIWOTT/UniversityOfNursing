@@ -1,23 +1,11 @@
 /** @jsx jsx */
 import { jsx, Box, Text, Heading } from "theme-ui";
-import { useStaticQuery, graphql } from "gatsby";
 import { rgba } from "polished";
 import Styled from "styled-components";
 import Video from "../assets/videos/travel.mp4";
 
 const Banner = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      serverRack: file(relativePath: { eq: "server-rack.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 1000) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-    }
-  `);
-
+  
   return (
     <Box as="section" id="home" sx={styles.section}>
       <HeroBg>

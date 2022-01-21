@@ -11,7 +11,7 @@ const DisputedSubmissions = () => {
     const DisputedSubmissionsQuery = ClientDisputedSubmissions_query;
     useEffect(() => {
         getDisputedSubmissions()
-    }, []);
+    }, []);// eslint-disable-line react-hooks/exhaustive-deps
     const [data, setData] = useState([])
     const [pageLoader, setPageLoader] = useState(true);
     const [loadingScreen,setLoadingScreen] = useState(<Spinner/>)

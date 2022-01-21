@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import Seo from 'components/seo';
 import Layout from 'components/layout';
 import Banner from 'sections/banner';
@@ -11,7 +11,6 @@ import PremiumFeature from 'sections/premium-feature';
 import Blog from 'sections/blog';
 import Faq from 'sections/faq';
 import Support from 'sections/support';
-import Spinner from '../components/Spinner';
 
 export default function IndexPage() {
 

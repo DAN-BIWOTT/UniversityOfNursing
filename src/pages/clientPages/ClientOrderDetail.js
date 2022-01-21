@@ -6,8 +6,7 @@ import Spinner from '../../components/Spinner'
 import { ClientOrderDetail_Query } from '../../graphQl/uonQueries'
 
 const ClientOrderDetail = ({orderId}) => {
-    const [id, setId] = useState(orderId);
-    
+    const id = orderId
     const ClientOrderDetailQuery = ClientOrderDetail_Query;
 
     const [data, setData] = useState({});
@@ -17,7 +16,7 @@ const ClientOrderDetail = ({orderId}) => {
         }else{
             getClientOrderDetails()
         }
-    }, []);
+    }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
     const [pageLoader, setPageLoader] = useState(true);
     const [loadingScreen,setLoadingScreen] = useState(<Spinner/>)

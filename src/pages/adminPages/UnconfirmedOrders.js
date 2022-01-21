@@ -11,7 +11,7 @@ const UnconfirmedOrders = () => {
 
   useEffect(() => {
     getUnconfirmedOrders();
-  }, []);
+  }, []);// eslint-disable-line react-hooks/exhaustive-deps
   const [data, setData] = useState([]);
 
   const [pageLoader, setPageLoader] = useState(true);
@@ -43,7 +43,7 @@ const UnconfirmedOrders = () => {
       <Nav />
       <UnconfirmedOrdersList
         data={data}
-        title="Accepted Orders"
+        title="Unconfirmed Orders"
         count={data.length}
       />
     </Container>

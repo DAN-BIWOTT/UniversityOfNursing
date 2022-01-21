@@ -42,8 +42,8 @@ const SearchHeader = () => {
       setImageUrl(logo1);
     }
   };
-  return (
-    <Container id="navbar">
+  return (<>
+  <Container id="navbar">
       <LogoContainer>
         <Img
           onClick={() => {
@@ -65,10 +65,23 @@ const SearchHeader = () => {
         />
       </CheckOutContainer>
     </Container>
+
+    <CartContainer>
+
+    </CartContainer>
+  </>
+    
   );
 };
 
 export default SearchHeader;
+
+const CartContainer = styled.div`
+position: fixed;
+height: 100vh;
+width: 10vw;
+right: 0;
+`
 
 const Container = styled.div`
   display: grid;

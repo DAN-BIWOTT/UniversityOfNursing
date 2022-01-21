@@ -11,7 +11,7 @@ const AllSubmissions = () => {
   const AllSubmissionsQuery = ClientAllSubmissions_query;
   useEffect(() => {
     getAllSubmissions();
-  }, []);
+  }, []);// eslint-disable-line react-hooks/exhaustive-deps
   const [data, setData] = useState([]);
   const [pageLoader, setPageLoader] = useState(true);
     const [loadingScreen,setLoadingScreen] = useState(<Spinner/>)

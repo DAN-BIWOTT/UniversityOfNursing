@@ -9,16 +9,6 @@ import { ClientRevisionSubmissions_query } from '../../graphQl/uonQueries'
 
 const RevisionSubmissions = () => {
     const RevisionSubmissionsQuery = ClientRevisionSubmissions_query;
-    useEffect(() => {
-        getRevisionSubmissions()
-    }, []);
-    const [data, setData] = useState([])
-    const [pageLoader, setPageLoader] = useState(true);
-    const [loadingScreen,setLoadingScreen] = useState(<Spinner/>)
-    useEffect(() => {
-        pageLoader?setLoadingScreen(<Spinner/>):setLoadingScreen(<></>)
-      },[pageLoader]);
-    const id = getUser().id
     const getRevisionSubmissions = async()=>{
         setPageLoader(true)
         const response = await fetch(`${process.env.GATSBY_HASURA_URI}`,{
@@ -39,6 +29,16 @@ const RevisionSubmissions = () => {
         setData(finalResp.data.order)
         setPageLoader(false);
     }
+    useEffect(()=>
+        getRevisionSubmissions()
+    , []);// eslint-disable-line react-hooks/exhaustive-deps
+    const [data, setData] = useState([])
+    const [pageLoader, setPageLoader] = useState(true);
+    const [loadingScreen,setLoadingScreen] = useState(<Spinner/>)
+    useEffect(() => {
+        pageLoader?setLoadingScreen(<Spinner/>):setLoadingScreen(<></>)
+      },[pageLoader]);
+    const id = getUser().id
     return (
         <Container>
             {loadingScreen}

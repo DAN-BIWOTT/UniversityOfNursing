@@ -11,7 +11,7 @@ const PaidSubmissions = () => {
     const PaidSubmissionsQuery = ClientPaidSubmissions_query;
     useEffect(() => {
         getPaidSubmissions()
-    }, []);
+    }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
     const [pageLoader, setPageLoader] = useState(true);
     const [loadingScreen,setLoadingScreen] = useState(<Spinner/>)
