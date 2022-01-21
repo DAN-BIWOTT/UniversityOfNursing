@@ -9,6 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 import {
   AdminStatusChange_query,
   CompleteOrderButton_query,
+  MarkOrderAsPaid_query,
 } from "../../graphQl/uonQueries";
 import Spinner from "../Spinner";
 import AdminUploadForm from "./AdminUploadForm";
@@ -144,6 +145,44 @@ const AdminDetailMain = ({ data, orderId }) => {
     }
   };
 
+  const orderPaid = async (event) =>{
+    event.preventDefault();
+    setPageLoader(true);
+    // let paymentStatusChange = event.target.value;
+    const MarkOrderAsPaidQuery = MarkOrderAsPaid_query;
+    const response = await fetch(`${process.env.GATSBY_HASURA_URI}`,{
+      method: "POST",
+      headers:{
+          "x-hasura-admin-secret":`${process.env.GATSBY_HASURA_ADMIN_SECRET}`,
+          "Content-Type":"Application/Json"
+      },
+      body: JSON.stringify({
+          query: MarkOrderAsPaidQuery,
+          variables:{
+            orderId
+          }
+      })
+  }
+  );
+  const finalRes = await response.json();
+  setPageLoader(false);
+    if(finalRes.data.update_order_by_pk.payment_status === 404){
+      toast("Order Marked as Paid Successfully!", {
+        style: {
+          background: "#1f891f",
+          color:"#fff"
+        },
+      });
+    }else{
+      toast("Order Not Marked as Paid!", {
+        style: {
+          background: "#992b2b",
+          color:"#fff"
+        },
+      });
+    }
+  }
+
   const progress_status = (event) => {
     event.preventDefault();
     setPageLoader(true);
@@ -253,6 +292,11 @@ const AdminDetailMain = ({ data, orderId }) => {
             <Li>
               <NavButton onClick={(event) => orderStatus(event)} value={202}>
                 Order Inprogress
+              </NavButton>
+            </Li>
+            <Li>
+              <NavButton onClick={(event) => orderPaid(event)} value={404}>
+                Mark Paid
               </NavButton>
             </Li>
             <Li style={{ float: "right" }}>
