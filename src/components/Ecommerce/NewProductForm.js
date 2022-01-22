@@ -5,7 +5,7 @@ import {
   NatureDropDown,
   PaperFormat,
   Subjects,
-} from "./newOrderForm.data";
+} from "../clientComponents/newOrderForm.data.js";
 import "react-input-range/lib/css/index.css";
 import { getUser } from "../../services/auth";
 import toast from "react-hot-toast";
