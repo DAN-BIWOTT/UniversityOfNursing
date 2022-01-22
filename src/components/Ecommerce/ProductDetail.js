@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import styled from "styled-components";
 import placeholderImage from "../../assets/images/placeholderImage.jpg";
 import {BiArrowBack} from "react-icons/bi";
@@ -18,7 +18,7 @@ const ProductDetail = ({ data }) => {
         <ColumnTwo>
           <Cross onClick={(event)=>toggle(event)}><BiArrowBack size={"2.5rem"}/></Cross>
           <H2>{data.title}</H2>
-          <H1>Fall Limited Edition Sneakers</H1>
+          <H1>Paper Bank Limited Edition</H1>
           <P>
             {data.description}
           </P>
