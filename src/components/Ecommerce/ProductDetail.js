@@ -1,55 +1,57 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import placeholderImage from "../../assets/images/placeholderImage.jpg";
-import {BiArrowBack} from "react-icons/bi";
+import { BiArrowBack } from "react-icons/bi";
 
 const ProductDetail = ({ data }) => {
-  const [isOpen,setIsOpen] = useState(true)
-  const toggle = (event) =>{
+  const [isOpen, setIsOpen] = useState(true);
+  const toggle = (event) => {
     event.preventDefault();
-    setIsOpen(!isOpen)
-  }
-  if(isOpen){
+    setIsOpen(!isOpen);
+  };
+  if (isOpen) {
     return (
-      <Container>
-        <ColumnOne>
-          <Image src={placeholderImage} />
-        </ColumnOne>
-        <ColumnTwo>
-          <Cross onClick={(event)=>toggle(event)}><BiArrowBack size={"2.5rem"}/></Cross>
-          <H2>{data.title}</H2>
-          <H1>Paper Bank Limited Edition</H1>
-          <P>
-            {data.description}
-          </P>
-          <Price>${data.price}</Price>
-          <CheckOut>CheckOut</CheckOut>
-        </ColumnTwo>
-      </Container>
+      <CenterContainer>
+        <Container>
+          <ColumnOne>
+            <Image src={placeholderImage} />
+          </ColumnOne>
+          <ColumnTwo>
+            <Cross onClick={(event) => toggle(event)}>
+              <BiArrowBack size={"2.5rem"} />
+            </Cross>
+            <H2>{data.title}</H2>
+            <H1>Paper Bank Limited Edition</H1>
+            <P>{data.description}</P>
+            <Price>${data.price}</Price>
+            <CheckOut>CheckOut</CheckOut>
+          </ColumnTwo>
+        </Container>
+      </CenterContainer>
     );
-  }else{
-    return(<></>);
+  } else {
+    return <></>;
   }
 };
 
 export default ProductDetail;
 const Cross = styled.div`
-cursor: pointer;
-width: 40px;
-height: 40px;
-transition: 100ms;
-:hover{
-  border-radius: 50%;
-  background: #f2f2f2;
-}
-:active{
-  border-radius: 50%;
-  background: #7d858f;
-  width: 38px;
-height: 38px;
-}
-`
-const Container = styled.div`
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  transition: 100ms;
+  :hover {
+    border-radius: 50%;
+    background: #f2f2f2;
+  }
+  :active {
+    border-radius: 50%;
+    background: #7d858f;
+    width: 38px;
+    height: 38px;
+  }
+`;
+const CenterContainer = styled.div`
   position: fixed;
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
@@ -58,22 +60,22 @@ const Container = styled.div`
   -ms-transform: translate(-50%, -50%);
   width: 100vw;
   height: 100vh;
-  margin-top: -83.6vh;
-  margin-left: -36vw;
   z-index: 900;
+  background: #fff;
+`;
+
+const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
   padding: 90px 50px;
-  background: #fff;
-
 `;
 const ColumnOne = styled.div``;
 const ColumnTwo = styled.div`
   padding: 40px;
 `;
 const Image = styled.img`
-margin-top: 22vh;
-margin-left: 30vh;
+  margin-top: 22vh;
+  margin-left: 30vh;
   height: 50vh;
   width: 50vh;
   position: absolute;
