@@ -23,7 +23,7 @@ const NewProductForm = () => {
   const [subject, setSubject] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  let files = "";
+  const [files, setFiles] = useState("");
   const [waitingButton, setWaitingButton] = useState(false);
   const newProductQuery = NewProduct_query;
   const [selectedFile, setSelectedFile] = useState("");
@@ -81,9 +81,9 @@ const NewProductForm = () => {
         style: { background: "#008000" },
       });
       setWaitingButton(false);
-      setTimeout(() => {
-        navigate(-1);
-      }, 2000);
+      // setTimeout(() => {
+      //   navigate(-1);
+      // }, 2000);
       setWaitingButton(false);
     } catch (e) {
       toast("Problem Posting Product.", { style: { background: "#DC143C" } });
@@ -101,7 +101,7 @@ const NewProductForm = () => {
       try {
         uploadBytes(fileRef, selectedFile).then((url) => {
           getDownloadURL(fileRef).then((downloadUrl) => {
-            files = downloadUrl;
+            setFiles(downloadUrl);
             files !== ""
               ? submitOrder()
               : toast("Please select file", {
@@ -125,6 +125,7 @@ const NewProductForm = () => {
           background: "#DC143C",
         },
       });
+      setWaitingButton(false)
     }
   };
 

@@ -49,6 +49,7 @@ const Container = styled.div`
   box-shadow: 2px 14px 9px 2px rgba(0, 0, 0, 0.25);
   padding: 1rem;
   border-radius: 5px;
+  width: auto;
 `;
 const Title = styled.h1`
   font-weight: 500;
