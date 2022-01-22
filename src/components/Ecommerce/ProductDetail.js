@@ -51,24 +51,21 @@ height: 38px;
 `
 const Container = styled.div`
   position: fixed;
-  z-index: 900;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-  width: 100vw;
-  height: 100vh;
-  margin: auto;
-  padding: 90px 50px;
-  background: #fff;
-  margin-top: -83.6vh;
-  margin-left: -36vw;
-
-  top: 50%;
-  left: 50%;
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  margin-top: -83.6vh;
+  margin-left: -36vw;
+  z-index: 900;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  padding: 90px 50px;
+  background: #fff;
+
 `;
 const ColumnOne = styled.div``;
 const ColumnTwo = styled.div`

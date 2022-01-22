@@ -3,7 +3,6 @@ import styled from "styled-components";
 import searchSvg from "../../assets/images/icons8-search.svg";
 import logo1 from "../../assets/images/logo.png";
 import logo2 from "../../assets/images/logo-white1.png";
-import { AiOutlineShopping } from "react-icons/ai";
 import { navigate } from "gatsby";
 
 const SearchHeader = () => {
@@ -57,13 +56,6 @@ const SearchHeader = () => {
       <SearchContainer>
         <Input placeholder="Search for..." />
       </SearchContainer>
-      <CheckOutContainer>
-        <Span>{cartCount}</Span>
-        <AiOutlineShopping
-          size={"6vh"}
-          style={{ position: "absolute", left: "50%", top: "50%" }}
-        />
-      </CheckOutContainer>
     </Container>
 
     <CartContainer>
