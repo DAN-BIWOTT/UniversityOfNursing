@@ -44,7 +44,7 @@ const User = ({ data }) => {
       </UserWrapper>
       <UserWrapper>
         <Text>{due_time}</Text>
-        <Subtitle style={{fontSize:"1rem!important;"}}>
+        <Subtitle style={{fontSize:"16px !important"}}>
         <Countdown date={due_time} >
           <p style={{color:"red"}}>Overdue</p>
         </Countdown>
