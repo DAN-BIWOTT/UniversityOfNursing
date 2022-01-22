@@ -2,6 +2,7 @@ import { Link } from "gatsby";
 import React,{useState} from "react";
 import styled from "styled-components";
 import AdminOrderDetail from "../../../pages/adminPages/AdminOrderDetail";
+import Countdown from 'react-countdown';
 
 const User = ({ data }) => {
 
@@ -42,7 +43,9 @@ const User = ({ data }) => {
       </UserWrapper>
       <UserWrapper>
         <Text>{due_time}</Text>
-        <Subtitle>From: {date}</Subtitle>
+        <Subtitle>
+        <Countdown date={Date.now() + 1000000} />
+        </Subtitle>
       </UserWrapper>
       <UserWrapper>
       <Status>
