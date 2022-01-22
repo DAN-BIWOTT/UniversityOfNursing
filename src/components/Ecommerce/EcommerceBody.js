@@ -22,7 +22,11 @@ const EcommerceBody = () => {
         }
         );
         const finalResp = await response.json();
+        console.log(finalResp)
+        console.log(finalResp.data)
+        console.log(finalResp.data.products)
         setProduct(finalResp.data.products)
+        console.log(product)
     }
   return (
     <Container>
