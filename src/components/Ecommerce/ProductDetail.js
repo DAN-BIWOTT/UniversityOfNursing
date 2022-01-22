@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import placeholderImage from "../../assets/images/placeholderImage.jpg";
 import { BiArrowBack } from "react-icons/bi";
+import CheckOutButton from "./CheckOutButton";
 
 const ProductDetail = ({ data }) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -24,7 +25,7 @@ const ProductDetail = ({ data }) => {
             <H1>Paper Bank Limited Edition</H1>
             <P>{data.description}</P>
             <Price>${data.price}</Price>
-            <CheckOut>CheckOut</CheckOut>
+            <CheckOutButton product={data} />
           </ColumnTwo>
         </Container>
       </CenterContainer>
