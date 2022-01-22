@@ -10,7 +10,6 @@ import {
 } from "firebase/database";
 import { database } from "../../utils/firebase";
 import toast, { Toaster } from "react-hot-toast";
-import AccountBalance from "./AccountBalance";
 
 const Nav = () => {
   useEffect(() => {
@@ -72,7 +71,6 @@ const Nav = () => {
   return (
     <Container>
       <Toaster />
-      <AccountBalance />
       <DropDown>
         <Count>{notifications.length}</Count>
         <MessageIcon

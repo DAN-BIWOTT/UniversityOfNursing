@@ -145,12 +145,14 @@ const ClientDetailMain = ({ data, orderId }) => {
   const disputeButton = (event) => {
     event.preventDefault();
     setDisputeValue(1);
-    if(disputeValue === 1)changeDisputeStatus();
+    let ConfirmWithClient = window.confirm("Are You Sure You Want To Change Dispute Status?")
+    if(disputeValue === 1 && ConfirmWithClient)changeDisputeStatus();
   };
   const revisionButton = (event) => {
     event.preventDefault();
+    let ConfirmWithClient = window.confirm("Are You Sure You Want To Change Dispute Status?")
     setRevisionValue(1);
-    if(revisionValue === 1)changeRevisionStatus();
+    if(revisionValue === 1 && ConfirmWithClient)changeRevisionStatus();
   };
   // payment processing
   const [waitingButton, setWaitingButton] = useState(false);

@@ -393,4 +393,10 @@ export const UnconfirmedOrders_query = `query UnconfirmedOrders {
     created_at
     acceptance_status
   }
-}`
+}`;
+
+export const GetTotalBalance_query = `query TotalBalance {
+  transaction(order_by: {created_at: asc}) {
+    amount
+  }
+}`;

@@ -2,23 +2,15 @@
 import { jsx, Box, Container } from 'theme-ui';
 import SectionHeading from 'components/section-heading';
 import Service from 'components/cards/service';
-
-const services = [
-  {
-    title: 'Pre-assignment guidance'
-  },
-  {
-    title: 'Post-assignment guidance'
-  }
-];
+import { services } from './services.data';
 
 const Services = () => {
   return (
     <Box as="section" id="services" sx={styles.section}>
       <Container>
         <SectionHeading
-          slogan="Developing Future Nurses"
-          title="Nursing insights, essay help and support tools to help future nurses gain confidence and experience nursing thrive."
+          slogan="University of nursing is "
+          title="A team of professional tutors with over five years experience and expertise in BSN, MSN, APRN, & DNP programs especially in UK, Australia, Canada, and USA."
         />
         <Box sx={styles.grid}>
           {services.map((service, i) => (
