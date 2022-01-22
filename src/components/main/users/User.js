@@ -3,6 +3,7 @@ import React,{useState} from "react";
 import styled from "styled-components";
 import AdminOrderDetail from "../../../pages/adminPages/AdminOrderDetail";
 import Countdown from 'react-countdown';
+import AccountBalance from "../AccountBalance";
 
 const User = ({ data }) => {
 
@@ -19,8 +20,9 @@ const User = ({ data }) => {
   }
 
  if(!orderIdSet){
-   return(
+   return( 
     <Container>
+      <AccountBalance />
       <Property>
         <PropertyImg src="https://images.pexels.com/photos/3866555/pexels-photo-3866555.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
         <PropertyText>
@@ -43,7 +45,7 @@ const User = ({ data }) => {
       </UserWrapper>
       <UserWrapper>
         <Text>{due_time}</Text>
-        <Subtitle>
+        <Subtitle style={{fontSize:"1rem!important;"}}>
         <Countdown date={due_time} >
           <p style={{color:"red"}}>Overdue</p>
         </Countdown>
@@ -91,7 +93,7 @@ const Text = styled.h1`
 `;
 
 const Subtitle = styled(Text)`
-  font-size: 1rem;
+  font-size: 0.6rem;
   color: #b2bfe1;
   margin-top: 2px;
 `;

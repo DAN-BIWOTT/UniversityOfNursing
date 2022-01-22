@@ -26,7 +26,7 @@ const AccountBalance = () => {
     return (
 
         <Text>
-            Account Balance: 30$
+            Amount Received: 30$
         </Text>
     )
 }
