@@ -19,10 +19,11 @@ const AccountBalance = () => {
           const finalRes = await response.json();
           let tempAmount = []
           for(var amount in finalRes.data.transaction){
+            console.log(amount)
             tempAmount.push(amount[amount])
           }
           setTotalAmount(tempAmount.reduce((a, b) => a + b, 0))
-          console.log(tempAtempAmount.reduce((a, b) => a + b, 0));
+          console.log(tempAmount.reduce((a, b) => a + b, 0));
     }
     useEffect(() => {
       GetTotalBalance();
