@@ -417,9 +417,9 @@ export const AllTransactions_query = `query MyQuery {
   }
 }`
 
-export const NewProduct_query = `mutation NewProduct($description: String, $fileName: String, $files: String, $nature: String, $pages: String, $paperFormat: String, $price: Int!, $spacing: String, $subject: String, $title: String) {
-  insert_product_one(object: {admin_id: 10, description: $description, fileName: $fileName, files: $files, nature: $nature, pages: $pages, paperFormat: $paperFormat, price: $price, spacing: $spacing, subject: $subject, title: $title}) {
-    id
+export const NewProduct_query = `mutation NewProduct ($description: String, $fileName: String, $files: String, $nature: String, $pages: String, $paperFormat: String, $price: Int!, $spacing: String, $subject: String, $title: String) {
+  insert_product(objects: { description: $description, fileName: $fileName, files: $files, nature: $nature, pages: $pages, paperFormat: $paperFormat, price: $price, spacing: $spacing, subject: $subject, title: $title}) {
+    affected_rows
   }
 }`
 

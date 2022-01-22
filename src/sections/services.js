@@ -33,7 +33,7 @@ const styles = {
     gap: [3, null, null, 4],
     display: "grid",
     justifyContent: "center",
-    gridTemplateColumns: ["repeat(3, 1fr)"],
+    gridTemplateColumns: ["repeat(5, 1fr)"],
     "@media only screen and (max-width: 768px)": {
       gridTemplateColumns: ["repeat(2, 1fr)"],
     },

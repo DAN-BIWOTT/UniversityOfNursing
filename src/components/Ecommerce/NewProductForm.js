@@ -81,9 +81,9 @@ let files="";
         style: { background: "#008000" },
       });
       setWaitingButton(false);
-      // setTimeout(() => {
-      //   navigate(-1);
-      // }, 2000);
+      setTimeout(() => {
+        navigate(-1);
+      }, 2000);
       setWaitingButton(false);
     } catch (e) {
       toast("Problem Posting Product.", { style: { background: "#DC143C" } });
