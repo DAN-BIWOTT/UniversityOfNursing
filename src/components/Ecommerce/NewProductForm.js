@@ -23,7 +23,7 @@ const NewProductForm = () => {
   const [subject, setSubject] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [files, setFiles] = useState("");
+let files="";
   const [waitingButton, setWaitingButton] = useState(false);
   const newProductQuery = NewProduct_query;
   const [selectedFile, setSelectedFile] = useState("");
@@ -100,7 +100,7 @@ const NewProductForm = () => {
       try {
         uploadBytes(fileRef, selectedFile).then((url) => {
           getDownloadURL(fileRef).then((downloadUrl) => {
-            setFiles(downloadUrl);
+            files = downloadUrl;
             console.log(downloadUrl)
             console.log(files)
             files !== ""
