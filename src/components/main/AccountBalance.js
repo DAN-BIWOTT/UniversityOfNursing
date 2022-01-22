@@ -19,9 +19,7 @@ const AccountBalance = () => {
           const finalRes = await response.json();
           let tempAmount = []
           for(var amount in finalRes.data.transaction){
-            tempAmount.push(finalRes.data.transaction[amount].amount)
-            console.log(finalRes.data.transaction)
-            console.log(finalRes.data.transaction[amount])
+            tempAmount.push(parseFloat(finalRes.data.transaction[amount].amount))
             console.log(finalRes.data.transaction[amount].amount)
 
           }
