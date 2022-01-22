@@ -7,29 +7,25 @@ import {
   Subjects,
 } from "../clientComponents/newOrderForm.data.js";
 import "react-input-range/lib/css/index.css";
-import { getUser } from "../../services/auth";
 import toast from "react-hot-toast";
 import Loader from "react-loader-spinner";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../../utils/firebase";
-import { NewOrderForm_query } from "../../graphQl/uonQueries";
+import { NewProduct_query } from "../../graphQl/uonQueries";
 import { navigate } from "gatsby";
-import { sendGeneralNotification } from "../../utils/chats";
 
 const NewProductForm = () => {
   const [price, setPrice] = useState("");
   const [paperFormat, setPaperFormat] = useState("");
   const [nature, setNature] = useState("");
   const [pages, setPages] = useState("");
-  const [deadline, setDeadline] = useState("");
   const [spacing, setSpacing] = useState("");
   const [subject, setSubject] = useState("");
-  const [topic, setTopic] = useState("");
+  const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   let files = "";
   const [waitingButton, setWaitingButton] = useState(false);
-  const client_id = getUser().id;
-  const orderFormQuery = NewOrderForm_query;
+  const newProductQuery = NewProduct_query;
   const [selectedFile, setSelectedFile] = useState("");
 
   const emptyFields = () => {
@@ -39,7 +35,7 @@ const NewProductForm = () => {
       nature === "" ||
       pages === "" ||
       subject === "" ||
-      topic === "" ||
+      title === "" ||
       description === ""
     )
       return true;
@@ -62,16 +58,15 @@ const NewProductForm = () => {
         "Content-Type": "Application/Json",
       },
       body: JSON.stringify({
-        query: orderFormQuery,
+        query: newProductQuery,
         variables: {
-          client_id,
           price,
           paperFormat,
           nature,
           pages,
           spacing,
           subject,
-          topic,
+          title,
           description,
           files,
           fileName,
@@ -82,16 +77,8 @@ const NewProductForm = () => {
     try {
       const finalRes = await response.json();
       console.log(finalRes);
-      notification.created_at = Date.now();
-      notification.sender = "client";
-      notification.order_id = finalRes.data.insert_product_one.id;
-      notification.msg = "New order received: ".concat(
-        finalRes.data.insert_product_one.id
-      );
-      console.log(notification);
-      sendGeneralNotification(notification);
       toast("Product has been posted.", {
-        style: { background: "#00FF00" },
+        style: { background: "#008000" },
       });
       setWaitingButton(false);
       setTimeout(() => {
@@ -143,7 +130,7 @@ const NewProductForm = () => {
 
   return (
     <Container>
-      <Title>Add Order</Title>
+      <Title>Add Product</Title>
       <form onSubmit={handleSubmit}>
         <RowGrid>
           <ColumnGrid>
@@ -204,16 +191,6 @@ const NewProductForm = () => {
               value={pages}
             />
           </ColumnGrid>
-          <ColumnGrid>
-            <Label>*Deadline: </Label>
-            <Input
-              type="datetime-local"
-              onChange={(event) => {
-                setDeadline(event.target.value);
-              }}
-              value={deadline}
-            />
-          </ColumnGrid>
 
           <ColumnGrid>
             <Label>Spacing: </Label>
@@ -253,13 +230,13 @@ const NewProductForm = () => {
         </RowGrid>
 
         <ColumnGrid>
-          <Label>*Topic: </Label>
+          <Label>*Title: </Label>
           <Input
             placeholder="EXAMPLE: Introductory Physiology"
             onChange={(event) => {
-              setTopic(event.target.value);
+              setTitle(event.target.value);
             }}
-            value={topic}
+            value={title}
           />
         </ColumnGrid>
 

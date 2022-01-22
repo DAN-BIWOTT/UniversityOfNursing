@@ -15,7 +15,15 @@ const TransactionMain = ({ data,title, count }) => {
          <tbody>
              {data.map((info)=>{
              <tr>
-                 <td>{info.amount}</td>
+                 <td>{info[amount]}</td>
+                 <td>{info[client_id]}</td>
+                 <td>{info[created_at]}</td>
+                 <td>{info[currency_code]}</td>
+                 <td>{info[email_address]}</td>
+                 <td>{info[order_id]}</td>
+                 <td>{info[receipt]}</td>
+                 <td>{info[status]}</td>
+                 
              </tr>
              })}
          </tbody>
