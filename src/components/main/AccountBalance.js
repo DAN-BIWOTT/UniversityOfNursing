@@ -1,9 +1,10 @@
-import React,{useEffect} from 'react'
+import React,{useState,useEffect} from 'react'
 import styled from 'styled-components'
 import { GetTotalBalance_query } from '../../graphQl/uonQueries'
 
 const AccountBalance = () => {
     const GetTotalBalanceQuery = GetTotalBalance_query;
+    let [totalAmount,setTotalAmount] = useState(0);
     const GetTotalBalance = async() => {
         const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
             method: "POST",
@@ -16,7 +17,8 @@ const AccountBalance = () => {
             }),
           });
           const finalRes = await response.json();
-          console.log(finalRes.data.transaction);
+          setTotalAmount(finalRes.data.transaction.reduce((a, b) => a + b, 0))
+          console.log(finalRes.data.transaction.reduce((a, b) => a + b, 0));
     }
     useEffect(() => {
       GetTotalBalance();
@@ -26,7 +28,7 @@ const AccountBalance = () => {
     return (
 
         <Text>
-            Amount Received: 30$
+            Amount Received: {totalAmount}$
         </Text>
     )
 }

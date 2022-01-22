@@ -22,7 +22,6 @@ const User = ({ data }) => {
  if(!orderIdSet){
    return( 
     <Container>
-      <AccountBalance />
       <Property>
         <PropertyImg src="https://images.pexels.com/photos/3866555/pexels-photo-3866555.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
         <PropertyText>

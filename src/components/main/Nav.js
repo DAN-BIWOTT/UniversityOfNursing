@@ -75,6 +75,7 @@ const Nav = () => {
 
   return (
     <Container>
+      <AccountBalance />
       <Toaster />
       <DropDown>
         <Count>{notifications.length}</Count>
