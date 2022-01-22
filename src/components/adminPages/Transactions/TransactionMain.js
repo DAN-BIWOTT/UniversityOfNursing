@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
-
+import "./TransactionMain.css";
 const TransactionMain = ({ data,title, count }) => {
     console.log(data)
   return (
@@ -8,7 +8,7 @@ const TransactionMain = ({ data,title, count }) => {
       <Title>
         {title} <UserCount> {count}</UserCount>
       </Title>
-     <table>
+     <table id="transaction">
          <thead>
              <th>Amount</th>
              <th>Client Id</th>
@@ -20,7 +20,7 @@ const TransactionMain = ({ data,title, count }) => {
              <th>Status</th>
          </thead>
          <tbody>
-             {data.map((info)=>{
+             {data.map((info)=>{{console.log(info.amount)}
              <tr>
                  <td>{info.amount}</td>
                  <td>{info.client_id}</td>
