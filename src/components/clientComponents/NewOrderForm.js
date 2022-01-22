@@ -246,7 +246,7 @@ const NewOrderForm = () => {
           <ColumnGrid>
             <Label>*Deadline: </Label>
             <Input
-              placeholder="EXAMPLE: 4 Days, 2 Hours"
+            type="datetime-local"
               onChange={(event) => {
                 setDeadline(event.target.value);
               }}

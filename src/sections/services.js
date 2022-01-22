@@ -34,7 +34,7 @@ const styles = {
     display: 'grid',
     justifyContent: 'center',
     gridTemplateColumns: [
-      'repeat(1fr, 1fr, 1fr)',
+      'repeat(3, 1fr)',
       ],
   },
 };
