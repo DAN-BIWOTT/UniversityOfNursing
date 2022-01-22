@@ -53,11 +53,10 @@ const Cross = styled.div`
 `;
 const CenterContainer = styled.div`
   position: fixed;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
   width: 100vw;
   height: 100vh;
   z-index: 900;
@@ -68,6 +67,7 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
   padding: 90px 50px;
+  margin: auto;
 `;
 const ColumnOne = styled.div``;
 const ColumnTwo = styled.div`

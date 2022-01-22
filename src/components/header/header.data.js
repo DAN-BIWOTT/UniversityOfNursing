@@ -12,7 +12,7 @@ export default [
     label: 'Paper Bank',
   },
   {
-    path: 'blog',
+    path: 'UonBlog',
     label: 'Blog',
   },
   {

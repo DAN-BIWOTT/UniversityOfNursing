@@ -17,7 +17,7 @@ export function NavLink({ path, label, children, ...rest }) {
         {label}
       </Link>
     );
-  } else if (path === "Blog") {
+  } else if (path === "UonBlog") {
     return (
       <Link
         to="https://uonke.blogspot.com/"
