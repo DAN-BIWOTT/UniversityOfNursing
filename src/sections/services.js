@@ -1,8 +1,8 @@
 /** @jsx jsx */
-import { jsx, Box, Container } from 'theme-ui';
-import SectionHeading from 'components/section-heading';
-import Service from 'components/cards/service';
-import { services } from './services.data';
+import { jsx, Box, Container } from "theme-ui";
+import SectionHeading from "components/section-heading";
+import Service from "components/cards/service";
+import { services } from "./services.data";
 
 const Services = () => {
   return (
@@ -31,10 +31,11 @@ const styles = {
   },
   grid: {
     gap: [3, null, null, 4],
-    display: 'grid',
-    justifyContent: 'center',
-    gridTemplateColumns: [
-      'repeat(3, 1fr)',
-      ],
+    display: "grid",
+    justifyContent: "center",
+    gridTemplateColumns: ["repeat(3, 1fr)"],
+    "@media only screen and (max-width: 768px)": {
+      gridTemplateColumns: ["repeat(2, 1fr)"],
+    },
   },
 };

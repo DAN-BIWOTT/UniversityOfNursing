@@ -91,7 +91,6 @@ const NewProductForm = () => {
     }
   };
 
-  // uploadFile(selectedFile);
   const handleSubmit = async (event) => {
     event.preventDefault();
     setWaitingButton(true);
@@ -102,6 +101,7 @@ const NewProductForm = () => {
         uploadBytes(fileRef, selectedFile).then((url) => {
           getDownloadURL(fileRef).then((downloadUrl) => {
             setFiles(downloadUrl);
+            console.log(downloadUrl)
             console.log(files)
             files !== ""
               ? submitOrder()

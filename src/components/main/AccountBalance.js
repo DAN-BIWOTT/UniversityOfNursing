@@ -20,11 +20,8 @@ const AccountBalance = () => {
           let tempAmount = []
           for(var amount in finalRes.data.transaction){
             tempAmount.push(parseFloat(finalRes.data.transaction[amount].amount))
-            console.log(finalRes.data.transaction[amount].amount)
-
           }
           setTotalAmount(tempAmount.reduce((a, b) => a + b, 0))
-          console.log(tempAmount.reduce((a, b) => a + b, 0));
     }
     useEffect(() => {
       GetTotalBalance();
