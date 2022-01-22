@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { loadScript } from "@paypal/paypal-js";
 import { getUser } from "../../services/auth.js";
-import { SaveTransaction_query } from "../../graphQl/uonQueries.js";
+import { SavePurchase_query, SaveTransaction_query } from "../../graphQl/uonQueries.js";
 
 const CheckOutButton = ({ product }) => {
   const [paidFor, setPaidFor] = useState(false);

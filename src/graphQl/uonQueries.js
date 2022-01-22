@@ -431,3 +431,5 @@ export const AllProducts_query = `query AllProducts {
     description
   }
 }`
+
+export const SavePurchase_query = ``
