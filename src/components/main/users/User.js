@@ -44,7 +44,9 @@ const User = ({ data }) => {
       <UserWrapper>
         <Text>{due_time}</Text>
         <Subtitle>
-        <Countdown date={Date.now() + 1000000} />
+        <Countdown date={due_time} >
+          <p style={{color:"red"}}>Overdue</p>
+        </Countdown>
         </Subtitle>
       </UserWrapper>
       <UserWrapper>
@@ -89,7 +91,7 @@ const Text = styled.h1`
 `;
 
 const Subtitle = styled(Text)`
-  font-size: 0.6rem;
+  font-size: 1rem;
   color: #b2bfe1;
   margin-top: 2px;
 `;
