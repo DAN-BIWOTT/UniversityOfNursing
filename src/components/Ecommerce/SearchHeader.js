@@ -12,16 +12,7 @@ const SearchHeader = () => {
       window.removeEventListener("scroll", resizeHeaderOnScroll);
     };
   }, []);
-  const [cartCount, setCartCount] = useState(0);
-  useEffect(() => {
-    cartCountFunc();
-  } ,[cartCount]);
-  const cartCountFunc = () => {
-    var retrievedCart = localStorage.getItem("UON_Cart") != null ?localStorage.getItem("UON_Cart"):"";
-    const cart = retrievedCart.split("|")
-    console.log(cart.length);
-    setCartCount(cart.length);
-  };
+
   const [imageUrl, setImageUrl] = useState(logo1);
   const resizeHeaderOnScroll = () => {
     const distanceY = window.pageYOffset || document.documentElement.scrollTop,

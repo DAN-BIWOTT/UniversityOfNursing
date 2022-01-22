@@ -19,6 +19,7 @@ const Menu = ({permission}) => {
                     <MenuLink to="/adminPages/DisputedOrders"><MenuItem title="Disputed Orders" icon="cog" /></MenuLink>
                     <MenuLink to="/adminPages/OrdersInRevision"><MenuItem title="Orders in Revision" icon="cog" /></MenuLink>
                     <MenuLink to="/adminPages/AllUsers"><MenuItem title="All Users" icon="cog" /></MenuLink>
+                    <MenuLink to="/adminPages/TransactionRecords"><MenuItem title="Transaction Records" icon="cog" /></MenuLink>
                     <MenuLink to="/adminPages/PaperBank"><MenuItem title="Paper Bank" icon="cog" /></MenuLink>
                 </Container>
             )

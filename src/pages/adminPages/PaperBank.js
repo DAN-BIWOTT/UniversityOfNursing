@@ -8,6 +8,7 @@ const PaperBank = () => {
         <Container>
             <Sidebar permission="admin"/>
             <Nav/>
+            <NewProductForm />
         </Container>
     )
 }
