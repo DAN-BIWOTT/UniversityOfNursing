@@ -16,7 +16,7 @@ import { NewOrderForm_query } from "../../graphQl/uonQueries";
 import { navigate } from "gatsby";
 import { sendGeneralNotification } from "../../utils/chats";
 
-const NewOrderForm = () => {
+const NewProductForm = () => {
   const [price, setPrice] = useState("");
   const [paperFormat, setPaperFormat] = useState("");
   const [nature, setNature] = useState("");
@@ -301,7 +301,7 @@ const NewOrderForm = () => {
   );
 };
 
-export default NewOrderForm;
+export default NewProductForm;
 
 const Container = styled.div`
   display: block;

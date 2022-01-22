@@ -400,3 +400,19 @@ export const GetTotalBalance_query = `query TotalBalance {
     amount
   }
 }`;
+
+export const AllTransactions_query = `query MyQuery {
+  transaction(order_by: {created_at: asc}) {
+    amount
+    client_id
+    created_at
+    currency_code
+    description
+    email_address
+    order_id
+    id
+    receipt
+    status
+    user_id
+  }
+}`

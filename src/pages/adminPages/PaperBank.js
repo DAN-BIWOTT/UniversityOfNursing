@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Nav from '../../components/main/Nav'
 import Sidebar from '../../components/sidebar/sidebar'
+import NewProductForm from '../../components/Ecommerce/NewProductForm.js'
 
 const PaperBank = () => {
     return (

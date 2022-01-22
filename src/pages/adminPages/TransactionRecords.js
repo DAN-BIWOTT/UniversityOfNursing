@@ -25,7 +25,7 @@ const TransactionRecords = () => {
     });
 
     const finalResp = await response.json();
-    setData(finalResp.data.client);
+    setData(finalResp.data.transaction);
   };
 
   return (
