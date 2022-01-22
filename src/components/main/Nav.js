@@ -4,18 +4,13 @@ import Image from "../../assets/images/profile.jpg";
 import { Icon } from "@iconify/react";
 import { logout } from "../../services/auth";
 import {
-  endAt,
-  endBefore,
   onValue,
-  orderByChild,
-  query,
   ref,
-  remove,
-  startAfter,
-  startAt,
+  remove
 } from "firebase/database";
 import { database } from "../../utils/firebase";
 import toast, { Toaster } from "react-hot-toast";
+import AccountBalance from "./AccountBalance";
 
 const Nav = () => {
   useEffect(() => {
