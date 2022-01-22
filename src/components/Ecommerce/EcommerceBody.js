@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import AddToCart from "./AddToCart";
 import SingleProductBody from "./SingleProductBody";
 
 const EcommerceBody = () => {
@@ -58,7 +57,6 @@ const EcommerceBody = () => {
               <SingleProductBody data={data} />
               <PaperFooter>
                 <PaperPrice>${data.price}</PaperPrice>
-                <AddToCart data={data} />
               </PaperFooter>
             </PaperCard>
           );

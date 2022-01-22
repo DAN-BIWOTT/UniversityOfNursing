@@ -44,11 +44,11 @@ const User = ({ data }) => {
       </UserWrapper>
       <UserWrapper>
         <Text>{due_time}</Text>
-        <Subtitle style={{fontSize:"16px !important"}}>
+        <SubtitleOverdue>
         <Countdown date={due_time} >
           <p style={{color:"red"}}>Overdue</p>
         </Countdown>
-        </Subtitle>
+        </SubtitleOverdue>
       </UserWrapper>
       <UserWrapper>
       <Status>
@@ -93,6 +93,12 @@ const Text = styled.h1`
 
 const Subtitle = styled(Text)`
   font-size: 0.6rem;
+  color: #b2bfe1;
+  margin-top: 2px;
+`;
+
+const SubtitleOverdue = styled(Text)`
+  font-size: 1rem;
   color: #b2bfe1;
   margin-top: 2px;
 `;

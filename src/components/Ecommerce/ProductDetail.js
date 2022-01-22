@@ -61,6 +61,14 @@ const Container = styled.div`
   background: #fff;
   margin-top: -83.6vh;
   margin-left: -36vw;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
 `;
 const ColumnOne = styled.div``;
 const ColumnTwo = styled.div`
