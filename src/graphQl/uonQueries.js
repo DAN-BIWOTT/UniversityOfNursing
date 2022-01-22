@@ -422,3 +422,12 @@ export const NewProduct_query = `mutation NewProduct($description: String, $file
     id
   }
 }`
+
+export const AllProducts_query = `query AllProducts {
+  product(order_by: {id: desc}) {
+    id
+    price
+    title
+    description
+  }
+}`

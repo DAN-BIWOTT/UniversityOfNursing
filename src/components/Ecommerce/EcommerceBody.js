@@ -1,52 +1,29 @@
 import React from "react";
 import styled from "styled-components";
+import { AllProducts_query } from "../../graphQl/uonQueries";
 import SingleProductBody from "./SingleProductBody";
 
 const EcommerceBody = () => {
-  const product = [
-    {
-      id: Math.floor((Math.random()*100)/1),
-      title: "Nursing Specifics",
-      description:
-        "A detailed research paper on the intricacies of nursing and a handful of useful esoteric ER tips.",
-      price: 40,
-    },
-    {
-      id: Math.floor((Math.random()*100)/1),
-      title: "Nursing Specifics",
-      description:
-        "A detailed research paper on the intricacies of nursing and a handful of useful esoteric ER tips.",
-      price: 40,
-    },
-    {
-      id: Math.floor((Math.random()*100)/1),
-      title: "Nursing Specifics",
-      description:
-        "A detailed research paper on the intricacies of nursing and a handful of useful esoteric ER tips.",
-      price: 40,
-    },
-    {
-      id: Math.floor((Math.random()*100)/1),
-      title: "Nursing Specifics",
-      description:
-        "A detailed research paper on the intricacies of nursing and a handful of useful esoteric ER tips.",
-      price: 40,
-    },
-    {
-      id: Math.floor((Math.random()*100)/1),
-      title: "Nursing Specifics",
-      description:
-        "A detailed research paper on the intricacies of nursing and a handful of useful esoteric ER tips.",
-      price: 40,
-    },
-    {
-      id: Math.floor((Math.random()*100)/1),
-      title: "Nursing Specifics",
-      description:
-        "A detailed research paper on the intricacies of nursing and a handful of useful esoteric ER tips.",
-      price: 40,
-    },
-  ];
+  const AllOProductsQuery = AllProducts_query;
+    useEffect(() => {
+        getAllOrders()
+    }, []);
+    const [product, setProduct] = useState([])
+    const getAllOrders = async()=>{
+        const response = await fetch(`${process.env.GATSBY_HASURA_URI}`,{
+            method:"POST",
+            headers:{
+                "x-hasura-admin-secret":`${process.env.GATSBY_HASURA_ADMIN_SECRET}`,
+                "Content-Type":"Application/Json"
+            },
+            body: JSON.stringify({
+                query: AllOProductsQuery,
+            })
+        }
+        );
+        const finalResp = await response.json();
+        setProduct(finalResp.data.products)
+    }
   return (
     <Container>
       <HeaderSpan>All Papers</HeaderSpan>

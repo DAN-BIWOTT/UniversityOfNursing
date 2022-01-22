@@ -102,6 +102,7 @@ const NewProductForm = () => {
         uploadBytes(fileRef, selectedFile).then((url) => {
           getDownloadURL(fileRef).then((downloadUrl) => {
             setFiles(downloadUrl);
+            console.log(files)
             files !== ""
               ? submitOrder()
               : toast("Please select file", {
