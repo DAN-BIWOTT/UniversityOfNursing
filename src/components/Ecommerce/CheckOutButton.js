@@ -51,7 +51,7 @@ const CheckOutButton = ({ product }) => {
   }, []);
   const SavePurchaseQuery = SavePurchase_query;
  
-    let userId= parseInt(getUser().id) ;
+    let userId= 01 ;
     let orderId= parseInt(product.id);
     let clientId= parseInt(product.client_id);
     let transaction_status= "";
@@ -100,8 +100,8 @@ const CheckOutButton = ({ product }) => {
   if (paidFor) {
     return (
       <div>
-        <h1>Congrats, you just paid for order: {product.name}!</h1>
-        <p>{product.description}</p>
+        <h1>Congrats, you just paid for product: {product.title}!</h1>
+        <button>Download</button>
       </div>
     );
   }
@@ -109,10 +109,6 @@ const CheckOutButton = ({ product }) => {
   return (
     <div>
       {error && <div>Uh oh, an error occurred! {error.message}</div>}
-      <h1>
-        {product.subject} for ${product.price}
-      </h1>
-      <p> {product.topic}</p>
       <div ref={paypalRef} />
     </div>
   );

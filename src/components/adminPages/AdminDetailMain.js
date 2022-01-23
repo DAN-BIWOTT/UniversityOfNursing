@@ -145,43 +145,48 @@ const AdminDetailMain = ({ data, orderId }) => {
     }
   };
 
-  const orderPaid = async (event) =>{
+  const orderPaid = async (event) => {
     event.preventDefault();
     setPageLoader(true);
     // let paymentStatusChange = event.target.value;
     const MarkOrderAsPaidQuery = MarkOrderAsPaid_query;
-    const response = await fetch(`${process.env.GATSBY_HASURA_URI}`,{
+    const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
-      headers:{
-          "x-hasura-admin-secret":`${process.env.GATSBY_HASURA_ADMIN_SECRET}`,
-          "Content-Type":"Application/Json"
+      headers: {
+        "x-hasura-admin-secret": `${process.env.GATSBY_HASURA_ADMIN_SECRET}`,
+        "Content-Type": "Application/Json",
       },
       body: JSON.stringify({
-          query: MarkOrderAsPaidQuery,
-          variables:{
-            orderId
-          }
-      })
-  }
-  );
-  const finalRes = await response.json();
-  setPageLoader(false);
-    if(finalRes.data.update_order_by_pk.payment_status === 404){
+        query: MarkOrderAsPaidQuery,
+        variables: {
+          orderId,
+        },
+      }),
+    });
+    const finalRes = await response.json();
+    setPageLoader(false);
+    if (finalRes.data.update_order_by_pk.payment_status === 404) {
+      notification.clientId = clientId;
+      notification.orderId = orderId;
+      notification.created_at = Date.now();
+      notification.sender = `From Admin`;
+      notification.msg = `Order: ${orderId} Is Paid`;
+      sendNotification(notification);
       toast("Order Marked as Paid Successfully!", {
         style: {
           background: "#1f891f",
-          color:"#fff"
+          color: "#fff",
         },
       });
-    }else{
+    } else {
       toast("Order Not Marked as Paid!", {
         style: {
           background: "#992b2b",
-          color:"#fff"
+          color: "#fff",
         },
       });
     }
-  }
+  };
 
   const progress_status = (event) => {
     event.preventDefault();
