@@ -432,4 +432,9 @@ export const AllProducts_query = `query AllProducts {
   }
 }`
 
-export const SavePurchase_query = ``
+export const getPurchase_query = `query getProduct ($id:Int!){
+  product_by_pk(id: $id) {
+    fileName
+    files
+  }
+}`

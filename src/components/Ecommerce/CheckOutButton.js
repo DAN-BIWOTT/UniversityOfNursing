@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { loadScript } from "@paypal/paypal-js";
 import { getUser } from "../../services/auth.js";
-import { SavePurchase_query, SaveTransaction_query } from "../../graphQl/uonQueries.js";
+import { getPurchase_query, SavePurchase_query, SaveTransaction_query } from "../../graphQl/uonQueries.js";
+import { Button } from "react-scroll";
+import { navigate } from "gatsby";
 
 const CheckOutButton = ({ product }) => {
   const [paidFor, setPaidFor] = useState(false);
@@ -51,7 +53,7 @@ const CheckOutButton = ({ product }) => {
   }, []);
   const SavePurchaseQuery = SavePurchase_query;
  
-    let userId= 01 ;
+    let userId= 1 ;
     let orderId= parseInt(product.id);
     let clientId= parseInt(product.client_id);
     let transaction_status= "";
@@ -97,11 +99,32 @@ const CheckOutButton = ({ product }) => {
     console.log(finalRes)
   };
 
+  const downloadFile = async(event) =>{
+    event.preventDefault();
+    const getPurchaseQuery = getPurchase_query;
+    const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
+      method: "POST",
+      headers: {
+        "x-hasura-admin-secret": `${process.env.GATSBY_HASURA_ADMIN_SECRET}`,
+        "Content-Type": "Application/Json",
+      },
+      body: JSON.stringify({
+        query: getPurchaseQuery,
+        variables: {
+         id
+        },
+      }),
+    });
+    const finalRes = await response.json();
+    if(finalRes.data.product_by_pk !== null){
+      navigate(finalRes.data.product_by_pk);
+    }
+  }
   if (paidFor) {
     return (
       <div>
         <h1>Congrats, you just paid for product: {product.title}!</h1>
-        <button>Download</button>
+        <Button onClick={(event)=>downloadFile(event)}>Download</Button>
       </div>
     );
   }

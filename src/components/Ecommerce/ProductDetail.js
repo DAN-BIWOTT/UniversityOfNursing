@@ -23,7 +23,7 @@ const ProductDetail = ({ data }) => {
             </Cross>
             <H2>{data.title}</H2>
             <H1>Paper Bank Limited Edition</H1>
-            <P>{data.description}</P>
+            <P>{(data.description).substring(0,22)}</P>
             <Price>${data.price}</Price>
             <CheckOutButton product={data} />
           </ColumnTwo>
