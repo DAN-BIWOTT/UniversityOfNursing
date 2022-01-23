@@ -12,7 +12,7 @@ const SingleProductBody = ({ data }) => {
   return (<>
     <PaperBody onClick={(event)=>openProductDetails(event)}>
       <PaperTitle>{data.title}</PaperTitle>
-      <PaperDescription>{data.description}</PaperDescription>
+      <PaperDescription>{(data.description).substring(0,44)}</PaperDescription>
     </PaperBody>
     {isOpen?<ProductDetail data={data}/>:<></>}
   </>
