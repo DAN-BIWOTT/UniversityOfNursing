@@ -122,7 +122,7 @@ console.log(data)
   if (paidFor) {
     return (
       <div>
-        <h1>Congrats, you just paid for product: {product.title}!</h1>
+        <h1>Congratulations. Click the button below to download.</h1>
         <Button onClick={(event)=>downloadFile(event)}>Download</Button>
       </div>
     );
@@ -130,7 +130,7 @@ console.log(data)
 
   return (
     <div>
-      {error && <div>Uh oh, an error occurred! {error.message}</div>}
+      {error && <div>Uh oh, an error occurred, Contact Admin! {error.message}</div>}
       <div ref={paypalRef} />
     </div>
   );
