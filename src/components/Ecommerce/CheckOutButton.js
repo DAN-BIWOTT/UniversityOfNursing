@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { loadScript } from "@paypal/paypal-js";
-import { getUser } from "../../services/auth.js";
-import { getPurchase_query, SavePurchase_query, SaveTransaction_query } from "../../graphQl/uonQueries.js";
+import { getPurchase_query, SavePurchase_query } from "../../graphQl/uonQueries.js";
 import { Button } from "react-scroll";
 import { navigate } from "gatsby";
 
@@ -72,7 +71,7 @@ const CheckOutButton = ({ product }) => {
     merchant_id = data.purchase_units[0].payee.merchant_id;
     description = data.purchase_units[0].description;
     created_at = data.create_time;
-
+console.log(data)
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
       headers: {

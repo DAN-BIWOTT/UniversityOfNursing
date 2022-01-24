@@ -61,12 +61,19 @@ const Main = () => {
     }
   }
 
+  const billingManagement = (event) =>{
+    event.preventDefault();
+      navigate("https://laughing-heyrovsky-3e37f1.netlify.app")
+    
+  }
+
   return (
     <Container>
       {loadingScreen}
       <Nav />
       <Button style={{marginBottom:"6vh"}} onClick={(event)=>{blog(event)}}>Blog</Button>
       <Button style={{marginBottom:"6vh",marginLeft:"2rem",backgroundColor:"blueviolet"}} onClick={(event)=>{generalChats(event)}}>General Chats</Button>
+      <Button style={{marginBottom:"6vh",marginLeft:"2rem",backgroundColor:"blueviolet"}} onClick={(event)=>{billingManagement(event)}}>Billing Management</Button>
       <Users data={data} title="New Orders" count={data.length} />
     </Container>
   );

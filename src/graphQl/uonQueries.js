@@ -346,6 +346,11 @@ export const SaveTransaction_query = `mutation InsertTransaction($userId: Int!, 
     payment_status
   }
 }`;
+export const SavePurchase_query = `mutation InsertTransaction($userId: Int!, $orderId: Int!, $clientId: Int!, $transaction_status: String, $amount: String, $currency_code: String, $email_address: String, $merchant_id: String, $description: String, $created_at: String) {
+  insert_transaction(objects: {amount: $amount, client_id: $clientId, created_at: $created_at, currency_code: $currency_code, description: $description, email_address: $email_address, order_id: $orderId, receipt: $merchant_id, status: $transaction_status, user_id: $userId}) {
+    affected_rows
+  }
+}`;
 
 export const MarkOrderAsPaid_query = `mutation MarkOrderAsPaid($orderId: Int!) {
   update_order_by_pk(pk_columns: {id: $orderId}, _set: {payment_status: 404}) {
