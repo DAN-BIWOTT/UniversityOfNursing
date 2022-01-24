@@ -1,7 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { loadScript } from "@paypal/paypal-js";
-import { getPurchase_query, SavePurchase_query } from "../../graphQl/uonQueries.js";
-import { Button } from "react-scroll";
+import {
+  getPurchase_query,
+  SavePurchase_query,
+} from "../../graphQl/uonQueries.js";
+import { Button } from "theme-ui";
 import { navigate } from "gatsby";
 
 const CheckOutButton = ({ product }) => {
@@ -35,8 +38,9 @@ const CheckOutButton = ({ product }) => {
             },
             onApprove: async (data, actions) => {
               const order = await actions.order.capture();
-              saveTransaction(order);console.log("saving transaction")
               setPaidFor(true);
+              saveTransaction(order);
+              console.log("saving transaction");
             },
             onError: (err) => {
               setError(err);
@@ -51,18 +55,18 @@ const CheckOutButton = ({ product }) => {
     // end spa
   }, []);
   const SavePurchaseQuery = SavePurchase_query;
- 
-    let userId= 1 ;
-    let orderId= parseInt(product.id);
-    let clientId= parseInt(product.client_id);
-    let transaction_status= "";
-    let amount= "";
-    let currency_code= "";
-    let email_address= "";
-    let merchant_id= "";
-    let description= "";
-    let created_at= "";
- 
+
+  let userId = 1;
+  let orderId = parseInt(product.id);
+  let clientId = parseInt(product.client_id);
+  let transaction_status = "";
+  let amount = "";
+  let currency_code = "";
+  let email_address = "";
+  let merchant_id = "";
+  let description = "";
+  let created_at = "";
+
   const saveTransaction = async (data) => {
     transaction_status = data.status;
     amount = data.purchase_units[0].amount.value;
@@ -71,7 +75,7 @@ const CheckOutButton = ({ product }) => {
     merchant_id = data.id;
     description = data.purchase_units[0].description;
     created_at = data.create_time;
-console.log(data)
+    console.log(data);
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
       headers: {
@@ -95,11 +99,12 @@ console.log(data)
       }),
     });
     const finalRes = await response.json();
-    console.log(finalRes)
+    console.log(finalRes);
   };
 
-  const downloadFile = async(event) =>{
+  const downloadFile = async (event) => {
     event.preventDefault();
+    console.log("starting download...")
     const getPurchaseQuery = getPurchase_query;
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
@@ -110,30 +115,33 @@ console.log(data)
       body: JSON.stringify({
         query: getPurchaseQuery,
         variables: {
-         id
+          id,
         },
       }),
     });
     const finalRes = await response.json();
-    if(finalRes.data.product_by_pk !== null){
+    console.log(finalRes)
+    if (finalRes.data.product_by_pk !== null) {
+      console.log(finalRes.data.product_by_pk)
       navigate(finalRes.data.product_by_pk);
     }
-  }
+  };
   if (paidFor) {
     return (
       <div>
-        <h1>Congratulations. Click the button below to download.</h1>
-        <Button onClick={(event)=>downloadFile(event)}>Download</Button>
+        <h1 style={{color:"green"}}>🎉Your download is ready.🎉</h1>
+        <Button onClick={(event) => downloadFile(event)}>Download</Button>
       </div>
     );
-  }
-else
-  return (
-    <div>
-      {error && <div>Uh oh, an error occurred, Contact Admin! {error.message}</div>}
-      <div ref={paypalRef} />
-    </div>
-  );
+  } else
+    return (
+      <div>
+        {error && (
+          <div>Uh oh, an error occurred, Contact Admin! {error.message}</div>
+        )}
+        <div ref={paypalRef} />
+      </div>
+    );
 };
 
 export default CheckOutButton;
