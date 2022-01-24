@@ -104,7 +104,8 @@ const CheckOutButton = ({ product }) => {
 
   const downloadFile = async (event) => {
     event.preventDefault();
-    console.log("starting download...")
+    console.log("starting download...");
+    const id = product.id
     const getPurchaseQuery = getPurchase_query;
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
@@ -115,15 +116,15 @@ const CheckOutButton = ({ product }) => {
       body: JSON.stringify({
         query: getPurchaseQuery,
         variables: {
-          id,
+          id
         },
       }),
     });
     const finalRes = await response.json();
     console.log(finalRes)
     if (finalRes.data.product_by_pk !== null) {
-      console.log(finalRes.data.product_by_pk)
-      navigate(finalRes.data.product_by_pk);
+      console.log(finalRes.data.product_by_pk.files)
+      navigate(finalRes.data.product_by_pk.files);
     }
   };
   if (paidFor) {
