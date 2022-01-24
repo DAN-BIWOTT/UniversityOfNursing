@@ -68,7 +68,7 @@ const CheckOutButton = ({ product }) => {
     amount = data.purchase_units[0].amount.value;
     currency_code = data.purchase_units[0].amount.currency_code;
     email_address = data.payer.email_address;
-    merchant_id = data.purchase_units[0].payee.merchant_id;
+    merchant_id = data.id;
     description = data.purchase_units[0].description;
     created_at = data.create_time;
 console.log(data)
@@ -127,7 +127,7 @@ console.log(data)
       </div>
     );
   }
-
+else
   return (
     <div>
       {error && <div>Uh oh, an error occurred, Contact Admin! {error.message}</div>}
