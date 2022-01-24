@@ -6,6 +6,7 @@ import {
 } from "../../graphQl/uonQueries.js";
 import { Button } from "theme-ui";
 import { navigate } from "gatsby";
+import toast, { Toaster } from "react-hot-toast";
 
 const CheckOutButton = ({ product }) => {
   const [paidFor, setPaidFor] = useState(false);
@@ -124,6 +125,7 @@ const CheckOutButton = ({ product }) => {
     console.log(finalRes)
     if (finalRes.data.product_by_pk !== null) {
       console.log(finalRes.data.product_by_pk.files)
+      toast("Download will begin shortly")
       navigate(finalRes.data.product_by_pk.files);
     }
   };
@@ -132,6 +134,7 @@ const CheckOutButton = ({ product }) => {
       <div>
         <h1 style={{color:"green"}}>🎉Your download is ready.🎉</h1>
         <Button onClick={(event) => downloadFile(event)}>Download</Button>
+        <Toaster />
       </div>
     );
   } else
