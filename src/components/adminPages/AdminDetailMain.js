@@ -189,12 +189,14 @@ const AdminDetailMain = ({ data, orderId }) => {
   };
   const isMarkedAccepted = () => {
     console.log(data.acceptance_status);
+    data.acceptance_status === 303 ? console.log("accepted") : console.log("Not accepted");
     data.acceptance_status === 303 ? true : false;
   };
   const progress_status = (event) => {
     event.preventDefault();
     setPageLoader(true);
     console.log(`progress status: ${event.target.value}`)
+    event.target.value === 404?console.log("equal to 404"):console.log("not equal to 404")
     if (event.target.value === 404 && !isMarkedAccepted) {
       setPageLoader(false);
       toast("Order must be approved before marked as complete.", {
