@@ -188,20 +188,16 @@ const AdminDetailMain = ({ data, orderId }) => {
     }
   };
   const isMarkedAccepted = () => {
-    alert("called");
-    console.log(data.acceptance_status);
     data.acceptance_status == 303 ? console.log("accepted") : console.log("Not accepted");
     return data.acceptance_status == 303 ? true : false;
   };
   const progress_status = (event) => {
     event.preventDefault();
     setPageLoader(true);
-    console.log(`progress status: ${event.target.value}`)
-    event.target.value === "404"?console.log("equal to 404"):console.log("not equal to 404")
     if (event.target.value === "404" && isMarkedAccepted != true) {
       setPageLoader(false);
       toast("Order must be approved before marked as complete.", {
-        style: { backgroundColor: "#000", color: "fff" },
+        style: { backgroundColor: "#000", color: "#fff" },
       });
     } else {
       statusChangeQuery = CompleteOrderButton_query;
