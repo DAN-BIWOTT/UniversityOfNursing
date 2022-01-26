@@ -194,6 +194,7 @@ const AdminDetailMain = ({ data, orderId }) => {
   const progress_status = (event) => {
     event.preventDefault();
     setPageLoader(true);
+    console.log(`progress status: ${event.target.value}`)
     if (event.target.value === 404 && !isMarkedAccepted) {
       setPageLoader(false);
       toast("Order must be approved before marked as complete.", {
