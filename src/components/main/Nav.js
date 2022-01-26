@@ -181,6 +181,7 @@ const ImageButton = styled.button`
 
 const NotificationRow = styled.div`
   margin-top: 0.5rem;
+  margin-left: -10px;
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -229,7 +230,8 @@ const NotificationBody = styled.div`
 const NotificationDropDownContainer = styled.div`
   width: 16em;
   right: 0;
-  padding-left: 1rem;
+  padding-right: 17.5rem;
+    margin-right: 10rem;
   position: absolute;
   animation: blinker 1s cubic-bezier(0.5, 0, 1, 1) infinite alternate;
   z-index: 1;

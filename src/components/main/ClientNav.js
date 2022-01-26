@@ -153,7 +153,7 @@ const NotificationCard = styled.div`
   -moz-box-shadow: -2px -4px 6px 0px rgba(103, 46, 191, 0.75);
   border-radius: 4px;
   width: 95%;
-  margin-left: 0.4rem;
+  margin-left: 0.4  rem;
   margin-bottom: 1rem;
   background: rgb(193, 38, 219);
   background: linear-gradient(
@@ -226,7 +226,8 @@ const NotificationBody = styled.div`
 const NotificationDropDownContainer = styled.div`
   width: 16em;
   right: 0;
-  padding-left: 1rem;
+  padding-right: 17.5rem;
+    margin-right: 10rem;
   position: absolute;
   animation: blinker 1s cubic-bezier(0.5, 0, 1, 1) infinite alternate;
   z-index: 1;
