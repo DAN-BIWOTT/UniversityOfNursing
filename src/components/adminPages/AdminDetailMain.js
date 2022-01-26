@@ -112,6 +112,9 @@ const AdminDetailMain = ({ data, orderId }) => {
           notification.msg = `Order: ${orderId} Accepted by Admin`;
           sendNotification(notification);
           toast("Order Approved.", { style: { backgroundColor: "#22c382" } });
+          setTimeout(() => {
+            navigate(-1);
+          }, 1000);
           break;
 
         default:
@@ -188,8 +191,8 @@ const AdminDetailMain = ({ data, orderId }) => {
     }
   };
   const isMarkedAccepted = () => {
-    data.acceptance_status === 303 ? console.log("accepted") : console.log("Not accepted");
-    return data.acceptance_status === 303 ? true : false;
+    data.acceptance_status == 303 ? console.log("accepted") : console.log("Not accepted");
+    return data.acceptance_status == 303 ? true : false;
   };
   const progress_status = (event) => {
     event.preventDefault();
