@@ -190,14 +190,11 @@ const AdminDetailMain = ({ data, orderId }) => {
       });
     }
   };
-  const isMarkedAccepted = () => {
-    data.acceptance_status == 303 ? console.log("accepted") : console.log("Not accepted");
-    return data.acceptance_status == 303 ? true : false;
-  };
+
   const progress_status = (event) => {
     event.preventDefault();
     setPageLoader(true);
-    if (event.target.value === "404" && isMarkedAccepted !== true) {
+    if (event.target.value === "404" && data.acceptance_status == 303) {
       setPageLoader(false);
       toast("Order must be approved before marked as complete.", {
         style: { backgroundColor: "#000", color: "#fff" },
