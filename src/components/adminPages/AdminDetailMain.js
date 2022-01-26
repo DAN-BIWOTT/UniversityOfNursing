@@ -187,30 +187,31 @@ const AdminDetailMain = ({ data, orderId }) => {
       });
     }
   };
-  const isMarkedAccepted =()=>{
-    data.acceptance_status === 303?true:false;
-  }
+  const isMarkedAccepted = () => {
+    console.log(data.acceptance_status);
+    data.acceptance_status === 303 ? true : false;
+  };
   const progress_status = (event) => {
     event.preventDefault();
     setPageLoader(true);
-    if (!isMarkedAccepted){
+    if (!isMarkedAccepted) {
       setPageLoader(false);
       toast("Order must be approved before marked as complete.", {
+        style: { backgroundColor: "#000", color: "fff" },
+      });
+    } else {
+      statusChangeQuery = CompleteOrderButton_query;
+      callToDb(404);
+      notification.clientId = clientId;
+      notification.orderId = orderId;
+      notification.created_at = Date.now();
+      notification.sender = `From Admin`;
+      notification.msg = `Order: ${orderId} has been completed`;
+      sendNotification(notification);
+      toast("Order Marked as complete.", {
         style: { backgroundColor: "#22c382" },
       });
-      return false;
     }
-    statusChangeQuery = CompleteOrderButton_query;
-    callToDb(404);
-    notification.clientId = clientId;
-    notification.orderId = orderId;
-    notification.created_at = Date.now();
-    notification.sender = `From Admin`;
-    notification.msg = `Order: ${orderId} has been completed`;
-    sendNotification(notification);
-    toast("Order Marked as complete.", {
-      style: { backgroundColor: "#22c382" },
-    });
   };
   const [waitingButton, setWaitingButton] = useState(false);
   const deleteFromFireBase = async () => {

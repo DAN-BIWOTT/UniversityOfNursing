@@ -238,7 +238,7 @@ const NotificationDropDownContainer = styled.div`
   overflow-x: hidden;
   /* width */
   ::-webkit-scrollbar {
-    width: 20px;
+    width: 5px;
   }
 
   /* Track */
