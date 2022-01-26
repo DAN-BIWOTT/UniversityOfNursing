@@ -201,6 +201,7 @@ const NotificationTitle = styled.div`
 
 const NotificationTime = styled.div`
   margin-bottom: -10%;
+  margin-left: -20px;
   p {
     font-size: clamp(0.8rem, 0.8rem, 0.8rem);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,

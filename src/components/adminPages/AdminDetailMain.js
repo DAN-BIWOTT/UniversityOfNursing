@@ -194,7 +194,7 @@ const AdminDetailMain = ({ data, orderId }) => {
   const progress_status = (event) => {
     event.preventDefault();
     setPageLoader(true);
-    if (!isMarkedAccepted) {
+    if (event.target.value === 404 && !isMarkedAccepted) {
       setPageLoader(false);
       toast("Order must be approved before marked as complete.", {
         style: { backgroundColor: "#000", color: "fff" },
