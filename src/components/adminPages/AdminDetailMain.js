@@ -187,10 +187,19 @@ const AdminDetailMain = ({ data, orderId }) => {
       });
     }
   };
-
+  const isMarkedAccepted =()=>{
+    data.acceptance_status === 303?true:false;
+  }
   const progress_status = (event) => {
     event.preventDefault();
     setPageLoader(true);
+    if (!isMarkedAccepted){
+      setPageLoader(false);
+      toast("Order must be approved before marked as complete.", {
+        style: { backgroundColor: "#22c382" },
+      });
+      return false;
+    }
     statusChangeQuery = CompleteOrderButton_query;
     callToDb(404);
     notification.clientId = clientId;
