@@ -188,6 +188,7 @@ const AdminDetailMain = ({ data, orderId }) => {
     }
   };
   const isMarkedAccepted = () => {
+    alert("called");
     console.log(data.acceptance_status);
     data.acceptance_status === 303 ? console.log("accepted") : console.log("Not accepted");
     data.acceptance_status === 303 ? true : false;
