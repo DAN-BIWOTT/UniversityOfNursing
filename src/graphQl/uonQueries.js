@@ -251,7 +251,7 @@ export const ClientPendingTransactions_query = `query MyOrders($id: Int!) {
 }`;
 
 export const AdminOrdersInRevision_query = `query OrdersInRevision {
-  order(order_by: {created_at: desc}, where: {revision_status: {_eq: 101}}) {
+  order(order_by: {created_at: desc}, where: {revision_status: {_eq: 1}}) {
       id
       subject
       pages

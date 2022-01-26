@@ -114,7 +114,7 @@ const AdminDetailMain = ({ data, orderId }) => {
           toast("Order Approved.", { style: { backgroundColor: "#22c382" } });
           setTimeout(() => {
             navigate(-1);
-          }, 1000);
+          }, 100);
           break;
 
         default:
@@ -196,7 +196,6 @@ const AdminDetailMain = ({ data, orderId }) => {
     setPageLoader(true);
     if (event.target.value === "404" && data.acceptance_status !== 303) {
       setPageLoader(false);
-      console.log(data.acceptance_status)
       toast("Order must be approved before marked as complete.", {
         style: { backgroundColor: "#000", color: "#fff" },
       });

@@ -150,7 +150,7 @@ const ClientDetailMain = ({ data, orderId }) => {
   };
   const revisionButton = (event) => {
     event.preventDefault();
-    let ConfirmWithClient = window.confirm("Are You Sure You Want To Change Dispute Status?")
+    let ConfirmWithClient = window.confirm("Are You Sure You Want To Change Revision Status?")
     setRevisionValue(1);
     if(revisionValue === 1 && ConfirmWithClient)changeRevisionStatus();
   };
