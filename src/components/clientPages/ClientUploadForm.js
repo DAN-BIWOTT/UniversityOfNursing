@@ -10,11 +10,11 @@ const ClientUploadForm = ({ orderId }) => {
   let files;
   const [waitingButton, setWaitingButton] = useState(false);
   const [selectedFile, setSelectedFile] = useState("");
-  const adminFileQuery = `mutation ClientFile_query($orderId: Int!, $fileName: String, $files: String) {
-        update_order_by_pk(pk_columns: {id: $orderId}, _set: {files: $files, client_file_name: $fileName}) {
-          files
-        }
-      }`;
+  const adminFileQuery = `mutation adminAddFile($file: String,$fileName: String,$orderId: Int!) {
+  insert_file(objects: {file: $file, fileName: $fileName, order_id: $orderId, sender: "client"}) {
+    affected_rows
+  }
+}`;
   const saveFiles = async() => {
       console.log("This is at save files",files)
       let fileName = selectedFile.name

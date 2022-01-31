@@ -22,6 +22,14 @@ const ClientDetailMain = ({ data, orderId }) => {
     colorPaymentTitle,
     acceptanceStatus,
     colorAcceptanceTitle;
+    var fileArray;
+          if (typeof data.filesByOrderId !== "undefined"){
+            fileArray = data.filesByOrderId
+            console.log(fileArray);
+          }else{
+            fileArray = []
+            console.log(data.filesByOrderId);
+          }
   const date = `${new Date(data.created_at).getDate()}/${new Date(data.created_at
   ).getMonth()}/${new Date(data.created_at).getFullYear()}`;
   const [pageLoader, setPageLoader] = useState(false);
@@ -77,7 +85,7 @@ const ClientDetailMain = ({ data, orderId }) => {
       break;
   }
 
-  
+
   const [revisionValue, setRevisionValue] = useState(0);
   const disputeQuery = dispute_query;
   const revisionQuery = revision_query;
@@ -332,53 +340,26 @@ const ClientDetailMain = ({ data, orderId }) => {
         <FileHold>
           <H1>Project Files</H1>
           <h2 style={{ paddingLeft: "1rem" }}>From Client</h2>
-          {data.files !== "" ? (
-            <FileRow>
+          {fileArray.map((filesData)=>{
+              {if(filesData.sender == "client")return(<FileRow>
               <FolderImage
                 src={fileFolder}
                 alt="Folder representing downloadable files."
               />
-              <FileTitle href={data.files}>Data File</FileTitle>
-              <br />
-
-              {waitingButton ? (
-                <Loader
-                  type="Bars"
-                  color="#00BFFF"
-                  height={40}
-                  width={40}
-                  style={{ marginLeft: "40%" }}
-                />
-              ) : (
-                <Button
-                  onClick={(event) => {
-                    deleteFile(event);
-                  }}
-                >
-                  delete
-                </Button>
-              )}
-            </FileRow>
-          ) : (
-            <p style={{ paddingLeft: "1rem" }}>No File Uploaded</p>
-          )}
-          <h2 style={{ paddingLeft: "1rem" }}>From Admin</h2>
-          {data.admin_files !== null ? (
-            <FileRow>
-              <FolderImage
-                src={fileFolder}
-                alt="Folder representing downloadable files."
-              />
-              <FileTitle href={data.admin_files}>Download files</FileTitle>
-            </FileRow>
-          ) : (
-            <p style={{ paddingLeft: "1rem" }}>No File Uploaded</p>
-          )}
-          {data.files === "" || data.files === "" ? (
-            <ClientUploadForm />
-          ) : (
-            <></>
-          )}
+              <FileTitle href={filesData.file}>Data File</FileTitle>
+            </FileRow>)}
+      })}
+      <h2 style={{ paddingLeft: "1rem" }}>From Admin</h2>
+      {fileArray.map((filesData)=>{
+            {if(filesData.sender == "admin")return(<FileRow>
+            <FolderImage
+              src={fileFolder}
+              alt="Folder representing downloadable files."
+            />
+            <FileTitle href={filesData.file}>Data File</FileTitle>
+          </FileRow>)}
+          })}
+          <ClientUploadForm orderId={orderId} />
         </FileHold>
       </OrderGrid>
     </div>

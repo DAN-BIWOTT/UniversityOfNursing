@@ -1,29 +1,32 @@
-export const AdminOrderDetail_Query = `query MyQuery($id: Int!) {
-    order_by_pk(id: $id) {
-      budget
-      client_id
-      created_at
-      dispute_status
-      doc_description
-      doc_format
-      due_time
-      id
-      nature
-      pages
-      payment_status
-      price
-      progress_status
-      revision_status
-      spacing
-      subject
-      topic
-      files
-      acceptance_status
-      admin_files
-      admin_file_name
-      client_file_name
+export const AdminOrderDetail_Query = `query AdminOrderDetail($id: Int!) {
+  order_by_pk(id: $id) {
+    budget
+    client_id
+    created_at
+    dispute_status
+    doc_description
+    doc_format
+    due_time
+    id
+    nature
+    pages
+    payment_status
+    price
+    progress_status
+    revision_status
+    spacing
+    subject
+    topic
+    acceptance_status
+    admin_files
+    admin_file_name
+    filesByOrderId(order_by: {id: asc}) {
+      file
+      fileName
+      sender
     }
-  }`
+  }
+}`
 
 export const AllOrders_Query = `query AllOrders {
     order(order_by: {created_at: desc}) {
@@ -78,11 +81,9 @@ export const AllOrders_Query = `query AllOrders {
     }
   }`;
 
-  export const NewOrderForm_query = `mutation addOrder($client_id: Int!, $budgetRangeString: String, $price: Int!, $paperFormat: String, $nature: String, $pages: String, $deadline: String, $spacing: String, $subject: String, $topic: String, $description: String, $files: String,$fileName:String) {
-    insert_order_one(object: {budget: $budgetRangeString, client_id: $client_id, doc_description: $description, doc_format: $paperFormat, due_time: $deadline, files: $files, nature: $nature, pages: $pages, price: $price, spacing: $spacing, subject: $subject, topic: $topic, client_file_name: $fileName}) {
+  export const NewOrderForm_query = `mutation addOrder($client_id: Int!,$budgetRangeString: String, $price: Int!, $paperFormat: String, $nature: String, $pages: String, $deadline: String, $spacing: String, $subject: String, $topic: String, $description: String, $files: String, $fileName: String) {
+    insert_order_one(object: {budget: $budgetRangeString, doc_description: $description, doc_format: $paperFormat, due_time: $deadline, nature: $nature, pages: $pages, price: $price, spacing: $spacing, subject: $subject, topic: $topic, filesByOrderId: {data: {file: $files, fileName: $fileName}}, client_id: $client_id}) {
       id
-      files
-      client_file_name
     }
   }`
 

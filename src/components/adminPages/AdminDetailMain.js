@@ -17,9 +17,20 @@ import Loader from "react-loader-spinner";
 import { storage } from "../../utils/firebase";
 import { deleteObject, ref } from "firebase/storage";
 import { sendNotification } from "../../utils/chats";
+import { navigate } from "gatsby";
 
 const AdminDetailMain = ({ data, orderId }) => {
   var progressStatus, colorProgressTitle, paymentStatus, colorPaymentTitle;
+console.log(data);
+var fileArray;
+      if (typeof data.filesByOrderId !== "undefined"){
+        fileArray = data.filesByOrderId
+        console.log(fileArray);
+      }else{
+        fileArray = []
+        console.log(data.filesByOrderId);
+      }
+
 
   const date = `${new Date(data.created_at).getDate()}/${new Date(
     data.created_at
@@ -267,6 +278,7 @@ const AdminDetailMain = ({ data, orderId }) => {
     });
     return true;
   };
+  console.log(data)
   const deleteFile = (event) => {
     event.preventDefault();
     if (deleteFromFireBase() && deleteFromHasura())
@@ -387,56 +399,30 @@ const AdminDetailMain = ({ data, orderId }) => {
             </tbody>
           </table>
         </OrderSummary>
-        <ChatBox sender="admin" orderData={orderId} />
+        <ChatBox sender="client" orderData={orderId} />
         <FileHold>
           <H1>Project Files</H1>
           <h2 style={{ paddingLeft: "1rem" }}>From Client</h2>
-          {data.files !== "" ? (
-            <FileRow>
-              <FolderImage
-                src={fileFolder}
-                alt="Folder representing downloadable files."
-              />
-              <FileTitle href={data.files}>Data File</FileTitle>
-            </FileRow>
-          ) : (
-            <p style={{ paddingLeft: "1rem" }}>No File Uploaded</p>
-          )}
-          <h2 style={{ paddingLeft: "1rem" }}>From Admin</h2>
-          {data.admin_files !== null ? (
-            <FileRow>
-              <FolderImage
-                src={fileFolder}
-                alt="Folder representing downloadable files."
-              />
-              <FileTitle href={data.admin_files}>Download files</FileTitle>
-              <br />
-              {waitingButton ? (
-                <Loader
-                  type="Bars"
-                  color="#00BFFF"
-                  height={40}
-                  width={40}
-                  style={{ marginLeft: "40%" }}
-                />
-              ) : (
-                <Button
-                  onClick={(event) => {
-                    deleteFile(event);
-                  }}
-                >
-                  delete
-                </Button>
-              )}
-            </FileRow>
-          ) : (
-            <p style={{ paddingLeft: "1rem" }}>No File Uploaded</p>
-          )}
-          {data.admin_files === null || data.admin_files === "" ? (
-            <AdminUploadForm orderId={orderId} />
-          ) : (
-            <></>
-          )}
+          {fileArray.map((filesData)=>{
+            {if(filesData.sender == "client")return(<FileRow>
+            <FolderImage
+              src={fileFolder}
+              alt="Folder representing downloadable files."
+            />
+            <FileTitle href={filesData.file}>Data File</FileTitle>
+          </FileRow>)}
+    })}
+    <h2 style={{ paddingLeft: "1rem" }}>From Admin</h2>
+    {fileArray.map((filesData)=>{
+          {if(filesData.sender == "admin")return(<FileRow>
+          <FolderImage
+            src={fileFolder}
+            alt="Folder representing downloadable files."
+          />
+          <FileTitle href={filesData.file}>Data File</FileTitle>
+        </FileRow>)}
+        })}
+        <AdminUploadForm orderId={orderId} />
         </FileHold>
       </OrderGrid>
       <Toaster

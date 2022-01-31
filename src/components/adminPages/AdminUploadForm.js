@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import Loader from "react-loader-spinner";
 import styled from "styled-components";
+import { getUser } from "../../services/auth";
 import { sendNotification } from "../../utils/chats";
 import { storage } from "../../utils/firebase";
 
@@ -10,13 +11,12 @@ const AdminUploadForm = ({ orderId }) => {
   let files;
   const [waitingButton, setWaitingButton] = useState(false);
   const [selectedFile, setSelectedFile] = useState("");
-  const adminFileQuery = `mutation adminFile_query($orderId: Int!, $fileName: String, $files: String) {
-    update_order_by_pk(pk_columns: {id: $orderId}, _set: {admin_files: $files, admin_file_name: $fileName}) {
-      admin_files
-      client_id
-    }
-  }`;
-  
+  const adminFileQuery = `mutation adminAddFile($file: String,$fileName: String,$orderId: Int!) {
+  insert_file(objects: {file: $file, fileName: $fileName, order_id: $orderId, sender: "admin"}) {
+    affected_rows
+  }
+}`;
+
   let notification = {
     clientId:0,
     orderId: 0,
@@ -27,6 +27,7 @@ const AdminUploadForm = ({ orderId }) => {
   const saveFiles = async() => {
       console.log("This is at save files",files);
       let fileName = selectedFile.name;
+      let file = files
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
       headers: {
@@ -38,14 +39,14 @@ const AdminUploadForm = ({ orderId }) => {
         variables: {
           orderId,
           fileName,
-          files,
+          file,
         },
       }),
     });
     const finalRes = await response.json();
     console.log(finalRes);
     setWaitingButton(false);
-    notification.clientId = finalRes.data.update_order_by_pk.client_id;
+    notification.clientId = getUser().id;
           notification.orderId = orderId;
           notification.created_at = Date.now();
           notification.sender = `From Admin`;
