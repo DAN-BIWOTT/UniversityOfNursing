@@ -70,11 +70,11 @@ const ClientDetailMain = ({ data, orderId }) => {
   }
 
   switch (data.acceptance_status) {
-    case 0:
+    case 101:
       acceptanceStatus = "red";
       colorAcceptanceTitle = "Declined";
       break;
-    case 1:
+    case 303:
       acceptanceStatus = "green";
       colorAcceptanceTitle = "Accepted";
       break;
