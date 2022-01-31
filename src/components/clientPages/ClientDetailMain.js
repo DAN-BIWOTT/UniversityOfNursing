@@ -86,7 +86,6 @@ const ClientDetailMain = ({ data, orderId }) => {
   }
 
 
-  const [revisionValue, setRevisionValue] = useState(0);
   const disputeQuery = dispute_query;
   const revisionQuery = revision_query;
   const changeDisputeStatus = async () => {
@@ -123,6 +122,7 @@ const ClientDetailMain = ({ data, orderId }) => {
   };
   const changeRevisionStatus = async () => {
     setPageLoader(true)
+    let revisionValue = 1
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
       headers: {
@@ -159,8 +159,7 @@ const ClientDetailMain = ({ data, orderId }) => {
   const revisionButton = (event) => {
     event.preventDefault();
     let ConfirmWithClient = window.confirm("Are You Sure You Want To Change Revision Status?")
-    setRevisionValue(1);
-    if(revisionValue === 1 && ConfirmWithClient)changeRevisionStatus();
+    if(ConfirmWithClient)changeRevisionStatus();
   };
   // payment processing
   const [waitingButton, setWaitingButton] = useState(false);
