@@ -82,6 +82,7 @@ const ClientDetailMain = ({ data, orderId }) => {
     default:
       acceptanceStatus = "neutral";
       colorAcceptanceTitle = "Waiting Acceptance";
+      console.log(data)
       break;
   }
 
@@ -90,6 +91,7 @@ const ClientDetailMain = ({ data, orderId }) => {
   const revisionQuery = revision_query;
   const changeDisputeStatus = async () => {
     setPageLoader(true)
+    let disputeValue = 1
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
       headers: {
@@ -149,12 +151,11 @@ const ClientDetailMain = ({ data, orderId }) => {
       toast("Request for Revision filed", { style: { background: "#a92d2d" } });
     }
   };
-  const [disputeValue, setDisputeValue] = useState(0);
+
   const disputeButton = (event) => {
     event.preventDefault();
-    setDisputeValue(1);
     let ConfirmWithClient = window.confirm("Are You Sure You Want To Change Dispute Status?")
-    if(disputeValue === 1 && ConfirmWithClient)changeDisputeStatus();
+    if(ConfirmWithClient)changeDisputeStatus();
   };
   const revisionButton = (event) => {
     event.preventDefault();
