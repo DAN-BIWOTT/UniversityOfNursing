@@ -5,10 +5,10 @@ import Sidebar from '../../components/sidebar/sidebar'
 import CompleteSubmissionsList from '../../components/main/users/AllOrders'
 import { getUser } from '../../services/auth'
 import Spinner from '../../components/Spinner'
-import { ClientCompleteSubmissions_query } from '../../graphQl/uonQueries'
+import { ClientInProgressSubmissions_query } from '../../graphQl/uonQueries'
 
 const IncompleteSubmissions = () => {
-    const CompleteSubmissionsQuery = ClientCompleteSubmissions_query;
+    const ClientInProgressSubmissionsQuery = ClientInProgressSubmissions_query;
     useEffect(() => {
         getCompleteSubmissions()
     }, []);// eslint-disable-line react-hooks/exhaustive-deps
@@ -28,7 +28,7 @@ const IncompleteSubmissions = () => {
                 "Content-Type":"Application/Json"
             },
             body: JSON.stringify({
-                query: CompleteSubmissionsQuery,
+                query: ClientInProgressSubmissionsQuery,
                 variables:{
                     id
                 }

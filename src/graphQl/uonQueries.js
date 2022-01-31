@@ -198,6 +198,20 @@ export const ClientCompleteSubmissions_query = `query MyOrders($id: Int!) {
   }
 }`;
 
+export const ClientInProgressSubmissions_query = `query MyOrders($id: Int!) {
+  order(where: {client_id: {_eq: $id}, progress_status: {_eq: 202}}, order_by: {created_at: desc}) {
+    id
+    subject
+    pages
+    budget
+    due_time
+    price
+    topic
+    created_at
+    acceptance_status
+  }
+}`;
+
 export const ClientIncompleteSubmissions_query = `query MyOrders($id: Int!) {
   order(where: {client_id: {_eq: $id}, progress_status: {_neq: 404}}, order_by: {created_at: desc}) {
     id
