@@ -13,7 +13,7 @@ const PaymentPaypal = ({ product }) => {
     // spa
     loadScript({
       "client-id":
-        "AaLfS_ZYEnABsbGdbUng-dQ_VIF9DNW2qzzz6VpmVpYbCOUECyLvktd323y_Nz3MNI1vRVKlLdjrO_iC",
+        "AQP_VPBm-4CZt3KdeLwPgLteVwNtYC_LU2kZqyJ0LGL8VVukWUoxGV1ms0BVLSvl2PiDHnIar5CmWG2r",
     })
       .then((paypal) => {
         // start to use the PayPal JS SDK script
