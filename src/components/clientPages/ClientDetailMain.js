@@ -42,7 +42,7 @@ const ClientDetailMain = ({ data, orderId }) => {
       progressStatus = "red";
       colorProgressTitle = "Incomplete";
       break;
-    case 1:
+    case 404:
       progressStatus = "green";
       colorProgressTitle = "Complete";
       break;
@@ -58,7 +58,7 @@ const ClientDetailMain = ({ data, orderId }) => {
       paymentStatus = "red";
       colorPaymentTitle = "Not Paid";
       break;
-    case 1:
+    case 404:
       paymentStatus = "green";
       colorPaymentTitle = "Paid";
       break;
