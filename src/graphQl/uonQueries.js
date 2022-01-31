@@ -42,7 +42,7 @@ export const AllOrders_Query = `query AllOrders {
     }
   }`;
 
-  export const ClientOrderDetail_Query = `query MyQuery($id: Int!) {
+  export const ClientOrderDetail_Query = `query ClientOrderDetail($id: Int!) {
     order_by_pk(id: $id) {
       budget
       client_id
@@ -62,10 +62,13 @@ export const AllOrders_Query = `query AllOrders {
       subject
       topic
       acceptance_status
-      files
       admin_files
       admin_file_name
-      client_file_name
+      filesByOrderId(order_by: {id: asc}) {
+        file
+        fileName
+        sender
+      }
     }
   }`;
 
