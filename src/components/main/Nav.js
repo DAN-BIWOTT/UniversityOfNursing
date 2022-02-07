@@ -67,6 +67,10 @@ const Nav = () => {
       toast("Action Cancelled");
     }
   }
+  const goToOrder = (event) =>{
+event.preventDefault();
+alert(event.target.value)
+  }
 
   return (
     <Container>
@@ -89,7 +93,7 @@ const Nav = () => {
                     console.log(data);
                   }
                   return (
-                    <NotificationCard key={data.created_at}>
+                    <NotificationCard key={data.created_at} onClick={event=>goToOrder(event)} value={28}>
                       <NotificationRow>
                         <NotificationTitle>
                           <p>{data.sender}</p>
@@ -191,7 +195,7 @@ const NotificationRow = styled.div`
 const NotificationTitle = styled.div`
   margin-bottom: -10%;
   p {
-    padding-left: 0.5rem;
+    padding-left: 1.5rem;
     font-size: clamp(1rem, 1rem, 1rem);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
