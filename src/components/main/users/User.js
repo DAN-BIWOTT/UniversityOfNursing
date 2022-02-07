@@ -22,7 +22,7 @@ console.log(data);
     event.preventDefault();
     setOrderId(true);
   }
-  const showUser = (event) =>{
+  const showUserTrigger = (event) =>{
     event.preventDefault();
     setOrderId(true);
     setShowUser(true);
@@ -32,7 +32,7 @@ console.log(data);
    return( 
     <Container>
       <Property>
-        <link onClick={event=>showUser(event)}>{clientName}</link>
+        <link onClick={event=>showUserTrigger(event)}>{clientName}</link>
         <PropertyText>
           <PropertyStreet>
           <OrderButton onClick={event=>showDetail(event)}>
