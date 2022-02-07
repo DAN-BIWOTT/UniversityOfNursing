@@ -4,7 +4,7 @@ import { UserDetails_query } from "../../../graphQl/uonQueries";
 import Sidebar from "../../sidebar/sidebar";
 import Spinner from "../../Spinner";
 
-import "./UserStyles.css";
+import "./UserStyle.css";
 
 const UserDetails = ({ clientId }) => {
   const [id, setId] = useState(clientId);
