@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Sidebar from "../../components/sidebar/sidebar";
-import Spinner from "../../components/Spinner";
-import { UserDetails_query } from "../../graphQl/uonQueries";
+import { UserDetails_query } from "../../../graphQl/uonQueries";
+import Sidebar from "../../sidebar/sidebar";
+import Spinner from "../../Spinner";
+
 import "./UserStyles.css";
 
 const UserDetails = ({ clientId }) => {
