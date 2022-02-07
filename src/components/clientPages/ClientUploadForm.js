@@ -10,7 +10,7 @@ const ClientUploadForm = ({ orderId }) => {
   let files;
   const [waitingButton, setWaitingButton] = useState(false);
   const [selectedFile, setSelectedFile] = useState("");
-  const adminFileQuery = `mutation clientAddFile($file: String,$fileName: String,$orderId: Int!) {
+  const adminFileQuery = `mutation clientAddFile($files: String,$fileName: String,$orderId: Int!) {
   insert_file(objects: {file: $files, fileName: $fileName, order_id: $orderId, sender: "client"}) {
     affected_rows
   }

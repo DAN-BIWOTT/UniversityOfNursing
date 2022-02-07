@@ -4,6 +4,7 @@ import styled from 'styled-components'
 const SortingBar = () => {
     return (
         <Container>
+            <ClientName>Client Name</ClientName>
             <Property>Order Id</Property>
             <Topic>Topic</Topic>
             <Pages>Pages/words</Pages>
@@ -31,8 +32,11 @@ const Text = styled.h1`
     color: ${({ theme }) => theme.textColor};
 `
 
+const ClientName = styled(Text)`
+    width: 15%;
+`
 const Property = styled(Text)`
-    width: 30%;
+    width: 15%;
 `
 
 const Subject = styled(Text)`

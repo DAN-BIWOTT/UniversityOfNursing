@@ -121,7 +121,7 @@ export const ClientAllSubmissions_query = `query MyOrders($id: Int!) {
 }`;
 
 export const AdminAllNewOrders_query = `query AllNewOrders {
-  order(order_by: {created_at: desc}, where: {progress_status: {_eq: 0}}) {
+  order(order_by: {created_at: desc, client: {full_name: asc}}, where: {progress_status: {_eq: 0}}) {
     id
     subject
     pages
@@ -131,6 +131,9 @@ export const AdminAllNewOrders_query = `query AllNewOrders {
     topic
     created_at
     acceptance_status
+    client {
+      full_name
+    }
   }
 }`;
 
@@ -459,5 +462,18 @@ export const getPurchase_query = `query getProduct ($id:Int!){
   product_by_pk(id: $id) {
     fileName
     files
+  }
+}`
+
+export const UserDetails_query = `query UserDetails_Query($id: Int!) {
+  client(where: {id: {_eq: $id}}) {
+    full_name
+    email
+    orders(order_by: {id: asc}) {
+      price
+      progress_status
+      doc_description
+      topic
+    }
   }
 }`

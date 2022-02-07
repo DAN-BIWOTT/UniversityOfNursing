@@ -4,26 +4,35 @@ import styled from "styled-components";
 import AdminOrderDetail from "../../../pages/adminPages/AdminOrderDetail";
 import Countdown from 'react-countdown';
 import AccountBalance from "../AccountBalance";
+import UserDetails from "./UserDetails";
 
 const User = ({ data }) => {
-
-  const { budget, due_time, id, pages, price, topic, created_at,acceptance_status } =
+console.log(data);
+  const { budget, due_time, id, pages, price, topic, created_at,acceptance_status,client_id } =
     data;
+    const clientName = data.client.full_name
+    console.log("🚀 ~ file: User.js ~ line 13 ~ User ~ clientName", clientName)
   const date = `${new Date(created_at).getDate()}/${new Date(
     created_at
   ).getMonth()}/${new Date(created_at).getFullYear()}`;
 
   const [orderIdSet, setOrderId] = useState(false)
+  const[showUser,setShowUser] = useState(false);
   const showDetail = (event) =>{
     event.preventDefault();
     setOrderId(true);
   }
+  const showUser = (event) =>{
+    event.preventDefault();
+    setOrderId(true);
+    setShowUser(true);
+  }
 
- if(!orderIdSet){
+ if(orderIdSet === false && showUser === false){
    return( 
     <Container>
       <Property>
-        <PropertyImg src="https://images.pexels.com/photos/3866555/pexels-photo-3866555.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+        <link onClick={event=>showUser(event)}>{clientName}</link>
         <PropertyText>
           <PropertyStreet>
           <OrderButton onClick={event=>showDetail(event)}>
@@ -63,9 +72,13 @@ const User = ({ data }) => {
             </Status>
             </UserWrapper>
     </Container>
-  );}else{
+  );}else if (orderIdSet === true && showUser === false){
     return(
     <AdminOrderDetail orderId={id}/>)
+  }else{
+    return(
+      <UserDetails clientId={client_id} />
+    )
   }
 };
 
