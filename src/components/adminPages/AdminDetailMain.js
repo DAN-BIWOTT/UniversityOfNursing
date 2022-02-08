@@ -460,6 +460,7 @@ var fileArray;
       </div>
     );
   }else{
+    return(
     <div>
       <BackButton />
         <ToolTip>
@@ -624,14 +625,6 @@ var fileArray;
           />
         </ColumnGrid>
         <ColumnGrid>
-          <p>Upload a single compressed file (.rar,.zip etc) upto 80mb</p>
-          <Label>Upload File: </Label>
-          <Input
-            type="file"
-            onChange={(event) => setSelectedFile(event.target.files[0])}
-          />
-        </ColumnGrid>
-        <ColumnGrid>
           {waitingButton ? (
             <Loader
               type="Bars"
@@ -649,6 +642,7 @@ var fileArray;
             </EditContainer>
         </EditGrid>
     </div>
+    )
   }
 };
 
