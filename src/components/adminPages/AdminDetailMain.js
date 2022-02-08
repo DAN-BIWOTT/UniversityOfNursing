@@ -315,7 +315,6 @@ const AdminDetailMain = ({ data, orderId }) => {
       });
     }
   };
-  const [waitingButton, setWaitingButton] = useState(false);
   const deleteFromFireBase = async () => {
     const fileRef = ref(storage, "files/".concat(data.admin_file_name));
     // Delete the file
