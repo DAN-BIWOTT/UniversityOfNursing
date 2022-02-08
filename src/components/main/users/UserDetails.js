@@ -68,7 +68,7 @@ const UserDetails = ({ clientId }) => {
 export default UserDetails;
 
 const Container = styled.div`
-  width: auto;
+  width: 80%;
   left: 16rem;
   top: 0px;
   position: fixed;

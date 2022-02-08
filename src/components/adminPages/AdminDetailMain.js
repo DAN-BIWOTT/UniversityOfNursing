@@ -567,7 +567,7 @@ const AdminDetailMain = ({ data, orderId }) => {
     );
   } else {
     return (
-      <div style={{width:"80%"}}>
+      <div>
         <BackButton />
         <ToolTip>
           <FaqButton>
