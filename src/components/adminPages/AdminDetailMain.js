@@ -290,6 +290,9 @@ var fileArray;
     event.preventDefault();
     setEditState(true);
   }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  }
   if(editState === false){
     return (
       <div>
