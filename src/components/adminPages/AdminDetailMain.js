@@ -27,6 +27,7 @@ import {
 } from "../clientComponents/newOrderForm.data";
 
 const AdminDetailMain = ({ data, orderId }) => {
+console.log("🚀 ~ file: AdminDetailMain.js ~ line 30 ~ AdminDetailMain ~ data", data)
   const [price, setPrice] = useState(data.price);
   const [paperFormat, setPaperFormat] = useState(data.doc_format);
   const [nature, setNature] = useState(data.nature);
@@ -938,6 +939,7 @@ const OrderDescription = styled.p`
 
 const Container = styled.div`
   display: block;
+  width: 67vw;
   padding: 1rem 0;
   border-bottom: 1px solid rgba(190, 190, 190, 0.22);
   cursor: pointer;
