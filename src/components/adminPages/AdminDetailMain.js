@@ -101,7 +101,6 @@ const AdminDetailMain = ({ data, orderId }) => {
       toast("Your Order Has Been Placed.", {
         style: { background: "#00FF00" },
       });
-      setWaitingButton(false);
       setTimeout(() => {
         navigate(-1);
       }, 2000);
