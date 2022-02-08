@@ -32,7 +32,7 @@ console.log(data);
    return( 
     <Container>
       <Property>
-        <link onClick={event=>showUserTrigger(event)}>{clientName}</link>
+        <link to={"#"} />{clientName}
         <PropertyText>
           <PropertyStreet>
           <OrderButton onClick={event=>showDetail(event)}>
