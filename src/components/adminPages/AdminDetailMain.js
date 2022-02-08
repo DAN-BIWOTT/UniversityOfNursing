@@ -18,19 +18,24 @@ import { storage } from "../../utils/firebase";
 import { deleteObject, ref } from "firebase/storage";
 import { sendNotification } from "../../utils/chats";
 import { navigate } from "gatsby";
+import {
+  LineSpacing,
+  NatureDropDown,
+  PaperFormat,
+  Subjects,
+} from "../clientComponents/newOrderForm.data";
 
 const AdminDetailMain = ({ data, orderId }) => {
   var progressStatus, colorProgressTitle, paymentStatus, colorPaymentTitle;
-console.log(data);
-var fileArray;
-      if (typeof data.filesByOrderId !== "undefined"){
-        fileArray = data.filesByOrderId
-        console.log(fileArray);
-      }else{
-        fileArray = []
-        console.log(data.filesByOrderId);
-      }
-
+  console.log(data);
+  var fileArray;
+  if (typeof data.filesByOrderId !== "undefined") {
+    fileArray = data.filesByOrderId;
+    console.log(fileArray);
+  } else {
+    fileArray = [];
+    console.log(data.filesByOrderId);
+  }
 
   const date = `${new Date(data.created_at).getDate()}/${new Date(
     data.created_at
@@ -278,22 +283,22 @@ var fileArray;
     });
     return true;
   };
-  console.log(data)
+  console.log(data);
   const deleteFile = (event) => {
     event.preventDefault();
     if (deleteFromFireBase() && deleteFromHasura())
       toast("File deleted successfully!");
     else toast("System failed to delete file!");
   };
-  const[editState,setEditState] = useState(false)
-  const editTrigger=(event)=>{
+  const [editState, setEditState] = useState(false);
+  const editTrigger = (event) => {
     event.preventDefault();
     setEditState(true);
-  }
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
-  }
-  if(editState === false){
+  };
+  if (editState === false) {
     return (
       <div>
         {loadingScreen}
@@ -306,8 +311,8 @@ var fileArray;
               <br />
               Approve an Order before marking it Complete
               <br />
-              To start chats about the assignment with the client, press the start
-              chat button below.
+              To start chats about the assignment with the client, press the
+              start chat button below.
             </ToolTipText>
           </FaqButton>
         </ToolTip>
@@ -407,33 +412,43 @@ var fileArray;
                 </tr>
               </tbody>
             </table>
-            <Button onClick={event=>editTrigger(event)}>Edit Order</Button>
+            <Button onClick={(event) => editTrigger(event)}>Edit Order</Button>
           </OrderSummary>
-  
+
           <ChatBox sender="client" orderData={orderId} />
           <FileHold>
             <H1>Project Files</H1>
             <h2 style={{ paddingLeft: "1rem" }}>From Client</h2>
-            {fileArray.map((filesData)=>{
-              {if(filesData.sender == "client")return(<FileRow>
-              <FolderImage
-                src={fileFolder}
-                alt="Folder representing downloadable files."
-              />
-              <FileTitle href={filesData.file}>Data File</FileTitle>
-            </FileRow>)}
-      })}
-      <h2 style={{ paddingLeft: "1rem" }}>From Admin</h2>
-      {fileArray.map((filesData)=>{
-            {if(filesData.sender == "admin")return(<FileRow>
-            <FolderImage
-              src={fileFolder}
-              alt="Folder representing downloadable files."
-            />
-            <FileTitle href={filesData.file}>Data File</FileTitle>
-          </FileRow>)}
-          })}
-          <AdminUploadForm orderId={orderId} />
+            {fileArray.map((filesData) => {
+              {
+                if (filesData.sender == "client")
+                  return (
+                    <FileRow>
+                      <FolderImage
+                        src={fileFolder}
+                        alt="Folder representing downloadable files."
+                      />
+                      <FileTitle href={filesData.file}>Data File</FileTitle>
+                    </FileRow>
+                  );
+              }
+            })}
+            <h2 style={{ paddingLeft: "1rem" }}>From Admin</h2>
+            {fileArray.map((filesData) => {
+              {
+                if (filesData.sender == "admin")
+                  return (
+                    <FileRow>
+                      <FolderImage
+                        src={fileFolder}
+                        alt="Folder representing downloadable files."
+                      />
+                      <FileTitle href={filesData.file}>Data File</FileTitle>
+                    </FileRow>
+                  );
+              }
+            })}
+            <AdminUploadForm orderId={orderId} />
           </FileHold>
         </OrderGrid>
         <Toaster
@@ -462,10 +477,10 @@ var fileArray;
         />
       </div>
     );
-  }else{
-    return(
-    <div>
-      <BackButton />
+  } else {
+    return (
+      <div>
+        <BackButton />
         <ToolTip>
           <FaqButton>
             <BsQuestionLg color="black" size="clamp(1rem,1vw,1rem)" />
@@ -474,178 +489,168 @@ var fileArray;
               <br />
               Approve an Order before marking it Complete
               <br />
-              To start chats about the assignment with the client, press the start
-              chat button below.
+              To start chats about the assignment with the client, press the
+              start chat button below.
             </ToolTipText>
           </FaqButton>
         </ToolTip>
         <EditGrid>
-            <EditContainer>
-    <Container>
-      <Title>Edit Order</Title>
-      <form onSubmit={handleSubmit}>
-        <RowGrid>
-          <ColumnGrid>
-            <Label>Budget: </Label>
-            <div style={{ width: "80%", marginLeft: "1rem" }}>
-              <InputRange
-                maxValue={400}
-                minValue={10}
-                formatLabel={(value) => `${value} $`}
-                value={budgetRange}
-                onChange={(value) => setBudgetRange(value)}
-                onChangeComplete={(value) => console.log(value)}
-              />
-            </div>
-          </ColumnGrid>
-          <ColumnGrid>
-            <Label>*Price: </Label>
-            <Input
-              placeholder="EXAMPLE: $25"
-              type="number"
-              onChange={(event) => {
-                setPrice(event.target.value);
-              }}
-              value={price}
-            />
-          </ColumnGrid>
+          <EditContainer>
+            <Container>
+              <Title>Edit Order</Title>
+              <form onSubmit={handleSubmit}>
+                <RowGrid>
+                  <ColumnGrid>
+                    <Label>*Price: </Label>
+                    <Input
+                      placeholder="EXAMPLE: $25"
+                      type="number"
+                      onChange={(event) => {
+                        setPrice(event.target.value);
+                      }}
+                      value={price}
+                    />
+                  </ColumnGrid>
 
-          <ColumnGrid>
-            <Label>*Paper Format: </Label>
-            <InputSelect
-              onChange={(event) => setPaperFormat(event.target.value)}
-              value={paperFormat}
-            >
-              {PaperFormat.map((data) => {
-                return (
-                  <option
-                    value={data.paper_format_id}
-                    key={data.paper_format_id}
-                  >
-                    {data.paper_format}
-                  </option>
-                );
-              })}
-            </InputSelect>
-          </ColumnGrid>
-          <ColumnGrid>
-            <Label>*Nature: </Label>
-            <InputSelect
-              onChange={(event) => {
-                setNature(event.target.value);
-              }}
-              value={nature}
-            >
-              {NatureDropDown.map((data) => {
-                return (
-                  <option value={data.named_id} key={data.named_id}>
-                    {data.name}
-                  </option>
-                );
-              })}
-            </InputSelect>
-          </ColumnGrid>
+                  <ColumnGrid>
+                    <Label>*Paper Format: </Label>
+                    <InputSelect
+                      onChange={(event) => setPaperFormat(event.target.value)}
+                      value={paperFormat}
+                    >
+                      {PaperFormat.map((data) => {
+                        return (
+                          <option
+                            value={data.paper_format_id}
+                            key={data.paper_format_id}
+                          >
+                            {data.paper_format}
+                          </option>
+                        );
+                      })}
+                    </InputSelect>
+                  </ColumnGrid>
+                  <ColumnGrid>
+                    <Label>*Nature: </Label>
+                    <InputSelect
+                      onChange={(event) => {
+                        setNature(event.target.value);
+                      }}
+                      value={nature}
+                    >
+                      {NatureDropDown.map((data) => {
+                        return (
+                          <option value={data.named_id} key={data.named_id}>
+                            {data.name}
+                          </option>
+                        );
+                      })}
+                    </InputSelect>
+                  </ColumnGrid>
 
-          <ColumnGrid>
-            <Label>*Pages: </Label>
-            <Input
-              placeholder="EXAMPLE: 2 pages"
-              onChange={(event) => {
-                setPages(event.target.value);
-              }}
-              value={pages}
-            />
-          </ColumnGrid>
-          <ColumnGrid>
-            <Label>*Deadline: </Label>
-            <Input
-            type="datetime-local"
-              onChange={(event) => {
-                setDeadline(event.target.value);
-              }}
-              value={deadline}
-            />
-          </ColumnGrid>
+                  <ColumnGrid>
+                    <Label>*Pages: </Label>
+                    <Input
+                      placeholder="EXAMPLE: 2 pages"
+                      onChange={(event) => {
+                        setPages(event.target.value);
+                      }}
+                      value={pages}
+                    />
+                  </ColumnGrid>
+                  <ColumnGrid>
+                    <Label>*Deadline: </Label>
+                    <Input
+                      type="datetime-local"
+                      onChange={(event) => {
+                        setDeadline(event.target.value);
+                      }}
+                      value={deadline}
+                    />
+                  </ColumnGrid>
 
-          <ColumnGrid>
-            <Label>Spacing: </Label>
-            <InputSelect
-              onChange={(event) => setSpacing(event.target.value)}
-              value={spacing}
-            >
-              {LineSpacing.map((data) => {
-                return (
-                  <option value={data.lineSpace} key={data.lineSpace_id}>
-                    {data.lineSpace}
-                  </option>
-                );
-              })}
-            </InputSelect>
-          </ColumnGrid>
-          <ColumnGrid>
-            <Label>*Subject: </Label>
-            <InputSelect
-              onChange={(event) => {
-                setSubject(event.target.value);
-              }}
-              value={subject}
-            >
-              {Subjects.map((data) => {
-                return (
-                  <option
-                    value={data.subject_named_id}
-                    key={data.subject_named_id}
-                  >
-                    {data.subject_name}
-                  </option>
-                );
-              })}
-            </InputSelect>
-          </ColumnGrid>
-        </RowGrid>
+                  <ColumnGrid>
+                    <Label>Spacing: </Label>
+                    <InputSelect
+                      onChange={(event) => setSpacing(event.target.value)}
+                      value={spacing}
+                    >
+                      {LineSpacing.map((data) => {
+                        return (
+                          <option
+                            value={data.lineSpace}
+                            key={data.lineSpace_id}
+                          >
+                            {data.lineSpace}
+                          </option>
+                        );
+                      })}
+                    </InputSelect>
+                  </ColumnGrid>
+                  <ColumnGrid>
+                    <Label>*Subject: </Label>
+                    <InputSelect
+                      onChange={(event) => {
+                        setSubject(event.target.value);
+                      }}
+                      value={subject}
+                    >
+                      {Subjects.map((data) => {
+                        return (
+                          <option
+                            value={data.subject_named_id}
+                            key={data.subject_named_id}
+                          >
+                            {data.subject_name}
+                          </option>
+                        );
+                      })}
+                    </InputSelect>
+                  </ColumnGrid>
+                </RowGrid>
 
-        <ColumnGrid>
-          <Label>*Topic: </Label>
-          <Input
-            placeholder="EXAMPLE: Introductory Physiology"
-            onChange={(event) => {
-              setTopic(event.target.value);
-            }}
-            value={topic}
-          />
-        </ColumnGrid>
+                <ColumnGrid>
+                  <Label>*Topic: </Label>
+                  <Input
+                    placeholder="EXAMPLE: Introductory Physiology"
+                    onChange={(event) => {
+                      setTopic(event.target.value);
+                    }}
+                    value={topic}
+                  />
+                </ColumnGrid>
 
-        <ColumnGrid>
-          <Label>*Description: </Label>
-          <TextAreaInput
-            type="text"
-            placeholder="INFO: Input a summary of the project description. Max of 700 characters"
-            maxLength="700"
-            onChange={(event) => {
-              setDescription(event.target.value);
-            }}
-            value={description}
-          />
-        </ColumnGrid>
-        <ColumnGrid>
-          {waitingButton ? (
-            <Loader
-              type="Bars"
-              color="#00BFFF"
-              height={40}
-              width={40}
-              style={{ marginLeft: "40%" }}
-            />
-          ) : (
-            <Button type="submit">Submit</Button>
-          )}
-        </ColumnGrid>
-      </form>
-    </Container>
-            </EditContainer>
+                <ColumnGrid>
+                  <Label>*Description: </Label>
+                  <TextAreaInput
+                    type="text"
+                    placeholder="INFO: Input a summary of the project description. Max of 700 characters"
+                    maxLength="700"
+                    onChange={(event) => {
+                      setDescription(event.target.value);
+                    }}
+                    value={description}
+                  />
+                </ColumnGrid>
+                <ColumnGrid>
+                  {waitingButton ? (
+                    <Loader
+                      type="Bars"
+                      color="#00BFFF"
+                      height={40}
+                      width={40}
+                      style={{ marginLeft: "40%" }}
+                    />
+                  ) : (
+                    <Button type="submit">Submit</Button>
+                  )}
+                </ColumnGrid>
+              </form>
+            </Container>
+          </EditContainer>
         </EditGrid>
-    </div>
-    )
+      </div>
+    );
   }
 };
 
@@ -653,9 +658,9 @@ export default AdminDetailMain;
 const EditGrid = styled.div`
   display: grid;
   grid-template-columns: auto;
-`
+`;
 const EditContainer = styled.div`
-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   height: auto;
   background: white;
@@ -663,7 +668,7 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   justify-content: left;
   align-items: center;
   border-radius: 20px;
-`
+`;
 const FaqButton = styled.button`
   margin-left: 100%;
   float: left;
@@ -948,4 +953,3 @@ const TextAreaInput = styled.textarea`
     box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
   }
 `;
-
