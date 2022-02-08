@@ -51,7 +51,7 @@ const AdminDetailMain = ({ data, orderId }) => {
       return true;
     return false;
   };
-  let notification = {
+  let GeneralNotification = {
     created_at: 0,
     sender: "",
     msg: "",
@@ -92,12 +92,12 @@ const AdminDetailMain = ({ data, orderId }) => {
     try {
       const finalRes = await response.json();
       console.log(finalRes);
-      notification.created_at = Date.now();
-      notification.sender = "Admin";
-      notification.order_id = finalRes.data.insert_order_one.id;
-      notification.msg = "Order Edited: ".concat(finalRes.data.insert_order_one.id);
-      console.log(notification)
-      sendGeneralNotification(notification);
+      GeneralNotification.created_at = Date.now();
+      GeneralNotification.sender = "Admin";
+      GeneralNotification.order_id = finalRes.data.insert_order_one.id;
+      GeneralNotification.msg = "Order Edited: ".concat(finalRes.data.insert_order_one.id);
+      console.log(GeneralNotification)
+      sendGeneralNotification(GeneralNotification);
       toast("Your Order Has Been Placed.", {
         style: { background: "#00FF00" },
       });
