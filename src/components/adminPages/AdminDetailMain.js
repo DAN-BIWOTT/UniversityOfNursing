@@ -9,6 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 import {
   AdminStatusChange_query,
   CompleteOrderButton_query,
+  EditOrderForm_query,
   MarkOrderAsPaid_query,
 } from "../../graphQl/uonQueries";
 import Spinner from "../Spinner";
@@ -16,7 +17,7 @@ import AdminUploadForm from "./AdminUploadForm";
 import Loader from "react-loader-spinner";
 import { storage } from "../../utils/firebase";
 import { deleteObject, ref } from "firebase/storage";
-import { sendNotification } from "../../utils/chats";
+import { sendGeneralNotification, sendNotification } from "../../utils/chats";
 import { navigate } from "gatsby";
 import {
   LineSpacing,
@@ -26,6 +27,92 @@ import {
 } from "../clientComponents/newOrderForm.data";
 
 const AdminDetailMain = ({ data, orderId }) => {
+  const [price, setPrice] = useState("");
+  const [paperFormat, setPaperFormat] = useState("");
+  const [nature, setNature] = useState("");
+  const [pages, setPages] = useState("");
+  const [deadline, setDeadline] = useState("");
+  const [spacing, setSpacing] = useState("");
+  const [subject, setSubject] = useState("");
+  const [topic, setTopic] = useState("");
+  const [description, setDescription] = useState("");
+  const [waitingButton, setWaitingButton] = useState(false);
+  const emptyFields = () => {
+    if (
+      price === "" ||
+      paperFormat === "" ||
+      nature === "" ||
+      pages === "" ||
+      deadline === "" ||
+      subject === "" ||
+      topic === "" ||
+      description === ""
+    )
+      return true;
+    return false;
+  };
+  let notification = {
+    created_at: 0,
+    sender: "",
+    msg: "",
+  };
+  const EditOrderFormQuery = EditOrderForm_query
+  const submitOrder = async () => {
+    if (emptyFields()) {
+      toast("Fields with stars cant be left empty!", {
+        style: { background: "#DC143C" },
+      });
+      setWaitingButton(false);
+      return false;
+    }
+    const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
+      method: "POST",
+      headers: {
+        "x-hasura-admin-secret": `${process.env.GATSBY_HASURA_ADMIN_SECRET}`,
+        "Content-Type": "Application/Json",
+      },
+      body: JSON.stringify({
+        query: EditOrderFormQuery,
+        variables: {
+          orderId,
+          clientId,
+          price,
+          paperFormat,
+          nature,
+          pages,
+          deadline,
+          spacing,
+          subject,
+          topic,
+          description
+        },
+      }),
+    });
+
+    try {
+      const finalRes = await response.json();
+      console.log(finalRes);
+      notification.created_at = Date.now();
+      notification.sender = "Admin";
+      notification.order_id = finalRes.data.insert_order_one.id;
+      notification.msg = "Order Edited: ".concat(finalRes.data.insert_order_one.id);
+      console.log(notification)
+      sendGeneralNotification(notification);
+      toast("Your Order Has Been Placed.", {
+        style: { background: "#00FF00" },
+      });
+      setWaitingButton(false);
+      setTimeout(() => {
+        navigate(-1);
+      }, 2000);
+      setWaitingButton(false);
+    } catch (e) {
+      toast("Problem Creating Order.", { style: { background: "#DC143C" } });
+      setWaitingButton(false);
+    }
+  };
+
+
   var progressStatus, colorProgressTitle, paymentStatus, colorPaymentTitle;
   console.log(data);
   var fileArray;
@@ -295,8 +382,10 @@ const AdminDetailMain = ({ data, orderId }) => {
     event.preventDefault();
     setEditState(true);
   };
-  const handleSubmit = async (event) => {
+ const handleSubmit = async (event) => {
     event.preventDefault();
+    setWaitingButton(true);
+    submitOrder()
   };
   if (editState === false) {
     return (
