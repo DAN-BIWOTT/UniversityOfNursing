@@ -27,16 +27,17 @@ import {
 } from "../clientComponents/newOrderForm.data";
 
 const AdminDetailMain = ({ data, orderId }) => {
-  const [price, setPrice] = useState("");
-  const [paperFormat, setPaperFormat] = useState("");
-  const [nature, setNature] = useState("");
-  const [pages, setPages] = useState("");
-  const [deadline, setDeadline] = useState("");
-  const [spacing, setSpacing] = useState("");
-  const [subject, setSubject] = useState("");
-  const [topic, setTopic] = useState("");
-  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState(data.price);
+  const [paperFormat, setPaperFormat] = useState(data.doc_format);
+  const [nature, setNature] = useState(data.nature);
+  const [pages, setPages] = useState(data.pages);
+  const [deadline, setDeadline] = useState(data.due_time);
+  const [spacing, setSpacing] = useState(data.spacing);
+  const [subject, setSubject] = useState(data.subject);
+  const [topic, setTopic] = useState(data.topic);
+  const [description, setDescription] = useState(data.doc_description);
   const [waitingButton, setWaitingButton] = useState(false);
+  
   const emptyFields = () => {
     if (
       price === "" ||
@@ -566,7 +567,7 @@ const AdminDetailMain = ({ data, orderId }) => {
     );
   } else {
     return (
-      <div>
+      <div style={{width:"80%"}}>
         <BackButton />
         <ToolTip>
           <FaqButton>
