@@ -952,24 +952,3 @@ const TextAreaInput = styled.textarea`
   }
 `;
 
-const Button = styled.button`
-  margin-top: 2rem;
-  width: 90%;
-  height: 7vh;
-  background-color: #8e6fe1;
-  border: none;
-  border-bottom: 1px solid black;
-  border-radius: 5px;
-  cursor: pointer;
-  color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: clamp(1rem, 2vw, 1rem);
-  font-weight: bold;
-  :hover {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  }
-  :active {
-    box-shadow: 4px 0 0 8px rgba(0, 0, 0, 0.2);
-  }
-`;
