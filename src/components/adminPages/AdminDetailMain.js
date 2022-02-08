@@ -285,175 +285,388 @@ var fileArray;
       toast("File deleted successfully!");
     else toast("System failed to delete file!");
   };
-  return (
-    <div>
-      {loadingScreen}
-      <BackButton />
-      <ToolTip>
-        <FaqButton>
-          <BsQuestionLg color="black" size="clamp(1rem,1vw,1rem)" />
-          <ToolTipText className="tooltiptext">
-            HELP
-            <br />
-            Approve an Order before marking it Complete
-            <br />
-            To start chats about the assignment with the client, press the start
-            chat button below.
-          </ToolTipText>
-        </FaqButton>
-      </ToolTip>
-      <H1>Order Id: {orderId}</H1>
-      <OrderGrid>
-        <OrderContainer>
-          <Ul>
-            <Li>
-              <NavButton onClick={(event) => orderStatus(event)} value={101}>
-                Reject Order
-              </NavButton>
-            </Li>
-            <Li>
-              <NavButton onClick={(event) => orderStatus(event)} value={303}>
-                Approve Order
-              </NavButton>
-            </Li>
-            <Li>
-              <NavButton onClick={(event) => orderStatus(event)} value={202}>
-                Order Inprogress
-              </NavButton>
-            </Li>
-            <Li>
-              <NavButton onClick={(event) => orderPaid(event)} value={404}>
-                Mark Paid
-              </NavButton>
-            </Li>
-            <Li style={{ float: "right" }}>
-              <NavButton
-                onClick={(event) => progress_status(event)}
-                value={404}
-              >
-                Order Complete
-              </NavButton>
-            </Li>
-          </Ul>
-          <OrderTitle>{data.subject}</OrderTitle>
-          <StatusContainer>
-            <ColorStatus status={progressStatus} title={colorProgressTitle} />
-            <ColorStatus status={paymentStatus} title={colorPaymentTitle} />
-          </StatusContainer>
-          <OrderSubtitle>{data.topic}</OrderSubtitle>
-          <OrderDescription>{data.doc_description}</OrderDescription>
-        </OrderContainer>
-        <OrderSummary>
-          <OrderSummaryTitle>Order Summary</OrderSummaryTitle>
-          <hr />
-          <table>
-            <tbody>
-              <tr>
-                <td>Budget:</td>
-                <td>{data.budget}</td>
-              </tr>
-              <tr>
-                <td>Price:</td>
-                <td>{data.price}</td>
-              </tr>
-              <tr>
-                <td>Dispute:</td>
-                <td>
-                  {data.dispute_status === 0 || data.dispute_status === null
-                    ? "No Dispute"
-                    : "Under Dispute"}
-                </td>
-              </tr>
-              <tr>
-                <td>Date Received:</td>
-                <td>{date}</td>
-              </tr>
-              <tr>
-                <td>Format:</td>
-                <td>{data.doc_format}</td>
-              </tr>
-              <tr>
-                <td>Deadline:</td>
-                <td>{data.due_time}</td>
-              </tr>
-              <tr>
-                <td>Nature:</td>
-                <td>{data.nature}</td>
-              </tr>
-              <tr>
-                <td>Pages:</td>
-                <td>{data.pages}</td>
-              </tr>
-              <tr>
-                <td>Line-Spacing:</td>
-                <td>{data.spacing}</td>
-              </tr>
-              <tr>
-                <td>Revision Status:</td>
-                <td>
-                  {data.revision_status === 0 || data.revision_status === null
-                    ? "Not In Revision"
-                    : "In Revision"}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </OrderSummary>
-        <ChatBox sender="client" orderData={orderId} />
-        <FileHold>
-          <H1>Project Files</H1>
-          <h2 style={{ paddingLeft: "1rem" }}>From Client</h2>
-          {fileArray.map((filesData)=>{
-            {if(filesData.sender == "client")return(<FileRow>
+  const[editState,setEditState] = useState(false)
+  const editTrigger=(event)=>{
+    event.preventDefault();
+    setEditState(true);
+  }
+  if(editState === false){
+    return (
+      <div>
+        {loadingScreen}
+        <BackButton />
+        <ToolTip>
+          <FaqButton>
+            <BsQuestionLg color="black" size="clamp(1rem,1vw,1rem)" />
+            <ToolTipText className="tooltiptext">
+              HELP
+              <br />
+              Approve an Order before marking it Complete
+              <br />
+              To start chats about the assignment with the client, press the start
+              chat button below.
+            </ToolTipText>
+          </FaqButton>
+        </ToolTip>
+        <H1>Order Id: {orderId}</H1>
+        <OrderGrid>
+          <OrderContainer>
+            <Ul>
+              <Li>
+                <NavButton onClick={(event) => orderStatus(event)} value={101}>
+                  Reject Order
+                </NavButton>
+              </Li>
+              <Li>
+                <NavButton onClick={(event) => orderStatus(event)} value={303}>
+                  Approve Order
+                </NavButton>
+              </Li>
+              <Li>
+                <NavButton onClick={(event) => orderStatus(event)} value={202}>
+                  Order Inprogress
+                </NavButton>
+              </Li>
+              <Li>
+                <NavButton onClick={(event) => orderPaid(event)} value={404}>
+                  Mark Paid
+                </NavButton>
+              </Li>
+              <Li style={{ float: "right" }}>
+                <NavButton
+                  onClick={(event) => progress_status(event)}
+                  value={404}
+                >
+                  Order Complete
+                </NavButton>
+              </Li>
+            </Ul>
+            <OrderTitle>{data.subject}</OrderTitle>
+            <StatusContainer>
+              <ColorStatus status={progressStatus} title={colorProgressTitle} />
+              <ColorStatus status={paymentStatus} title={colorPaymentTitle} />
+            </StatusContainer>
+            <OrderSubtitle>{data.topic}</OrderSubtitle>
+            <OrderDescription>{data.doc_description}</OrderDescription>
+          </OrderContainer>
+          <OrderSummary>
+            <OrderSummaryTitle>Order Summary</OrderSummaryTitle>
+            <hr />
+            <table>
+              <tbody>
+                <tr>
+                  <td>Budget:</td>
+                  <td>{data.budget}</td>
+                </tr>
+                <tr>
+                  <td>Price:</td>
+                  <td>{data.price}</td>
+                </tr>
+                <tr>
+                  <td>Dispute:</td>
+                  <td>
+                    {data.dispute_status === 0 || data.dispute_status === null
+                      ? "No Dispute"
+                      : "Under Dispute"}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Date Received:</td>
+                  <td>{date}</td>
+                </tr>
+                <tr>
+                  <td>Format:</td>
+                  <td>{data.doc_format}</td>
+                </tr>
+                <tr>
+                  <td>Deadline:</td>
+                  <td>{data.due_time}</td>
+                </tr>
+                <tr>
+                  <td>Nature:</td>
+                  <td>{data.nature}</td>
+                </tr>
+                <tr>
+                  <td>Pages:</td>
+                  <td>{data.pages}</td>
+                </tr>
+                <tr>
+                  <td>Line-Spacing:</td>
+                  <td>{data.spacing}</td>
+                </tr>
+                <tr>
+                  <td>Revision Status:</td>
+                  <td>
+                    {data.revision_status === 0 || data.revision_status === null
+                      ? "Not In Revision"
+                      : "In Revision"}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <Button onClick={event=>editTrigger(event)}>Edit Order</Button>
+          </OrderSummary>
+  
+          <ChatBox sender="client" orderData={orderId} />
+          <FileHold>
+            <H1>Project Files</H1>
+            <h2 style={{ paddingLeft: "1rem" }}>From Client</h2>
+            {fileArray.map((filesData)=>{
+              {if(filesData.sender == "client")return(<FileRow>
+              <FolderImage
+                src={fileFolder}
+                alt="Folder representing downloadable files."
+              />
+              <FileTitle href={filesData.file}>Data File</FileTitle>
+            </FileRow>)}
+      })}
+      <h2 style={{ paddingLeft: "1rem" }}>From Admin</h2>
+      {fileArray.map((filesData)=>{
+            {if(filesData.sender == "admin")return(<FileRow>
             <FolderImage
               src={fileFolder}
               alt="Folder representing downloadable files."
             />
             <FileTitle href={filesData.file}>Data File</FileTitle>
           </FileRow>)}
-    })}
-    <h2 style={{ paddingLeft: "1rem" }}>From Admin</h2>
-    {fileArray.map((filesData)=>{
-          {if(filesData.sender == "admin")return(<FileRow>
-          <FolderImage
-            src={fileFolder}
-            alt="Folder representing downloadable files."
-          />
-          <FileTitle href={filesData.file}>Data File</FileTitle>
-        </FileRow>)}
-        })}
-        <AdminUploadForm orderId={orderId} />
-        </FileHold>
-      </OrderGrid>
-      <Toaster
-        position="top-center"
-        reverseOrder={false}
-        gutter={8}
-        containerClassName=""
-        containerStyle={{}}
-        toastOptions={{
-          // Define default options
-          className: "",
-          duration: 5000,
-          style: {
-            background: "#363636",
-            color: "#fff",
-          },
-          // Default options for specific types
-          success: {
-            duration: 3000,
-            theme: {
-              primary: "green",
-              secondary: "black",
+          })}
+          <AdminUploadForm orderId={orderId} />
+          </FileHold>
+        </OrderGrid>
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+          gutter={8}
+          containerClassName=""
+          containerStyle={{}}
+          toastOptions={{
+            // Define default options
+            className: "",
+            duration: 5000,
+            style: {
+              background: "#363636",
+              color: "#fff",
             },
-          },
-        }}
-      />
+            // Default options for specific types
+            success: {
+              duration: 3000,
+              theme: {
+                primary: "green",
+                secondary: "black",
+              },
+            },
+          }}
+        />
+      </div>
+    );
+  }else{
+    <div>
+      <BackButton />
+        <ToolTip>
+          <FaqButton>
+            <BsQuestionLg color="black" size="clamp(1rem,1vw,1rem)" />
+            <ToolTipText className="tooltiptext">
+              HELP
+              <br />
+              Approve an Order before marking it Complete
+              <br />
+              To start chats about the assignment with the client, press the start
+              chat button below.
+            </ToolTipText>
+          </FaqButton>
+        </ToolTip>
+        <EditGrid>
+            <EditContainer>
+    <Container>
+      <Title>Edit Order</Title>
+      <form onSubmit={handleSubmit}>
+        <RowGrid>
+          <ColumnGrid>
+            <Label>Budget: </Label>
+            <div style={{ width: "80%", marginLeft: "1rem" }}>
+              <InputRange
+                maxValue={400}
+                minValue={10}
+                formatLabel={(value) => `${value} $`}
+                value={budgetRange}
+                onChange={(value) => setBudgetRange(value)}
+                onChangeComplete={(value) => console.log(value)}
+              />
+            </div>
+          </ColumnGrid>
+          <ColumnGrid>
+            <Label>*Price: </Label>
+            <Input
+              placeholder="EXAMPLE: $25"
+              type="number"
+              onChange={(event) => {
+                setPrice(event.target.value);
+              }}
+              value={price}
+            />
+          </ColumnGrid>
+
+          <ColumnGrid>
+            <Label>*Paper Format: </Label>
+            <InputSelect
+              onChange={(event) => setPaperFormat(event.target.value)}
+              value={paperFormat}
+            >
+              {PaperFormat.map((data) => {
+                return (
+                  <option
+                    value={data.paper_format_id}
+                    key={data.paper_format_id}
+                  >
+                    {data.paper_format}
+                  </option>
+                );
+              })}
+            </InputSelect>
+          </ColumnGrid>
+          <ColumnGrid>
+            <Label>*Nature: </Label>
+            <InputSelect
+              onChange={(event) => {
+                setNature(event.target.value);
+              }}
+              value={nature}
+            >
+              {NatureDropDown.map((data) => {
+                return (
+                  <option value={data.named_id} key={data.named_id}>
+                    {data.name}
+                  </option>
+                );
+              })}
+            </InputSelect>
+          </ColumnGrid>
+
+          <ColumnGrid>
+            <Label>*Pages: </Label>
+            <Input
+              placeholder="EXAMPLE: 2 pages"
+              onChange={(event) => {
+                setPages(event.target.value);
+              }}
+              value={pages}
+            />
+          </ColumnGrid>
+          <ColumnGrid>
+            <Label>*Deadline: </Label>
+            <Input
+            type="datetime-local"
+              onChange={(event) => {
+                setDeadline(event.target.value);
+              }}
+              value={deadline}
+            />
+          </ColumnGrid>
+
+          <ColumnGrid>
+            <Label>Spacing: </Label>
+            <InputSelect
+              onChange={(event) => setSpacing(event.target.value)}
+              value={spacing}
+            >
+              {LineSpacing.map((data) => {
+                return (
+                  <option value={data.lineSpace} key={data.lineSpace_id}>
+                    {data.lineSpace}
+                  </option>
+                );
+              })}
+            </InputSelect>
+          </ColumnGrid>
+          <ColumnGrid>
+            <Label>*Subject: </Label>
+            <InputSelect
+              onChange={(event) => {
+                setSubject(event.target.value);
+              }}
+              value={subject}
+            >
+              {Subjects.map((data) => {
+                return (
+                  <option
+                    value={data.subject_named_id}
+                    key={data.subject_named_id}
+                  >
+                    {data.subject_name}
+                  </option>
+                );
+              })}
+            </InputSelect>
+          </ColumnGrid>
+        </RowGrid>
+
+        <ColumnGrid>
+          <Label>*Topic: </Label>
+          <Input
+            placeholder="EXAMPLE: Introductory Physiology"
+            onChange={(event) => {
+              setTopic(event.target.value);
+            }}
+            value={topic}
+          />
+        </ColumnGrid>
+
+        <ColumnGrid>
+          <Label>*Description: </Label>
+          <TextAreaInput
+            type="text"
+            placeholder="INFO: Input a summary of the project description. Max of 700 characters"
+            maxLength="700"
+            onChange={(event) => {
+              setDescription(event.target.value);
+            }}
+            value={description}
+          />
+        </ColumnGrid>
+        <ColumnGrid>
+          <p>Upload a single compressed file (.rar,.zip etc) upto 80mb</p>
+          <Label>Upload File: </Label>
+          <Input
+            type="file"
+            onChange={(event) => setSelectedFile(event.target.files[0])}
+          />
+        </ColumnGrid>
+        <ColumnGrid>
+          {waitingButton ? (
+            <Loader
+              type="Bars"
+              color="#00BFFF"
+              height={40}
+              width={40}
+              style={{ marginLeft: "40%" }}
+            />
+          ) : (
+            <Button type="submit">Submit</Button>
+          )}
+        </ColumnGrid>
+      </form>
+    </Container>
+            </EditContainer>
+        </EditGrid>
     </div>
-  );
+  }
 };
 
 export default AdminDetailMain;
+const EditGrid = styled.div`
+  display: grid;
+  grid-template-columns: auto;
+`
+const EditContainer = styled.div`
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  height: auto;
+  background: white;
+  display: block;
+  justify-content: left;
+  align-items: center;
+  border-radius: 20px;
+`
 const FaqButton = styled.button`
   margin-left: 100%;
   float: left;
@@ -631,4 +844,132 @@ const OrderDescription = styled.p`
   font-size: clamp(1rem, 1vw, 1rem);
   justify-content: left;
   margin-left: 2vw;
+`;
+
+const Container = styled.div`
+  display: block;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(190, 190, 190, 0.22);
+  cursor: pointer;
+  background-color: #fff;
+  transition: all ease-in-out 300ms;
+  box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  &:hover {
+    background-color: ${({ theme }) => theme.secondary};
+  }
+`;
+
+const Title = styled.h1`
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: clamp(2rem, 1vw, 1rem);
+  font-weight: bold;
+  margin-left: 40%;
+`;
+
+const RowGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 2rem;
+`;
+const ColumnGrid = styled.div`
+  margin-left: 1rem;
+  display: block;
+  margin-bottom: 1rem;
+  width: 100%;
+`;
+
+const Label = styled.h3`
+  margin-top: 1px;
+  font-size: clamp(1rem, 1vw, 1rem);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 600;
+`;
+const Input = styled.input`
+  width: 70%;
+  height: 7vh;
+  margin-left: 10px;
+  font-size: clamp(1rem, 1vw, 1rem);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 400;
+  padding: 1rem;
+  border: none;
+  border-bottom: 1px solid black;
+  box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
+  padding: 1rem;
+  border-radius: 5px;
+  :focus {
+    outline: none;
+    border: none;
+    border-bottom: #1740e1;
+    box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
+  }
+`;
+
+const InputSelect = styled.select`
+  width: 70%;
+  height: 8vh;
+  margin-left: 10px;
+  font-size: clamp(1rem, 1vw, 1rem);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 400;
+  padding: 0px 0px 0px 1rem;
+  border-radius: 5px;
+  border: none;
+  border-bottom: 1px solid black;
+  box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
+  padding: 1rem;
+  :focus {
+    outline: none;
+    border: none;
+    border-bottom: #1740e1;
+    box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
+  }
+`;
+
+const TextAreaInput = styled.textarea`
+  width: 90%;
+  height: 20vh;
+  margin-left: 10px;
+  font-size: clamp(1rem, 1vw, 1rem);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 400;
+  padding: 1rem;
+  border-radius: 5px;
+  border: none;
+  border-bottom: 1px solid black;
+  box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
+  :focus {
+    outline: none;
+    border: none;
+    border-bottom: #1740e1;
+    box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
+  }
+`;
+
+const Button = styled.button`
+  margin-top: 2rem;
+  width: 90%;
+  height: 7vh;
+  background-color: #8e6fe1;
+  border: none;
+  border-bottom: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: clamp(1rem, 2vw, 1rem);
+  font-weight: bold;
+  :hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+  :active {
+    box-shadow: 4px 0 0 8px rgba(0, 0, 0, 0.2);
+  }
 `;
