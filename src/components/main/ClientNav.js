@@ -70,8 +70,11 @@ const Nav = () => {
   }
 
   const[showOrder,setShowOrder] = useState(false)
+  const[order_id,setOrder_id] = useState(0)
+  
   const goToOrder = (event)=>{
     event.preventDefault();
+    setOrder_id(event.target.value);
     setShowOrder(true);
   }
 if(showOrder==true){
@@ -142,7 +145,7 @@ if(showOrder==true){
     </Container>
   );
 }else{
-  return(<ClientOrderDetail orderId={event.target.value}/>)
+  return(<ClientOrderDetail orderId={order_id}/>)
 }
   
 };
