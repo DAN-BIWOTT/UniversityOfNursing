@@ -106,7 +106,7 @@ if(showOrder==false ){
               <ListItem>
                 {notifications.map((data) => {
                   return (<>
-                    <NotificationCard onClick={event=>goToOrder(event)} value={data.orderId} key={data.created_at}>
+                    <NotificationCard key={data.created_at}>
                       <NotificationRow>
                         <NotificationTitle>
                           <p>{data.sender}</p>
@@ -118,7 +118,7 @@ if(showOrder==false ){
                           <p>{getDate(data.created_at)}</p>
                         </NotificationTime>
                       </NotificationRow>
-                      
+                      <Button onClick={event=>goToOrder(event)} value={data.orderId}>view</Button>
                     </NotificationCard>
                       <hr /></>
                   );

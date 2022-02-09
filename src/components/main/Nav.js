@@ -8,6 +8,7 @@ import {
   ref,
   remove
 } from "firebase/database";
+import AdminOrderDetail from "../../../pages/adminPages/AdminOrderDetail";
 import { database } from "../../utils/firebase";
 import toast, { Toaster } from "react-hot-toast";
 import AccountBalance from "./AccountBalance";
@@ -67,11 +68,23 @@ const Nav = () => {
       toast("Action Cancelled");
     }
   }
+  const[showOrder,setShowOrder] = useState(false)
+  const[order_id,setOrder_id]= useState(0);
   const goToOrder = (event) =>{
-event.preventDefault();
-alert(event.target.value)
+    event.preventDefault();
+    if(event.target.value === null || event.target.value ===0 || event.target.value ===""){
+      console.log("No id passed ",event.target.value);
+    }else{
+      console.log("id passed ",event.target.value);
+      setOrder_id(event.target.value)
+      if(order_id==""||order_id===0){
+        console.log("id not set ",event.target.value);
+      }else{
+        setShowOrder(true);
+      }
+    }
   }
-
+  if(showOrder==false ){
   return (
     <Container>
       <AccountBalance />
@@ -106,6 +119,7 @@ alert(event.target.value)
                       <NotificationBody>
                         <p>{data.msg}</p>
                       </NotificationBody>
+                      <Button onClick={event=>goToOrder(event)} value={data.orderId}>view</Button>
                     </NotificationCard>
                   );
                 })}
@@ -140,6 +154,9 @@ alert(event.target.value)
       </DropDown>
     </Container>
   );
+}else{
+  return(<AdminOrderDetail orderId={order_id}/>)
+}
 };
 
 export default Nav;

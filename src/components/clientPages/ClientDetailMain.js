@@ -15,6 +15,7 @@ import Loader from "react-loader-spinner";
 import { sendGeneralNotification } from "../../utils/chats";
 import Spinner from "../Spinner";
 import { LineSpacing, NatureDropDown, PaperFormat, Subjects } from "../clientComponents/newOrderForm.data";
+import { navigate } from "gatsby";
 
 const ClientDetailMain = ({ data, orderId }) => {
 console.log("🚀 ~ file: ClientDetailMain.js ~ line 19 ~ ClientDetailMain ~ data", data)
@@ -102,7 +103,7 @@ let clientId = data.client_id;
       const finalRes = await response.json();
       console.log(finalRes);
       GeneralNotification.created_at = Date.now();
-      GeneralNotification.sender = "Admin";
+      GeneralNotification.sender = "Client";
       GeneralNotification.order_id = finalRes.data.update_order.returning.id;
       GeneralNotification.msg = "Order Edited: ".concat(finalRes.data.update_order.returning.id);
       console.log(GeneralNotification)
