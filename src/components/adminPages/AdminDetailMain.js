@@ -55,7 +55,15 @@ let check = true
       setDescription(data.description);
       console.log("Price test ~ data", price);
     }
-  });
+  },[price,
+    paperFormat,
+    nature,
+    pages,
+    deadline,
+    spacing,
+    subject,
+    topic,
+    description]);
   const emptyFields = () => {
     if (
       price === "" ||
