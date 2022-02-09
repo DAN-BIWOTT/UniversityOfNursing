@@ -145,7 +145,11 @@ if(showOrder==true){
     </Container>
   );
 }else{
-  return(<ClientOrderDetail orderId={order_id}/>)
+  if(order_id===0||order_id===""){
+    return(<></>)
+  }else{
+    return(<ClientOrderDetail orderId={order_id}/>)
+  }
 }
   
 };

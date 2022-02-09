@@ -38,10 +38,23 @@ const [subject, setSubject] = useState(data.subject);
 const [topic, setTopic] = useState(data.topic);
 const [description, setDescription] = useState(data.doc_description);
 const [waitingButton, setWaitingButton] = useState(false);
-
+const emptyFields = () => {
+  if (
+    price === "" ||
+    paperFormat === "" ||
+    nature === "" ||
+    pages === "" ||
+    deadline === "" ||
+    subject === "" ||
+    topic === "" ||
+    description === ""
+  )
+    return true;
+  return false;
+};
 let [check,setCheck] = useState(true)
   useEffect(() => {
-    if(data.price!==null && check===true){
+    if(data.price!=="" && check===true){
       setPrice(data.price);
       setPaperFormat(data.doc_format);
       setNature(data.nature);
@@ -51,7 +64,7 @@ let [check,setCheck] = useState(true)
       setSubject(data.subject);
       setTopic(data.topic);
       setDescription(data.description);
-      setCheck(false)
+      emptyFields()===true?"":setCheck(false);
       console.log("Price test ~ data", price);
     }
   },[price,
@@ -63,20 +76,7 @@ let [check,setCheck] = useState(true)
     subject,
     topic,
     description]);
-  const emptyFields = () => {
-    if (
-      price === "" ||
-      paperFormat === "" ||
-      nature === "" ||
-      pages === "" ||
-      deadline === "" ||
-      subject === "" ||
-      topic === "" ||
-      description === ""
-    )
-      return true;
-    return false;
-  };
+ 
   let GeneralNotification = {
     created_at: 0,
     sender: "",
