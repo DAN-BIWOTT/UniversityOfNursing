@@ -28,6 +28,7 @@ const [subject, setSubject] = useState(data.subject);
 const [topic, setTopic] = useState(data.topic);
 const [description, setDescription] = useState(data.doc_description);
 const [waitingButton, setWaitingButton] = useState(false);
+let clientId = data.client_id;
   const emptyFields = () => {
     if (
       price === "" ||
