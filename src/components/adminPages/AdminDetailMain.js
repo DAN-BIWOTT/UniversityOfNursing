@@ -41,7 +41,7 @@ const [waitingButton, setWaitingButton] = useState(false);
 
 let check = true
   useEffect(() => {
-    if(data.price!==null && check===false){
+    if(data.price!==null && check===true){
       setPrice(data.price);
       setPaperFormat(data.doc_format);
       setNature(data.nature);
@@ -51,6 +51,7 @@ let check = true
       setSubject(data.subject);
       setTopic(data.topic);
       setDescription(data.description);
+      check=false
       console.log("Price test ~ data", price);
     }
   },[price,
