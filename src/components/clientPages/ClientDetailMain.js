@@ -14,6 +14,7 @@ import { storage } from "../../utils/firebase";
 import Loader from "react-loader-spinner";
 import { sendGeneralNotification } from "../../utils/chats";
 import Spinner from "../Spinner";
+import { LineSpacing, NatureDropDown, PaperFormat, Subjects } from "../clientComponents/newOrderForm.data";
 
 const ClientDetailMain = ({ data, orderId }) => {
 console.log("🚀 ~ file: ClientDetailMain.js ~ line 19 ~ ClientDetailMain ~ data", data)
