@@ -104,7 +104,6 @@ let clientId = data.client_id;
       console.log(finalRes);
       GeneralNotification.created_at = Date.now();
       GeneralNotification.sender = "Client";
-      GeneralNotification.order_id = orderId;
       GeneralNotification.msg = "Order Edited: ".concat(orderId);
       console.log(GeneralNotification)
       sendGeneralNotification(GeneralNotification);

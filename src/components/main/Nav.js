@@ -71,7 +71,6 @@ const Nav = () => {
   const[showOrder,setShowOrder] = useState(false)
   const[order_id,setOrder_id]= useState(0);
   const goToOrder = (event) =>{
-    event.preventDefault();
     if(event.target.value === null || event.target.value ===0 || event.target.value ===""){
       console.log("No id passed ",event.target.value);
     }else{

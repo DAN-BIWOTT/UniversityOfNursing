@@ -113,7 +113,6 @@ let [check,setCheck] = useState(true)
       console.log(finalRes);
       GeneralNotification.created_at = Date.now();
       GeneralNotification.sender = "Admin";
-      GeneralNotification.order_id = orderId;
       GeneralNotification.msg = "Order Edited: ".concat(orderId);
       console.log(GeneralNotification)
       sendGeneralNotification(GeneralNotification);
