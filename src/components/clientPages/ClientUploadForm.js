@@ -40,6 +40,7 @@ const ClientUploadForm = ({ orderId }) => {
       created_at: Date.now(),
       sender: "Order: ".concat(orderId),
       msg: "New File Uploaded",
+      order_id: orderId
     };
     sendGeneralNotification(notification);
     toast("File Upload Successful!", {

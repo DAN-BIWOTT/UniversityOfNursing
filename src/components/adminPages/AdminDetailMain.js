@@ -29,15 +29,25 @@ import {
 const AdminDetailMain = ({ data, orderId }) => {
 console.log("🚀 ~ file: AdminDetailMain.js ~ line 30 ~ AdminDetailMain ~ data", data)
   const [price, setPrice] = useState(data.price);
+  console.log("🚀 ~ file: AdminDetailMain.js ~ line 32 ~ AdminDetailMain ~ price", price)
   const [paperFormat, setPaperFormat] = useState(data.doc_format);
+  console.log("🚀 ~ file: AdminDetailMain.js ~ line 34 ~ AdminDetailMain ~ paperFormat", paperFormat)
   const [nature, setNature] = useState(data.nature);
+  console.log("🚀 ~ file: AdminDetailMain.js ~ line 36 ~ AdminDetailMain ~ nature", nature)
   const [pages, setPages] = useState(data.pages);
+  console.log("🚀 ~ file: AdminDetailMain.js ~ line 38 ~ AdminDetailMain ~ pages", pages)
   const [deadline, setDeadline] = useState(data.due_time);
+  console.log("🚀 ~ file: AdminDetailMain.js ~ line 40 ~ AdminDetailMain ~ deadline", deadline)
   const [spacing, setSpacing] = useState(data.spacing);
+  console.log("🚀 ~ file: AdminDetailMain.js ~ line 42 ~ AdminDetailMain ~ spacing", spacing)
   const [subject, setSubject] = useState(data.subject);
+  console.log("🚀 ~ file: AdminDetailMain.js ~ line 44 ~ AdminDetailMain ~ subject", subject)
   const [topic, setTopic] = useState(data.topic);
+  console.log("🚀 ~ file: AdminDetailMain.js ~ line 46 ~ AdminDetailMain ~ topic", topic)
   const [description, setDescription] = useState(data.doc_description);
+  console.log("🚀 ~ file: AdminDetailMain.js ~ line 48 ~ AdminDetailMain ~ description", description)
   const [waitingButton, setWaitingButton] = useState(false);
+  console.log("🚀 ~ file: AdminDetailMain.js ~ line 50 ~ AdminDetailMain ~ waitingButton", waitingButton)
   
   const emptyFields = () => {
     if (
@@ -57,6 +67,7 @@ console.log("🚀 ~ file: AdminDetailMain.js ~ line 30 ~ AdminDetailMain ~ data"
     created_at: 0,
     sender: "",
     msg: "",
+    order_id: orderId
   };
   const EditOrderFormQuery = EditOrderForm_query
   const submitOrder = async () => {

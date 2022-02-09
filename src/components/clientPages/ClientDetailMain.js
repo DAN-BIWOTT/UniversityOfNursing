@@ -113,6 +113,7 @@ const ClientDetailMain = ({ data, orderId }) => {
         created_at: Date.now(),
         sender: "Order: ".concat(orderId),
         msg: "Dispute filed",
+        order_id: orderId
       };
       sendGeneralNotification(notification);
       setPageLoader(false);
@@ -145,6 +146,7 @@ const ClientDetailMain = ({ data, orderId }) => {
         created_at: Date.now(),
         sender: "Order: ".concat(orderId),
         msg: "Request for Revision",
+        order_id: orderId
       };
       sendGeneralNotification(notification);
       setPageLoader(false)

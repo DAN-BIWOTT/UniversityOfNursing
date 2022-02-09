@@ -68,6 +68,12 @@ const Nav = () => {
     }
   }
 
+  const goToOrder = (event)=>{
+    event.preventDefault();
+    alert("notification pressed.");
+    return(<ClientOrderDetail orderId={event.target.value}/>)
+  }
+
   return (
     <Container>
       <Toaster />
@@ -98,6 +104,7 @@ const Nav = () => {
                           <p>{getDate(data.created_at)}</p>
                         </NotificationTime>
                       </NotificationRow>
+                      <button onClick={event=>goToOrder(event)} value={data.orderId}>view</button>
                     </NotificationCard>
                       <hr /></>
                   );
@@ -156,6 +163,7 @@ const NotificationCard = styled.div`
   margin-left: 0.4  rem;
   margin-bottom: 1rem;
   background: rgb(193, 38, 219);
+  cursor: pointer;
   background: linear-gradient(
     0deg,
     rgba(193, 38, 219, 0.10407913165266103) 0%,

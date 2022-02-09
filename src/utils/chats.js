@@ -68,6 +68,7 @@ const sendGeneralNotification = async (msgObj) => {
     created_at: msgObj.created_at,
     sender: msgObj.sender,
     msg: msgObj.msg,
+    orderId: msgObj.order_id
   });
   return true;
 };

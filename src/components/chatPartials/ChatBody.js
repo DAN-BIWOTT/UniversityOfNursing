@@ -69,6 +69,7 @@ const ChatBody = ({ orderId, sender }) => {
         created_at: Date.now(),
         sender: "Order: ".concat(orderId),
         msg: "New Chat Message",
+        order_id: orderId
       };
       sendGeneralNotification(notification);
       setWaitingButton(false);
