@@ -8,7 +8,7 @@ import {
   ref,
   remove
 } from "firebase/database";
-import AdminOrderDetail from "../../../pages/adminPages/AdminOrderDetail";
+import AdminOrderDetail from "../../pages/adminPages/AdminOrderDetail.js";
 import { database } from "../../utils/firebase";
 import toast, { Toaster } from "react-hot-toast";
 import AccountBalance from "./AccountBalance";
