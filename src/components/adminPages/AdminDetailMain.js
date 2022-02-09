@@ -27,20 +27,18 @@ import {
 } from "../clientComponents/newOrderForm.data";
 
 const AdminDetailMain = ({ data, orderId }) => {
-  console.log(
-    "🚀 ~ file: AdminDetailMain.js ~ line 30 ~ AdminDetailMain ~ data",
-    data
-  );
-  const [price, setPrice] = useState(0);
-  const [paperFormat, setPaperFormat] = useState("");
-  const [nature, setNature] = useState("");
-  const [pages, setPages] = useState("");
-  const [deadline, setDeadline] = useState("");
-  const [spacing, setSpacing] = useState("");
-  const [subject, setSubject] = useState("");
-  const [topic, setTopic] = useState("");
-  const [description, setDescription] = useState("");
-  const [waitingButton, setWaitingButton] = useState(false);
+console.log("🚀 ~ file: AdminDetailMain.js ~ line 30 ~ AdminDetailMain ~ data", data)
+const [price, setPrice] = useState(data.price);
+const [paperFormat, setPaperFormat] = useState(data.doc_format);
+const [nature, setNature] = useState(data.nature);
+const [pages, setPages] = useState(data.pages);
+const [deadline, setDeadline] = useState(data.due_time);
+const [spacing, setSpacing] = useState(data.spacing);
+const [subject, setSubject] = useState(data.subject);
+const [topic, setTopic] = useState(data.topic);
+const [description, setDescription] = useState(data.description);
+const [waitingButton, setWaitingButton] = useState(false);
+
 let check = true
   useEffect(() => {
     if(data.price!==null && check===false){
@@ -82,9 +80,9 @@ let check = true
     created_at: 0,
     sender: "",
     msg: "",
-    order_id: orderId,
+    order_id: orderId
   };
-  const EditOrderFormQuery = EditOrderForm_query;
+  const EditOrderFormQuery = EditOrderForm_query
   const submitOrder = async () => {
     if (emptyFields()) {
       toast("Fields with stars cant be left empty!", {
@@ -112,7 +110,7 @@ let check = true
           spacing,
           subject,
           topic,
-          description,
+          description
         },
       }),
     });
@@ -123,10 +121,8 @@ let check = true
       GeneralNotification.created_at = Date.now();
       GeneralNotification.sender = "Admin";
       GeneralNotification.order_id = finalRes.data.insert_order_one.id;
-      GeneralNotification.msg = "Order Edited: ".concat(
-        finalRes.data.insert_order_one.id
-      );
-      console.log(GeneralNotification);
+      GeneralNotification.msg = "Order Edited: ".concat(finalRes.data.insert_order_one.id);
+      console.log(GeneralNotification)
       sendGeneralNotification(GeneralNotification);
       toast("Your Order Has Been Placed.", {
         style: { background: "#00FF00" },
@@ -140,6 +136,7 @@ let check = true
       setWaitingButton(false);
     }
   };
+
 
   var progressStatus, colorProgressTitle, paymentStatus, colorPaymentTitle;
   console.log(data);
@@ -409,10 +406,10 @@ let check = true
     event.preventDefault();
     setEditState(true);
   };
-  const handleSubmit = async (event) => {
+ const handleSubmit = async (event) => {
     event.preventDefault();
     setWaitingButton(true);
-    submitOrder();
+    submitOrder()
   };
   if (editState === false) {
     return (
