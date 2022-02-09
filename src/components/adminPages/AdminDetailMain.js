@@ -113,8 +113,8 @@ let [check,setCheck] = useState(true)
       console.log(finalRes);
       GeneralNotification.created_at = Date.now();
       GeneralNotification.sender = "Admin";
-      GeneralNotification.order_id = finalRes.data.update_order.returning.id;
-      GeneralNotification.msg = "Order Edited: ".concat(finalRes.data.update_order.returning.id);
+      GeneralNotification.order_id = orderId;
+      GeneralNotification.msg = "Order Edited: ".concat(orderId);
       console.log(GeneralNotification)
       sendGeneralNotification(GeneralNotification);
       toast("Your Order Has Been Edited.", {
