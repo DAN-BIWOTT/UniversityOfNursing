@@ -655,6 +655,20 @@ const [waitingButton, setWaitingButton] = useState(false);
 };
 
 export default ClientDetailMain;
+const EditGrid = styled.div`
+  display: grid;
+  grid-template-columns: auto;
+`;
+const EditContainer = styled.div`
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  height: auto;
+  background: white;
+  display: block;
+  justify-content: left;
+  align-items: center;
+  border-radius: 20px;
+`;
 const FaqButton = styled.button`
   margin-left: 100%;
   float: left;
@@ -849,4 +863,111 @@ const OrderDescription = styled.p`
   font-size: clamp(1rem, 1vw, 1rem);
   justify-content: left;
   margin-left: 2vw;
+`;
+
+const Container = styled.div`
+  display: block;
+  width: 67vw;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(190, 190, 190, 0.22);
+  cursor: pointer;
+  background-color: #fff;
+  transition: all ease-in-out 300ms;
+  box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  &:hover {
+    background-color: ${({ theme }) => theme.secondary};
+  }
+`;
+
+const Title = styled.h1`
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: clamp(2rem, 1vw, 1rem);
+  font-weight: bold;
+  margin-left: 40%;
+`;
+
+const RowGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 2rem;
+`;
+const ColumnGrid = styled.div`
+  margin-left: 1rem;
+  display: block;
+  margin-bottom: 1rem;
+  width: 100%;
+`;
+
+const Label = styled.h3`
+  margin-top: 1px;
+  font-size: clamp(1rem, 1vw, 1rem);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 600;
+`;
+const Input = styled.input`
+  width: 70%;
+  height: 7vh;
+  margin-left: 10px;
+  font-size: clamp(1rem, 1vw, 1rem);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 400;
+  padding: 1rem;
+  border: none;
+  border-bottom: 1px solid black;
+  box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
+  padding: 1rem;
+  border-radius: 5px;
+  :focus {
+    outline: none;
+    border: none;
+    border-bottom: #1740e1;
+    box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
+  }
+`;
+
+const InputSelect = styled.select`
+  width: 70%;
+  height: 8vh;
+  margin-left: 10px;
+  font-size: clamp(1rem, 1vw, 1rem);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 400;
+  padding: 0px 0px 0px 1rem;
+  border-radius: 5px;
+  border: none;
+  border-bottom: 1px solid black;
+  box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
+  padding: 1rem;
+  :focus {
+    outline: none;
+    border: none;
+    border-bottom: #1740e1;
+    box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
+  }
+`;
+
+const TextAreaInput = styled.textarea`
+  width: 90%;
+  height: 20vh;
+  margin-left: 10px;
+  font-size: clamp(1rem, 1vw, 1rem);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 400;
+  padding: 1rem;
+  border-radius: 5px;
+  border: none;
+  border-bottom: 1px solid black;
+  box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
+  :focus {
+    outline: none;
+    border: none;
+    border-bottom: #1740e1;
+    box-shadow: 0 4px 8px 0 rgba(23, 64, 225, 0.2);
+  }
 `;
