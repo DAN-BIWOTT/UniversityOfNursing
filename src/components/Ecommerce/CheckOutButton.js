@@ -41,7 +41,7 @@ const CheckOutButton = ({ product }) => {
               const order = await actions.order.capture();
               setPaidFor(true);
               saveTransaction(order);
-              console.log("saving transaction");
+              //console.log("saving transaction");
             },
             onError: (err) => {
               setError(err);
@@ -76,7 +76,7 @@ const CheckOutButton = ({ product }) => {
     merchant_id = data.id;
     description = data.purchase_units[0].description;
     created_at = data.create_time;
-    console.log(data);
+    //console.log(data);
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
       headers: {
@@ -100,12 +100,12 @@ const CheckOutButton = ({ product }) => {
       }),
     });
     const finalRes = await response.json();
-    console.log(finalRes);
+    //console.log(finalRes);
   };
 
   const downloadFile = async (event) => {
     event.preventDefault();
-    console.log("starting download...");
+    //console.log("starting download...");
     const id = product.id
     const getPurchaseQuery = getPurchase_query;
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
@@ -122,9 +122,9 @@ const CheckOutButton = ({ product }) => {
       }),
     });
     const finalRes = await response.json();
-    console.log(finalRes)
+    //console.log(finalRes)
     if (finalRes.data.product_by_pk !== null) {
-      console.log(finalRes.data.product_by_pk.files)
+      //console.log(finalRes.data.product_by_pk.files)
       toast("Download will begin shortly")
       navigate(finalRes.data.product_by_pk.files);
     }

@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import React from "react";
 import "./TransactionMain.css";
 const TransactionMain = ({ data, title, count }) => {
-  console.log(data);
+  //console.log(data);
   return (
     <Container>
       <Title>
@@ -22,7 +22,7 @@ const TransactionMain = ({ data, title, count }) => {
         <tbody>
           {data.map((info) => {
             {
-              console.log(info.amount);
+              //console.log(info.amount);
             }
             return (
               <tr>

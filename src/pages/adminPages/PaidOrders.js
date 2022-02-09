@@ -24,7 +24,7 @@ const PaidOrders = () => {
         }
         );
         const finalResp = await response.json();
-        console.log("🚀 ~ file: PaidOrders.js ~ line 25 ~ getPaidOrders ~ finalResp", finalResp);
+        //console.log("🚀 ~ file: PaidOrders.js ~ line 25 ~ getPaidOrders ~ finalResp", finalResp);
         setData(finalResp.data.order)
     }
     return (

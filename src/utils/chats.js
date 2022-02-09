@@ -31,7 +31,7 @@ const readGeneralNotifications = async () => {
 //   const someChats = query(allChats, where("order_id", "==", order_id));
 //   const chatSnapshot = await getDocs(someChats);
 //   const chatList = chatSnapshot.docs.map((doc) => doc.data());
-//   console.log(chatList);
+//   //console.log(chatList);
 //   return chatList;
 // };
 

@@ -36,10 +36,10 @@ const EditForm = ({ data }) => {
         background: "#32CD32"
       }
     });
-    console.log(
-      "🚀 ~ file: EditForm.js ~ line 24 ~ makeEdit ~ finalRes",
-      finalRes
-    );
+    //console.log(
+    //   "🚀 ~ file: EditForm.js ~ line 24 ~ makeEdit ~ finalRes",
+    //   finalRes
+    // );
   };
 
   const submitHandler = (event) => {

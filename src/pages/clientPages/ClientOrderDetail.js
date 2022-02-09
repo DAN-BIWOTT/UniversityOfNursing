@@ -7,7 +7,7 @@ import { ClientOrderDetail_Query } from '../../graphQl/uonQueries'
 
 const ClientOrderDetail = ({orderId}) => {
     const id = orderId
-    console.log("🚀 ~ file: ClientOrderDetail.js ~ line 10 ~ ClientOrderDetail ~ id", id)
+    //console.log("🚀 ~ file: ClientOrderDetail.js ~ line 10 ~ ClientOrderDetail ~ id", id)
     const ClientOrderDetailQuery = ClientOrderDetail_Query;
 
     const [data, setData] = useState({});

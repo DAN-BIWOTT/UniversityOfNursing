@@ -34,7 +34,7 @@ const PaymentPaypal = ({ product }) => {
             },
             onApprove: async (data, actions) => {
               const order = await actions.order.capture();
-              saveTransaction(order);console.log("saving transaction")
+              saveTransaction(order);//console.log("saving transaction")
               setPaidFor(true);
             },
             onError: (err) => {
@@ -94,7 +94,7 @@ const PaymentPaypal = ({ product }) => {
       }),
     });
     const finalRes = await response.json();
-    console.log(finalRes)
+    //console.log(finalRes)
   };
 
   if (paidFor) {

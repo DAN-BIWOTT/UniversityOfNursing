@@ -33,7 +33,7 @@ const Nav = () => {
         notificationArray.push(data[notificationList]);
       }
       setNotifications(notificationArray);
-      console.log(notifications)
+      //console.log(notifications)
     });
   };
 
@@ -74,12 +74,12 @@ const Nav = () => {
   
   const goToOrder = (event)=>{
     if(event.target.value === null || event.target.value ===0 || event.target.value ===""){
-      console.log("No id passed ",event.target.value);
+      //console.log("No id passed ",event.target.value);
     }else{
-      console.log("id passed ",event.target.value);
+      //console.log("id passed ",event.target.value);
       setOrder_id(event.target.value)
       if(order_id==""||order_id===0){
-        console.log("id not set ",event.target.value);
+        //console.log("id not set ",event.target.value);
       }else{
         setShowOrder(true);
       }

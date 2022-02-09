@@ -76,7 +76,7 @@ let files="";
 
     try {
       const finalRes = await response.json();
-      console.log(finalRes);
+      //console.log(finalRes);
       toast("Product has been posted.", {
         style: { background: "#008000" },
       });
@@ -101,8 +101,8 @@ let files="";
         uploadBytes(fileRef, selectedFile).then((url) => {
           getDownloadURL(fileRef).then((downloadUrl) => {
             files = downloadUrl;
-            console.log(downloadUrl)
-            console.log(files)
+            //console.log(downloadUrl)
+            //console.log(files)
             files !== ""
               ? submitOrder()
               : toast("Please select file", {

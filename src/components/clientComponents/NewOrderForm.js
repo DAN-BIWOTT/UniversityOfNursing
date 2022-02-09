@@ -94,12 +94,12 @@ const NewOrderForm = () => {
 
     try {
       const finalRes = await response.json();
-      console.log(finalRes);
+      //console.log(finalRes);
       notification.created_at = Date.now();
       notification.sender = "client";
       notification.order_id = finalRes.data.insert_order_one.id;
       notification.msg = "New order received: ".concat(finalRes.data.insert_order_one.id);
-      console.log(notification)
+      //console.log(notification)
       sendGeneralNotification(notification);
       toast("Your Order Has Been Placed.", {
         style: { background: "#00FF00" },
@@ -119,10 +119,6 @@ const NewOrderForm = () => {
       budgetRangeString = `${budgetRange.min} - ${budgetRange.max}`;
       return true;
     } catch (e) {
-      console.log(
-        "🚀 ~ file: NewOrderForm.js ~ line 72 ~ budgetToString ~ e",
-        e
-      );
       setWaitingButton(false);
       return false;
     }
@@ -181,7 +177,6 @@ const NewOrderForm = () => {
                 formatLabel={(value) => `${value} $`}
                 value={budgetRange}
                 onChange={(value) => setBudgetRange(value)}
-                onChangeComplete={(value) => console.log(value)}
               />
             </div>
           </ColumnGrid>

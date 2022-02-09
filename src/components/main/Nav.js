@@ -72,12 +72,12 @@ const Nav = () => {
   const[order_id,setOrder_id]= useState(0);
   const goToOrder = (event) =>{
     if(event.target.value === null || event.target.value ===0 || event.target.value ===""){
-      console.log("No id passed ",event.target.value);
+      //console.log("No id passed ",event.target.value);
     }else{
-      console.log("id passed ",event.target.value);
+      //console.log("id passed ",event.target.value);
       setOrder_id(event.target.value)
       if(order_id==""||order_id===0){
-        console.log("id not set ",event.target.value);
+        //console.log("id not set ",event.target.value);
       }else{
         setShowOrder(true);
       }
@@ -102,7 +102,7 @@ const Nav = () => {
               <ListItem>
                 {notifications.map((data) => {
                   {
-                    console.log(data);
+                    //console.log(data);
                   }
                   return (
                     <NotificationCard key={data.created_at} onClick={event=>goToOrder(event)} value={28}>

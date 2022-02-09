@@ -18,7 +18,7 @@ import { LineSpacing, NatureDropDown, PaperFormat, Subjects } from "../clientCom
 import { navigate } from "gatsby";
 
 const ClientDetailMain = ({ data, orderId }) => {
-console.log("🚀 ~ file: ClientDetailMain.js ~ line 19 ~ ClientDetailMain ~ data", data)
+//console.log("🚀 ~ file: ClientDetailMain.js ~ line 19 ~ ClientDetailMain ~ data", data)
 const [price, setPrice] = useState(data.price);
 const [paperFormat, setPaperFormat] = useState(data.doc_format);
 const [nature, setNature] = useState(data.nature);
@@ -57,7 +57,7 @@ let clientId = data.client_id;
       setTopic(data.topic);
       setDescription(data.doc_description);
       emptyFields()===false?"":setCheck(false);
-      console.log("Price test ~ data", price);
+      //console.log("Price test ~ data", price);
     }
   });
   let GeneralNotification = {
@@ -101,11 +101,11 @@ let clientId = data.client_id;
 
     try {
       const finalRes = await response.json();
-      console.log(finalRes);
+      //console.log(finalRes);
       GeneralNotification.created_at = Date.now();
       GeneralNotification.sender = "Client";
       GeneralNotification.msg = "Order Edited: ".concat(orderId);
-      console.log(GeneralNotification)
+      //console.log(GeneralNotification)
       sendGeneralNotification(GeneralNotification);
       toast("Your Order Has Been Edited.", {
         style: { background: "#00FF00" },
@@ -115,7 +115,7 @@ let clientId = data.client_id;
       }, 2000);
       setWaitingButton(false);
     } catch (e) {
-      console.log("error at: ",e)
+      //console.log("error at: ",e)
       toast("Problem Editing Creating.", { style: { background: "#DC143C" } });
       setWaitingButton(false);
     }
@@ -130,10 +130,10 @@ let clientId = data.client_id;
     var fileArray;
           if (typeof data.filesByOrderId !== "undefined"){
             fileArray = data.filesByOrderId
-            console.log(fileArray);
+            //console.log(fileArray);
           }else{
             fileArray = []
-            console.log(data.filesByOrderId);
+            //console.log(data.filesByOrderId);
           }
   const date = `${new Date(data.created_at).getDate()}/${new Date(data.created_at
   ).getMonth()}/${new Date(data.created_at).getFullYear()}`;
@@ -187,7 +187,7 @@ let clientId = data.client_id;
     default:
       acceptanceStatus = "neutral";
       colorAcceptanceTitle = "Waiting Acceptance";
-      console.log(data)
+      //console.log(data)
       break;
   }
 
@@ -212,7 +212,7 @@ let clientId = data.client_id;
       }),
     });
     const finalResp = await response.json();
-    console.log(finalResp);
+    //console.log(finalResp);
     if (finalResp.data.update_order_by_pk.dispute_status === 1) {
       let notification = {
         created_at: Date.now(),
@@ -282,7 +282,7 @@ let clientId = data.client_id;
       })
       .catch((error) => {
         // Uh-oh, an error occurred!
-        console.log(error);
+        //console.log(error);
         toast("File Not Deleted From storage!", {
           style: {
             background: "#914747",
@@ -313,7 +313,7 @@ let clientId = data.client_id;
       }),
     });
     const finalRes = await response.json();
-    console.log(finalRes);
+    //console.log(finalRes);
     setWaitingButton(false);
     toast("File Deleted From database Successfully!", {
       style: {

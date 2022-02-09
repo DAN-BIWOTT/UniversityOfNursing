@@ -7,11 +7,11 @@ import AccountBalance from "../AccountBalance";
 import UserDetails from "./UserDetails";
 
 const User = ({ data }) => {
-console.log(data);
+//console.log(data);
   const { budget, due_time, id, pages, price, topic, created_at,acceptance_status,client_id } =
     data;
     const clientName = data.client.full_name
-    console.log("🚀 ~ file: User.js ~ line 13 ~ User ~ clientName", clientName)
+    //console.log("🚀 ~ file: User.js ~ line 13 ~ User ~ clientName", clientName)
   const date = `${new Date(created_at).getDate()}/${new Date(
     created_at
   ).getMonth()}/${new Date(created_at).getFullYear()}`;

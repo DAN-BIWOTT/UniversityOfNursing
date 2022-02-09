@@ -25,7 +25,7 @@ const AdminUploadForm = ({ orderId }) => {
     msg: "",
   };
   const saveFiles = async() => {
-      console.log("This is at save files",files);
+      //console.log("This is at save files",files);
       let fileName = selectedFile.name;
       let file = files
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
@@ -44,7 +44,7 @@ const AdminUploadForm = ({ orderId }) => {
       }),
     });
     const finalRes = await response.json();
-    console.log(finalRes);
+    //console.log(finalRes);
     setWaitingButton(false);
     notification.clientId = getUser().id;
           notification.orderId = orderId;
@@ -67,9 +67,9 @@ const AdminUploadForm = ({ orderId }) => {
       try {
         uploadBytes(fileRef, selectedFile).then((url) => {
           getDownloadURL(fileRef).then((downloadUrl) => {
-            console.log("🚀 ~ file: AdminUploadForm.js ~ line 44 ~ getDownloadURL ~ downloadUrl", downloadUrl)
+            //console.log("🚀 ~ file: AdminUploadForm.js ~ line 44 ~ getDownloadURL ~ downloadUrl", downloadUrl)
             files = downloadUrl;
-            console.log("🚀 ~ file: AdminUploadForm.js ~ line 48 ~ getDownloadURL ~ files", files)
+            //console.log("🚀 ~ file: AdminUploadForm.js ~ line 48 ~ getDownloadURL ~ files", files)
             if(files !== "")saveFiles();
           });
         });

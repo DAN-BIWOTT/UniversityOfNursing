@@ -43,9 +43,9 @@ const AdminOrderDetail = ({ orderId }) => {
       }),
     });
     const finalRes = await response.json();
-    console.log(finalRes)
+    //console.log(finalRes)
     setData(finalRes.data.order_by_pk);
-    console.log(data)
+    //console.log(data)
     setPageLoader(false);
   };
 

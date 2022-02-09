@@ -27,7 +27,7 @@ import {
 } from "../clientComponents/newOrderForm.data";
 
 const AdminDetailMain = ({ data, orderId }) => {
-console.log("🚀 ~ file: AdminDetailMain.js ~ line 30 ~ AdminDetailMain ~ data", data)
+//console.log("🚀 ~ file: AdminDetailMain.js ~ line 30 ~ AdminDetailMain ~ data", data)
 const [price, setPrice] = useState(data.price);
 const [paperFormat, setPaperFormat] = useState(data.doc_format);
 const [nature, setNature] = useState(data.nature);
@@ -65,7 +65,7 @@ let [check,setCheck] = useState(true)
       setTopic(data.topic);
       setDescription(data.doc_description);
       emptyFields()===false?"":setCheck(false);
-      console.log("Price test ~ data", price);
+      // console.log("Price test ~ data", price);
     }
   });
  
@@ -110,11 +110,11 @@ let [check,setCheck] = useState(true)
 
     try {
       const finalRes = await response.json();
-      console.log(finalRes);
+      //console.log(finalRes);
       GeneralNotification.created_at = Date.now();
       GeneralNotification.sender = "Admin";
       GeneralNotification.msg = "Order Edited: ".concat(orderId);
-      console.log(GeneralNotification)
+      //console.log(GeneralNotification)
       sendGeneralNotification(GeneralNotification);
       toast("Your Order Has Been Edited.", {
         style: { background: "#00FF00" },
@@ -124,7 +124,7 @@ let [check,setCheck] = useState(true)
       }, 2000);
       setWaitingButton(false);
     } catch (e) {
-      console.log("error at: ",e)
+      //console.log("error at: ",e)
       toast("Problem Editing Creating.", { style: { background: "#DC143C" } });
       setWaitingButton(false);
     }
@@ -132,14 +132,14 @@ let [check,setCheck] = useState(true)
 
 
   var progressStatus, colorProgressTitle, paymentStatus, colorPaymentTitle;
-  console.log(data);
+  //console.log(data);
   var fileArray;
   if (typeof data.filesByOrderId !== "undefined") {
     fileArray = data.filesByOrderId;
-    console.log(fileArray);
+    //console.log(fileArray);
   } else {
     fileArray = [];
-    console.log(data.filesByOrderId);
+    //console.log(data.filesByOrderId);
   }
 
   const date = `${new Date(data.created_at).getDate()}/${new Date(
@@ -347,7 +347,7 @@ let [check,setCheck] = useState(true)
       })
       .catch((error) => {
         // Uh-oh, an error occurred!
-        console.log(error);
+        //console.log(error);
         toast("File Not Deleted From storage!", {
           style: {
             background: "#914747",
@@ -378,7 +378,7 @@ let [check,setCheck] = useState(true)
       }),
     });
     const finalRes = await response.json();
-    console.log(finalRes);
+    //console.log(finalRes);
     setWaitingButton(false);
     toast("File Deleted From database Successfully!", {
       style: {
@@ -387,7 +387,7 @@ let [check,setCheck] = useState(true)
     });
     return true;
   };
-  console.log(data);
+  //console.log(data);
   const deleteFile = (event) => {
     event.preventDefault();
     if (deleteFromFireBase() && deleteFromHasura())
