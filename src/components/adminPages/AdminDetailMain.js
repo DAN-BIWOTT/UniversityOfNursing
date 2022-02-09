@@ -54,7 +54,7 @@ const emptyFields = () => {
 };
 let [check,setCheck] = useState(true)
   useEffect(() => {
-    if(typeof data.price==="undefined" && check===true){
+    if(typeof price=="undefined" && check===true){
       setPrice(data.price);
       setPaperFormat(data.doc_format);
       setNature(data.nature);
