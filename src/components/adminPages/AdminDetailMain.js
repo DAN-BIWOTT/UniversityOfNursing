@@ -29,6 +29,7 @@ import {
 const AdminDetailMain = ({ data, orderId }) => {
 console.log("🚀 ~ file: AdminDetailMain.js ~ line 30 ~ AdminDetailMain ~ data", data)
 let tempPrice = data.price
+console.log("🚀 ~ file: AdminDetailMain.js ~ line 32 ~ AdminDetailMain ~ tempPrice", tempPrice)
 let tempPaperFormat = data.doc_format
 let tempNature = data.nature
 let tempPages = data.pages
