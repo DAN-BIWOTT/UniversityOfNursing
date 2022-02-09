@@ -36,10 +36,10 @@ const [deadline, setDeadline] = useState(data.due_time);
 const [spacing, setSpacing] = useState(data.spacing);
 const [subject, setSubject] = useState(data.subject);
 const [topic, setTopic] = useState(data.topic);
-const [description, setDescription] = useState(data.description);
+const [description, setDescription] = useState(data.doc_description);
 const [waitingButton, setWaitingButton] = useState(false);
 
-let check = true
+let [check,setCheck] = useState(true)
   useEffect(() => {
     if(data.price!==null && check===true){
       setPrice(data.price);
@@ -51,7 +51,7 @@ let check = true
       setSubject(data.subject);
       setTopic(data.topic);
       setDescription(data.description);
-      check=false
+      setCheck(false)
       console.log("Price test ~ data", price);
     }
   },[price,
@@ -125,7 +125,7 @@ let check = true
       GeneralNotification.msg = "Order Edited: ".concat(finalRes.data.insert_order_one.id);
       console.log(GeneralNotification)
       sendGeneralNotification(GeneralNotification);
-      toast("Your Order Has Been Placed.", {
+      toast("Your Order Has Been Edited.", {
         style: { background: "#00FF00" },
       });
       setTimeout(() => {
@@ -133,7 +133,8 @@ let check = true
       }, 2000);
       setWaitingButton(false);
     } catch (e) {
-      toast("Problem Creating Order.", { style: { background: "#DC143C" } });
+      console.log("error at: ",e)
+      toast("Problem Editing Creating.", { style: { background: "#DC143C" } });
       setWaitingButton(false);
     }
   };
@@ -738,7 +739,6 @@ let check = true
                   <Label>*Description: </Label>
                   <TextAreaInput
                     type="text"
-                    placeholder="INFO: Input a summary of the project description. Max of 700 characters"
                     maxLength="700"
                     onChange={(event) => {
                       setDescription(event.target.value);
