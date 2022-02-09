@@ -73,7 +73,7 @@ const Main = () => {
       <Nav />
       <Button style={{marginBottom:"6vh"}} onClick={(event)=>{blog(event)}}>Blog</Button>
       <Button style={{marginBottom:"6vh",marginLeft:"2rem",backgroundColor:"blueviolet"}} onClick={(event)=>{generalChats(event)}}>General Chats</Button>
-      <Button style={{marginBottom:"6vh",marginLeft:"2rem",backgroundColor:"blueviolet"}} onClick={(event)=>{billingManagement(event)}}>Billing Management</Button>
+      {/* <Button style={{marginBottom:"6vh",marginLeft:"2rem",backgroundColor:"blueviolet"}} onClick={(event)=>{billingManagement(event)}}>Billing Management</Button> */}
       <Users data={data} title="New Orders" count={data.length} />
     </Container>
   );
