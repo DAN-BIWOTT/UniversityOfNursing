@@ -28,18 +28,18 @@ import {
 
 const AdminDetailMain = ({ data, orderId }) => {
 console.log("🚀 ~ file: AdminDetailMain.js ~ line 30 ~ AdminDetailMain ~ data", data)
-console.log("🚀 ~ file: AdminDetailMain.js ~ line 30 ~ AdminDetailMain ~ data", data.price)
-  const [price, setPrice] = useState(data.price);
-  const [paperFormat, setPaperFormat] = useState(data.doc_format);
-  const [nature, setNature] = useState(data.nature);
-  const [pages, setPages] = useState(data.pages);
-  const [deadline, setDeadline] = useState(data.due_time);
-  const [spacing, setSpacing] = useState(data.spacing);
-  const [subject, setSubject] = useState(data.subject);
-  const [topic, setTopic] = useState(data.topic);
-  const [description, setDescription] = useState(data.doc_description);
-  const [waitingButton, setWaitingButton] = useState(false);
-  
+const [price, setPrice] = useState(data.price);
+const [paperFormat, setPaperFormat] = useState(data.doc_format);
+const [nature, setNature] = useState(data.nature);
+const [pages, setPages] = useState(data.pages);
+const [deadline, setDeadline] = useState(data.due_time);
+const [spacing, setSpacing] = useState(data.spacing);
+const [subject, setSubject] = useState(data.subject);
+const [topic, setTopic] = useState(data.topic);
+const [description, setDescription] = useState(data.doc_description);
+const [waitingButton, setWaitingButton] = useState(false);
+console.log("🚀 ~ file: AdminDetailMain.js ~ line 41 ~ AdminDetailMain ~ data", price)
+
   const emptyFields = () => {
     if (
       price === "" ||

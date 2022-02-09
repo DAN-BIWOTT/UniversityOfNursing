@@ -69,12 +69,12 @@ const Nav = () => {
     }
   }
 
+  const[showOrder,setShowOrder] = useState(false)
   const goToOrder = (event)=>{
     event.preventDefault();
-    alert("notification pressed.");
-    return(<ClientOrderDetail orderId={event.target.value}/>)
+    setShowOrder(true);
   }
-
+if(showOrder==true){
   return (
     <Container>
       <Toaster />
@@ -141,6 +141,10 @@ const Nav = () => {
       </DropDown>
     </Container>
   );
+}else{
+  return(<ClientOrderDetail orderId={event.target.value}/>)
+}
+  
 };
 
 export default Nav;
@@ -235,7 +239,6 @@ const NotificationBody = styled.div`
 const NotificationDropDownContainer = styled.div`
   width: 16em;
   right: 0;
-  padding-right: 17.5rem;
     margin-right: 10rem;
   position: absolute;
   animation: blinker 1s cubic-bezier(0.5, 0, 1, 1) infinite alternate;
