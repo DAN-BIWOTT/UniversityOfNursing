@@ -478,8 +478,10 @@ export const UserDetails_query = `query UserDetails_Query($id: Int!) {
   }
 }`
 
-export const EditOrderForm_query = `mutation EditOrderForm_query($orderId:Int!,$clientId:Int!,$price:Int!,$paperFormat:String,$nature:String,$pages:String,$deadline:String,$spacing:String,$subject:String,$topic:String,$description:String) {
-  update_order(where: {id: {_eq: $orderId}}, _set: {client_id: $clientId, price: $price, topic: $topic, doc_format: $paperFormat, nature: $nature, pages: $pages, due_time:$deadline, spacing: $spacing, subject: $subject, doc_description: $description}) {
-    affected_rows
+export const EditOrderForm_query = `mutation EditOrderForm_query($orderId: Int!, $clientId: Int!, $price: Int!, $paperFormat: String, $nature: String, $pages: String, $deadline: String, $spacing: String, $subject: String, $topic: String, $description: String) {
+  update_order(where: {id: {_eq: $orderId}}, _set: {client_id: $clientId, price: $price, topic: $topic, doc_format: $paperFormat, nature: $nature, pages: $pages, due_time: $deadline, spacing: $spacing, subject: $subject, doc_description: $description}) {
+    returning {
+      id
+    }
   }
 }`

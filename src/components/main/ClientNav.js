@@ -74,8 +74,13 @@ const Nav = () => {
   
   const goToOrder = (event)=>{
     event.preventDefault();
-    (event.target.value !== null && order_id!==0 &&order_id!=="")?setOrder_id(event.target.value):console.log("No id passed");
-    setShowOrder(true);
+    if(event.target.value !== null && order_id!==0 &&order_id!==""){
+      setOrder_id(event.target.value)
+      setShowOrder(true);
+    }else{
+      console.log("No id passed");
+    }
+    
   }
 if(showOrder==false ){
   return (
