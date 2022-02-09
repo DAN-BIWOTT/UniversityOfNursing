@@ -28,28 +28,29 @@ import {
 
 const AdminDetailMain = ({ data, orderId }) => {
 console.log("🚀 ~ file: AdminDetailMain.js ~ line 30 ~ AdminDetailMain ~ data", data)
-let tempPrice = data.price
-console.log("🚀 ~ file: AdminDetailMain.js ~ line 32 ~ AdminDetailMain ~ tempPrice", tempPrice)
-let tempPaperFormat = data.doc_format
-let tempNature = data.nature
-let tempPages = data.pages
-let tempDeadline = data.due_time
-let tempSpacing = data.spacing
-let tempSubject = data.subject
-let tempTopic = data.topic
-let tempDescription = data.description
-const [price, setPrice] = useState(tempPrice);
-const [paperFormat, setPaperFormat] = useState(tempPaperFormat);
-const [nature, setNature] = useState(tempNature);
-const [pages, setPages] = useState(tempPages);
-const [deadline, setDeadline] = useState(tempDeadline);
-const [spacing, setSpacing] = useState(tempSpacing);
-const [subject, setSubject] = useState(tempSubject);
-const [topic, setTopic] = useState(tempTopic);
-const [description, setDescription] = useState(tempDescription);
+const [price, setPrice] = useState(data.price);
+const [paperFormat, setPaperFormat] = useState(data.doc_format);
+const [nature, setNature] = useState(data.nature);
+const [pages, setPages] = useState(data.pages);
+const [deadline, setDeadline] = useState(data.due_time);
+const [spacing, setSpacing] = useState(data.spacing);
+const [subject, setSubject] = useState(data.subject);
+const [topic, setTopic] = useState(data.topic);
+const [description, setDescription] = useState(data.description);
 const [waitingButton, setWaitingButton] = useState(false);
-console.log("Price test ~ data", price)
 
+useEffect(()=>{
+  setPrice(data.price);
+setPaperFormat(data.doc_format);
+setNature(data.nature);
+setPages(data.pages);
+setDeadline(data.due_time);
+setSpacing(data.spacing);
+setSubject(data.subject);
+setTopic(data.topic);
+setDescription(data.description);
+console.log("Price test ~ data", price)
+},[price])
   const emptyFields = () => {
     if (
       price === "" ||
