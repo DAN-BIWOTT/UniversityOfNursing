@@ -74,12 +74,10 @@ const Nav = () => {
   
   const goToOrder = (event)=>{
     event.preventDefault();
-    event.target.value !== null?setOrder_id(event.target.value):alert("No id passed");
-    console.log(event.target.value)
-    console.log(order_id)
+    (event.target.value !== null && order_id!==0 &&order_id!=="")?setOrder_id(event.target.value):alert("No id passed");
     setShowOrder(true);
   }
-if(showOrder==true || order_id===0||order_id===""){
+if(showOrder==false ){
   return (
     <Container>
       <Toaster />

@@ -64,7 +64,7 @@ let [check,setCheck] = useState(true)
       setSubject(data.subject);
       setTopic(data.topic);
       setDescription(data.description);
-      emptyFields()===true?"":setCheck(false);
+      emptyFields()===false?"":setCheck(false);
       console.log("Price test ~ data", price);
     }
   });
