@@ -70,7 +70,7 @@ const Nav = () => {
   }
 
   const[showOrder,setShowOrder] = useState(false)
-  const[order_id,setOrder_id] = useState(0)
+  let order_id;
   
   const goToOrder = (event)=>{
     event.preventDefault();
@@ -78,7 +78,7 @@ const Nav = () => {
       console.log("No id passed ",event.target.value);
     }else{
       console.log("id passed ",event.target.value);
-      setOrder_id(event.target.value)
+      order_id = event.target.value
       if(order_id!==""||order_id!==0){
         console.log("id not set ",event.target.value);
       }else{
