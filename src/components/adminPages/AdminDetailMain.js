@@ -67,7 +67,7 @@ let [check,setCheck] = useState(true)
       emptyFields()===true?"":setCheck(false);
       console.log("Price test ~ data", price);
     }
-  },[price]);
+  });
  
   let GeneralNotification = {
     created_at: 0,
