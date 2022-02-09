@@ -77,7 +77,7 @@ const Nav = () => {
     event.target.value !== null?setOrder_id(event.target.value):alert("No id passed");
     setShowOrder(true);
   }
-if(showOrder==true){
+if(showOrder==true || order_id===0||order_id===""){
   return (
     <Container>
       <Toaster />
@@ -145,11 +145,7 @@ if(showOrder==true){
     </Container>
   );
 }else{
-  if(order_id===0||order_id===""){
-    return(<></>)
-  }else{
     return(<ClientOrderDetail orderId={order_id}/>)
-  }
 }
   
 };
