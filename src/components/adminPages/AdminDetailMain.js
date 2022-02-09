@@ -54,7 +54,7 @@ const emptyFields = () => {
 };
 let [check,setCheck] = useState(true)
   useEffect(() => {
-    if(data.price!=="" && check===true){
+    if(typeof data.price==="undefined" && check===true){
       setPrice(data.price);
       setPaperFormat(data.doc_format);
       setNature(data.nature);
@@ -63,7 +63,7 @@ let [check,setCheck] = useState(true)
       setSpacing(data.spacing);
       setSubject(data.subject);
       setTopic(data.topic);
-      setDescription(data.description);
+      setDescription(data.doc_description);
       emptyFields()===false?"":setCheck(false);
       console.log("Price test ~ data", price);
     }
