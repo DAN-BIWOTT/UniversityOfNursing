@@ -23,7 +23,7 @@ const ClientDetailMain = ({ data, orderId }) => {
     acceptanceStatus,
     colorAcceptanceTitle;
     var fileArray;
-          if (typeof data.filesByOrderId !== "undefined" && data.filesByOrderId !== null){
+          if (data.filesByOrderId !== null && typeof data.filesByOrderId !== "undefined"){
             fileArray = data.filesByOrderId
             console.log(fileArray);
           }else{
