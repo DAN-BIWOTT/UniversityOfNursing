@@ -4,7 +4,7 @@ import ColorStatus from "../icons/ColorStatus";
 import ChatBox from "../ChatBox";
 import fileFolder from "../../assets/images/fileFolder.png";
 import BackButton from "../BackButton";
-import { dispute_query, revision_query } from "../../graphQl/uonQueries";
+import { dispute_query, EditOrderForm_query, revision_query } from "../../graphQl/uonQueries";
 import toast from "react-hot-toast";
 import { BsQuestionLg } from "react-icons/bs";
 import TransactionModal from "../transaction/TransactionModal";
@@ -16,6 +16,109 @@ import { sendGeneralNotification } from "../../utils/chats";
 import Spinner from "../Spinner";
 
 const ClientDetailMain = ({ data, orderId }) => {
+console.log("🚀 ~ file: ClientDetailMain.js ~ line 19 ~ ClientDetailMain ~ data", data)
+const [price, setPrice] = useState(data.price);
+const [paperFormat, setPaperFormat] = useState(data.doc_format);
+const [nature, setNature] = useState(data.nature);
+const [pages, setPages] = useState(data.pages);
+const [deadline, setDeadline] = useState(data.due_time);
+const [spacing, setSpacing] = useState(data.spacing);
+const [subject, setSubject] = useState(data.subject);
+const [topic, setTopic] = useState(data.topic);
+const [description, setDescription] = useState(data.doc_description);
+const [waitingButton, setWaitingButton] = useState(false);
+  const emptyFields = () => {
+    if (
+      price === "" ||
+      paperFormat === "" ||
+      nature === "" ||
+      pages === "" ||
+      deadline === "" ||
+      subject === "" ||
+      topic === "" ||
+      description === ""
+    )
+      return true;
+    return false;
+  };
+  let [check,setCheck] = useState(true)
+  useEffect(() => {
+    if(typeof price=="undefined" && check===true){
+      setPrice(data.price);
+      setPaperFormat(data.doc_format);
+      setNature(data.nature);
+      setPages(data.pages);
+      setDeadline(data.due_time);
+      setSpacing(data.spacing);
+      setSubject(data.subject);
+      setTopic(data.topic);
+      setDescription(data.doc_description);
+      emptyFields()===false?"":setCheck(false);
+      console.log("Price test ~ data", price);
+    }
+  });
+  let GeneralNotification = {
+    created_at: 0,
+    sender: "",
+    msg: "",
+    order_id: orderId
+  };
+  const EditOrderFormQuery = EditOrderForm_query
+  const submitOrder = async () => {
+    if (emptyFields()) {
+      toast("Fields with stars cant be left empty!", {
+        style: { background: "#DC143C" },
+      });
+      setWaitingButton(false);
+      return false;
+    }
+    const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
+      method: "POST",
+      headers: {
+        "x-hasura-admin-secret": `${process.env.GATSBY_HASURA_ADMIN_SECRET}`,
+        "Content-Type": "Application/Json",
+      },
+      body: JSON.stringify({
+        query: EditOrderFormQuery,
+        variables: {
+          orderId,
+          clientId,
+          price,
+          paperFormat,
+          nature,
+          pages,
+          deadline,
+          spacing,
+          subject,
+          topic,
+          description
+        },
+      }),
+    });
+
+    try {
+      const finalRes = await response.json();
+      console.log(finalRes);
+      GeneralNotification.created_at = Date.now();
+      GeneralNotification.sender = "Admin";
+      GeneralNotification.order_id = finalRes.data.update_order.returning.id;
+      GeneralNotification.msg = "Order Edited: ".concat(finalRes.data.update_order.returning.id);
+      console.log(GeneralNotification)
+      sendGeneralNotification(GeneralNotification);
+      toast("Your Order Has Been Edited.", {
+        style: { background: "#00FF00" },
+      });
+      setTimeout(() => {
+        navigate(0);
+      }, 2000);
+      setWaitingButton(false);
+    } catch (e) {
+      console.log("error at: ",e)
+      toast("Problem Editing Creating.", { style: { background: "#DC143C" } });
+      setWaitingButton(false);
+    }
+  };
+
   var progressStatus,
     colorProgressTitle,
     paymentStatus,
@@ -225,6 +328,18 @@ const ClientDetailMain = ({ data, orderId }) => {
       toast("File deleted successfully!");
     else toast("System failed to delete file!");
   };
+
+  const [editState, setEditState] = useState(false);
+  const editTrigger = (event) => {
+    event.preventDefault();
+    setEditState(true);
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setWaitingButton(true);
+    submitOrder()
+  };
+  if (editState === false) {
   return (
     <div>
       {loadingScreen}
@@ -337,6 +452,7 @@ const ClientDetailMain = ({ data, orderId }) => {
               </tr>
             </tbody>
           </table>
+          <Button onClick={(event) => editTrigger(event)}>Edit Order</Button>
         </OrderSummary>
         <ChatBox sender="client" orderData={orderId} />
         <FileHold>
@@ -366,6 +482,178 @@ const ClientDetailMain = ({ data, orderId }) => {
       </OrderGrid>
     </div>
   );
+} else {
+  return (
+    <div>
+      <BackButton />
+      <ToolTip>
+        <FaqButton>
+          <BsQuestionLg color="black" size="clamp(1rem,1vw,1rem)" />
+          <ToolTipText className="tooltiptext">
+            HELP
+            <br />
+            To start chats about the assignment with the admin, press the
+            start chat button below.
+          </ToolTipText>
+        </FaqButton>
+      </ToolTip>
+      <EditGrid>
+        <EditContainer>
+          <Container>
+            <Title>Edit Order</Title>
+            <form onSubmit={handleSubmit}>
+              <RowGrid>
+                <ColumnGrid>
+                  <Label>*Price: </Label>
+                  <Input
+                    placeholder="EXAMPLE: $25"
+                    type="number"
+                    onChange={(event) => {
+                      setPrice(event.target.value);
+                    }}
+                    value={price}
+                  />
+                </ColumnGrid>
+
+                <ColumnGrid>
+                  <Label>*Paper Format: </Label>
+                  <InputSelect
+                    onChange={(event) => setPaperFormat(event.target.value)}
+                    value={paperFormat}
+                  >
+                    {PaperFormat.map((data) => {
+                      return (
+                        <option
+                          value={data.paper_format_id}
+                          key={data.paper_format_id}
+                        >
+                          {data.paper_format}
+                        </option>
+                      );
+                    })}
+                  </InputSelect>
+                </ColumnGrid>
+                <ColumnGrid>
+                  <Label>*Nature: </Label>
+                  <InputSelect
+                    onChange={(event) => {
+                      setNature(event.target.value);
+                    }}
+                    value={nature}
+                  >
+                    {NatureDropDown.map((data) => {
+                      return (
+                        <option value={data.named_id} key={data.named_id}>
+                          {data.name}
+                        </option>
+                      );
+                    })}
+                  </InputSelect>
+                </ColumnGrid>
+
+                <ColumnGrid>
+                  <Label>*Pages: </Label>
+                  <Input
+                    placeholder="EXAMPLE: 2 pages"
+                    onChange={(event) => {
+                      setPages(event.target.value);
+                    }}
+                    value={pages}
+                  />
+                </ColumnGrid>
+                <ColumnGrid>
+                  <Label>*Deadline: </Label>
+                  <Input
+                    type="datetime-local"
+                    onChange={(event) => {
+                      setDeadline(event.target.value);
+                    }}
+                    value={deadline}
+                  />
+                </ColumnGrid>
+
+                <ColumnGrid>
+                  <Label>Spacing: </Label>
+                  <InputSelect
+                    onChange={(event) => setSpacing(event.target.value)}
+                    value={spacing}
+                  >
+                    {LineSpacing.map((data) => {
+                      return (
+                        <option
+                          value={data.lineSpace}
+                          key={data.lineSpace_id}
+                        >
+                          {data.lineSpace}
+                        </option>
+                      );
+                    })}
+                  </InputSelect>
+                </ColumnGrid>
+                <ColumnGrid>
+                  <Label>*Subject: </Label>
+                  <InputSelect
+                    onChange={(event) => {
+                      setSubject(event.target.value);
+                    }}
+                    value={subject}
+                  >
+                    {Subjects.map((data) => {
+                      return (
+                        <option
+                          value={data.subject_named_id}
+                          key={data.subject_named_id}
+                        >
+                          {data.subject_name}
+                        </option>
+                      );
+                    })}
+                  </InputSelect>
+                </ColumnGrid>
+              </RowGrid>
+
+              <ColumnGrid>
+                <Label>*Topic: </Label>
+                <Input
+                  placeholder="EXAMPLE: Introductory Physiology"
+                  onChange={(event) => {
+                    setTopic(event.target.value);
+                  }}
+                  value={topic}
+                />
+              </ColumnGrid>
+
+              <ColumnGrid>
+                <Label>*Description: </Label>
+                <TextAreaInput
+                  type="text"
+                  maxLength="700"
+                  onChange={(event) => {
+                    setDescription(event.target.value);
+                  }}
+                  value={description}
+                />
+              </ColumnGrid>
+              <ColumnGrid>
+                {waitingButton ? (
+                  <Loader
+                    type="Bars"
+                    color="#00BFFF"
+                    height={40}
+                    width={40}
+                    style={{ marginLeft: "40%" }}
+                  />
+                ) : (
+                  <Button type="submit">Submit</Button>
+                )}
+              </ColumnGrid>
+            </form>
+          </Container>
+        </EditContainer>
+      </EditGrid>
+    </div>
+  );
+}
 };
 
 export default ClientDetailMain;

@@ -79,7 +79,7 @@ const Nav = () => {
     }else{
       console.log("id passed ",event.target.value);
       order_id = event.target.value
-      if(order_id!==""||order_id!==0){
+      if(order_id==""||order_id===0){
         console.log("id not set ",event.target.value);
       }else{
         setShowOrder(true);
