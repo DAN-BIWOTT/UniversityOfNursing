@@ -10,6 +10,7 @@ import {
 } from "firebase/database";
 import { database } from "../../utils/firebase";
 import toast, { Toaster } from "react-hot-toast";
+import ClientOrderDetail from "../../pages/clientPages/ClientOrderDetail";
 
 const Nav = () => {
   useEffect(() => {
