@@ -267,8 +267,6 @@ const [waitingButton, setWaitingButton] = useState(false);
     let ConfirmWithClient = window.confirm("Are You Sure You Want To Change Revision Status?")
     if(ConfirmWithClient)changeRevisionStatus();
   };
-  // payment processing
-  const [waitingButton, setWaitingButton] = useState(false);
   const deleteFromFireBase = async () => {
     const fileRef = ref(storage, "files/".concat(data.client_file_name));
     // Delete the file
