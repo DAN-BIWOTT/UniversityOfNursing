@@ -121,7 +121,7 @@ let [check,setCheck] = useState(true)
         style: { background: "#00FF00" },
       });
       setTimeout(() => {
-        navigate(-1);
+        navigate(0);
       }, 2000);
       setWaitingButton(false);
     } catch (e) {
