@@ -41,19 +41,21 @@ const AdminDetailMain = ({ data, orderId }) => {
   const [topic, setTopic] = useState("");
   const [description, setDescription] = useState("");
   const [waitingButton, setWaitingButton] = useState(false);
-
+let check = true
   useEffect(() => {
-    setPrice(data.price);
-    setPaperFormat(data.doc_format);
-    setNature(data.nature);
-    setPages(data.pages);
-    setDeadline(data.due_time);
-    setSpacing(data.spacing);
-    setSubject(data.subject);
-    setTopic(data.topic);
-    setDescription(data.description);
-    console.log("Price test ~ data", price);
-  },[]);
+    if(data.price!==null && check===false){
+      setPrice(data.price);
+      setPaperFormat(data.doc_format);
+      setNature(data.nature);
+      setPages(data.pages);
+      setDeadline(data.due_time);
+      setSpacing(data.spacing);
+      setSubject(data.subject);
+      setTopic(data.topic);
+      setDescription(data.description);
+      console.log("Price test ~ data", price);
+    }
+  });
   const emptyFields = () => {
     if (
       price === "" ||
