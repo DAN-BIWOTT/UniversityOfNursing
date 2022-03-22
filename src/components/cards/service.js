@@ -3,9 +3,9 @@ import { jsx, Box, Text } from 'theme-ui';
 
 const Service = ({ service }) => {
   return (
-    <Box sx={styles.service}>
+    <li sx={styles.service}>
       <Text as="p">{service.title}</Text>
-    </Box>
+    </li>
   );
 };
 

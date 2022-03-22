@@ -12,11 +12,11 @@ const Services = () => {
           slogan="University of nursing is "
           title="A team of professional tutors with over five years experience and expertise in BSN, MSN, APRN, & DNP programs especially in UK, Australia, Canada, and USA."
         />
-        <Box sx={styles.grid}>
+        <ul sx={styles.grid}>
           {services.map((service, i) => (
             <Service key={i} service={service} />
           ))}
-        </Box>
+        </ul>
       </Container>
     </Box>
   );
