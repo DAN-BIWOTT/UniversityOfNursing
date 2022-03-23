@@ -3,7 +3,7 @@ import { jsx, Box, Text } from 'theme-ui';
 
 const Service = ({ service }) => {
   return (
-    <li sx={styles.service}>
+    <li>
       <Text as="p">{service.title}</Text>
     </li>
   );
