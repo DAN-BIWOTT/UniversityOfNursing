@@ -15,6 +15,6 @@ const styles = {
   service: {
     float:'left',
 margin:"0 10px",
-fontSize:"10px"
+fontSize:"30px"
   },
 };
