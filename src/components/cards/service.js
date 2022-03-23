@@ -14,7 +14,7 @@ export default Service;
 const styles = {
   service: {
     backgroundColor:"#fff",
-    float:left,
+    float:'left',
 margin:"0 5px",
     display: 'flex',
     flexDirection: 'row',
