@@ -13,8 +13,8 @@ export default Service;
 
 const styles = {
   service: {
-    backgroundColor:"#fff",
     float:'left',
-margin:"0 5px",
+margin:"0 10px",
+fontSize:"10px"
   },
 };
