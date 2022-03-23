@@ -21,10 +21,6 @@ margin:"0 5px",
     justifyContent: 'center',
     minHeight: [107, null, null, 130],
     textAlign: 'center',
-    transition: 'all 0.3s ease-in-out 0s',
-    ':hover': {
-      borderColor: 'transparent',
-    },
     p: {
       fontWeight: 600,
       fontSize: [2, null, null, '17px'],
