@@ -15,6 +15,9 @@ const DisputedOrder = () => {
             price
             topic
             created_at
+            client {
+                full_name
+              }
           }
       }`
     useEffect(() => {

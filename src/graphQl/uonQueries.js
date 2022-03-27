@@ -39,6 +39,9 @@ export const AllOrders_Query = `query AllOrders {
       topic
       created_at
       acceptance_status
+      client {
+        full_name
+      }
     }
   }`;
 
@@ -117,6 +120,9 @@ export const ClientAllSubmissions_query = `query MyOrders($id: Int!) {
     topic
     created_at
     acceptance_status
+    client {
+      full_name
+    }
   }
 }`;
 
@@ -162,6 +168,9 @@ export const CompleteOrders_query = `query InCompleteOrders {
     topic
     created_at
     acceptance_status
+    client {
+      full_name
+    }
   }
 }`;
 
@@ -176,6 +185,9 @@ export const IncompleteOrders_query = `query InCompleteOrders {
     topic
     created_at
     acceptance_status
+    client {
+      full_name
+    }
   }
 }`;
 
@@ -198,6 +210,9 @@ export const ClientCompleteSubmissions_query = `query MyOrders($id: Int!) {
     topic
     created_at
     acceptance_status
+    client {
+      full_name
+    }
   }
 }`;
 
@@ -212,6 +227,9 @@ export const ClientInProgressSubmissions_query = `query MyOrders($id: Int!) {
     topic
     created_at
     acceptance_status
+    client {
+      full_name
+    }
   }
 }`;
 
@@ -226,6 +244,9 @@ export const ClientIncompleteSubmissions_query = `query MyOrders($id: Int!) {
     topic
     created_at
     acceptance_status
+    client {
+      full_name
+    }
   }
 }`;
 
@@ -240,6 +261,9 @@ export const ClientCompleteTransactions_query = `query MyOrders($id: Int!) {
     topic
     created_at
     acceptance_status
+    client {
+      full_name
+    }
   }
 }`;
 
@@ -254,6 +278,9 @@ export const ClientPaidSubmissions_query = `query MyOrders($id: Int!) {
     topic
     created_at
     acceptance_status
+    client {
+      full_name
+    }
   }
 }`;
 
@@ -268,6 +295,9 @@ export const ClientPendingTransactions_query = `query MyOrders($id: Int!) {
     topic
     created_at
     acceptance_status
+    client {
+      full_name
+    }
   }
 }`;
 
@@ -282,6 +312,9 @@ export const AdminOrdersInRevision_query = `query OrdersInRevision {
       topic
       created_at
       acceptance_status
+      client {
+        full_name
+      }
     }
 }`;
 
@@ -296,6 +329,9 @@ export const AdminPaidOrders_query = `query PaidOrders {
       topic
       created_at
       acceptance_status
+      client {
+        full_name
+      }
     }
 }`;
 
@@ -328,6 +364,9 @@ export const ClientRevisionSubmissions_query = `query MyOrders($id: Int!) {
     topic
     created_at
     acceptance_status
+    client {
+      full_name
+    }
   }
 }`
 
@@ -342,6 +381,9 @@ export const ClientRejectedSubmissions_query = `query MyOrders($id: Int!) {
     topic
     created_at
     acceptance_status
+    client {
+      full_name
+    }
   }
 }`;
 
@@ -356,6 +398,9 @@ export const ClientDisputedSubmissions_query = `query MyOrders($id: Int!) {
     topic
     created_at
     acceptance_status
+    client {
+      full_name
+    }
   }
 }`;
 
@@ -390,6 +435,9 @@ export const AcceptedOrders_query = `query AcceptedOrders {
     topic
     created_at
     acceptance_status
+    client {
+      full_name
+    }
   }
 }`
 
@@ -404,6 +452,9 @@ export const RejectedOrders_query = `query RejectedOrders {
     topic
     created_at
     acceptance_status
+    client {
+      full_name
+    }
   }
 }`
 
@@ -418,6 +469,9 @@ export const UnconfirmedOrders_query = `query UnconfirmedOrders {
     topic
     created_at
     acceptance_status
+    client {
+      full_name
+    }
   }
 }`;
 
