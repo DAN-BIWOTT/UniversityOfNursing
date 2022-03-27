@@ -534,7 +534,7 @@ let [check,setCheck] = useState(true)
                         src={fileFolder}
                         alt="Folder representing downloadable files."
                       />
-                      <FileTitle href={filesData.file}>Data File</FileTitle>
+                      <FileTitle href={filesData.file}>{filesData.fileName}</FileTitle>
                     </FileRow>
                   );
               }
@@ -549,7 +549,7 @@ let [check,setCheck] = useState(true)
                         src={fileFolder}
                         alt="Folder representing downloadable files."
                       />
-                      <FileTitle href={filesData.file}>Data File</FileTitle>
+                      <FileTitle href={filesData.file}>{filesData.fileName}</FileTitle>
                     </FileRow>
                   );
               }
