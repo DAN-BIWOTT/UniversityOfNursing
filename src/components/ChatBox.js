@@ -59,7 +59,6 @@ const Container = styled.div`
   margin-top: 3vh;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  height: auto;
   background: #fcf9ff;
   display: block;
   width: 50%;

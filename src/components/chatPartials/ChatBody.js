@@ -163,7 +163,8 @@ const Container = styled.div`
   margin: 0, 0, 10px, 0;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  height: 60vh;
+  height: 50vh;
+  max-height:50vh;
   background: #f5f5f5;
   display: block;
   border-radius: 0px, 0px, 0px, 0px;
