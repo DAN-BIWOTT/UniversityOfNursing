@@ -171,7 +171,7 @@ const Container = styled.div`
 `;
 
 const Body = styled.div`
-  height: 60vh;
+  height: 50vh;
   width: 100%;
   overflow-y: scroll;
 `;
