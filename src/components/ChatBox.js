@@ -62,6 +62,8 @@ const Container = styled.div`
   height: auto;
   background: #fcf9ff;
   display: block;
+  width: 50%;
+  height: 50%;
 `;
 
 const TopChatBar = styled.div`
