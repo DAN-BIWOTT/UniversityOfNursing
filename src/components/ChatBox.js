@@ -62,7 +62,7 @@ const Container = styled.div`
   background: #fcf9ff;
   display: block;
   width: 50%;
-  height: 50%;
+  height: 50vh;
 `;
 
 const TopChatBar = styled.div`
