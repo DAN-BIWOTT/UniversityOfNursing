@@ -24,6 +24,7 @@ const AllOrders = () => {
         }
         );
         const finalResp = await response.json();
+        console.log(finalResp)
         setData(finalResp.data.order)
     }
     return (
