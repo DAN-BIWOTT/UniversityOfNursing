@@ -246,7 +246,7 @@ let files="";
           <Label>*Description: </Label>
           <TextAreaInput
             type="text"
-            placeholder="INFO: Input a summary of the project description. Max of 700 characters"
+            placeholder="INFO: Input a summary of the project description."
             maxLength="700"
             onChange={(event) => {
               setDescription(event.target.value);

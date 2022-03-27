@@ -80,7 +80,7 @@ navigate('/login');
                 <LockIcon fill={state.isSticky ? "#343D48" : "white"} />
                 Login
               </Button>
-              <Button
+              {/* <Button
                 onClick={(event)=>{login(event)}}
                 variant="text"
                 sx={{
@@ -90,7 +90,7 @@ navigate('/login');
                 }}
               >
                 Get Started
-              </Button>
+              </Button> */}
             </Flex>
 
             <HamburgerMenu

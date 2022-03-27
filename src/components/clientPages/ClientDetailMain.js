@@ -464,7 +464,7 @@ let clientId = data.client_id;
                 src={fileFolder}
                 alt="Folder representing downloadable files."
               />
-              <FileTitle href={filesData.file}>Data File</FileTitle>
+              <FileTitle href={filesData.file}>{filesData.fileName}</FileTitle>
             </FileRow>)}
       })}
       <h2 style={{ paddingLeft: "1rem" }}>From Admin</h2>
@@ -474,7 +474,7 @@ let clientId = data.client_id;
               src={fileFolder}
               alt="Folder representing downloadable files."
             />
-            <FileTitle href={filesData.file}>Data File</FileTitle>
+            <FileTitle href={filesData.file}>{filesData.fileName}</FileTitle>
           </FileRow>)}
           })}
           <ClientUploadForm orderId={orderId} />
