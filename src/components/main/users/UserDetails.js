@@ -29,6 +29,7 @@ const UserDetails = ({ clientId }) => {
 
   const getOrderDetails = async () => {
     setPageLoader(true);
+    console.log("this is: ",id)
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
       headers: {
@@ -38,7 +39,7 @@ const UserDetails = ({ clientId }) => {
       body: JSON.stringify({
         query: UserDetailQuery,
         variables: {
-          id,
+          id
         },
       }),
     });
@@ -53,7 +54,7 @@ const UserDetails = ({ clientId }) => {
     <Container>
       {loadingScreen}
       <Sidebar permission="admin" />
-      <Title>{data.client?.full_name}</Title>
+      <Title>{data.client[0]?.full_name}</Title>
       <table id="clients">
         <tr>
           <th>Order Id</th>
