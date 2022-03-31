@@ -45,7 +45,7 @@ const UserDetails = ({ clientId }) => {
     const finalRes = await response.json();
     //console.log(finalRes);
     setData(finalRes.data);
-    //console.log(data);
+    console.log(data);
     setPageLoader(false);
   };
 
@@ -53,6 +53,7 @@ const UserDetails = ({ clientId }) => {
     <Container>
       {loadingScreen}
       <Sidebar permission="admin" />
+      <Title>{data.client[0]?.full_name}</Title>
       <table id="clients">
         <tr>
           <th>Order Id</th>
@@ -77,4 +78,12 @@ const Container = styled.div`
   background: #f4eaff;
   z-index: 10;
   overflow-y: auto;
+`;
+
+const Title = styled.h1`
+  font-weight: 500;
+  color: ${({ theme }) => theme.textColor};
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
 `;
