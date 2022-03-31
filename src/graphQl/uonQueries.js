@@ -26,7 +26,7 @@ export const AdminOrderDetail_Query = `query AdminOrderDetail($id: Int!) {
       sender
     }
   }
-}`
+}`;
 
 export const AllOrders_Query = `query AllOrders {
     order(order_by: {created_at: desc}) {
@@ -45,7 +45,7 @@ export const AllOrders_Query = `query AllOrders {
     }
   }`;
 
-  export const ClientOrderDetail_Query = `query ClientOrderDetail($id: Int!) {
+export const ClientOrderDetail_Query = `query ClientOrderDetail($id: Int!) {
     order_by_pk(id: $id) {
       budget
       client_id
@@ -75,25 +75,25 @@ export const AllOrders_Query = `query AllOrders {
     }
   }`;
 
-  export const dispute_query = `mutation updateDispute($orderId:Int!,$disputeValue:Int!) {
+export const dispute_query = `mutation updateDispute($orderId:Int!,$disputeValue:Int!) {
     update_order_by_pk(pk_columns: {id: $orderId}, _set: {dispute_status: $disputeValue}) {
       dispute_status
     }
   }`;
 
-  export const revision_query = `mutation updateDispute($orderId:Int!,$revisionValue:Int!) {
+export const revision_query = `mutation updateDispute($orderId:Int!,$revisionValue:Int!) {
     update_order_by_pk(pk_columns: {id: $orderId}, _set: {revision_status: $revisionValue}) {
       revision_status
     }
   }`;
 
-  export const NewOrderForm_query = `mutation addOrder($client_id: Int!,$budgetRangeString: String, $price: Int!, $paperFormat: String, $nature: String, $pages: String, $deadline: String, $spacing: String, $subject: String, $topic: String, $description: String, $files: String, $fileName: String) {
+export const NewOrderForm_query = `mutation addOrder($client_id: Int!,$budgetRangeString: String, $price: Int!, $paperFormat: String, $nature: String, $pages: String, $deadline: String, $spacing: String, $subject: String, $topic: String, $description: String, $files: String, $fileName: String) {
     insert_order_one(object: {budget: $budgetRangeString, doc_description: $description, doc_format: $paperFormat, due_time: $deadline, nature: $nature, pages: $pages, price: $price, spacing: $spacing, subject: $subject, topic: $topic, filesByOrderId: {data: {file: $files, fileName: $fileName}}, client_id: $client_id}) {
       id
     }
-  }`
+  }`;
 
-  export const UserSpecific_query = `
+export const UserSpecific_query = `
   query UserSpecificOrders($id: Int!) {
     order(order_by: {created_at: desc}, where: {client_id: {_eq: $id}}) {
       id
@@ -107,7 +107,7 @@ export const AllOrders_Query = `query AllOrders {
       acceptance_status
     }
   }
-`
+`;
 
 export const ClientAllSubmissions_query = `query MyOrders($id: Int!) {
   order(where: {client_id: {_eq: $id}}, order_by: {created_at: desc}) {
@@ -122,6 +122,7 @@ export const ClientAllSubmissions_query = `query MyOrders($id: Int!) {
     acceptance_status
     client {
       full_name
+id      
     }
   }
 }`;
@@ -139,6 +140,7 @@ export const AdminAllNewOrders_query = `query AllNewOrders {
     acceptance_status
     client {
       full_name
+id      
     }
   }
 }`;
@@ -170,6 +172,7 @@ export const CompleteOrders_query = `query InCompleteOrders {
     acceptance_status
     client {
       full_name
+id      
     }
   }
 }`;
@@ -187,6 +190,7 @@ export const IncompleteOrders_query = `query InCompleteOrders {
     acceptance_status
     client {
       full_name
+id      
     }
   }
 }`;
@@ -212,6 +216,7 @@ export const ClientCompleteSubmissions_query = `query MyOrders($id: Int!) {
     acceptance_status
     client {
       full_name
+id      
     }
   }
 }`;
@@ -229,6 +234,7 @@ export const ClientInProgressSubmissions_query = `query MyOrders($id: Int!) {
     acceptance_status
     client {
       full_name
+id      
     }
   }
 }`;
@@ -246,6 +252,7 @@ export const ClientIncompleteSubmissions_query = `query MyOrders($id: Int!) {
     acceptance_status
     client {
       full_name
+id      
     }
   }
 }`;
@@ -263,6 +270,7 @@ export const ClientCompleteTransactions_query = `query MyOrders($id: Int!) {
     acceptance_status
     client {
       full_name
+id      
     }
   }
 }`;
@@ -280,6 +288,7 @@ export const ClientPaidSubmissions_query = `query MyOrders($id: Int!) {
     acceptance_status
     client {
       full_name
+id      
     }
   }
 }`;
@@ -297,6 +306,7 @@ export const ClientPendingTransactions_query = `query MyOrders($id: Int!) {
     acceptance_status
     client {
       full_name
+id      
     }
   }
 }`;
@@ -366,9 +376,10 @@ export const ClientRevisionSubmissions_query = `query MyOrders($id: Int!) {
     acceptance_status
     client {
       full_name
+id      
     }
   }
-}`
+}`;
 
 export const ClientRejectedSubmissions_query = `query MyOrders($id: Int!) {
   order(where: {client_id: {_eq: $id}, acceptance_status: {_eq: 101}}, order_by: {created_at: desc}) {
@@ -383,6 +394,7 @@ export const ClientRejectedSubmissions_query = `query MyOrders($id: Int!) {
     acceptance_status
     client {
       full_name
+id      
     }
   }
 }`;
@@ -400,6 +412,7 @@ export const ClientDisputedSubmissions_query = `query MyOrders($id: Int!) {
     acceptance_status
     client {
       full_name
+id      
     }
   }
 }`;
@@ -437,9 +450,10 @@ export const AcceptedOrders_query = `query AcceptedOrders {
     acceptance_status
     client {
       full_name
+id      
     }
   }
-}`
+}`;
 
 export const RejectedOrders_query = `query RejectedOrders {
   order(order_by: {created_at: desc}, where: {acceptance_status: {_eq: 101}}) {
@@ -454,9 +468,10 @@ export const RejectedOrders_query = `query RejectedOrders {
     acceptance_status
     client {
       full_name
+id      
     }
   }
-}`
+}`;
 
 export const UnconfirmedOrders_query = `query UnconfirmedOrders {
   order(order_by: {created_at: desc}, where: {_not: {acceptance_status: {_eq: 303}}, _or: {_not: {acceptance_status: {_eq: 101}}}}) {
@@ -471,6 +486,7 @@ export const UnconfirmedOrders_query = `query UnconfirmedOrders {
     acceptance_status
     client {
       full_name
+id      
     }
   }
 }`;
@@ -495,13 +511,13 @@ export const AllTransactions_query = `query MyQuery {
     status
     user_id
   }
-}`
+}`;
 
 export const NewProduct_query = `mutation NewProduct ($description: String, $fileName: String, $files: String, $nature: String, $pages: String, $paperFormat: String, $price: Int!, $spacing: String, $subject: String, $title: String) {
   insert_product(objects: { description: $description, fileName: $fileName, files: $files, nature: $nature, pages: $pages, paperFormat: $paperFormat, price: $price, spacing: $spacing, subject: $subject, title: $title}) {
     affected_rows
   }
-}`
+}`;
 
 export const AllProducts_query = `query AllProducts {
   product(order_by: {id: desc}) {
@@ -510,14 +526,14 @@ export const AllProducts_query = `query AllProducts {
     title
     description
   }
-}`
+}`;
 
 export const getPurchase_query = `query getProduct ($id:Int!){
   product_by_pk(id: $id) {
     fileName
     files
   }
-}`
+}`;
 
 export const UserDetails_query = `query UserDetails_Query($id: Int!) {
   client(where: {id: {_eq: $id}}) {
@@ -530,7 +546,7 @@ export const UserDetails_query = `query UserDetails_Query($id: Int!) {
       topic
     }
   }
-}`
+}`;
 
 export const EditOrderForm_query = `mutation EditOrderForm_query($orderId: Int!, $clientId: Int!, $price: Int!, $paperFormat: String, $nature: String, $pages: String, $deadline: String, $spacing: String, $subject: String, $topic: String, $description: String) {
   update_order(where: {id: {_eq: $orderId}}, _set: {client_id: $clientId, price: $price, topic: $topic, doc_format: $paperFormat, nature: $nature, pages: $pages, due_time: $deadline, spacing: $spacing, subject: $subject, doc_description: $description}) {
@@ -538,4 +554,4 @@ export const EditOrderForm_query = `mutation EditOrderForm_query($orderId: Int!,
       id
     }
   }
-}`
+}`;
