@@ -544,6 +544,7 @@ export const UserDetails_query = `query UserDetails_Query($id: Int!) {
       progress_status
       doc_description
       topic
+      id
     }
   }
 }`;

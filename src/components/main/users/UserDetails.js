@@ -15,7 +15,7 @@ const UserDetails = ({ clientId }) => {
   const [data, setData] = useState({});
   useEffect(() => {
     if (id === "") {
-      navigate(0)
+      navigate(0);
     } else {
       getOrderDetails();
     }
@@ -30,7 +30,7 @@ const UserDetails = ({ clientId }) => {
 
   const getOrderDetails = async () => {
     setPageLoader(true);
-    console.log("this is: ",id)
+    console.log("this is: ", id);
     const response = await fetch(`${process.env.GATSBY_HASURA_URI}`, {
       method: "POST",
       headers: {
@@ -40,7 +40,7 @@ const UserDetails = ({ clientId }) => {
       body: JSON.stringify({
         query: UserDetailQuery,
         variables: {
-          id
+          id,
         },
       }),
     });
@@ -48,6 +48,7 @@ const UserDetails = ({ clientId }) => {
     console.log(finalRes);
     setData(finalRes.data);
     console.log(data);
+
     setPageLoader(false);
   };
 
@@ -55,7 +56,8 @@ const UserDetails = ({ clientId }) => {
     <Container>
       {loadingScreen}
       <Sidebar permission="admin" />
-      <Title>Name of user</Title>
+      <Title>{data.client[0]?.full_name}</Title>
+      <Title>{data.client[0]?.email}</Title>
       <table id="clients">
         <tr>
           <th>Order Id</th>
@@ -63,6 +65,16 @@ const UserDetails = ({ clientId }) => {
           <th>topic</th>
           <th>doc_description</th>
         </tr>
+        {data.client[0].orders.map((orders) => {
+          return (
+            <tr>
+              <td>{orders.id}</td>
+              <td>{orders.price}</td>
+              <td>{orders.topic}</td>
+              <td>{orders.doc_description}</td>
+            </tr>
+          );
+        })}
       </table>
     </Container>
   );
