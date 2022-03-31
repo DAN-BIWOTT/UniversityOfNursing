@@ -12,7 +12,7 @@ const UserDetails = ({ clientId }) => {
   const UserDetailQuery = UserDetails_query;
   
   const [data, setData] = useState({});
-  console.log("this is client id: ",id)
+  
   useEffect(() => {
     if (id === "") {
       navigate(0);
@@ -56,8 +56,7 @@ const UserDetails = ({ clientId }) => {
     <Container>
       {loadingScreen}
       <Sidebar permission="admin" />
-      <Title>{data.client[0]?.full_name}</Title>
-      <Title>{data.client[0]?.email}</Title>
+      
       <table id="clients">
         <tr>
           <th>Order Id</th>
@@ -65,16 +64,7 @@ const UserDetails = ({ clientId }) => {
           <th>topic</th>
           <th>doc_description</th>
         </tr>
-        {data.client[0].orders.map((orders) => {
-          return (
-            <tr>
-              <td>{orders.id}</td>
-              <td>{orders.price}</td>
-              <td>{orders.topic}</td>
-              <td>{orders.doc_description}</td>
-            </tr>
-          );
-        })}
+      
       </table>
     </Container>
   );
