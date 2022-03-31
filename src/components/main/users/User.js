@@ -12,6 +12,7 @@ const User = ({ data }) => {
     data;
     const clientName = data.client?.full_name
     const client_id = data.client?.id
+    console.log("this is client id: ",client_id)
   const date = `${new Date(created_at).getDate()}/${new Date(
     created_at
   ).getMonth()}/${new Date(created_at).getFullYear()}`;
