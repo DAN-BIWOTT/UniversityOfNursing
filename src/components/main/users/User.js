@@ -7,10 +7,9 @@ import AccountBalance from "../AccountBalance";
 import UserDetails from "./UserDetails";
 
 const User = ({ data }) => {
-//console.log(data);
+console.log(data);
   const { budget, due_time, id, pages, price, topic, created_at,acceptance_status,client_id } =
     data;
-    //console.log(data.client?.full_name)
     const clientName = data.client?.full_name
   const date = `${new Date(created_at).getDate()}/${new Date(
     created_at
