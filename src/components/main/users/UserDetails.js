@@ -4,12 +4,11 @@ import { UserDetails_query } from "../../../graphQl/uonQueries";
 import Sidebar from "../../sidebar/sidebar";
 import Spinner from "../../Spinner";
 import { navigate } from "gatsby";
-
+import UserDetailTable from "./UserDetailTable.js"
 import "./UserStyle.css";
 
 const UserDetails = ({ clientId }) => {
   const [id, setId] = useState(clientId);
-  const [displayData, setDisplayData] = useState(false);
   const UserDetailQuery = UserDetails_query;
   
   const [data, setData] = useState({});
@@ -50,53 +49,17 @@ const UserDetails = ({ clientId }) => {
     setData(finalRes.data);
     console.log(data);
     setPageLoader(false);
-    displayData(true);
   };
   
 
-  if(displayData){
-    return (
+  return (
     <Container>
       {loadingScreen}
       <Sidebar permission="admin" />
-      <Title>Name</Title>
-      <Title>Email</Title>
-      <table id="clients">
-        <tr>
-          <th>Order Id</th>
-          <th>price</th>
-          <th>topic</th>
-          <th>doc_description</th>
-        </tr>
-      </table>
+      <UserDetailTable tableData={data} />
+
     </Container>
-  );}else{
-    return(
-    <Container>
-      {loadingScreen}
-      <Sidebar permission="admin" />
-      <Title>{data.client[0]?.full_name}</Title>
-      <Title>{data.client[0]?.email}</Title>
-      <table id="clients">
-        <tr>
-          <th>Order Id</th>
-          <th>price</th>
-          <th>topic</th>
-          <th>doc_description</th>
-        </tr>
-        {data.client[0].orders.map((orders) => {
-          return (
-            <tr>
-              <td>{orders.id}</td>
-              <td>{orders.price}</td>
-              <td>{orders.topic}</td>
-              <td>{orders.doc_description}</td>
-            </tr>
-          );
-        })}
-      </table>
-    </Container>
-  )}
+  );
 };
 
 export default UserDetails;
@@ -111,12 +74,4 @@ const Container = styled.div`
   background: #f4eaff;
   z-index: 10;
   overflow-y: auto;
-`;
-
-const Title = styled.h1`
-  font-weight: 500;
-  color: ${({ theme }) => theme.textColor};
-  font-size: 1.3rem;
-  display: flex;
-  align-items: center;
 `;
