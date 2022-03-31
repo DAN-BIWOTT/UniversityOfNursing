@@ -44,7 +44,7 @@ const UserDetails = ({ clientId }) => {
     });
     const finalRes = await response.json();
     //console.log(finalRes);
-    setData(finalRes.data.order_by_pk);
+    setData(finalRes.data);
     //console.log(data);
     setPageLoader(false);
   };
@@ -68,13 +68,13 @@ const UserDetails = ({ clientId }) => {
 export default UserDetails;
 
 const Container = styled.div`
-  width: auto;
+  width: 80%;
+  height: 100vh;
   left: 16rem;
   top: 0px;
   position: fixed;
   padding: 0 4rem 4rem;
   background: #f4eaff;
-  height: 100vh;
   z-index: 10;
   overflow-y: auto;
 `;
