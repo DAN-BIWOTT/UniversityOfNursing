@@ -9,6 +9,7 @@ import "./UserStyle.css";
 
 const UserDetails = ({ clientId }) => {
   const [id, setId] = useState(clientId);
+  const [displayData, setDisplayData] = useState(false);
   const UserDetailQuery = UserDetails_query;
   
   const [data, setData] = useState({});
@@ -48,15 +49,18 @@ const UserDetails = ({ clientId }) => {
     console.log(finalRes);
     setData(finalRes.data);
     console.log(data);
-
     setPageLoader(false);
+    displayData(true);
   };
+  
 
-  return (
+  if(displayData){
+    return (
     <Container>
       {loadingScreen}
       <Sidebar permission="admin" />
-      
+      <Title>Name</Title>
+      <Title>Email</Title>
       <table id="clients">
         <tr>
           <th>Order Id</th>
@@ -64,10 +68,35 @@ const UserDetails = ({ clientId }) => {
           <th>topic</th>
           <th>doc_description</th>
         </tr>
-      
       </table>
     </Container>
-  );
+  );}else{
+    return(
+    <Container>
+      {loadingScreen}
+      <Sidebar permission="admin" />
+      <Title>{data.client[0]?.full_name}</Title>
+      <Title>{data.client[0]?.email}</Title>
+      <table id="clients">
+        <tr>
+          <th>Order Id</th>
+          <th>price</th>
+          <th>topic</th>
+          <th>doc_description</th>
+        </tr>
+        {data.client[0].orders.map((orders) => {
+          return (
+            <tr>
+              <td>{orders.id}</td>
+              <td>{orders.price}</td>
+              <td>{orders.topic}</td>
+              <td>{orders.doc_description}</td>
+            </tr>
+          );
+        })}
+      </table>
+    </Container>
+  )}
 };
 
 export default UserDetails;
