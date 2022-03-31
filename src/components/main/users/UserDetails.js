@@ -9,10 +9,10 @@ import "./UserStyle.css";
 
 const UserDetails = ({ clientId }) => {
   const [id, setId] = useState(clientId);
-
   const UserDetailQuery = UserDetails_query;
-
+  
   const [data, setData] = useState({});
+  console.log("this is client id: ",id)
   useEffect(() => {
     if (id === "") {
       navigate(0);
