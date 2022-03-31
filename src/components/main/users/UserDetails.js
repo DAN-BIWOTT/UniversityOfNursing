@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { UserDetails_query } from "../../../graphQl/uonQueries";
 import Sidebar from "../../sidebar/sidebar";
 import Spinner from "../../Spinner";
+import { navigate } from "gatsby";
 
 import "./UserStyle.css";
 
@@ -14,7 +15,7 @@ const UserDetails = ({ clientId }) => {
   const [data, setData] = useState({});
   useEffect(() => {
     if (id === "") {
-      window.location.href = "/admin";
+      navigate(0)
     } else {
       getOrderDetails();
     }
@@ -54,7 +55,7 @@ const UserDetails = ({ clientId }) => {
     <Container>
       {loadingScreen}
       <Sidebar permission="admin" />
-      <Title>{data.client[0]?.full_name}</Title>
+      <Title>Name of user</Title>
       <table id="clients">
         <tr>
           <th>Order Id</th>
