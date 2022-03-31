@@ -10,8 +10,8 @@ const User = ({ data }) => {
 //console.log(data);
   const { budget, due_time, id, pages, price, topic, created_at,acceptance_status,client_id } =
     data;
-    console.log(data.client.full_name)
-    const clientName = data.client.full_name
+   if(data.client.full_name != null){console.log(data.client.full_name)}else{console.log("null section")}
+    const clientName = data.client.full_name != null? data.client.full_name:"No Name"
   const date = `${new Date(created_at).getDate()}/${new Date(
     created_at
   ).getMonth()}/${new Date(created_at).getFullYear()}`;
