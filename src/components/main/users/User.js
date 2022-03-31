@@ -7,7 +7,7 @@ import AccountBalance from "../AccountBalance";
 import UserDetails from "./UserDetails";
 
 const User = ({ data }) => {
-console.log(data);
+// console.log(data);
   const { budget, due_time, id, pages, price, topic, created_at,acceptance_status } =
     data;
     const clientName = data.client?.full_name
