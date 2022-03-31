@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 
 const UserDetailTable = ({tableData}) => {
+    console.log(tableData)
   return (
     <div>
         <Title>{tableData.client[0]?.full_name}</Title>
