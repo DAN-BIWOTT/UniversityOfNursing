@@ -32,7 +32,7 @@ const User = ({ data }) => {
    return( 
     <Container>
       <Property>
-        <link to={"#"} />{clientName}
+        <ShowUser onClick={event=>showUserTrigger(event)} >{clientName}</ShowUser>
         <PropertyText>
           <PropertyStreet>
           <OrderButton onClick={event=>showDetail(event)}>
@@ -97,6 +97,17 @@ const Container = styled.div`
     background-color: ${({ theme }) => theme.secondary};
   }
 `;
+
+const ShowUser = styled.button`
+background: none!important;
+  border: none;
+  padding: 0!important;
+  font-family: arial, sans-serif;
+  color: #069;
+  text-decoration: underline;
+  cursor: pointer;
+`
+
 const Text = styled.h1`
   font-size: 0.8rem;
   font-weight: 500;
