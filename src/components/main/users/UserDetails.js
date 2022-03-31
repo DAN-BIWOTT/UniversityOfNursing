@@ -43,7 +43,7 @@ const UserDetails = ({ clientId }) => {
       }),
     });
     const finalRes = await response.json();
-    //console.log(finalRes);
+    console.log(finalRes);
     setData(finalRes.data);
     console.log(data);
     setPageLoader(false);
@@ -53,7 +53,7 @@ const UserDetails = ({ clientId }) => {
     <Container>
       {loadingScreen}
       <Sidebar permission="admin" />
-      <Title>{data.client[0]?.full_name}</Title>
+      <Title>{data.client?.full_name}</Title>
       <table id="clients">
         <tr>
           <th>Order Id</th>
