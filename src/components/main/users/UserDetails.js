@@ -51,12 +51,12 @@ const UserDetails = ({ clientId }) => {
     setData(finalRes.data);
     console.log(data);
     setPageLoader(false);
-    JSON.stringify(data) === '{}'?setDisplay(false):setDisplay(true)
+    setDisplay(true)
     console.log(display)
   };
   
   console.log(display)
-  if (display) {
+  if (display===true) {
     return (
       <Container>
         {loadingScreen}
