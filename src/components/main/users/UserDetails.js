@@ -57,8 +57,7 @@ const UserDetails = ({ clientId }) => {
   const isEmpty = (object) => {
     for (const property in object) {
       setDisplay(true);
-    }
-    setDisplay(false);
+    } 
   };
   
   if (display) {
