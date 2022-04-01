@@ -51,13 +51,10 @@ const UserDetails = ({ clientId }) => {
     setData(finalRes.data);
     console.log(data);
     setPageLoader(false);
-    notEmpty(data)
+    JSON.stringify(data) === '{}'?setDisplay(false):setDisplay(true)
+    console.log(display)
   };
-  const notEmpty = (object) => {
-    for (const property in object) {
-      setDisplay(true);
-    } 
-  };
+  
   console.log(display)
   if (display) {
     return (
