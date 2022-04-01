@@ -50,8 +50,13 @@ const UserDetails = ({ clientId }) => {
     console.log(data);
     setPageLoader(false);
   };
-  
-  if (Object.keys(data).length !== 0)
+  function isEmpty(object) {
+    for (const property in object) {
+      return false;
+    }
+    return true;
+  }
+  if (!isEmpty(data))
   return (
     <Container>
       {loadingScreen}
