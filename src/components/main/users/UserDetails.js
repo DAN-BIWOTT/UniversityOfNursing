@@ -12,7 +12,7 @@ const UserDetails = ({ clientId }) => {
   const UserDetailQuery = UserDetails_query;
 
   const [data, setData] = useState({});
-  const [display, setDisplay] = useState(false);
+  const [display, setDisplay] = useState(true);
 
   useEffect(() => {
     if (id === "") {
