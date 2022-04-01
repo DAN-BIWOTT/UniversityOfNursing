@@ -51,14 +51,14 @@ const UserDetails = ({ clientId }) => {
     setData(finalRes.data);
     console.log(data);
     setPageLoader(false);
-    isEmpty(data)
+    notEmpty(data)
   };
-  const isEmpty = (object) => {
+  const notEmpty = (object) => {
     for (const property in object) {
       setDisplay(true);
     } 
   };
-  
+  console.log(display)
   if (display) {
     return (
       <Container>
