@@ -50,7 +50,7 @@ const UserDetails = ({ clientId }) => {
     console.log(data);
     setPageLoader(false);
   };
-  function isEmpty(object) {
+  const isEmpty = (object)=> {
     for (const property in object) {
       return false;
     }
