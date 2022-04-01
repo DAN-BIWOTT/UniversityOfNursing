@@ -23,7 +23,7 @@ const UserDetails = ({ clientId }) => {
   }, []);
   useEffect(() => {
     isEmpty(data)
-  });
+  },[]);
 
   const [pageLoader, setPageLoader] = useState(true);
   const [loadingScreen, setLoadingScreen] = useState(<Spinner />);
