@@ -51,13 +51,12 @@ const UserDetails = ({ clientId }) => {
     setPageLoader(false);
   };
   
-
+  if (Object.keys(data).length !== 0)
   return (
     <Container>
       {loadingScreen}
       <Sidebar permission="admin" />
-      <UserDetailTable tableData={data} />
-
+    <UserDetailTable tableData={data} />
     </Container>
   );
 };
