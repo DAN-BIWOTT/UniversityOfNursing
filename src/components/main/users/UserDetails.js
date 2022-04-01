@@ -4,15 +4,16 @@ import { UserDetails_query } from "../../../graphQl/uonQueries";
 import Sidebar from "../../sidebar/sidebar";
 import Spinner from "../../Spinner";
 import { navigate } from "gatsby";
-import UserDetailTable from "./UserDetailTable.js"
+import UserDetailTable from "./UserDetailTable.js";
 import "./UserStyle.css";
 
 const UserDetails = ({ clientId }) => {
   const [id, setId] = useState(clientId);
   const UserDetailQuery = UserDetails_query;
-  
+
   const [data, setData] = useState({});
-  
+  const [display, setDisplay] = useState(false);
+
   useEffect(() => {
     if (id === "") {
       navigate(0);
@@ -20,6 +21,9 @@ const UserDetails = ({ clientId }) => {
       getOrderDetails();
     }
   }, []);
+  useEffect(() => {
+    isEmpty(data)
+  });
 
   const [pageLoader, setPageLoader] = useState(true);
   const [loadingScreen, setLoadingScreen] = useState(<Spinner />);
@@ -50,20 +54,30 @@ const UserDetails = ({ clientId }) => {
     console.log(data);
     setPageLoader(false);
   };
-  const isEmpty = (object)=> {
+  const isEmpty = (object) => {
     for (const property in object) {
-      return false;
+      setDisplay(false);
     }
-    return true;
+    setDisplay(true);
+  };
+  
+  if (display) {
+    return (
+      <Container>
+        {loadingScreen}
+        <Sidebar permission="admin" />
+        <UserDetailTable tableData={data} />
+      </Container>
+    );
+  } else {
+    return (
+      <Container>
+        {loadingScreen}
+        <Sidebar permission="admin" />
+        <h1>Loading...</h1>
+      </Container>
+    );
   }
-  if (!isEmpty(data))
-  return (
-    <Container>
-      {loadingScreen}
-      <Sidebar permission="admin" />
-    <UserDetailTable tableData={data} />
-    </Container>
-  );
 };
 
 export default UserDetails;
