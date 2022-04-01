@@ -5,8 +5,8 @@ const UserDetailTable = ({tableData}) => {
     console.log(tableData)
   return (
     <div>
-        <Title>{tableData.client[0]?.full_name}</Title>
-      <Title>{tableData.client[0]?.email}</Title>
+        <Title>{tableData?.client[0]?.full_name}</Title>
+      <Title>{tableData?.client[0]?.email}</Title>
       <table id="clients">
         <tr>
           <th>Order Id</th>
@@ -14,7 +14,7 @@ const UserDetailTable = ({tableData}) => {
           <th>topic</th>
           <th>doc_description</th>
         </tr>
-        {tableData.client[0].orders.map((orders) => {
+        {tableData?.client[0]?.orders.map((orders) => {
           return (
             <tr>
               <td>{orders.id}</td>
