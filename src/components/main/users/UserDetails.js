@@ -12,7 +12,7 @@ const UserDetails = ({ clientId }) => {
   const UserDetailQuery = UserDetails_query;
 
   const [data, setData] = useState({});
-  const [display, setDisplay] = useState(true);
+  const [display, setDisplay] = useState(false);
 
   useEffect(() => {
     if (id === "") {
@@ -21,9 +21,7 @@ const UserDetails = ({ clientId }) => {
       getOrderDetails();
     }
   }, []);
-  useEffect(() => {
-    isEmpty(data)
-  },[]);
+ 
 
   const [pageLoader, setPageLoader] = useState(true);
   const [loadingScreen, setLoadingScreen] = useState(<Spinner />);
@@ -53,6 +51,7 @@ const UserDetails = ({ clientId }) => {
     setData(finalRes.data);
     console.log(data);
     setPageLoader(false);
+    isEmpty(data)
   };
   const isEmpty = (object) => {
     for (const property in object) {
