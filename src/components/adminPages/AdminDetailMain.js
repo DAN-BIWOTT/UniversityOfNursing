@@ -527,7 +527,7 @@ const viewRevisionTrigger = (event)=>{
                 </tr>
               </tbody>
             </table>
-            <ul style={{display:'inline',"list-style-type": "none"}}>
+            <ul style={{"display":"inline","list-style-type": "none"}}>
               <li> <Button onClick={(event) => editTrigger(event)}>Edit Order</Button></li>
               <li><Button onClick={(event) => viewRevisionTrigger(event)}>View Revision Request</Button></li>
             </ul>
@@ -770,7 +770,9 @@ const viewRevisionTrigger = (event)=>{
       </div>
     );
   }else{
-    <ViewRevision data={revisionDescription} />
+    return(
+      <ViewRevision data={revisionDescription} />
+    )
   }
 };
 
