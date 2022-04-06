@@ -25,6 +25,7 @@ export const AdminOrderDetail_Query = `query AdminOrderDetail($id: Int!) {
       fileName
       sender
     }
+    revision_description
   }
 }`;
 

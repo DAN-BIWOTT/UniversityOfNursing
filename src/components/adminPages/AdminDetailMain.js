@@ -25,6 +25,7 @@ import {
   PaperFormat,
   Subjects,
 } from "../clientComponents/newOrderForm.data";
+import ViewRevision from "../ViewRevision";
 
 const AdminDetailMain = ({ data, orderId }) => {
 //console.log("🚀 ~ file: AdminDetailMain.js ~ line 30 ~ AdminDetailMain ~ data", data)
@@ -36,7 +37,8 @@ const [deadline, setDeadline] = useState(data.due_time);
 const [spacing, setSpacing] = useState(data.spacing);
 const [subject, setSubject] = useState(data.subject);
 const [topic, setTopic] = useState(data.topic);
-const [description, setDescription] = useState(data.doc_description);
+const [description, setDescription] = useState(data.revision_description);
+const revisionDescription=data.doc_description;
 const [waitingButton, setWaitingButton] = useState(false);
 const emptyFields = () => {
   if (
@@ -399,6 +401,12 @@ let [check,setCheck] = useState(true)
     event.preventDefault();
     setEditState(true);
   };
+
+const viewRevisionTrigger = (event)=>{
+  event.preventDefault();
+  return(<ViewRevision data={revisionDescription} />);
+}
+
  const handleSubmit = async (event) => {
     event.preventDefault();
     setWaitingButton(true);
@@ -518,7 +526,11 @@ let [check,setCheck] = useState(true)
                 </tr>
               </tbody>
             </table>
-            <Button onClick={(event) => editTrigger(event)}>Edit Order</Button>
+            <ul sx={{display:"inline"}}>
+              <li> <Button onClick={(event) => editTrigger(event)}>Edit Order</Button></li>
+              <li><Button onClick={(event) => viewRevisionTrigger(event)}>View Revision Request</Button></li>
+            </ul>
+          
           </OrderSummary>
 
           <ChatBox sender="client" orderData={orderId} />
