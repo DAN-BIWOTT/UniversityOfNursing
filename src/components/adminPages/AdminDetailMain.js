@@ -397,6 +397,7 @@ let [check,setCheck] = useState(true)
     else toast("System failed to delete file!");
   };
   const [editState, setEditState] = useState(false);
+  const [showRevisionState, setShowRevisionState] = useState(false);
   const editTrigger = (event) => {
     event.preventDefault();
     setEditState(true);
@@ -404,7 +405,7 @@ let [check,setCheck] = useState(true)
 
 const viewRevisionTrigger = (event)=>{
   event.preventDefault();
-  return(<ViewRevision data={revisionDescription} />);
+  setShowRevisionState(true);
 }
 
  const handleSubmit = async (event) => {
@@ -412,7 +413,7 @@ const viewRevisionTrigger = (event)=>{
     setWaitingButton(true);
     submitOrder()
   };
-  if (editState === false) {
+  if (editState === false && showRevisionState===false) {
     return (
       <div>
         {loadingScreen}
@@ -526,7 +527,7 @@ const viewRevisionTrigger = (event)=>{
                 </tr>
               </tbody>
             </table>
-            <ul sx={{display:"inline"}}>
+            <ul style={{display:'inline',"list-style-type": "none"}}>
               <li> <Button onClick={(event) => editTrigger(event)}>Edit Order</Button></li>
               <li><Button onClick={(event) => viewRevisionTrigger(event)}>View Revision Request</Button></li>
             </ul>
@@ -595,7 +596,7 @@ const viewRevisionTrigger = (event)=>{
         />
       </div>
     );
-  } else {
+  } else if(editState === true && showRevisionState===false){
     return (
       <div>
         <BackButton />
@@ -768,6 +769,8 @@ const viewRevisionTrigger = (event)=>{
         </EditGrid>
       </div>
     );
+  }else{
+    <ViewRevision data={revisionDescription} />
   }
 };
 
