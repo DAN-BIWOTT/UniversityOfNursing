@@ -2,11 +2,11 @@ import React from 'react'
 import styled from 'styled-components';
 
 const UserDetailTable = ({tableData}) => {
-    console.log(tableData)
+    
   return (
     <div>
-        <Title>{tableData?.client[0]?.full_name}</Title>
-      <Title>{tableData?.client[0]?.email}</Title>
+        <Title>Name: {tableData?.client[0]?.full_name}</Title>
+      <Title>Email: {tableData?.client[0]?.email}</Title>
       <table id="clients">
         <tr>
           <th>Order Id</th>

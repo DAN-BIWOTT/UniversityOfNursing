@@ -81,11 +81,11 @@ export const dispute_query = `mutation updateDispute($orderId:Int!,$disputeValue
     }
   }`;
 
-export const revision_query = `mutation updateDispute($orderId:Int!,$revisionValue:Int!) {
-    update_order_by_pk(pk_columns: {id: $orderId}, _set: {revision_status: $revisionValue}) {
-      revision_status
-    }
-  }`;
+export const revision_query = `mutation updateDispute($orderId: Int!, $revisionValue: Int!,$revisionDescription: String) {
+  update_order_by_pk(pk_columns: {id: $orderId}, _set: {revision_status: $revisionValue, revision_description: $revisionDescription}) {
+    revision_status
+  }
+}`;
 
 export const NewOrderForm_query = `mutation addOrder($client_id: Int!,$budgetRangeString: String, $price: Int!, $paperFormat: String, $nature: String, $pages: String, $deadline: String, $spacing: String, $subject: String, $topic: String, $description: String, $files: String, $fileName: String) {
     insert_order_one(object: {budget: $budgetRangeString, doc_description: $description, doc_format: $paperFormat, due_time: $deadline, nature: $nature, pages: $pages, price: $price, spacing: $spacing, subject: $subject, topic: $topic, filesByOrderId: {data: {file: $files, fileName: $fileName}}, client_id: $client_id}) {

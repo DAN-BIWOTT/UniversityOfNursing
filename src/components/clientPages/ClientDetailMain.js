@@ -28,6 +28,7 @@ const [spacing, setSpacing] = useState(data.spacing);
 const [subject, setSubject] = useState(data.subject);
 const [topic, setTopic] = useState(data.topic);
 const [description, setDescription] = useState(data.doc_description);
+const [revisionDescription, setRevisionDescription] = useState("");
 const [waitingButton, setWaitingButton] = useState(false);
 let clientId = data.client_id;
   const emptyFields = () => {
@@ -242,6 +243,7 @@ let clientId = data.client_id;
         variables: {
           orderId,
           revisionValue,
+          revisionDescription
         },
       }),
     });
@@ -330,16 +332,21 @@ let clientId = data.client_id;
   };
 
   const [editState, setEditState] = useState(false);
+  const [revisionState, setRevisionState] = useState(false);
   const editTrigger = (event) => {
     event.preventDefault();
     setEditState(true);
+  };
+  const revisionTrigger = (event) => {
+    event.preventDefault();
+    setRevisionState(true);
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
     setWaitingButton(true);
     submitOrder()
   };
-  if (editState === false) {
+  if (editState === false && revisionState === false) {
   return (
     <div>
       {loadingScreen}
@@ -372,7 +379,7 @@ let clientId = data.client_id;
               </NavButton>
             </Li>
             <Li>
-            <NavButton onClick={(event) => revisionButton(event)}>
+            <NavButton onClick={(event) => revisionTrigger(event)}>
                 Revision
               </NavButton>
             </Li>
@@ -482,7 +489,7 @@ let clientId = data.client_id;
       </OrderGrid>
     </div>
   );
-} else {
+} else if(editState === true && revisionState === false){
   return (
     <div>
       <BackButton />
@@ -653,6 +660,56 @@ let clientId = data.client_id;
       </EditGrid>
     </div>
   );
+} else {
+  return (
+    <div>
+    <BackButton />
+    <ToolTip>
+      <FaqButton>
+        <BsQuestionLg color="black" size="clamp(1rem,1vw,1rem)" />
+        <ToolTipText className="tooltiptext">
+          HELP
+          <br />
+          To start chats about the assignment with the admin, press the
+          start chat button below.
+        </ToolTipText>
+      </FaqButton>
+    </ToolTip>
+    <EditGrid>
+      <EditContainer>
+        <Container>
+          <Title>Revise Order</Title>
+          <form onSubmit={revisionButton}>
+            <ColumnGrid>
+              <Label>*Revision Instructions: </Label>
+              <TextAreaInput
+                type="text"
+                maxLength="700"
+                onChange={(event) => {
+                  setRevisionDescription(event.target.value);
+                }}
+                value={revisionDescription}
+              />
+            </ColumnGrid>
+            <ColumnGrid>
+              {waitingButton ? (
+                <Loader
+                  type="Bars"
+                  color="#00BFFF"
+                  height={40}
+                  width={40}
+                  style={{ marginLeft: "40%" }}
+                />
+              ) : (
+                <Button type="submit">Submit</Button>
+              )}
+            </ColumnGrid>
+          </form>
+        </Container>
+      </EditContainer>
+    </EditGrid>
+  </div>
+  )
 }
 };
 
