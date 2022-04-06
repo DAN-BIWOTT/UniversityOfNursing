@@ -22,7 +22,7 @@ const ViewRevision = ({data}) => {
       <EditContainer>
         <Container>
           <Title>Revise Order</Title>
-          <form onSubmit={revisionButton}>
+          <form>
             <ColumnGrid>
               <Label>*Revision Instructions: </Label>
               <TextAreaInput
