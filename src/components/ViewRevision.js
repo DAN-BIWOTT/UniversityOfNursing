@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { BsQuestionLg } from "react-icons/bs";
-import Loader from "react-loader-spinner";
 import BackButton from "./BackButton";
 const ViewRevision = ({data}) => {
   return (
@@ -35,17 +34,7 @@ const ViewRevision = ({data}) => {
               />
             </ColumnGrid>
             <ColumnGrid>
-              {waitingButton ? (
-                <Loader
-                  type="Bars"
-                  color="#00BFFF"
-                  height={40}
-                  width={40}
-                  style={{ marginLeft: "40%" }}
-                />
-              ) : (
                 <Button disabled={true} type="submit">Submit</Button>
-              )}
             </ColumnGrid>
           </form>
         </Container>
