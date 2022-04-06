@@ -37,8 +37,8 @@ const [deadline, setDeadline] = useState(data.due_time);
 const [spacing, setSpacing] = useState(data.spacing);
 const [subject, setSubject] = useState(data.subject);
 const [topic, setTopic] = useState(data.topic);
-const [description, setDescription] = useState(data.revision_description);
-const revisionDescription=data.doc_description;
+const [description, setDescription] = useState(data.doc_description);
+const revisionDescription=data.revision_description;
 const [waitingButton, setWaitingButton] = useState(false);
 const emptyFields = () => {
   if (

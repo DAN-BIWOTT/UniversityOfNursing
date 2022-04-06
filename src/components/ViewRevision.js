@@ -33,9 +33,6 @@ const ViewRevision = ({data}) => {
                 value={data}
               />
             </ColumnGrid>
-            <ColumnGrid>
-                <Button disabled={true} type="submit">Submit</Button>
-            </ColumnGrid>
           </form>
         </Container>
       </EditContainer>
