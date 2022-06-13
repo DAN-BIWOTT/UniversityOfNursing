@@ -44,6 +44,7 @@ const SignIn = () => {
 
       const finalRes = await response.json();
       setLoadingScreen(false);
+      console.log(finalRes);
       if (finalRes.data.client.length !== 0) {
         setWaitingButton(false);
         handleLogin(
