@@ -42,7 +42,7 @@ const Signup = () => {
         }
       );
       const finalRes = await response.json();
-
+        console.log(finalRes);
       if (finalRes.errors !== undefined) {
         setWaitingButton(false);
         toast("Error. User already exists.");
