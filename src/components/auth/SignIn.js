@@ -24,6 +24,7 @@ const SignIn = () => {
     event.preventDefault(event);
     setPageLoader(true)
     setWaitingButton("wait");
+    
     if (email !== "") {
       const response = await fetch(
         "https://elegant-phoenix-17.hasura.app/v1/graphql",
