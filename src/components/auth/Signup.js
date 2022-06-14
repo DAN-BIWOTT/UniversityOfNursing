@@ -30,6 +30,7 @@ const Signup = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "x-hasura-admin-secret": `${process.env.GATSBY_HASURA_ADMIN_SECRET}`
           },
           body: JSON.stringify({
             query: mutation,
