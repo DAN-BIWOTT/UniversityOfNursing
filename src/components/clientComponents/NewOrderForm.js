@@ -94,7 +94,7 @@ const NewOrderForm = () => {
 
     try {
       const finalRes = await response.json();
-      //console.log(finalRes);
+      console.log(finalRes);
       notification.created_at = Date.now();
       notification.sender = "client";
       notification.order_id = finalRes.data.insert_order_one.id;
